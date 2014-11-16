@@ -1,0 +1,113 @@
+package com.hwooy.shiftgamebeta.screens;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector3;
+import com.hwooy.shiftgamebeta.ShiftGameBeta;
+
+
+/**
+ * Created by jason on 11/14/14.
+ * This is the first screen seen upon uponing up the application
+ */
+public class StartScreen extends ScreenAdapter {
+
+    public static final int CAM_WIDTH = 150; //Gdx.graphics.getWidth();
+    public static final int CAM_HEIGHT = 100; //Gdx.graphics.getHeight();
+    public static final float PLAY_BOUNDS_WIDTH_RATIO = .5f;
+    public static final float PLAY_BOUNDS_HEIGHT_RATIO = .2f;
+    public static final float HELP_BOUNDS_WIDTH_RATIO = .5f;
+    public static final float HELP_BOUNDS_HEIGHT_RATIO = .2f;
+    public static final float SETTINGS_BOUNDS_WIDTH_RATIO = .2f;
+    public static final float SETTINGS_BOUNDS_HEIGHT_RATIO = .2f;
+
+    ShiftGameBeta game;
+    OrthographicCamera cam;
+    Rectangle playBounds;
+    Rectangle helpBounds;
+    Rectangle settingsBounds;
+    Vector3 touchPoint;
+    ShapeRenderer debugRenderer;
+
+    /**
+     * constructor for the start screen
+     * @param game instance of game being played
+     */
+    public StartScreen(ShiftGameBeta game) {
+        this.game = game;
+        cam = new OrthographicCamera(CAM_WIDTH, CAM_HEIGHT);
+        cam.position.set(CAM_WIDTH / 2, CAM_HEIGHT / 2, 0);
+        playBounds = new Rectangle(
+                (int) (CAM_WIDTH * PLAY_BOUNDS_WIDTH_RATIO / 2),
+                (int) (CAM_HEIGHT * .7),
+                (int) (CAM_WIDTH * PLAY_BOUNDS_WIDTH_RATIO),
+                (int) (CAM_HEIGHT * PLAY_BOUNDS_HEIGHT_RATIO));
+        helpBounds = new Rectangle(
+                (int) (CAM_WIDTH * HELP_BOUNDS_WIDTH_RATIO / 2),
+                (int) (CAM_HEIGHT * .4),
+                (int) (CAM_WIDTH * HELP_BOUNDS_WIDTH_RATIO),
+                (int) (CAM_HEIGHT * HELP_BOUNDS_HEIGHT_RATIO));
+        settingsBounds = new Rectangle(
+                0,
+                0,
+                (int) (CAM_WIDTH * SETTINGS_BOUNDS_WIDTH_RATIO),
+                (int) (CAM_HEIGHT * SETTINGS_BOUNDS_HEIGHT_RATIO));
+        touchPoint = new Vector3();
+        debugRenderer = new ShapeRenderer();
+    }
+
+    /**
+     * handles user input response
+     */
+    public void update() {
+        if (Gdx.input.justTouched()) {
+            cam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
+
+//            TODO provide actions inputs
+            if (playBounds.contains(touchPoint.x, touchPoint.y)) {
+                game.setScreen(new GameScreen(game, 1));
+            }
+            else if (helpBounds.contains(touchPoint.x, touchPoint.y)) {
+            }
+            else if (settingsBounds.contains(touchPoint.x, touchPoint.y)) {
+            }
+        }
+    }
+
+    /**
+     * draws shit onto screen
+     */
+    public void draw() {
+        GL20 gl = Gdx.gl;
+        gl.glClearColor(1, 1, 1, 1);
+        gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        cam.update();
+
+//        TODO change from shitty colors to real drawings
+        debugRenderer.setProjectionMatrix(cam.combined);
+        debugRenderer.begin(ShapeRenderer.ShapeType.Line);
+        debugRenderer.setColor(new Color(Color.RED));
+        debugRenderer.rect(playBounds.getX(), playBounds.getY(), playBounds.getWidth(), playBounds.getHeight());
+        debugRenderer.setColor(new Color(Color.BLUE));
+        debugRenderer.rect(settingsBounds.getX(), settingsBounds.getY(), settingsBounds.getWidth(), settingsBounds.getHeight());
+        debugRenderer.setColor(new Color(Color.GREEN));
+        debugRenderer.rect(helpBounds.getX(), helpBounds.getY(), helpBounds.getWidth(), helpBounds.getHeight());
+        debugRenderer.end();
+    }
+
+    /**
+     * renders shit on screen
+     * @param delta time since last render
+     */
+    @Override
+    public void render(float delta) {
+        update();
+        draw();
+    }
+
+}
