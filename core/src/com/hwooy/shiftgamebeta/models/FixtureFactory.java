@@ -32,33 +32,13 @@ public class FixtureFactory {
     }
 
     public void makeFixtures() {
-        makeHellTerrainFixtures();
-        makeHeavenTerrainFixtures();
-        makeHellStarFixtures();
-        makeHeaveStarFixtures();
+        makeTerrainFixtures();
+        makeStarFixtures();
         makePlayerFixture();
         makePortalFixture();
     }
 
-    /**
-     * adds fixtures matching terrain description into the box2d hell
-     */
-    private void makeHellTerrainFixtures() {
-        bodyDef.type = BodyDef.BodyType.StaticBody;
-        polygonShape.setAsBox(TerrainBlock.WIDTH, TerrainBlock.HEIGHT);
-        fixtureDef.shape = polygonShape;
-        fixtureDef.filter.categoryBits = BIT_TERRAIN;
-
-        for (GameObject object : level.hellTerrainObjects) {
-            bodyDef.position.set(object.position);
-            Body body = hell.createBody(bodyDef);
-            Fixture fixture = body.createFixture(fixtureDef);
-            fixture.setFriction(0);
-            object.setBody(body);
-        }
-    }
-
-    private void makeHeavenTerrainFixtures() {
+    private void makeTerrainFixtures() {
         bodyDef.type = BodyDef.BodyType.StaticBody;
         polygonShape.setAsBox(TerrainBlock.WIDTH, TerrainBlock.HEIGHT);
         fixtureDef.shape = polygonShape;
@@ -71,9 +51,17 @@ public class FixtureFactory {
             fixture.setFriction(0);
             object.setBody(body);
         }
+
+        for (GameObject object : level.hellStarObjects) {
+            bodyDef.position.set(object.position);
+            Body body = hell.createBody(bodyDef);
+            Fixture fixture = body.createFixture(fixtureDef);
+            fixture.setFriction(0);
+            object.setBody(body);
+        }
     }
 
-    private void makeHellStarFixtures() {
+    private void makeStarFixtures() {
         bodyDef.type = BodyDef.BodyType.StaticBody;
         polygonShape.setAsBox(TerrainBlock.WIDTH, TerrainBlock.HEIGHT);
         fixtureDef.shape = polygonShape;
@@ -86,13 +74,6 @@ public class FixtureFactory {
             fixture.setFriction(0);
             object.setBody(body);
         }
-    }
-
-    private void makeHeaveStarFixtures() {
-        bodyDef.type = BodyDef.BodyType.StaticBody;
-        polygonShape.setAsBox(TerrainBlock.WIDTH, TerrainBlock.HEIGHT);
-        fixtureDef.shape = polygonShape;
-        fixtureDef.filter.categoryBits = BIT_STAR_PORTAL;
 
         for (GameObject object : level.heavenStarObjects) {
             bodyDef.position.set(object.position);
