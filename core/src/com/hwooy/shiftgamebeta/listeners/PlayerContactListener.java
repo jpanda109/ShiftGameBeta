@@ -1,12 +1,21 @@
 package com.hwooy.shiftgamebeta.listeners;
 
 import com.badlogic.gdx.physics.box2d.*;
+import com.hwooy.shiftgamebeta.screens.GameScreen;
 
 /**
  * Created by jason on 11/16/14.
  * contact listener
  */
 public class PlayerContactListener implements ContactListener {
+
+    GameScreen gameScreen;
+
+    public PlayerContactListener(GameScreen gameScreen) {
+        super();
+        this.gameScreen = gameScreen;
+    }
+
     @Override
     public void beginContact(Contact contact) {
         Fixture fixtureA = contact.getFixtureA();
@@ -15,10 +24,10 @@ public class PlayerContactListener implements ContactListener {
             return;
         }
         if (fixtureA.getUserData() != null && fixtureA.getUserData().equals("Portal")) {
-            System.out.println("contact");
+            portalContacted();
         }
         if (fixtureB.getUserData() != null && fixtureB.getUserData().equals("Portal")) {
-            System.out.println("contact");
+            portalContacted();
         }
     }
 
@@ -34,5 +43,9 @@ public class PlayerContactListener implements ContactListener {
     @Override
     public void postSolve(Contact contact, ContactImpulse impulse) {
 
+    }
+
+    private void portalContacted() {
+        gameScreen.nextLevel();
     }
 }

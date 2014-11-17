@@ -51,7 +51,7 @@ public class GameScreen extends ScreenAdapter{
     public GameScreen(ScreenManager screenManager, int levelNumber) {
         hell = new World(new Vector2(0, -100f), false);
         heaven = new World(new Vector2(0, -100f), false);
-        playerContactListener = new PlayerContactListener();
+        playerContactListener = new PlayerContactListener(this);
         hell.setContactListener(playerContactListener);
         heaven.setContactListener(playerContactListener);
 
@@ -200,6 +200,10 @@ public class GameScreen extends ScreenAdapter{
     public void render(float delta) {
         update(delta);
         draw();
+    }
+
+    public void nextLevel() {
+        screenManager.setGameScreen(2);
     }
 
 }
