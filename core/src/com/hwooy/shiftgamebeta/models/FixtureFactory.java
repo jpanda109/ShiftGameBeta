@@ -52,7 +52,7 @@ public class FixtureFactory {
             object.setBody(body);
         }
 
-        for (GameObject object : level.hellStarObjects) {
+        for (GameObject object : level.hellTerrainObjects) {
             bodyDef.position.set(object.position);
             Body body = hell.createBody(bodyDef);
             Fixture fixture = body.createFixture(fixtureDef);
