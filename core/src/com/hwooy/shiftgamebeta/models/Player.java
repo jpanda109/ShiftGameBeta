@@ -21,6 +21,7 @@ public class Player extends GameObject {
 
     public  State state;
     public  Direction direction;
+    public int stars;
     public float stateTime;
 
     public Player(float x, float y) {

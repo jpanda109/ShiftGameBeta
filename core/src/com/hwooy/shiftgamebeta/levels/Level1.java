@@ -37,8 +37,8 @@ public class Level1 extends Level {
         }
 
         // create player
-        player.position.set(49, 80);
-        portal.position.set(135, 10);
+        portal.position.set(100, 80);
+        player.position.set(90, 80);
 
     }
 

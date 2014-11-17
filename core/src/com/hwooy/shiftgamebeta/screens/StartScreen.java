@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
-import com.hwooy.shiftgamebeta.ShiftGameBeta;
 
 
 /**
@@ -26,7 +25,7 @@ public class StartScreen extends ScreenAdapter {
     public static final float SETTINGS_BOUNDS_WIDTH_RATIO = .2f;
     public static final float SETTINGS_BOUNDS_HEIGHT_RATIO = .2f;
 
-    ShiftGameBeta game;
+    ScreenManager screenManager;
     OrthographicCamera cam;
     Rectangle playBounds;
     Rectangle helpBounds;
@@ -36,10 +35,10 @@ public class StartScreen extends ScreenAdapter {
 
     /**
      * constructor for the start screen
-     * @param game instance of game being played
+     * @param screenManager instance of screenManager being played
      */
-    public StartScreen(ShiftGameBeta game) {
-        this.game = game;
+    public StartScreen(ScreenManager screenManager) {
+        this.screenManager = screenManager;
         cam = new OrthographicCamera(CAM_WIDTH, CAM_HEIGHT);
         cam.position.set(CAM_WIDTH / 2, CAM_HEIGHT / 2, 0);
         playBounds = new Rectangle(
@@ -70,7 +69,8 @@ public class StartScreen extends ScreenAdapter {
 
 //            TODO provide actions inputs
             if (playBounds.contains(touchPoint.x, touchPoint.y)) {
-                game.setScreen(new GameScreen(game, 1));
+                screenManager.setGameScreen(1);
+                //screenManager.setScreen(new GameScreen(screenManager, 1));
             }
             else if (helpBounds.contains(touchPoint.x, touchPoint.y)) {
             }

@@ -10,18 +10,15 @@ import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
-import com.hwooy.shiftgamebeta.ShiftGameBeta;
 import com.hwooy.shiftgamebeta.levels.Level;
 import com.hwooy.shiftgamebeta.levels.LevelFactory;
 import com.hwooy.shiftgamebeta.listeners.PlayerContactListener;
 import com.hwooy.shiftgamebeta.models.FixtureFactory;
-import com.hwooy.shiftgamebeta.models.GameObject;
 import com.hwooy.shiftgamebeta.models.Player;
-import com.hwooy.shiftgamebeta.ShiftGameBeta;
 
 /**
  * Created by jason on 11/14/14.
- * This is the screen that displays the game itself
+ * This is the screen that displays the screenManager itself
  */
 public class GameScreen extends ScreenAdapter{
 
@@ -30,7 +27,7 @@ public class GameScreen extends ScreenAdapter{
     }
 
     State state;
-    ShiftGameBeta game;
+    ScreenManager screenManager;
     OrthographicCamera cam;
     Level level;
     //LevelRenderer renderer;
@@ -44,17 +41,17 @@ public class GameScreen extends ScreenAdapter{
     Application.ApplicationType applicationType;
 
     /**
-     * Constructor for GameScreen which takes in an instance of the game and a level number
-     * @param game instance of game
+     * Constructor for GameScreen which takes in an instance of the screenManager and a level number
+     * @param screenManager instance of screenManager
      * @param levelNumber of the level to be played
      */
-    public GameScreen(ShiftGameBeta game, int levelNumber) {
+    public GameScreen(ScreenManager screenManager, int levelNumber) {
         hell = new World(new Vector2(0, -100f), false);
         heaven = new World(new Vector2(0, -100f), false);
         hell.setContactListener(new PlayerContactListener());
         heaven.setContactListener(new PlayerContactListener());
 
-        this.game = game;
+        this.screenManager = screenManager;
         state = State.RUNNING;
         cam = new OrthographicCamera(StartScreen.CAM_WIDTH, StartScreen.CAM_HEIGHT);
         cam.position.set(StartScreen.CAM_WIDTH / 2, StartScreen.CAM_HEIGHT / 2, 0);
@@ -213,7 +210,7 @@ public class GameScreen extends ScreenAdapter{
     }
 
     /**
-     * updates game screen based on user input
+     * updates screenManager screen based on user input
      */
     private void update(float delta) {
         handleInput();
@@ -226,7 +223,7 @@ public class GameScreen extends ScreenAdapter{
     }
 
     /**
-     * draws needed objects onto the game screen
+     * draws needed objects onto the screenManager screen
      */
     private void draw() {
         GL20 gl = Gdx.gl;
@@ -241,7 +238,7 @@ public class GameScreen extends ScreenAdapter{
     }
 
     /**
-     * renders (updates and draws) onto the game screen
+     * renders (updates and draws) onto the screenManager screen
      * @param delta time since last render
      */
     @Override
