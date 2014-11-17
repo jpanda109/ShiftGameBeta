@@ -26,7 +26,6 @@ public class ScreenManager {
 
     public void pushScreen(Screens screen, int level) {
         if (screen == Screens.START) {
-            System.out.println("pushing start screen");
             screens.push(new StartScreen(this));
         } else if (screen == Screens.GAME) {
             screens.push(new GameScreen(this, level));

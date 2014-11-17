@@ -13,6 +13,7 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.hwooy.shiftgamebeta.levels.Level;
 import com.hwooy.shiftgamebeta.levels.LevelFactory;
 import com.hwooy.shiftgamebeta.listeners.PlayerContactListener;
+import com.hwooy.shiftgamebeta.listeners.PlayerInputListener;
 import com.hwooy.shiftgamebeta.models.FixtureFactory;
 import com.hwooy.shiftgamebeta.models.Player;
 
@@ -37,6 +38,8 @@ public class GameScreen extends ScreenAdapter{
     World heaven;
     Player player;
     boolean inHell;
+    PlayerContactListener playerContactListener;
+    PlayerInputListener playerInputListener;
 
     Application.ApplicationType applicationType;
 
@@ -48,8 +51,9 @@ public class GameScreen extends ScreenAdapter{
     public GameScreen(ScreenManager screenManager, int levelNumber) {
         hell = new World(new Vector2(0, -100f), false);
         heaven = new World(new Vector2(0, -100f), false);
-        hell.setContactListener(new PlayerContactListener());
-        heaven.setContactListener(new PlayerContactListener());
+        playerContactListener = new PlayerContactListener();
+        hell.setContactListener(playerContactListener);
+        heaven.setContactListener(playerContactListener);
 
         this.screenManager = screenManager;
         state = State.RUNNING;
@@ -65,57 +69,8 @@ public class GameScreen extends ScreenAdapter{
         inHell = true;
 
         applicationType = Gdx.app.getType();
-        Gdx.input.setInputProcessor(new GestureDetector(new GestureDetector.GestureListener() {
-            @Override
-            public boolean touchDown(float x, float y, int pointer, int button) {
-                return false;
-            }
-
-            @Override
-            public boolean tap(float x, float y, int count, int button) {
-                playerShiftDimension();
-                return false;
-            }
-
-            @Override
-            public boolean longPress(float x, float y) {
-                return false;
-            }
-
-            @Override
-            public boolean fling(float velocityX, float velocityY, int button) {
-                if (Math.abs(velocityY) > Math.abs(velocityX)) {
-                       // WHY IS VELOCITY < 0 SWIPE UP? DUNNO BUT OH WELL
-                    if (velocityY < 0) {
-                        playerJump();
-                    } else {
-//                        TODO handle swipe down (shift dimension)
-                        playerShiftDimension();
-                    }
-                }
-                return false;
-            }
-
-            @Override
-            public boolean pan(float x, float y, float deltaX, float deltaY) {
-                return false;
-            }
-
-            @Override
-            public boolean panStop(float x, float y, int pointer, int button) {
-                return false;
-            }
-
-            @Override
-            public boolean zoom(float initialDistance, float distance) {
-                return false;
-            }
-
-            @Override
-            public boolean pinch(Vector2 initialPointer1, Vector2 initialPointer2, Vector2 pointer1, Vector2 pointer2) {
-                return false;
-            }
-        }));
+        playerInputListener = new PlayerInputListener(this);
+        Gdx.input.setInputProcessor(new GestureDetector(playerInputListener));
 
     }
 
@@ -145,7 +100,7 @@ public class GameScreen extends ScreenAdapter{
         }
     }
 
-    private void playerJump() {
+    public void playerJump() {
         if (player.state != Player.State.AIRBORNE) {
             player.state = Player.State.AIRBORNE;
             //player.getBody().setLinearVelocity(player.getBody().getLinearVelocity().x, 0);
@@ -178,7 +133,7 @@ public class GameScreen extends ScreenAdapter{
         player.getBody().setLinearVelocity(0, player.getBody().getLinearVelocity().y);
     }
 
-    private void playerShiftDimension() {
+    public void playerShiftDimension() {
         BodyDef bodyDef = new BodyDef();
         PolygonShape polygonShape = new PolygonShape();
         FixtureDef fixtureDef = new FixtureDef();
