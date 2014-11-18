@@ -35,6 +35,15 @@ public class PlayerInputListener implements GestureDetector.GestureListener {
         return false;
     }
 
+    /**
+     * This is the only touch action currently needed, simply handles vertical swipes to either make the player
+     * jump or shift dimension
+     * parameter must be kept as is due to it being an overriden method (obviously)
+     * @param velocityX horizontal velocity of fling
+     * @param velocityY vertical velocity of fling
+     * @param button button being held during fling (unneeded for mobile application for obvious reason)
+     * @return nothing needed to be returned
+     */
     @Override
     public boolean fling(float velocityX, float velocityY, int button) {
         if (Math.abs(velocityY) > Math.abs(velocityX)) {

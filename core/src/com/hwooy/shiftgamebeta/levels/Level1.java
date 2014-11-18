@@ -13,6 +13,9 @@ public class Level1 extends Level {
         populateLevel();
     }
 
+    /**
+     * populates level with the necessary terrain blocks and etc
+     */
     public void populateLevel() {
         // populate hell
         for (int i = 0; i < LEVEL_WIDTH; i+=TerrainBlock.WIDTH * 2) {

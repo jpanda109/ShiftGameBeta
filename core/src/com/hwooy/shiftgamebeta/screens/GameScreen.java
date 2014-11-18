@@ -31,6 +31,7 @@ public class GameScreen extends ScreenAdapter{
     ScreenManager screenManager;
     OrthographicCamera cam;
     Level level;
+    int levelNumber;
     //LevelRenderer renderer;
     Box2DDebugRenderer renderer;
     Vector3 touchPoint;
@@ -59,6 +60,7 @@ public class GameScreen extends ScreenAdapter{
         state = State.RUNNING;
         cam = new OrthographicCamera(StartScreen.CAM_WIDTH, StartScreen.CAM_HEIGHT);
         cam.position.set(StartScreen.CAM_WIDTH / 2, StartScreen.CAM_HEIGHT / 2, 0);
+        this.levelNumber = levelNumber;
         level = LevelFactory.makeLevel(levelNumber);
         FixtureFactory fixtureFactory = new FixtureFactory(level, hell, heaven);
         fixtureFactory.makeFixtures();
@@ -69,11 +71,17 @@ public class GameScreen extends ScreenAdapter{
         inHell = true;
 
         applicationType = Gdx.app.getType();
+
+        // Using custom inputProcessor to handle screen touches (primarily fling actions for the phone)
         playerInputListener = new PlayerInputListener(this);
         Gdx.input.setInputProcessor(new GestureDetector(playerInputListener));
 
     }
 
+    /**
+     * This method handles some (but not all, input is also handled through the playerInputListener) input, including
+     * key presses and accelerometer actions
+     */
     private void handleInput() {
         if (applicationType == Application.ApplicationType.Android || applicationType == Application.ApplicationType.iOS) {
             playerMove(Gdx.input.getAccelerometerY() * 30);
@@ -100,6 +108,10 @@ public class GameScreen extends ScreenAdapter{
         }
     }
 
+    /**
+     * This method handles the player jumping
+     * If player not currently jumping, set to airborne and apply vertical force
+     */
     public void playerJump() {
         if (player.state != Player.State.AIRBORNE) {
             player.state = Player.State.AIRBORNE;
@@ -108,6 +120,10 @@ public class GameScreen extends ScreenAdapter{
         }
     }
 
+    /**
+     * moves player in a horizontal direction by applying a linear impulse
+     * @param xImpulse linear impulse to be applied to the player
+     */
     private void playerMove(float xImpulse) {
         if (xImpulse == 0) {
             return;
@@ -126,6 +142,10 @@ public class GameScreen extends ScreenAdapter{
         //player.getBody().setLinearVelocity(xVelocity, player.getBody().getLinearVelocity().y);
     }
 
+    /**
+     * There's no friction, so to stop, the velocity must be manually set to 0
+     * TODO set dampening
+     */
     private void playerStop() {
         if (player.state == Player.State.RUNNING) {
             player.state = Player.State.IDLE;
@@ -133,6 +153,9 @@ public class GameScreen extends ScreenAdapter{
         player.getBody().setLinearVelocity(0, player.getBody().getLinearVelocity().y);
     }
 
+    /**
+     * Switched dimensional layer of the player by creating a body in the other world and destroying the previous one
+     */
     public void playerShiftDimension() {
         BodyDef bodyDef = new BodyDef();
         PolygonShape polygonShape = new PolygonShape();
@@ -155,6 +178,9 @@ public class GameScreen extends ScreenAdapter{
         player.setBody(body);
     }
 
+    /**
+     * Updates player state from airborne to either idle or running based on horizontal velocity
+     */
     private void updatePlayerState() {
         if (player.getBody().getLinearVelocity().y == 0) {
             player.state = Player.State.RUNNING;
@@ -202,8 +228,11 @@ public class GameScreen extends ScreenAdapter{
         draw();
     }
 
+    /**
+     * Upon reaching the goal, moves player to the next level.
+     */
     public void nextLevel() {
-        screenManager.setGameScreen(2);
+        screenManager.setGameScreen(++levelNumber);
     }
 
 }

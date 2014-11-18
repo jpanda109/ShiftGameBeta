@@ -6,6 +6,11 @@ package com.hwooy.shiftgamebeta.levels;
  */
 public class LevelFactory {
 
+    /**
+     * ok literally this just returns the necessary level using factory pattern pls
+     * @param levelNumber of level to be returned
+     * @return the level
+     */
     public static Level makeLevel(int levelNumber) {
         switch (levelNumber) {
             case 1:

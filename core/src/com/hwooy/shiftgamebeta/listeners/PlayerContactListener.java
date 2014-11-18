@@ -16,13 +16,22 @@ public class PlayerContactListener implements ContactListener {
         this.gameScreen = gameScreen;
     }
 
+    /**
+     * called whenever two fixtures come into contact with eachother
+     * @param contact objects created that contains information about the two fixtures in collision
+     */
     @Override
     public void beginContact(Contact contact) {
         Fixture fixtureA = contact.getFixtureA();
         Fixture fixtureB = contact.getFixtureB();
+
+        // make sure you don't have null pointer exceptions when handling fixtures
         if (fixtureA == null || fixtureB == null) {
             return;
         }
+
+
+        // If something (player) comes into collision with portal, call portal contacted
         if (fixtureA.getUserData() != null && fixtureA.getUserData().equals("Portal")) {
             portalContacted();
         }
@@ -45,6 +54,9 @@ public class PlayerContactListener implements ContactListener {
 
     }
 
+    /**
+     * tells gameScreen to go to the next level upon collision as defined in beginContact
+     */
     private void portalContacted() {
         gameScreen.nextLevel();
     }

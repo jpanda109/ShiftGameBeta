@@ -22,6 +22,12 @@ public class FixtureFactory {
     PolygonShape polygonShape;
     FixtureDef fixtureDef;
 
+    /**
+     * Constructor for the FixtureFactory taking in the level to be built and worlds in which to build them
+     * @param level
+     * @param hell
+     * @param heaven
+     */
     public FixtureFactory(Level level, World hell, World heaven) {
         this.level = level;
         this.hell = hell;
@@ -31,6 +37,9 @@ public class FixtureFactory {
         fixtureDef = new FixtureDef();
     }
 
+    /**
+     * aggregate for all the fixtures created
+     */
     public void makeFixtures() {
         makeTerrainFixtures();
         makeStarFixtures();
@@ -38,11 +47,13 @@ public class FixtureFactory {
         makePortalFixture();
     }
 
+    /**
+     * creates terrain for both worlds
+     */
     private void makeTerrainFixtures() {
         bodyDef.type = BodyDef.BodyType.StaticBody;
         polygonShape.setAsBox(TerrainBlock.WIDTH, TerrainBlock.HEIGHT);
         fixtureDef.shape = polygonShape;
-        fixtureDef.filter.categoryBits = BIT_TERRAIN;
 
         for (GameObject object : level.heavenTerrainObjects) {
             bodyDef.position.set(object.position);
@@ -61,11 +72,13 @@ public class FixtureFactory {
         }
     }
 
+    /**
+     * creates stars for both worlds
+     */
     private void makeStarFixtures() {
         bodyDef.type = BodyDef.BodyType.StaticBody;
         polygonShape.setAsBox(TerrainBlock.WIDTH, TerrainBlock.HEIGHT);
         fixtureDef.shape = polygonShape;
-        fixtureDef.filter.categoryBits = BIT_STAR_PORTAL;
 
         for (GameObject object : level.hellStarObjects) {
             bodyDef.position.set(object.position);
@@ -84,27 +97,29 @@ public class FixtureFactory {
         }
     }
 
+    /**
+     * creates the player in hell
+     */
     public void makePlayerFixture() {
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         polygonShape.setAsBox(Player.PLAYER_WIDTH, Player.PLAYER_HEIGHT);
         fixtureDef.shape = polygonShape;
-        fixtureDef.filter.categoryBits = BIT_PLAYER;
-        fixtureDef.filter.maskBits = BIT_TERRAIN;
         bodyDef.position.set(level.player.position);
         Body body = hell.createBody(bodyDef);
         body.createFixture(fixtureDef).setUserData("Player");
         level.player.setBody(body);
     }
 
+    /**
+     * creates the portal in hell
+     */
     public void makePortalFixture() {
         bodyDef.type = BodyDef.BodyType.StaticBody;
         polygonShape.setAsBox(Portal.PORTAL_WIDTH, Portal.PORTAL_HEIGHT);
         fixtureDef.shape = polygonShape;
-        fixtureDef.filter.categoryBits = BIT_STAR_PORTAL;
-        //fixtureDef.filter.maskBits = 0;
         fixtureDef.isSensor = true;
         bodyDef.position.set(level.portal.position);
-        Body body = heaven.createBody(bodyDef);
+        Body body = hell.createBody(bodyDef);
         body.createFixture(fixtureDef).setUserData("Portal");
         level.portal.setBody(body);
     }
