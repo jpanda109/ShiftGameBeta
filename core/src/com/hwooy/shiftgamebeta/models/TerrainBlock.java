@@ -14,7 +14,7 @@ public class TerrainBlock extends GameObject {
      * e.g. a surface block might contain grass whereas the background block will contain dirt.
      */
     public enum Type {
-        SURFACE, BACKGROUND
+        SURFACE, BACKGROUND, LAVA
     }
 
     Type type;

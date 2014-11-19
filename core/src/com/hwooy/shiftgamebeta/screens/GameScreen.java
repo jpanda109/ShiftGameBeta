@@ -41,6 +41,7 @@ public class GameScreen extends ScreenAdapter{
     boolean inHell;
     PlayerContactListener playerContactListener;
     PlayerInputListener playerInputListener;
+    float lastShifted;
 
     Application.ApplicationType applicationType;
 
@@ -50,6 +51,9 @@ public class GameScreen extends ScreenAdapter{
      * @param levelNumber of the level to be played
      */
     public GameScreen(ScreenManager screenManager, int levelNumber) {
+
+        lastShifted = 0;
+
         hell = new World(new Vector2(0, -100f), false);
         heaven = new World(new Vector2(0, -100f), false);
         playerContactListener = new PlayerContactListener(this);
@@ -82,20 +86,32 @@ public class GameScreen extends ScreenAdapter{
      * This method handles some (but not all, input is also handled through the playerInputListener) input, including
      * key presses and accelerometer actions
      */
-    private void handleInput() {
+    private void handleInput(float delta) {
+        lastShifted += delta;
         if (applicationType == Application.ApplicationType.Android || applicationType == Application.ApplicationType.iOS) {
             playerMove(Gdx.input.getAccelerometerY() * 30);
-        } else {
+        }
+
+        else {
             if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
                 playerJump();
             }
-            if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-                playerMove(Player.RUN_VELOCITY);
-            } else if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
-                playerMove(-Player.RUN_VELOCITY);
-            } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+
+            if (Gdx.input.isKeyPressed(Input.Keys.DOWN) && lastShifted > delta * 10)
+            {
                 playerShiftDimension();
-            } else {
+                lastShifted = 0;
+            }
+
+            else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+                playerMove(Player.RUN_VELOCITY);
+            }
+
+            else if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
+                playerMove(-Player.RUN_VELOCITY);
+            }
+
+            else {
                 playerStop();
             }
 
@@ -194,7 +210,7 @@ public class GameScreen extends ScreenAdapter{
      * updates screenManager screen based on user input
      */
     private void update(float delta) {
-        handleInput();
+        handleInput(delta);
         updatePlayerState();
         if (inHell) {
             hell.step(delta, 6, 2);

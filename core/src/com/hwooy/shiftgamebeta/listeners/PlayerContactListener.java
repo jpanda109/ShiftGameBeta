@@ -30,7 +30,6 @@ public class PlayerContactListener implements ContactListener {
             return;
         }
 
-
         // If something (player) comes into collision with portal, call portal contacted
         if (fixtureA.getUserData() != null && fixtureA.getUserData().equals("Portal")) {
             portalContacted();

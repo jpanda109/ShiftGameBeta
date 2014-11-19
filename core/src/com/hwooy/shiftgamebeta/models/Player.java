@@ -16,8 +16,8 @@ public class Player extends GameObject {
 
     public static final float JUMP_VELOCITY = 10;
     public static final float RUN_VELOCITY = 100;
-    public static final float PLAYER_WIDTH = 3;
-    public static final float PLAYER_HEIGHT = 5;
+    public static final float PLAYER_WIDTH = 2;
+    public static final float PLAYER_HEIGHT = 2;
 
     public  State state;
     public  Direction direction;
