@@ -49,6 +49,8 @@ public class GameScreen extends ScreenAdapter{
     PlayerInputListener playerInputListener;
     float lastShifted;
 
+    int idleGlitch = 0;
+
     Application.ApplicationType applicationType;
 
     /**
@@ -117,9 +119,11 @@ public class GameScreen extends ScreenAdapter{
 
     public void flingPlayer(float xImpulse, float yImpulse) {
         if (player.state == Player.State.IDLE) {
+            System.out.println("moving");
             player.state = Player.State.MOVING;
             int multiplier = 3;
             player.getBody().applyForceToCenter(multiplier * xImpulse, multiplier * yImpulse, true);
+            ++idleGlitch;
         }
     }
 
@@ -153,8 +157,14 @@ public class GameScreen extends ScreenAdapter{
      * Updates player state from airborne to either idle or running based on horizontal velocity
      */
     private void updatePlayerState() {
-        if (player.getBody().getLinearVelocity().y == 0 && player.getBody().getLinearVelocity().x == 0) {
-            player.state = Player.State.IDLE;
+        if (player.getBody().getLinearVelocity().x == 0 && player.getBody().getLinearVelocity().y == 0) {
+            if (idleGlitch == 0) {
+                System.out.println(player.getBody().getLinearVelocity());
+                player.state = Player.State.IDLE;
+                idleGlitch = 0;
+            } else {
+                idleGlitch = 0;
+            }
         }
     }
 
