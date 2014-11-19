@@ -28,7 +28,8 @@ public class Level {
     public final ArrayList<Star> heavenStarObjects;
     public final Portal portal;
     public final Player player;
-    public final ArrayList<Platform> platforms;
+    public final ArrayList<Platform> platforms_HELL;
+    public final ArrayList<Platform> platforms_HEAVEN;
 
     /**
      * Default constructor initializing the hellTerrainObjects list
@@ -36,11 +37,15 @@ public class Level {
     public Level() {
         this.hellTerrainObjects = new ArrayList<TerrainBlock>();
         this.heavenTerrainObjects = new ArrayList<TerrainBlock>();
+
         this.hellStarObjects = new ArrayList<Star>();
         this.heavenStarObjects = new ArrayList<Star>();
+
         portal = new Portal(135, 10);
         player = new Player(5, 10);
-        this.platforms = new ArrayList<Platform>();
+
+        this.platforms_HELL = new ArrayList<Platform>();
+        this.platforms_HEAVEN = new ArrayList<Platform>();
     }
 
 }

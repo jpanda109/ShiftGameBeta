@@ -25,4 +25,7 @@ public class Platform extends GameObject {
 
     public void update()
     {}
+
+    public void setInitialSpeed()
+    {};
 }

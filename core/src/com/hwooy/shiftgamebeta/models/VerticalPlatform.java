@@ -19,6 +19,11 @@ public class VerticalPlatform extends Platform {
         dir = Direction.UP;
     }
 
+    public void setInitialSpeed()
+    {
+        this.getBody().setLinearVelocity(0, this.SPEED);
+    }
+
     public void update()
     {
         //dis da position of da body man u understand rite

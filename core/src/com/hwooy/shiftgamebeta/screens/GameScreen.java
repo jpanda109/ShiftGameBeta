@@ -99,6 +99,7 @@ public class GameScreen extends ScreenAdapter{
      */
     private void handleInput(float delta) {
         lastShifted += delta;
+
         if (applicationType != Application.ApplicationType.Android && applicationType != Application.ApplicationType.iOS) {
             if (Gdx.input.isKeyPressed(Input.Keys.DOWN) && lastShifted > delta * 10)
             {
@@ -118,7 +119,7 @@ public class GameScreen extends ScreenAdapter{
     }
 
     public void flingPlayer(float xImpulse, float yImpulse) {
-        if (player.state == Player.State.IDLE) {
+        if (player.state == Player.State.IDLE || player.getBody().getLinearVelocity().y == 0) {
             System.out.println("moving");
             player.state = Player.State.MOVING;
             int multiplier = 3;
@@ -140,15 +141,18 @@ public class GameScreen extends ScreenAdapter{
         bodyDef.position.set(player.getBody().getPosition());
         bodyDef.linearVelocity.set(player.getBody().getLinearVelocity());
         Body body;
+
         if (inHell) {
             body = heaven.createBody(bodyDef);
             hell.destroyBody(player.getBody());
             inHell = false;
-        } else {
+        }
+        else {
             body = hell.createBody(bodyDef);
             heaven.destroyBody(player.getBody());
             inHell = true;
         }
+
         body.createFixture(fixtureDef);
         player.setBody(body);
     }
@@ -186,7 +190,12 @@ public class GameScreen extends ScreenAdapter{
         handleInput(delta);
         updatePlayerState();
 
-        for(Platform plat: level.platforms)
+        for(Platform plat: level.platforms_HEAVEN)
+        {
+            plat.update();
+        }
+
+        for(Platform plat: level.platforms_HELL)
         {
             plat.update();
         }
@@ -196,8 +205,6 @@ public class GameScreen extends ScreenAdapter{
         } else {
             heaven.step(delta, 6, 2);
         }
-
-
     }
 
     private void updatePaused() {
@@ -217,11 +224,13 @@ public class GameScreen extends ScreenAdapter{
         GL20 gl = Gdx.gl;
         gl.glClearColor(1, 1, 1, 1);
         gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
         if (inHell) {
             renderer.render(hell, cam.combined);
         } else {
             renderer.render(heaven, cam.combined);
         }
+
         debugRenderer.setProjectionMatrix(cam.combined);
         debugRenderer.begin(ShapeRenderer.ShapeType.Filled);
         debugRenderer.setColor(Color.BLACK);

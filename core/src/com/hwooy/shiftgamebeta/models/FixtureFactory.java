@@ -129,19 +129,33 @@ public class FixtureFactory {
         fixtureDef.shape = polygonShape;
 
         int i = 0;
-        for (Platform plat : level.platforms)
+        for (Platform plat : level.platforms_HEAVEN)
+        {
+            bodyDef.position.set(plat.position);
+            polygonShape.setAsBox(plat.PLATFORM_WIDTH, plat.PLATFORM_HEIGHT);
+            Body body = heaven.createBody(bodyDef);
+            fixtureDef.friction = 1.0f;
+            fixtureDef.isSensor = false;
+            Fixture fixture = body.createFixture(fixtureDef);
+            fixture.setUserData("HeavenPlatform" + Integer.toString(i));
+
+            plat.setBody(body);
+            plat.setInitialSpeed();
+            ++i;
+        }
+
+        for (Platform plat : level.platforms_HELL)
         {
             bodyDef.position.set(plat.position);
             polygonShape.setAsBox(plat.PLATFORM_WIDTH, plat.PLATFORM_HEIGHT);
             Body body = hell.createBody(bodyDef);
+            fixtureDef.density = 1.0f;
             fixtureDef.friction = 1.0f;
-            fixtureDef.isSensor = false;
             Fixture fixture = body.createFixture(fixtureDef);
-            fixture.setUserData("Platform" + Integer.toString(i));
-
+            fixture.setUserData("HellPlatform" + Integer.toString(i));
 
             plat.setBody(body);
-            plat.getBody().setLinearVelocity(0, plat.SPEED);
+            plat.setInitialSpeed();
             ++i;
         }
 

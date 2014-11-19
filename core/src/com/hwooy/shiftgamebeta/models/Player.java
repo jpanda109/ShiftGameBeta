@@ -10,6 +10,8 @@ public class Player extends GameObject {
         IDLE, MOVING
     }
 
+    boolean isFlying;
+
     public static final float PLAYER_WIDTH = 2;
     public static final float PLAYER_HEIGHT = 2;
 
@@ -21,6 +23,7 @@ public class Player extends GameObject {
         super(x, y, PLAYER_WIDTH, PLAYER_HEIGHT);
         state = State.IDLE;
         stateTime = 0;
+        isFlying = false;
     }
 
 }

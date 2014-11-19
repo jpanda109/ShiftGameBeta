@@ -13,13 +13,17 @@ import com.hwooy.shiftgamebeta.models.VerticalPlatform;
  */
 public class Level2 extends Level{
 
-    Vector2 begin = new Vector2(25, 5);
-    Vector2 end = new Vector2(25, 80);
+    Vector2 hell_begin = new Vector2(25, 5);
+    Vector2 hell_end = new Vector2(25, 80);
+
+    Vector2 heaven_begin = new Vector2(40, 10);
+    Vector2 heaven_end = new Vector2(90, 10);
 
 //float x, float y, float width, float height, int speed_, Direction dir_, Vector2 end)
     public Level2() {
         super();
-        platforms.add(PlatformFactory.makePlatform(begin.x, begin.y, 10, 2, 40, begin, end));
+        platforms_HELL.add(PlatformFactory.makePlatform(hell_begin.x, hell_begin.y, 30, 1, 40, hell_begin, hell_end));
+        platforms_HEAVEN.add(PlatformFactory.makePlatform(heaven_begin.x, heaven_begin.y, 10, 1, 20, heaven_begin, heaven_end));
         populateLevel();
     }
 
@@ -27,21 +31,19 @@ public class Level2 extends Level{
     {
         //Populate hell
         populateHell();
-        createBounds(true);
 
         //Populate heaven
         populateHeaven();
-        createBounds(false);
     }
 
     public void populateHell()
     {
-
+        createBounds(true);
     }
 
     public void populateHeaven()
     {
-
+        createBounds(false);
     }
 
     public void createBounds(boolean isHell)

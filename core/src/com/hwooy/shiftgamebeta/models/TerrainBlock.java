@@ -29,14 +29,14 @@ public class TerrainBlock extends GameObject {
         this.type = Type.BACKGROUND;
     }
 
-    /**
-     * constructor taking in a position and terrain type
-     * @param x component of position
-     * @param y component of position
-     * @param type of terrain
-     */
-    public TerrainBlock(float x, float y, Type type) {
-        super(x, y, WIDTH, HEIGHT);
-        this.type = type;
-    }
+//    /**
+//     * constructor taking in a position and terrain type
+//     * @param x component of position
+//     * @param y component of position
+//     * @param type of terrain
+//     */
+//    public TerrainBlock(float x, float y, Type type) {
+//        super(x, y, WIDTH, HEIGHT);
+//        this.type = type;
+//    }
 }

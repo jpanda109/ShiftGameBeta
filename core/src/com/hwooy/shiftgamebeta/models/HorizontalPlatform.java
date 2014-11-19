@@ -19,18 +19,22 @@ public class HorizontalPlatform extends Platform
         dir = Direction.LEFT;
     }
 
+    public void setInitialSpeed()
+    {
+        this.getBody().setLinearVelocity(this.SPEED, 0);
+    }
+
     public void update()
     {
         Vector2 pos = this.body.getPosition();
-        if(this.begin.x > pos.x && dir == Direction.LEFT)
+        if(this.begin.x > pos.x)
         {
-            dir = Direction.RIGHT;
             this.getBody().setLinearVelocity(this.SPEED, 0);
         }
-        else if(this.end.x < pos.x && dir == Direction.RIGHT)
+        if(this.end.x < pos.x)
         {
-            dir = Direction.LEFT;
             this.getBody().setLinearVelocity(-1 * this.SPEED, 0);
         }
+
     }
 }
