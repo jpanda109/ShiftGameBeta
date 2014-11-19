@@ -1,6 +1,7 @@
 package com.hwooy.shiftgamebeta.models;
 
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 
 /**
  * Created by Anna Hwang on 11/18/2014.
@@ -10,25 +11,22 @@ import com.badlogic.gdx.math.Rectangle;
 public class PlatformFactory
 {
 
-    public enum Direction {
-        VERTICAL, HORIZONTAL
-    }
+    public PlatformFactory()
+    {}
 
-    public int SPEED;
-    public Direction dir;
-    /**
-     * Platform constructor.
-     * @param x the bottom-left corner
-     * @param y the bottom-left corner
-     */
-    public Platform()
-    {};
-
-    public Platform makePlatform(float x, float y, float width, float height, int speed_, Direction dir_)
+    public static Platform makePlatform(float x, float y, float width, float height, int speed_, Vector2 begin, Vector2 end)
     {
-        super(x, y, width, height);
-        this.SPEED = speed_;
-        dir = dir_;
+        Platform plat;
+        if(y != end.y)
+        {
+            plat = new VerticalPlatform(x, y, width, height, speed_, begin, end);
+        }
+        else //Horizontal
+        {
+            plat = new HorizontalPlatform(x, y, width, height, speed_, begin, end);
+        }
+
+        return plat;
     }
 
 }
