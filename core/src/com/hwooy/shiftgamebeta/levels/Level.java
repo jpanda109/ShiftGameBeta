@@ -28,6 +28,7 @@ public class Level {
     public final ArrayList<Star> heavenStarObjects;
     public final Portal portal;
     public final Player player;
+    public final ArrayList<Platform> platforms;
 
     /**
      * Default constructor initializing the hellTerrainObjects list
@@ -39,6 +40,7 @@ public class Level {
         this.heavenStarObjects = new ArrayList<Star>();
         portal = new Portal(135, 10);
         player = new Player(5, 10);
+        this.platforms = new ArrayList<Platform>();
     }
 
 }

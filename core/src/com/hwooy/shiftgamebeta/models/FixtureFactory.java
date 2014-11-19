@@ -124,11 +124,23 @@ public class FixtureFactory {
 
     public void makePlatformFixture(){
         bodyDef.type = BodyDef.BodyType.DynamicBody;
-        polygonShape.setAsBox(Player.PLAYER_WIDTH, Player.PLAYER_HEIGHT);
+
         fixtureDef.shape = polygonShape;
         bodyDef.position.set(level.player.position);
-        Body body = hell.createBody(bodyDef);
-        body.createFixture(fixtureDef).setUserData("Player");
-        level.player.setBody(body);
+
+        int i = 0;
+        for (Platform plat : level.platforms)
+        {
+            bodyDef.position.set(plat.position);
+            polygonShape.setAsBox(plat.PLATFORM_WIDTH, plat.PLATFORM_HEIGHT);
+            Body body = hell.createBody(bodyDef);
+            body.createFixture(fixtureDef).setUserData("Platform" + Integer.toString(i));
+            Fixture fixture = body.createFixture(fixtureDef);
+            fixture.setFriction(0);
+            plat.setBody(body);
+            plat.getBody().setLinearVelocity(0, plat.SPEED);
+            ++i;
+        }
+
     }
 }

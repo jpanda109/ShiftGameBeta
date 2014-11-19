@@ -13,7 +13,7 @@ public class Player extends GameObject {
     public static final float PLAYER_WIDTH = 2;
     public static final float PLAYER_HEIGHT = 2;
 
-    public  State state;
+    public State state;
     public int stars;
     public float stateTime;
 

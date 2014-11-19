@@ -13,15 +13,14 @@ import com.hwooy.shiftgamebeta.models.VerticalPlatform;
  */
 public class Level2 extends Level{
 
-    public final Platform lavaPlatform;
     Vector2 begin = new Vector2(25, 25);
     Vector2 end = new Vector2(50, 25);
 
 //float x, float y, float width, float height, int speed_, Direction dir_, Vector2 end)
     public Level2() {
         super();
+        platforms.add(PlatformFactory.makePlatform(begin.x, begin.y, 10, 2, 40, begin, end));
         populateLevel();
-        this.lavaPlatform = PlatformFactory.makePlatform(begin.x, begin.y, 10, 2, 40, begin, end);
     }
 
     public void populateLevel()
@@ -33,8 +32,6 @@ public class Level2 extends Level{
         //Populate heaven
         populateHeaven();
         createBounds(false);
-
-
     }
 
     public void populateHell()

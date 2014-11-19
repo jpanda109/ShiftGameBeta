@@ -18,6 +18,7 @@ import com.hwooy.shiftgamebeta.levels.LevelFactory;
 import com.hwooy.shiftgamebeta.listeners.PlayerContactListener;
 import com.hwooy.shiftgamebeta.listeners.PlayerInputListener;
 import com.hwooy.shiftgamebeta.models.FixtureFactory;
+import com.hwooy.shiftgamebeta.models.Platform;
 import com.hwooy.shiftgamebeta.models.Player;
 
 /**
@@ -172,6 +173,11 @@ public class GameScreen extends ScreenAdapter{
     private void updateRunning(float delta) {
         handleInput(delta);
         updatePlayerState();
+        for(Platform plat: level.platforms)
+        {
+            plat.update();
+        }
+
         if (inHell) {
             hell.step(delta, 6, 2);
         } else {
