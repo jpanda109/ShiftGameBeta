@@ -17,6 +17,7 @@ public class VerticalPlatform extends Platform {
     {
         super(x, y, width, height, speed, bottom, top);
         dir = Direction.UP;
+        this.getBody().setLinearVelocity(0, this.SPEED);
     }
 
     public void update()
@@ -27,7 +28,8 @@ public class VerticalPlatform extends Platform {
             dir = Direction.UP;
             this.getBody().setLinearVelocity(0, this.SPEED);
         }
-        else if(this.end.y < pos.y && dir == Direction.UP)
+
+        if(this.end.y < pos.y && dir == Direction.UP)
         {
             dir = Direction.DOWN;
             this.getBody().setLinearVelocity(0, -1 * this.SPEED);

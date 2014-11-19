@@ -124,9 +124,7 @@ public class FixtureFactory {
 
     public void makePlatformFixture(){
         bodyDef.type = BodyDef.BodyType.DynamicBody;
-
         fixtureDef.shape = polygonShape;
-        bodyDef.position.set(level.player.position);
 
         int i = 0;
         for (Platform plat : level.platforms)
@@ -134,11 +132,10 @@ public class FixtureFactory {
             bodyDef.position.set(plat.position);
             polygonShape.setAsBox(plat.PLATFORM_WIDTH, plat.PLATFORM_HEIGHT);
             Body body = hell.createBody(bodyDef);
-            body.createFixture(fixtureDef).setUserData("Platform" + Integer.toString(i));
             Fixture fixture = body.createFixture(fixtureDef);
+            fixture.setUserData("Platform" + Integer.toString(i));
             fixture.setFriction(0);
             plat.setBody(body);
-            plat.getBody().setLinearVelocity(0, plat.SPEED);
             ++i;
         }
 

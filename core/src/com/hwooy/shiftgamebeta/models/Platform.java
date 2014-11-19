@@ -10,7 +10,8 @@ public class Platform extends GameObject {
     public int SPEED;
     public float PLATFORM_WIDTH;
     public float PLATFORM_HEIGHT;
-    Vector2 end, begin;
+    Vector2 end;
+    Vector2 begin;
 
     Platform(float x, float y, float width, float height, int speed, Vector2 begin, Vector2 end)
     {
