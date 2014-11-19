@@ -13,8 +13,8 @@ import com.hwooy.shiftgamebeta.models.VerticalPlatform;
  */
 public class Level2 extends Level{
 
-    Vector2 begin = new Vector2(25, 25);
-    Vector2 end = new Vector2(50, 25);
+    Vector2 begin = new Vector2(25, 5);
+    Vector2 end = new Vector2(25, 80);
 
 //float x, float y, float width, float height, int speed_, Direction dir_, Vector2 end)
     public Level2() {

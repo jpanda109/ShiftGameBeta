@@ -7,13 +7,13 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class Platform extends GameObject {
 
-    public int SPEED;
+    public float SPEED;
     public float PLATFORM_WIDTH;
     public float PLATFORM_HEIGHT;
     Vector2 end;
     Vector2 begin;
 
-    Platform(float x, float y, float width, float height, int speed, Vector2 begin, Vector2 end)
+    Platform(float x, float y, float width, float height, float speed, Vector2 begin, Vector2 end)
     {
         super(x, y, width, height);
         this.SPEED = speed;

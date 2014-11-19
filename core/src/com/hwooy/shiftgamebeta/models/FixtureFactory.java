@@ -1,8 +1,10 @@
 package com.hwooy.shiftgamebeta.models;
 
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.*;
 import com.hwooy.shiftgamebeta.levels.Level;
 
+import com.badlogic.gdx.physics.box2d.FixtureDef;
 import java.util.ArrayList;
 
 /**
@@ -132,10 +134,14 @@ public class FixtureFactory {
             bodyDef.position.set(plat.position);
             polygonShape.setAsBox(plat.PLATFORM_WIDTH, plat.PLATFORM_HEIGHT);
             Body body = hell.createBody(bodyDef);
+            fixtureDef.density = 1.0f;
+            fixtureDef.friction = 1.0f;
             Fixture fixture = body.createFixture(fixtureDef);
             fixture.setUserData("Platform" + Integer.toString(i));
-            fixture.setFriction(0);
+
+
             plat.setBody(body);
+            plat.getBody().setLinearVelocity(0, plat.SPEED);
             ++i;
         }
 

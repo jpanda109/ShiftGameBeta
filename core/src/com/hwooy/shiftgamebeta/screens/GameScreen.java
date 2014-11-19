@@ -175,6 +175,7 @@ public class GameScreen extends ScreenAdapter{
     private void updateRunning(float delta) {
         handleInput(delta);
         updatePlayerState();
+
         for(Platform plat: level.platforms)
         {
             plat.update();
@@ -185,6 +186,8 @@ public class GameScreen extends ScreenAdapter{
         } else {
             heaven.step(delta, 6, 2);
         }
+
+
     }
 
     private void updatePaused() {

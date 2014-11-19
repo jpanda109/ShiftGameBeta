@@ -13,7 +13,7 @@ public class HorizontalPlatform extends Platform
 
     public Direction dir;
 
-    HorizontalPlatform(float x, float y, float width, float height, int speed, Vector2 begin, Vector2 end)
+    HorizontalPlatform(float x, float y, float width, float height, float speed, Vector2 begin, Vector2 end)
     {
         super(x, y, width, height, speed, begin, end);
         dir = Direction.LEFT;
