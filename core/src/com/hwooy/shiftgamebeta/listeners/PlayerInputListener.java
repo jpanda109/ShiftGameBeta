@@ -50,13 +50,11 @@ public class PlayerInputListener implements GestureDetector.GestureListener {
      */
     @Override
     public boolean fling(float velocityX, float velocityY, int button) {
-        if (Math.abs(velocityY) > Math.abs(velocityX)) {
-            // WHY IS VELOCITY < 0 SWIPE UP? DUNNO BUT OH WELL
-            if (velocityY < 0) {
-                gameScreen.flingPlayer(velocityX, -velocityY);
-            } else {
-                gameScreen.playerShiftDimension();
-            }
+        // WHY IS VELOCITY < 0 SWIPE UP? DUNNO BUT OH WELL
+        if (velocityY < 0) {
+            gameScreen.flingPlayer(velocityX, -velocityY);
+        } else if (Math.abs(velocityX) < Math.abs(velocityY)) {
+            gameScreen.playerShiftDimension();
         }
         return false;
     }

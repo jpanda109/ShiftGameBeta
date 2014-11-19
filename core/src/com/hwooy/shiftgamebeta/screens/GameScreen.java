@@ -116,9 +116,11 @@ public class GameScreen extends ScreenAdapter{
     }
 
     public void flingPlayer(float xImpulse, float yImpulse) {
-        player.state = Player.State.MOVING;
-        int multiplier = 3;
-        player.getBody().applyForceToCenter(multiplier * xImpulse, multiplier * yImpulse, true);
+        if (player.state == Player.State.IDLE) {
+            player.state = Player.State.MOVING;
+            int multiplier = 3;
+            player.getBody().applyForceToCenter(multiplier * xImpulse, multiplier * yImpulse, true);
+        }
     }
 
     /**
