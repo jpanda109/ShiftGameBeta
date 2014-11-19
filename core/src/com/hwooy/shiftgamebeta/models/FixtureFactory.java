@@ -45,6 +45,7 @@ public class FixtureFactory {
         makeStarFixtures();
         makePlayerFixture();
         makePortalFixture();
+        makePlatformFixture();
     }
 
     /**
@@ -119,5 +120,15 @@ public class FixtureFactory {
         Body body = hell.createBody(bodyDef);
         body.createFixture(fixtureDef).setUserData("Portal");
         level.portal.setBody(body);
+    }
+
+    public void makePlatformFixture(){
+        bodyDef.type = BodyDef.BodyType.DynamicBody;
+        polygonShape.setAsBox(Player.PLAYER_WIDTH, Player.PLAYER_HEIGHT);
+        fixtureDef.shape = polygonShape;
+        bodyDef.position.set(level.player.position);
+        Body body = hell.createBody(bodyDef);
+        body.createFixture(fixtureDef).setUserData("Player");
+        level.player.setBody(body);
     }
 }
