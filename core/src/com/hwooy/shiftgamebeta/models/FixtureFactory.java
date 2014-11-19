@@ -125,7 +125,7 @@ public class FixtureFactory {
     }
 
     public void makePlatformFixture(){
-        bodyDef.type = BodyDef.BodyType.DynamicBody;
+        bodyDef.type = BodyDef.BodyType.KinematicBody;
         fixtureDef.shape = polygonShape;
 
         int i = 0;
@@ -134,8 +134,8 @@ public class FixtureFactory {
             bodyDef.position.set(plat.position);
             polygonShape.setAsBox(plat.PLATFORM_WIDTH, plat.PLATFORM_HEIGHT);
             Body body = hell.createBody(bodyDef);
-            fixtureDef.density = 1.0f;
             fixtureDef.friction = 1.0f;
+            fixtureDef.isSensor = false;
             Fixture fixture = body.createFixture(fixtureDef);
             fixture.setUserData("Platform" + Integer.toString(i));
 
