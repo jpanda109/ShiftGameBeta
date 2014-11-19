@@ -4,9 +4,12 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.input.GestureDetector;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
@@ -27,6 +30,8 @@ public class GameScreen extends ScreenAdapter{
         RUNNING, PAUSED
     }
 
+    Rectangle pauseBounds;
+    ShapeRenderer debugRenderer;
     State state;
     ScreenManager screenManager;
     OrthographicCamera cam;
@@ -51,6 +56,9 @@ public class GameScreen extends ScreenAdapter{
      * @param levelNumber of the level to be played
      */
     public GameScreen(ScreenManager screenManager, int levelNumber) {
+
+        pauseBounds = new Rectangle(0, 85, 15, 15);
+        debugRenderer = new ShapeRenderer();
 
         lastShifted = 0;
 
@@ -88,85 +96,28 @@ public class GameScreen extends ScreenAdapter{
      */
     private void handleInput(float delta) {
         lastShifted += delta;
-        if (applicationType == Application.ApplicationType.Android || applicationType == Application.ApplicationType.iOS) {
-            playerMove(Gdx.input.getAccelerometerY() * 30);
-        }
-
-        else {
-            if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-                playerJump();
-            }
-
+        if (applicationType != Application.ApplicationType.Android && applicationType != Application.ApplicationType.iOS) {
             if (Gdx.input.isKeyPressed(Input.Keys.DOWN) && lastShifted > delta * 10)
             {
                 playerShiftDimension();
                 lastShifted = 0;
             }
-
-            else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-                playerMove(Player.RUN_VELOCITY);
-            }
-
-            else if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
-                playerMove(-Player.RUN_VELOCITY);
-            }
-
-            else {
-                playerStop();
-            }
-
         }
 
         // handle pauses etc
         if (Gdx.input.justTouched()) {
             cam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
 //            TODO add real stuff asides from this debug crap
+            if (pauseBounds.contains(touchPoint.x, touchPoint.y)) {
+                state = State.PAUSED;
+            }
         }
     }
 
-    /**
-     * This method handles the player jumping
-     * If player not currently jumping, set to airborne and apply vertical force
-     */
-    public void playerJump() {
-        if (player.state != Player.State.AIRBORNE) {
-            player.state = Player.State.AIRBORNE;
-            //player.getBody().setLinearVelocity(player.getBody().getLinearVelocity().x, 0);
-            player.getBody().applyForceToCenter(0, 2000, true);
-        }
-    }
-
-    /**
-     * moves player in a horizontal direction by applying a linear impulse
-     * @param xImpulse linear impulse to be applied to the player
-     */
-    private void playerMove(float xImpulse) {
-        if (xImpulse == 0) {
-            return;
-        }
-        if (xImpulse > 0) {
-            player.direction = Player.Direction.RIGHT;
-        } else {
-            player.direction = Player.Direction.LEFT;
-        }
-        if (player.state == Player.State.IDLE) {
-            player.state = Player.State.RUNNING;
-        }
-        player.getBody().setLinearVelocity(0, player.getBody().getLinearVelocity().y);
-        player.getBody().applyLinearImpulse(new Vector2(xImpulse, 0), player.getBody().getPosition(), true);
-        //player.getBody().applyForceToCenter(xImpulse, 0, true);
-        //player.getBody().setLinearVelocity(xVelocity, player.getBody().getLinearVelocity().y);
-    }
-
-    /**
-     * There's no friction, so to stop, the velocity must be manually set to 0
-     * TODO set dampening
-     */
-    private void playerStop() {
-        if (player.state == Player.State.RUNNING) {
-            player.state = Player.State.IDLE;
-        }
-        player.getBody().setLinearVelocity(0, player.getBody().getLinearVelocity().y);
+    public void flingPlayer(float xImpulse, float yImpulse) {
+        player.state = Player.State.MOVING;
+        int multiplier = 3;
+        player.getBody().applyForceToCenter(multiplier * xImpulse, multiplier * yImpulse, true);
     }
 
     /**
@@ -180,6 +131,7 @@ public class GameScreen extends ScreenAdapter{
         polygonShape.setAsBox(Player.PLAYER_WIDTH, Player.PLAYER_HEIGHT);
         fixtureDef.shape = polygonShape;
         bodyDef.position.set(player.getBody().getPosition());
+        bodyDef.linearVelocity.set(player.getBody().getLinearVelocity());
         Body body;
         if (inHell) {
             body = heaven.createBody(bodyDef);
@@ -198,11 +150,8 @@ public class GameScreen extends ScreenAdapter{
      * Updates player state from airborne to either idle or running based on horizontal velocity
      */
     private void updatePlayerState() {
-        if (player.getBody().getLinearVelocity().y == 0) {
-            player.state = Player.State.RUNNING;
-            if (player.getBody().getLinearVelocity().x == 0) {
-                player.state = Player.State.IDLE;
-            }
+        if (player.getBody().getLinearVelocity().y == 0 && player.getBody().getLinearVelocity().x == 0) {
+            player.state = Player.State.IDLE;
         }
     }
 
@@ -210,12 +159,33 @@ public class GameScreen extends ScreenAdapter{
      * updates screenManager screen based on user input
      */
     private void update(float delta) {
+        switch (state) {
+            case RUNNING:
+                updateRunning(delta);
+                return;
+            case PAUSED:
+                updatePaused();
+                return;
+        }
+    }
+
+    private void updateRunning(float delta) {
         handleInput(delta);
         updatePlayerState();
         if (inHell) {
             hell.step(delta, 6, 2);
         } else {
             heaven.step(delta, 6, 2);
+        }
+    }
+
+    private void updatePaused() {
+        if (Gdx.input.justTouched()) {
+            cam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
+
+            if (pauseBounds.contains(touchPoint.x, touchPoint.y)) {
+                state = State.RUNNING;
+            }
         }
     }
 
@@ -231,6 +201,11 @@ public class GameScreen extends ScreenAdapter{
         } else {
             renderer.render(heaven, cam.combined);
         }
+        debugRenderer.setProjectionMatrix(cam.combined);
+        debugRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        debugRenderer.setColor(Color.BLACK);
+        debugRenderer.rect(pauseBounds.x, pauseBounds.y, pauseBounds.width, pauseBounds.height);
+        debugRenderer.end();
         cam.update();
     }
 

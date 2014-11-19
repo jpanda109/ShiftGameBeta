@@ -1,8 +1,12 @@
 package com.hwooy.shiftgamebeta.listeners;
 
+import com.badlogic.gdx.Application;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.hwooy.shiftgamebeta.screens.GameScreen;
 
 import java.util.Queue;
@@ -49,7 +53,7 @@ public class PlayerInputListener implements GestureDetector.GestureListener {
         if (Math.abs(velocityY) > Math.abs(velocityX)) {
             // WHY IS VELOCITY < 0 SWIPE UP? DUNNO BUT OH WELL
             if (velocityY < 0) {
-                gameScreen.playerJump();
+                gameScreen.flingPlayer(velocityX, -velocityY);
             } else {
                 gameScreen.playerShiftDimension();
             }

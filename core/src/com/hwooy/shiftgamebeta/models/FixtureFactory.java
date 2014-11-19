@@ -67,7 +67,6 @@ public class FixtureFactory {
             bodyDef.position.set(object.position);
             Body body = hell.createBody(bodyDef);
             Fixture fixture = body.createFixture(fixtureDef);
-            fixture.setFriction(0);
             object.setBody(body);
         }
     }
@@ -84,7 +83,6 @@ public class FixtureFactory {
             bodyDef.position.set(object.position);
             Body body = hell.createBody(bodyDef);
             Fixture fixture = body.createFixture(fixtureDef);
-            fixture.setFriction(0);
             object.setBody(body);
         }
 
@@ -92,7 +90,6 @@ public class FixtureFactory {
             bodyDef.position.set(object.position);
             Body body = heaven.createBody(bodyDef);
             Fixture fixture = body.createFixture(fixtureDef);
-            fixture.setFriction(0);
             object.setBody(body);
         }
     }
