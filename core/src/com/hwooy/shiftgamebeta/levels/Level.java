@@ -4,7 +4,6 @@ import com.hwooy.shiftgamebeta.models.*;
 import com.hwooy.shiftgamebeta.screens.StartScreen;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by jason on 11/14/14.
@@ -22,8 +21,8 @@ public class Level {
     //public static final float LEVEL_WIDTH = StartScreen.CAM_WIDTH;
     public static final float LEVEL_GRAVITY = -10f;
 
-    public final ArrayList<TerrainBlock> hellTerrainObjects;
-    public final ArrayList<TerrainBlock> heavenTerrainObjects;
+    public final ArrayList<Block> hellTerrainObjects;
+    public final ArrayList<Block> heavenTerrainObjects;
     public final ArrayList<Star> hellStarObjects;
     public final ArrayList<Star> heavenStarObjects;
     public final Portal portal;
@@ -35,8 +34,8 @@ public class Level {
      * Default constructor initializing the hellTerrainObjects list
      */
     public Level() {
-        this.hellTerrainObjects = new ArrayList<TerrainBlock>();
-        this.heavenTerrainObjects = new ArrayList<TerrainBlock>();
+        this.hellTerrainObjects = new ArrayList<Block>();
+        this.heavenTerrainObjects = new ArrayList<Block>();
 
         this.hellStarObjects = new ArrayList<Star>();
         this.heavenStarObjects = new ArrayList<Star>();

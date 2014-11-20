@@ -7,11 +7,11 @@ import com.hwooy.shiftgamebeta.screens.GameScreen;
  * Created by jason on 11/16/14.
  * contact listener
  */
-public class PlayerContactListener implements ContactListener {
+public class TheContactListener implements ContactListener {
 
     GameScreen gameScreen;
 
-    public PlayerContactListener(GameScreen gameScreen) {
+    public TheContactListener(GameScreen gameScreen) {
         super();
         this.gameScreen = gameScreen;
     }
@@ -60,7 +60,6 @@ public class PlayerContactListener implements ContactListener {
 
     @Override
     public void postSolve(Contact contact, ContactImpulse impulse) {
-
     }
 
     /**

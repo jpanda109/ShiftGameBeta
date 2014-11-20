@@ -1,11 +1,9 @@
 package com.hwooy.shiftgamebeta.models;
 
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.*;
 import com.hwooy.shiftgamebeta.levels.Level;
 
 import com.badlogic.gdx.physics.box2d.FixtureDef;
-import java.util.ArrayList;
 
 /**
  * Created by jason on 11/15/14.
@@ -55,7 +53,7 @@ public class FixtureFactory {
      */
     private void makeTerrainFixtures() {
         bodyDef.type = BodyDef.BodyType.StaticBody;
-        polygonShape.setAsBox(TerrainBlock.WIDTH, TerrainBlock.HEIGHT);
+        polygonShape.setAsBox(Block.WIDTH, Block.HEIGHT);
         fixtureDef.shape = polygonShape;
 
         for (GameObject object : level.heavenTerrainObjects) {
@@ -79,7 +77,7 @@ public class FixtureFactory {
      */
     private void makeStarFixtures() {
         bodyDef.type = BodyDef.BodyType.StaticBody;
-        polygonShape.setAsBox(TerrainBlock.WIDTH, TerrainBlock.HEIGHT);
+        polygonShape.setAsBox(Block.WIDTH, Block.HEIGHT);
         fixtureDef.shape = polygonShape;
 
         for (GameObject object : level.hellStarObjects) {

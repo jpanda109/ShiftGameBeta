@@ -1,10 +1,8 @@
 package com.hwooy.shiftgamebeta.levels;
 
 import com.badlogic.gdx.math.Vector2;
-import com.hwooy.shiftgamebeta.models.Platform;
+import com.hwooy.shiftgamebeta.models.Block;
 import com.hwooy.shiftgamebeta.models.PlatformFactory;
-import com.hwooy.shiftgamebeta.models.TerrainBlock;
-import com.hwooy.shiftgamebeta.models.VerticalPlatform;
 
 /**
  * Created by Anna Hwang on 11/18/2014.
@@ -22,7 +20,7 @@ public class Level2 extends Level{
 //float x, float y, float width, float height, int speed_, Direction dir_, Vector2 end)
     public Level2() {
         super();
-        platforms_HELL.add(PlatformFactory.makePlatform(hell_begin.x, hell_begin.y, 30, 1, 40, hell_begin, hell_end));
+        platforms_HELL.add(PlatformFactory.makePlatform(hell_begin.x, hell_begin.y, 15, 1, 40, hell_begin, hell_end));
         platforms_HEAVEN.add(PlatformFactory.makePlatform(heaven_begin.x, heaven_begin.y, 10, 1, 20, heaven_begin, heaven_end));
         populateLevel();
     }
@@ -50,24 +48,24 @@ public class Level2 extends Level{
     {
         if(isHell)
         {
-            for (int i = 0; i < LEVEL_WIDTH; i+= TerrainBlock.WIDTH * 2) {
-                hellTerrainObjects.add(new TerrainBlock(i, 0));
-                hellTerrainObjects.add(new TerrainBlock(i, LEVEL_HEIGHT));
+            for (int i = 0; i < LEVEL_WIDTH; i+= Block.WIDTH * 2) {
+                hellTerrainObjects.add(new Block(i, 0));
+                hellTerrainObjects.add(new Block(i, LEVEL_HEIGHT));
             }
-            for (int i = (int) TerrainBlock.HEIGHT; i < LEVEL_HEIGHT; i += TerrainBlock.HEIGHT * 2) {
-                hellTerrainObjects.add(new TerrainBlock(0, i));
-                hellTerrainObjects.add(new TerrainBlock(LEVEL_WIDTH, i));
+            for (int i = (int) Block.HEIGHT; i < LEVEL_HEIGHT; i += Block.HEIGHT * 2) {
+                hellTerrainObjects.add(new Block(0, i));
+                hellTerrainObjects.add(new Block(LEVEL_WIDTH, i));
             }
         }
         else
         {
-            for (int i = 0; i < LEVEL_WIDTH; i+=TerrainBlock.WIDTH * 2) {
-                heavenTerrainObjects.add(new TerrainBlock(i, 0));
-                heavenTerrainObjects.add(new TerrainBlock(i, LEVEL_HEIGHT));
+            for (int i = 0; i < LEVEL_WIDTH; i+= Block.WIDTH * 2) {
+                heavenTerrainObjects.add(new Block(i, 0));
+                heavenTerrainObjects.add(new Block(i, LEVEL_HEIGHT));
             }
-            for (int i = (int) TerrainBlock.HEIGHT; i < LEVEL_HEIGHT; i += TerrainBlock.HEIGHT * 2) {
-                heavenTerrainObjects.add(new TerrainBlock(0, i));
-                heavenTerrainObjects.add(new TerrainBlock(LEVEL_WIDTH, i));
+            for (int i = (int) Block.HEIGHT; i < LEVEL_HEIGHT; i += Block.HEIGHT * 2) {
+                heavenTerrainObjects.add(new Block(0, i));
+                heavenTerrainObjects.add(new Block(LEVEL_WIDTH, i));
             }
         }
     }

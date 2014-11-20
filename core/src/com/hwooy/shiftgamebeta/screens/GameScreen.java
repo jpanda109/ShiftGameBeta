@@ -15,7 +15,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
 import com.hwooy.shiftgamebeta.levels.Level;
 import com.hwooy.shiftgamebeta.levels.LevelFactory;
-import com.hwooy.shiftgamebeta.listeners.PlayerContactListener;
+import com.hwooy.shiftgamebeta.listeners.TheContactListener;
 import com.hwooy.shiftgamebeta.listeners.PlayerInputListener;
 import com.hwooy.shiftgamebeta.models.FixtureFactory;
 import com.hwooy.shiftgamebeta.models.Platform;
@@ -45,11 +45,11 @@ public class GameScreen extends ScreenAdapter{
     World heaven;
     Player player;
     boolean inHell;
-    PlayerContactListener playerContactListener;
+    TheContactListener theContactListener;
     PlayerInputListener playerInputListener;
     float lastShifted;
-
-    int idleGlitch = 0;
+    boolean idleGlitch = false;
+    int multiplier;
 
     Application.ApplicationType applicationType;
 
@@ -59,38 +59,52 @@ public class GameScreen extends ScreenAdapter{
      * @param levelNumber of the level to be played
      */
     public GameScreen(ScreenManager screenManager, int levelNumber) {
+        //The pause square
+        pauseBounds = new Rectangle(0, 95, 5, 5);
 
-        pauseBounds = new Rectangle(0, 85, 15, 15);
+        //Renders the shapes of the objects for debugging purposes
         debugRenderer = new ShapeRenderer();
 
-        lastShifted = 0;
-
+        //Making heaven and hell
         hell = new World(new Vector2(0, -100f), false);
         heaven = new World(new Vector2(0, -100f), false);
-        playerContactListener = new PlayerContactListener(this);
-        hell.setContactListener(playerContactListener);
-        heaven.setContactListener(playerContactListener);
 
+        //Settings listeners
+        theContactListener = new TheContactListener(this);
+        hell.setContactListener(theContactListener);
+        heaven.setContactListener(theContactListener);
+
+        //Sets the stage
         this.screenManager = screenManager;
         state = State.RUNNING;
         cam = new OrthographicCamera(StartScreen.CAM_WIDTH, StartScreen.CAM_HEIGHT);
         cam.position.set(StartScreen.CAM_WIDTH / 2, StartScreen.CAM_HEIGHT / 2, 0);
+
+        //Making the level itself
         this.levelNumber = levelNumber;
         level = LevelFactory.makeLevel(levelNumber);
+
+        //Making the fixtures for all of the bodies
         FixtureFactory fixtureFactory = new FixtureFactory(level, hell, heaven);
         fixtureFactory.makeFixtures();
+
+        //Rendering stuff
         //renderer = new LevelRenderer(level);
         renderer = new Box2DDebugRenderer();
-        touchPoint = new Vector3();
-        player = level.player;
-        inHell = true;
 
+        //Private members
+        touchPoint = new Vector3();
+        lastShifted = 0;
+        inHell = true;
+        player = level.player;
+        multiplier = 3;
+
+        //Find what device the game is running on
         applicationType = Gdx.app.getType();
 
         // Using custom inputProcessor to handle screen touches (primarily fling actions for the phone)
         playerInputListener = new PlayerInputListener(this);
         Gdx.input.setInputProcessor(new GestureDetector(playerInputListener));
-
     }
 
     /**
@@ -100,31 +114,34 @@ public class GameScreen extends ScreenAdapter{
     private void handleInput(float delta) {
         lastShifted += delta;
 
-        if (applicationType != Application.ApplicationType.Android && applicationType != Application.ApplicationType.iOS) {
-            if (Gdx.input.isKeyPressed(Input.Keys.DOWN) && lastShifted > delta * 10)
-            {
+        //If the device is such that *does not* have touch capabilities
+        if (applicationType != Application.ApplicationType.Android &&
+            applicationType != Application.ApplicationType.iOS &&
+            Gdx.input.isKeyPressed(Input.Keys.DOWN) &&
+            lastShifted > delta * 10) {
                 playerShiftDimension();
                 lastShifted = 0;
-            }
         }
 
-        // handle pauses etc
+        // Handles touch events
         if (Gdx.input.justTouched()) {
             cam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
-//            TODO add real stuff asides from this debug crap
+
+            //If the pause button was touched... pause the game
             if (pauseBounds.contains(touchPoint.x, touchPoint.y)) {
                 state = State.PAUSED;
             }
         }
     }
 
+    //player.state == Player.State.IDLE ||
     public void flingPlayer(float xImpulse, float yImpulse) {
-        if (player.state == Player.State.IDLE || player.getBody().getLinearVelocity().y == 0) {
-            System.out.println("moving");
+        if (player.getBody().getLinearVelocity().y == 0) {
+            //System.out.println("moving");
             player.state = Player.State.MOVING;
-            int multiplier = 3;
+
             player.getBody().applyForceToCenter(multiplier * xImpulse, multiplier * yImpulse, true);
-            ++idleGlitch;
+            idleGlitch = true;
         }
     }
 
@@ -161,14 +178,15 @@ public class GameScreen extends ScreenAdapter{
      * Updates player state from airborne to either idle or running based on horizontal velocity
      */
     private void updatePlayerState() {
-        if (player.getBody().getLinearVelocity().x == 0 && player.getBody().getLinearVelocity().y == 0) {
-            if (idleGlitch == 0) {
-                System.out.println(player.getBody().getLinearVelocity());
+        Vector2 vel = player.getBody().getLinearVelocity();
+        if (vel.x == 0 && vel.y == 0) {
+
+            if (idleGlitch == false) {
+                //System.out.println(player.getBody().getLinearVelocity());
                 player.state = Player.State.IDLE;
-                idleGlitch = 0;
-            } else {
-                idleGlitch = 0;
             }
+
+            idleGlitch = false;
         }
     }
 
@@ -190,25 +208,23 @@ public class GameScreen extends ScreenAdapter{
         handleInput(delta);
         updatePlayerState();
 
-        for(Platform plat: level.platforms_HEAVEN)
-        {
-            plat.update();
-        }
-
-        for(Platform plat: level.platforms_HELL)
-        {
-            plat.update();
-        }
-
         if (inHell) {
+            for(Platform plat: level.platforms_HELL){
+                plat.update();
+            }
             hell.step(delta, 6, 2);
-        } else {
+        }
+        else {
+            for(Platform plat: level.platforms_HEAVEN){
+                plat.update();
+            }
             heaven.step(delta, 6, 2);
         }
     }
 
     private void updatePaused() {
-        if (Gdx.input.justTouched()) {
+        if (Gdx.input.justTouched())
+        {
             cam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
 
             if (pauseBounds.contains(touchPoint.x, touchPoint.y)) {

@@ -4,8 +4,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.hwooy.shiftgamebeta.levels.Level;
+import com.hwooy.shiftgamebeta.models.Block;
 import com.hwooy.shiftgamebeta.models.GameObject;
-import com.hwooy.shiftgamebeta.models.TerrainBlock;
 
 import java.util.ArrayList;
 
@@ -53,7 +53,7 @@ public class LevelRenderer {
      * renders the terrain in this level
      */
     private void renderTerrain() {
-        ArrayList<TerrainBlock> objects = level.hellTerrainObjects;
+        ArrayList<Block> objects = level.hellTerrainObjects;
         int size = objects.size();
         for (int i = 0; i < size; i++) {
             GameObject object = objects.get(i);
