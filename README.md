@@ -1,8 +1,10 @@
-ShiftGameBeta- README!
-=============
+README (ShiftGameBeta)
+======================
 
-A demo game based on a 4 dimensional world (without a 3rd dimension).
+A demo game based on two 2-dimensional worlds.
+Created with the libgdx framework and the box2d physics engine.
+Feel free to look and create your own games based on this one.
 
-Made for kicks.
+Hope you guys enjoy!
 
-Updates to follow.
+-STILL IN PROGRESS-
