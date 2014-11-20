@@ -6,8 +6,8 @@ package com.hwooy.shiftgamebeta.models;
  */
 public class Block extends GameObject {
 
-    public static final float WIDTH = 1;
-    public static final float HEIGHT = 1;
+    public static final float WIDTH = .5f;
+    public static final float HEIGHT = .5f;
 
     /**
      * This is a custom type depicting whether the terrain block is of surface or background,

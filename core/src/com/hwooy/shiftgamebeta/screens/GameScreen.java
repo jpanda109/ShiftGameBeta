@@ -49,7 +49,7 @@ public class GameScreen extends ScreenAdapter{
     PlayerInputListener playerInputListener;
     float lastShifted;
     boolean idleGlitch = false;
-    int multiplier;
+    float multiplier;
 
     Application.ApplicationType applicationType;
 
@@ -66,8 +66,8 @@ public class GameScreen extends ScreenAdapter{
         debugRenderer = new ShapeRenderer();
 
         //Making heaven and hell
-        hell = new World(new Vector2(0, -100f), false);
-        heaven = new World(new Vector2(0, -100f), false);
+        hell = new World(new Vector2(0, -30f), false);
+        heaven = new World(new Vector2(0, -30f), false);
 
         //Settings listeners
         theContactListener = new TheContactListener(this);
@@ -77,8 +77,8 @@ public class GameScreen extends ScreenAdapter{
         //Sets the stage
         this.screenManager = screenManager;
         state = State.RUNNING;
-        cam = new OrthographicCamera(StartScreen.CAM_WIDTH, StartScreen.CAM_HEIGHT);
-        cam.position.set(StartScreen.CAM_WIDTH / 2, StartScreen.CAM_HEIGHT / 2, 0);
+        cam = new OrthographicCamera(48, 32);
+        cam.position.set(24, 16, 0);
 
         //Making the level itself
         this.levelNumber = levelNumber;
@@ -97,7 +97,7 @@ public class GameScreen extends ScreenAdapter{
         lastShifted = 0;
         inHell = true;
         player = level.player;
-        multiplier = 3;
+        multiplier = 2.5f;
 
         //Find what device the game is running on
         applicationType = Gdx.app.getType();
@@ -117,7 +117,7 @@ public class GameScreen extends ScreenAdapter{
         //If the device is such that *does not* have touch capabilities
         if (applicationType != Application.ApplicationType.Android &&
             applicationType != Application.ApplicationType.iOS &&
-            Gdx.input.isKeyPressed(Input.Keys.DOWN) &&
+            Gdx.input.isKeyPressed(Input.Keys.SPACE) &&
             lastShifted > delta * 10) {
                 playerShiftDimension();
                 lastShifted = 0;
@@ -136,10 +136,13 @@ public class GameScreen extends ScreenAdapter{
 
     //player.state == Player.State.IDLE ||
     public void flingPlayer(float xImpulse, float yImpulse) {
-        if (player.getBody().getLinearVelocity().y == 0) {
+        if (Math.abs(player.getBody().getLinearVelocity().y) < .001f &&
+                Math.abs(player.getBody().getLinearVelocity().x) < .001f) {
             //System.out.println("moving");
             player.state = Player.State.MOVING;
 
+            System.out.println(yImpulse);
+            System.out.println(player.getBody().getMass());
             player.getBody().applyForceToCenter(multiplier * xImpulse, multiplier * yImpulse, true);
             idleGlitch = true;
         }
@@ -180,7 +183,6 @@ public class GameScreen extends ScreenAdapter{
     private void updatePlayerState() {
         Vector2 vel = player.getBody().getLinearVelocity();
         if (vel.x == 0 && vel.y == 0) {
-
             if (idleGlitch == false) {
                 //System.out.println(player.getBody().getLinearVelocity());
                 player.state = Player.State.IDLE;

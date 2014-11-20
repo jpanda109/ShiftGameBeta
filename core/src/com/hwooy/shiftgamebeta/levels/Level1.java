@@ -40,8 +40,8 @@ public class Level1 extends Level {
         }
 
         // create player
-        portal.position.set(125, 20);
-        player.position.set(25, 40);
+        portal.position.set(42, 2);
+        player.position.set(2, 4);
 
     }
 

@@ -12,8 +12,8 @@ public class Player extends GameObject {
 
     boolean isFlying;
 
-    public static final float PLAYER_WIDTH = 2;
-    public static final float PLAYER_HEIGHT = 2;
+    public static final float PLAYER_WIDTH = 1;
+    public static final float PLAYER_HEIGHT = 1;
 
     public State state;
     public int stars;

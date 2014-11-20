@@ -14,8 +14,8 @@ public class Level {
     public static final int LEVEL_BUFFER_HEIGHT = 500;
     public static final int LEVEL_BUFFER_WIDTH = 500;
 
-    public static final int LEVEL_HEIGHT = StartScreen.CAM_HEIGHT;
-    public static final int LEVEL_WIDTH = StartScreen.CAM_WIDTH;
+    public static final int LEVEL_HEIGHT = 32;
+    public static final int LEVEL_WIDTH = 48;
 
     //public static final float LEVEL_HEIGHT = StartScreen.CAM_HEIGHT;
     //public static final float LEVEL_WIDTH = StartScreen.CAM_WIDTH;

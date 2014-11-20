@@ -52,15 +52,18 @@ public class FixtureFactory {
      * creates terrain for both worlds
      */
     private void makeTerrainFixtures() {
+        bodyDef = new BodyDef();
+        fixtureDef = new FixtureDef();
         bodyDef.type = BodyDef.BodyType.StaticBody;
         polygonShape.setAsBox(Block.WIDTH, Block.HEIGHT);
         fixtureDef.shape = polygonShape;
+        fixtureDef.density = 1f;
+        fixtureDef.friction = .3f;
 
         for (GameObject object : level.heavenTerrainObjects) {
             bodyDef.position.set(object.position);
             Body body = heaven.createBody(bodyDef);
             Fixture fixture = body.createFixture(fixtureDef);
-            fixture.setFriction(0);
             object.setBody(body);
         }
 
@@ -76,6 +79,8 @@ public class FixtureFactory {
      * creates stars for both worlds
      */
     private void makeStarFixtures() {
+        bodyDef = new BodyDef();
+        fixtureDef = new FixtureDef();
         bodyDef.type = BodyDef.BodyType.StaticBody;
         polygonShape.setAsBox(Block.WIDTH, Block.HEIGHT);
         fixtureDef.shape = polygonShape;
@@ -99,9 +104,13 @@ public class FixtureFactory {
      * creates the player in hell
      */
     public void makePlayerFixture() {
+        bodyDef = new BodyDef();
+        fixtureDef = new FixtureDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         polygonShape.setAsBox(Player.PLAYER_WIDTH, Player.PLAYER_HEIGHT);
         fixtureDef.shape = polygonShape;
+        fixtureDef.density = 1f;
+        fixtureDef.friction = .3f;
         bodyDef.position.set(level.player.position);
         Body body = hell.createBody(bodyDef);
         body.createFixture(fixtureDef).setUserData("Player");
@@ -123,8 +132,12 @@ public class FixtureFactory {
     }
 
     public void makePlatformFixture(){
+        bodyDef = new BodyDef();
+        fixtureDef = new FixtureDef();
         bodyDef.type = BodyDef.BodyType.KinematicBody;
         fixtureDef.shape = polygonShape;
+        fixtureDef.friction = 100.0f;
+        fixtureDef.isSensor = false;
 
         int i = 0;
         for (Platform plat : level.platforms_HEAVEN)
@@ -132,8 +145,6 @@ public class FixtureFactory {
             bodyDef.position.set(plat.position);
             polygonShape.setAsBox(plat.PLATFORM_WIDTH, plat.PLATFORM_HEIGHT);
             Body body = heaven.createBody(bodyDef);
-            fixtureDef.friction = 1.0f;
-            fixtureDef.isSensor = false;
             Fixture fixture = body.createFixture(fixtureDef);
             fixture.setUserData("HeavenPlatform" + Integer.toString(i));
 
@@ -147,8 +158,6 @@ public class FixtureFactory {
             bodyDef.position.set(plat.position);
             polygonShape.setAsBox(plat.PLATFORM_WIDTH, plat.PLATFORM_HEIGHT);
             Body body = hell.createBody(bodyDef);
-            fixtureDef.density = 1.0f;
-            fixtureDef.friction = 1.0f;
             Fixture fixture = body.createFixture(fixtureDef);
             fixture.setUserData("HellPlatform" + Integer.toString(i));
 
