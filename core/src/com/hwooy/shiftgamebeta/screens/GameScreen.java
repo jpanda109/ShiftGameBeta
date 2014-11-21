@@ -141,8 +141,6 @@ public class GameScreen extends ScreenAdapter{
             //System.out.println("moving");
             player.state = Player.State.MOVING;
 
-            System.out.println(yImpulse);
-            System.out.println(player.getBody().getMass());
             player.getBody().applyForceToCenter(multiplier * xImpulse, multiplier * yImpulse, true);
             idleGlitch = true;
         }
