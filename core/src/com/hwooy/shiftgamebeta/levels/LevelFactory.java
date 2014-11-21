@@ -17,6 +17,8 @@ public class LevelFactory {
                 return new Level1();
             case 2:
                 return new Level2();
+            case 3:
+                return new Level3();
         }
         return new Level1();
     }

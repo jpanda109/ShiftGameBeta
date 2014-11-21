@@ -40,7 +40,7 @@ public class Level {
         this.hellStarObjects = new ArrayList<Star>();
         this.heavenStarObjects = new ArrayList<Star>();
 
-        portal = new Portal(135, 10);
+        portal = new Portal(4, 25);
         player = new Player(5, 10);
 
         this.platforms_HELL = new ArrayList<Platform>();

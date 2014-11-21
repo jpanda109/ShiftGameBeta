@@ -6,8 +6,8 @@ package com.hwooy.shiftgamebeta.models;
  */
 public class Portal extends GameObject {
 
-    public static final float PORTAL_WIDTH = 2.5f;
-    public static final float PORTAL_HEIGHT = 5;
+    public static final float PORTAL_WIDTH = 1.25f;
+    public static final float PORTAL_HEIGHT = 2.5f;
 
     public Portal(float x, float y) {
         super(x, y, PORTAL_WIDTH, PORTAL_HEIGHT);

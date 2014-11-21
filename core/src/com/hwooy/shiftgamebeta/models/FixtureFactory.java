@@ -1,5 +1,6 @@
 package com.hwooy.shiftgamebeta.models;
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.hwooy.shiftgamebeta.levels.Level;
 
@@ -58,18 +59,18 @@ public class FixtureFactory {
         polygonShape.setAsBox(Block.WIDTH, Block.HEIGHT);
         fixtureDef.shape = polygonShape;
         fixtureDef.density = 1f;
-        fixtureDef.friction = .3f;
+        fixtureDef.friction = 4f;
+        Body body = heaven.createBody(bodyDef);
 
         for (GameObject object : level.heavenTerrainObjects) {
-            bodyDef.position.set(object.position);
-            Body body = heaven.createBody(bodyDef);
+            polygonShape.setAsBox(Block.WIDTH, Block.HEIGHT, object.position, 0);
             Fixture fixture = body.createFixture(fixtureDef);
             object.setBody(body);
         }
 
+        body = hell.createBody(bodyDef);
         for (GameObject object : level.hellTerrainObjects) {
-            bodyDef.position.set(object.position);
-            Body body = hell.createBody(bodyDef);
+            polygonShape.setAsBox(Block.WIDTH, Block.HEIGHT, object.position, 0);
             Fixture fixture = body.createFixture(fixtureDef);
             object.setBody(body);
         }
@@ -110,7 +111,7 @@ public class FixtureFactory {
         polygonShape.setAsBox(Player.PLAYER_WIDTH, Player.PLAYER_HEIGHT);
         fixtureDef.shape = polygonShape;
         fixtureDef.density = 1f;
-        fixtureDef.friction = .3f;
+        fixtureDef.friction = 4f;
         bodyDef.position.set(level.player.position);
         Body body = hell.createBody(bodyDef);
         body.createFixture(fixtureDef).setUserData("Player");
