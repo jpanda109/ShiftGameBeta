@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="48" height="32" tilewidth="10" tileheight="10">
+ <tileset firstgid="1" name="ShiftBeta" tilewidth="10" tileheight="10">
+  <image source="../../Pictures/Tiled Terrain Maps/ShiftBeta.png" width="100" height="100"/>
+ </tileset>
+ <layer name="Tile Layer 3" width="48" height="32" opacity="0.37">
+  <data encoding="base64" compression="zlib">
+   eJzt07ENACAIBVGGdf8Z7CnRn9PkXkIL11CVtcL70+xn2c+yf3azz8mun9nPsv+eyV+/1D9hP8t+lv0s+1n2s+xn2c+yn2U/K92/AXNZEGk=
+  </data>
+ </layer>
+ <layer name="Tile Layer 2" width="48" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztzrEJwDAQBEEV6/5rcK7AgcyzCGbg0/tda9YzvD9Nf0t/S//Zz/3+bN1Mf0t/S39Lf0t/S39Lf0t/S39Lf0t/S/+3F4s2DnU=
+  </data>
+ </layer>
+ <layer name="Tile Layer 1" width="48" height="32">
+  <data encoding="base64" compression="zlib">
+   eJzt07EJgEAQRNGLLcJO1FAN1Uy9/ttwCrhAFmEW+Q9+uDDJlgL816BGNbmHBM1qUat7SNCmdnUEbruPt0Rc6lbVPSSgbwQgF/4U8Hn7f/wp4MP/AfmdjQDk8wARRQhX
+  </data>
+ </layer>
+</map>
