@@ -3,29 +3,24 @@
  <tileset firstgid="1" name="tileset" tilewidth="10" tileheight="10">
   <image source="tileset.png" width="100" height="100"/>
  </tileset>
- <layer name="Heaven GreenPlat" width="48" height="32">
+ <layer name="Heaven Block" width="48" height="32">
   <data encoding="base64" compression="zlib">
    eJzt1bEJACAMBMAM6/4zWFmIaURBIneQJhD4Kh+xasmuEvnfkr+OlszObWXyvyU/8IOTHgUY/BIAmOnGuzpFTgu5
   </data>
  </layer>
- <layer name="Hell GreenPlat" width="48" height="32">
+ <layer name="Hell Block" width="48" height="32">
   <data encoding="base64" compression="zlib">
    eJzt1bENADAIA0GGZf8ZWCBVKEDJneT+O0cAP8npgCb9s/S/Jw8DAO75VgBgkwI4LAXd
   </data>
  </layer>
- <layer name="Both BlackPlat" width="48" height="32">
-  <data encoding="base64" compression="zlib">
-   eJzt1VEJAEAIREGT2D+mBQRFOLiPGTDCWyMA3sjmgJ2pG30BwJ0/CkzsBPxPpzsFiNUDSQ==
-  </data>
- </layer>
- <layer name="Both PurpHoriz" width="48" height="32">
-  <data encoding="base64" compression="zlib">
-   eJztyjENAAAMw7CCGH+sI9Bz+2wpXxIAAADg05QufwCAZgGmegDJ
-  </data>
- </layer>
- <layer name="Both TempPlat" width="48" height="32">
+ <layer name="Both CrumblingBlock" width="48" height="32">
   <data encoding="base64" compression="zlib">
    eJzt1KERAAAIAzHGYf8JsWgckNy9qm8EsFW2Jjtwnx8AAACAvwqMJgFp
+  </data>
+ </layer>
+ <layer name="Both LavaBlock" width="48" height="32">
+  <data encoding="base64" compression="zlib">
+   eJzt07ENADAIAzCO6P+38gADQxFVZUvZMmRJBAAAADDpFLnZB/o/efVP9u+yn18laOcBkQ==
   </data>
  </layer>
  <layer name="Both Star" width="48" height="32">
@@ -33,19 +28,24 @@
    eJztzjENAAAIA7Dd+BeMioWDVkET+G2uAwAAAAAABQvp2AAL
   </data>
  </layer>
- <layer name="Both PurpVertic" width="48" height="32">
-  <data encoding="base64" compression="zlib">
-   eJztzjENAAAIwDBE4F8rJggE0t47FgEAAAAAt2VzN83/Lv98VdpeAMk=
-  </data>
- </layer>
  <layer name="Both Portal" width="48" height="32">
   <data encoding="base64" compression="zlib">
    eJztzrEJgEAUBcFrTA3V8DRU+2/DV8OBfIQZ2Hxb42tTmtNSPTJoTVvaq0cG9XSks3pk0JXu9FSPAAAAAAC/8gIpAwOd
   </data>
  </layer>
- <layer name="Both StartPlat" width="48" height="32">
+ <layer name="Both StartBlock" width="48" height="32">
   <data encoding="base64" compression="zlib">
    eJztwzENAAAMA6DqnH8hM9C3HyQkAAAAAACwcyV7D57+AcM=
+  </data>
+ </layer>
+ <layer name="Both Block" width="48" height="32">
+  <data encoding="base64" compression="zlib">
+   eJzt1VEJAEAIREGT2D+mBQRFOLiPGTDCWyMA3sjmgJ2pG30BwJ0/CkzsBPxPpzsFiNUDSQ==
+  </data>
+ </layer>
+ <layer name="Hell Player" width="48" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztzrENACAIAEFKbXX/XWUHC0K4S77/CAAAAACAGVa2qyc+nOxWT9DGA5pwADc=
   </data>
  </layer>
 </map>
