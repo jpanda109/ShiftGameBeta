@@ -17,7 +17,7 @@ public class Level3 extends Level {
     float tileSize;
 
     public Level3() {
-        super();
+        super(0);
 
         portal.position.set(5, 20);
 

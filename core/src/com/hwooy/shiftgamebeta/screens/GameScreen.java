@@ -84,10 +84,10 @@ public class GameScreen extends ScreenAdapter{
         lockedCam.setToOrtho(false, 480, 320);
 
         //Making the level itself
-        //this.levelNumber = levelNumber;
+        this.levelNumber = levelNumber;
         //level = LevelFactory.makeLevel(levelNumber);
 
-        level = new Level();
+        level = new Level(levelNumber);
 
         //Making the fixtures for all of the bodies
         FixtureFactory fixtureFactory = new FixtureFactory(level, hell, heaven);
@@ -186,7 +186,7 @@ public class GameScreen extends ScreenAdapter{
     private void updatePlayerState() {
         Vector2 vel = player.getBody().getLinearVelocity();
         if (vel.x == 0 && vel.y == 0) {
-            if (idleGlitch == false) {
+            if (!idleGlitch) {
                 //System.out.println(player.getBody().getLinearVelocity());
                 player.state = Player.State.IDLE;
             }
@@ -209,6 +209,10 @@ public class GameScreen extends ScreenAdapter{
         }
     }
 
+    /**
+     * updates the screen as if the player is actively playing
+     * @param delta
+     */
     private void updateRunning(float delta) {
         handleInput(delta);
         updatePlayerState();
@@ -233,6 +237,9 @@ public class GameScreen extends ScreenAdapter{
         }
     }
 
+    /**
+     * updates based on if player has paused the game
+     */
     private void updatePaused() {
         if (Gdx.input.justTouched())
         {
@@ -255,11 +262,11 @@ public class GameScreen extends ScreenAdapter{
         level.tiledMapRenderer.setView(lockedCam);
         level.tiledMapRenderer.render();
 
-        //if (inHell) {
+        if (inHell) {
             renderer.render(hell, mapCam.combined);
-        //} else {
-        //    renderer.render(heaven, mapCam.combined);
-        // }
+        } else {
+            renderer.render(heaven, mapCam.combined);
+        }
 
         debugRenderer.setProjectionMatrix(mapCam.combined);
         debugRenderer.begin(ShapeRenderer.ShapeType.Filled);

@@ -19,7 +19,7 @@ public class Level2 extends Level{
 
 //float x, float y, float width, float height, int speed_, Direction dir_, Vector2 end)
     public Level2() {
-        super();
+        super(0);
         platforms_HELL.add(PlatformFactory.makePlatform(hell_begin.x, hell_begin.y, 15, 1, 40, hell_begin, hell_end));
         platforms_HEAVEN.add(PlatformFactory.makePlatform(heaven_begin.x, heaven_begin.y, 10, 1, 20, heaven_begin, heaven_end));
         populateLevel();

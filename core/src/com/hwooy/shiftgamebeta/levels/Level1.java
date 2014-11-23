@@ -9,7 +9,7 @@ import com.hwooy.shiftgamebeta.models.Block;
 public class Level1 extends Level {
 
     public Level1() {
-        super();
+        super(0);
         populateLevel();
     }
 

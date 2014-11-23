@@ -39,7 +39,7 @@ public class Level {
     /**
      * Default constructor initializing the hellTerrainObjects list
      */
-    public Level() {
+    public Level(int levelNumber) {
         portal = new Portal(5, 20);
         player = new Player(5, 10);
 
@@ -52,7 +52,11 @@ public class Level {
         this.platforms_HELL = new ArrayList<Platform>();
         this.platforms_HEAVEN = new ArrayList<Platform>();
 
-        tiledMap = new TmxMapLoader().load("android/assets/levels/EarlyLevel.tmx");
+        try {
+            tiledMap = new TmxMapLoader().load("android/assets/levels/EarlyLevel.tmx");
+        } catch (Exception e) {
+            tiledMap = new TmxMapLoader().load("android/assets/level/EarlyLevel.tnx");
+        }
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
 
         TiledMapTileLayer layer1 = (TiledMapTileLayer) tiledMap.getLayers().get("Tile Layer 1");
