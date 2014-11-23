@@ -35,7 +35,8 @@ public class GameScreen extends ScreenAdapter{
     ShapeRenderer debugRenderer;
     State state;
     ScreenManager screenManager;
-    OrthographicCamera cam;
+    OrthographicCamera mapCam;
+    OrthographicCamera lockedCam;
     Level level;
     int levelNumber;
     //LevelRenderer renderer;
@@ -77,12 +78,16 @@ public class GameScreen extends ScreenAdapter{
         //Sets the stage
         this.screenManager = screenManager;
         state = State.RUNNING;
-        cam = new OrthographicCamera(48, 32);
-        cam.position.set(24, 16, 0);
+        mapCam = new OrthographicCamera(48, 32);
+        mapCam.position.set(24, 16, 0);
+        lockedCam = new OrthographicCamera();
+        lockedCam.setToOrtho(false, 480, 320);
 
         //Making the level itself
-        this.levelNumber = levelNumber;
-        level = LevelFactory.makeLevel(levelNumber);
+        //this.levelNumber = levelNumber;
+        //level = LevelFactory.makeLevel(levelNumber);
+
+        level = new Level();
 
         //Making the fixtures for all of the bodies
         FixtureFactory fixtureFactory = new FixtureFactory(level, hell, heaven);
@@ -125,7 +130,7 @@ public class GameScreen extends ScreenAdapter{
 
         // Handles touch events
         if (Gdx.input.justTouched()) {
-            cam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
+            mapCam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
 
             //If the pause button was touched... pause the game
             if (pauseBounds.contains(touchPoint.x, touchPoint.y)) {
@@ -225,7 +230,7 @@ public class GameScreen extends ScreenAdapter{
     private void updatePaused() {
         if (Gdx.input.justTouched())
         {
-            cam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
+            mapCam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
 
             if (pauseBounds.contains(touchPoint.x, touchPoint.y)) {
                 state = State.RUNNING;
@@ -241,18 +246,21 @@ public class GameScreen extends ScreenAdapter{
         gl.glClearColor(1, 1, 1, 1);
         gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        if (inHell) {
-            renderer.render(hell, cam.combined);
-        } else {
-            renderer.render(heaven, cam.combined);
-        }
+        level.tiledMapRenderer.setView(lockedCam);
+        level.tiledMapRenderer.render();
 
-        debugRenderer.setProjectionMatrix(cam.combined);
+        //if (inHell) {
+            renderer.render(hell, mapCam.combined);
+        //} else {
+        //    renderer.render(heaven, mapCam.combined);
+        // }
+
+        debugRenderer.setProjectionMatrix(mapCam.combined);
         debugRenderer.begin(ShapeRenderer.ShapeType.Filled);
         debugRenderer.setColor(Color.BLACK);
         debugRenderer.rect(pauseBounds.x, pauseBounds.y, pauseBounds.width, pauseBounds.height);
         debugRenderer.end();
-        cam.update();
+        mapCam.update();
     }
 
     /**

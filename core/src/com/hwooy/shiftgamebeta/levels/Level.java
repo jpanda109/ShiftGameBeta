@@ -1,5 +1,10 @@
 package com.hwooy.shiftgamebeta.levels;
 
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.hwooy.shiftgamebeta.models.*;
 import com.hwooy.shiftgamebeta.screens.StartScreen;
 
@@ -17,8 +22,6 @@ public class Level {
     public static final int LEVEL_HEIGHT = 32;
     public static final int LEVEL_WIDTH = 48;
 
-    //public static final float LEVEL_HEIGHT = StartScreen.CAM_HEIGHT;
-    //public static final float LEVEL_WIDTH = StartScreen.CAM_WIDTH;
     public static final float LEVEL_GRAVITY = -10f;
 
     public final ArrayList<Block> hellTerrainObjects;
@@ -30,21 +33,61 @@ public class Level {
     public final ArrayList<Platform> platforms_HELL;
     public final ArrayList<Platform> platforms_HEAVEN;
 
+    public TiledMap tiledMap;
+    public OrthogonalTiledMapRenderer tiledMapRenderer;
+
     /**
      * Default constructor initializing the hellTerrainObjects list
      */
     public Level() {
+        portal = new Portal(5, 20);
+        player = new Player(5, 10);
+
         this.hellTerrainObjects = new ArrayList<Block>();
         this.heavenTerrainObjects = new ArrayList<Block>();
 
         this.hellStarObjects = new ArrayList<Star>();
         this.heavenStarObjects = new ArrayList<Star>();
 
-        portal = new Portal(4, 25);
-        player = new Player(5, 10);
-
         this.platforms_HELL = new ArrayList<Platform>();
         this.platforms_HEAVEN = new ArrayList<Platform>();
+
+        tiledMap = new TmxMapLoader().load("android/assets/levels/EarlyLevel.tmx");
+        tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
+
+        TiledMapTileLayer layer1 = (TiledMapTileLayer) tiledMap.getLayers().get("Tile Layer 1");
+        TiledMapTileLayer layer2 = (TiledMapTileLayer) tiledMap.getLayers().get("Tile Layer 2");
+        TiledMapTileLayer layer3 = (TiledMapTileLayer) tiledMap.getLayers().get("Tile Layer 3");
+
+        for (int row = 0; row < layer1.getHeight(); row++) {
+            for (int col = 0; col < layer1.getWidth(); col++) {
+                TiledMapTileLayer.Cell cell = layer1.getCell(col, row);
+                if (cell == null || cell.getTile() == null) {
+                    continue;
+                }
+                hellTerrainObjects.add(new Block(col, row));
+            }
+        }
+
+        for (int row = 0; row < layer2.getHeight(); row++) {
+            for (int col = 0; col < layer2.getWidth(); col++) {
+                TiledMapTileLayer.Cell cell = layer2.getCell(col, row);
+                if (cell == null || cell.getTile() == null) {
+                    continue;
+                }
+                hellTerrainObjects.add(new Block(col, row));
+            }
+        }
+
+        for (int row = 0; row < layer3.getHeight(); row++) {
+            for (int col = 0; col < layer3.getWidth(); col++) {
+                TiledMapTileLayer.Cell cell = layer3.getCell(col, row);
+                if (cell == null || cell.getTile() == null) {
+                    continue;
+                }
+                hellTerrainObjects.add(new Block(col, row));
+            }
+        }
     }
 
 }
