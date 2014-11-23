@@ -9,27 +9,25 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 
-
 /**
- * Created by jason on 11/14/14.
- * This is the first screen seen upon uponing up the application
+ * Created by jason on 11/22/14.
  */
-public class StartScreen extends ScreenAdapter {
+public class HelpScreen extends ScreenAdapter {
 
     public static final int CAM_WIDTH = 150; //Gdx.graphics.getWidth();
     public static final int CAM_HEIGHT = 100; //Gdx.graphics.getHeight();
-    public static final float PLAY_BOUNDS_WIDTH_RATIO = .5f;
-    public static final float PLAY_BOUNDS_HEIGHT_RATIO = .2f;
-    public static final float HELP_BOUNDS_WIDTH_RATIO = .5f;
-    public static final float HELP_BOUNDS_HEIGHT_RATIO = .2f;
-    public static final float SETTINGS_BOUNDS_WIDTH_RATIO = .2f;
-    public static final float SETTINGS_BOUNDS_HEIGHT_RATIO = .2f;
+    public static final float BACK_BOUNDS_WIDTH_RATIO = .1f;
+    public static final float BACK_BOUNDS_HEIGHT_RATIO = .1f;
+    public static final float HELP_BOUNDS_WIDTH_RATIO = .8f;
+    public static final float HELP_BOUNDS_HEIGHT_RATIO = .6f;
+    public static final float NEXT_HELP_BOUNDS_WIDTH_RATIO = .2f;
+    public static final float NEXT_HELP_BOUNDS_HEIGHT_RATIO = .1f;
 
     ScreenManager screenManager;
     OrthographicCamera cam;
-    Rectangle playBounds;
+    Rectangle backBounds;
     Rectangle helpBounds;
-    Rectangle settingsBounds;
+    Rectangle nextHelpBounds;
     Vector3 touchPoint;
     ShapeRenderer debugRenderer;
 
@@ -37,25 +35,25 @@ public class StartScreen extends ScreenAdapter {
      * constructor for the start screen
      * @param screenManager instance of screenManager being played
      */
-    public StartScreen(ScreenManager screenManager) {
+    public HelpScreen(ScreenManager screenManager) {
         this.screenManager = screenManager;
         cam = new OrthographicCamera(CAM_WIDTH, CAM_HEIGHT);
         cam.position.set(CAM_WIDTH / 2, CAM_HEIGHT / 2, 0);
-        playBounds = new Rectangle(
-                (int) (CAM_WIDTH * PLAY_BOUNDS_WIDTH_RATIO / 2),
-                (int) (CAM_HEIGHT * .7),
-                (int) (CAM_WIDTH * PLAY_BOUNDS_WIDTH_RATIO),
-                (int) (CAM_HEIGHT * PLAY_BOUNDS_HEIGHT_RATIO));
+        backBounds = new Rectangle(
+                0,
+                (int) (CAM_HEIGHT * .85),
+                (int) (CAM_WIDTH * BACK_BOUNDS_WIDTH_RATIO),
+                (int) (CAM_HEIGHT * BACK_BOUNDS_HEIGHT_RATIO));
         helpBounds = new Rectangle(
-                (int) (CAM_WIDTH * HELP_BOUNDS_WIDTH_RATIO / 2),
-                (int) (CAM_HEIGHT * .4),
+                (int) (CAM_WIDTH * .1),
+                (int) (CAM_HEIGHT * .15),
                 (int) (CAM_WIDTH * HELP_BOUNDS_WIDTH_RATIO),
                 (int) (CAM_HEIGHT * HELP_BOUNDS_HEIGHT_RATIO));
-        settingsBounds = new Rectangle(
+        nextHelpBounds = new Rectangle(
+                (int) (CAM_WIDTH * (1 - NEXT_HELP_BOUNDS_WIDTH_RATIO)),
                 0,
-                0,
-                (int) (CAM_WIDTH * SETTINGS_BOUNDS_WIDTH_RATIO),
-                (int) (CAM_HEIGHT * SETTINGS_BOUNDS_HEIGHT_RATIO));
+                (int) (CAM_WIDTH * NEXT_HELP_BOUNDS_WIDTH_RATIO),
+                (int) (CAM_HEIGHT * NEXT_HELP_BOUNDS_HEIGHT_RATIO));
         touchPoint = new Vector3();
         debugRenderer = new ShapeRenderer();
     }
@@ -68,14 +66,13 @@ public class StartScreen extends ScreenAdapter {
             cam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
 
 //            TODO provide actions inputs
-            if (playBounds.contains(touchPoint.x, touchPoint.y)) {
-                screenManager.setGameScreen(1);
+            if (backBounds.contains(touchPoint.x, touchPoint.y)) {
+                screenManager.setScreen(ScreenManager.Screens.START);
                 //screenManager.setScreen(new GameScreen(screenManager, 1));
             }
             else if (helpBounds.contains(touchPoint.x, touchPoint.y)) {
-                screenManager.setScreen(ScreenManager.Screens.HELP);
             }
-            else if (settingsBounds.contains(touchPoint.x, touchPoint.y)) {
+            else if (nextHelpBounds.contains(touchPoint.x, touchPoint.y)) {
             }
         }
     }
@@ -93,9 +90,9 @@ public class StartScreen extends ScreenAdapter {
         debugRenderer.setProjectionMatrix(cam.combined);
         debugRenderer.begin(ShapeRenderer.ShapeType.Line);
         debugRenderer.setColor(new Color(Color.RED));
-        debugRenderer.rect(playBounds.getX(), playBounds.getY(), playBounds.getWidth(), playBounds.getHeight());
+        debugRenderer.rect(backBounds.getX(), backBounds.getY(), backBounds.getWidth(), backBounds.getHeight());
         debugRenderer.setColor(new Color(Color.BLUE));
-        debugRenderer.rect(settingsBounds.getX(), settingsBounds.getY(), settingsBounds.getWidth(), settingsBounds.getHeight());
+        debugRenderer.rect(nextHelpBounds.getX(), nextHelpBounds.getY(), nextHelpBounds.getWidth(), nextHelpBounds.getHeight());
         debugRenderer.setColor(new Color(Color.GREEN));
         debugRenderer.rect(helpBounds.getX(), helpBounds.getY(), helpBounds.getWidth(), helpBounds.getHeight());
         debugRenderer.end();
@@ -110,5 +107,5 @@ public class StartScreen extends ScreenAdapter {
         update();
         draw();
     }
-
+    
 }

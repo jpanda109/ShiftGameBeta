@@ -15,7 +15,7 @@ public class ScreenManager {
     public Stack<Screen> screens;
 
     public enum Screens {
-        START, GAME
+        START, GAME, HELP
     }
 
     public ScreenManager(ShiftGameBeta game) {
@@ -24,19 +24,6 @@ public class ScreenManager {
         pushScreen(Screens.START, 0);
     }
 
-    public void pushScreen(Screens screen, int level) {
-        if (screen == Screens.START) {
-            screens.push(new StartScreen(this));
-        } else if (screen == Screens.GAME) {
-            screens.push(new GameScreen(this, level));
-        }
-        game.setScreen(screens.peek());
-    }
-
-    public void popScreen() {
-        Screen screen = screens.pop();
-        screen.dispose();
-    }
 
     public void setScreen(Screens screen) {
         popScreen();
@@ -46,5 +33,21 @@ public class ScreenManager {
     public void setGameScreen(int level) {
         popScreen();
         pushScreen(Screens.GAME, level);
+    }
+
+    private void pushScreen(Screens screen, int level) {
+        if (screen == Screens.START) {
+            screens.push(new StartScreen(this));
+        } else if (screen == Screens.GAME) {
+            screens.push(new GameScreen(this, level));
+        } else if (screen == Screens.HELP) {
+            screens.push(new HelpScreen(this));
+        }
+        game.setScreen(screens.peek());
+    }
+
+    private void popScreen() {
+        Screen screen = screens.pop();
+        screen.dispose();
     }
 }

@@ -16,6 +16,8 @@ import java.util.ArrayList;
  */
 public class Level {
 
+    public static final String LEVEL_PATH = "android/assets/levels/";
+
     public static final int LEVEL_BUFFER_HEIGHT = 500;
     public static final int LEVEL_BUFFER_WIDTH = 500;
 
@@ -52,11 +54,9 @@ public class Level {
         this.platforms_HELL = new ArrayList<Platform>();
         this.platforms_HEAVEN = new ArrayList<Platform>();
 
-        try {
-            tiledMap = new TmxMapLoader().load("android/assets/levels/EarlyLevel.tmx");
-        } catch (Exception e) {
-            tiledMap = new TmxMapLoader().load("android/assets/level/EarlyLevel.tnx");
-        }
+        tiledMap = new TmxMapLoader().load("android/assets/levels/EarlyLevel.tmx");
+        //tiledMap = new TmxMapLoader().load(LEVEL_PATH + "Level" + levelNumber + ".tmx");
+
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
 
         TiledMapTileLayer layer1 = (TiledMapTileLayer) tiledMap.getLayers().get("Tile Layer 1");
