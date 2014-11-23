@@ -1,12 +1,12 @@
 package com.hwooy.shiftgamebeta.levels;
 
+import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.MapLayers;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.hwooy.shiftgamebeta.models.*;
-import com.hwooy.shiftgamebeta.screens.StartScreen;
 
 import java.util.ArrayList;
 
@@ -18,6 +18,16 @@ public class Level {
 
     public static final String LEVEL_PATH = "android/assets/levels/";
 
+    // layer keys
+    public static final String WORLD_BOTH = "Both";
+    public static final String WORLD_HELL = "Hell";
+    public static final String WORLD_HEAVEN = "Heaven";
+    public static final String OBJECT_PORTAL = "Portal";
+    public static final String OBJECT_BLOCK = "Block";
+    public static final String OBJECT_PLAYER = "Player";
+    public static final String OBJECT_LAVA = "LavaBlock";
+    public static final String OBJECT_CRUMBLING = "CrumblingBlock";
+
     public static final int LEVEL_BUFFER_HEIGHT = 500;
     public static final int LEVEL_BUFFER_WIDTH = 500;
 
@@ -26,14 +36,14 @@ public class Level {
 
     public static final float LEVEL_GRAVITY = -10f;
 
-    public final ArrayList<Block> hellTerrainObjects;
-    public final ArrayList<Block> heavenTerrainObjects;
-    public final ArrayList<Star> hellStarObjects;
-    public final ArrayList<Star> heavenStarObjects;
-    public final Portal portal;
-    public final Player player;
-    public final ArrayList<Platform> platforms_HELL;
-    public final ArrayList<Platform> platforms_HEAVEN;
+    public ArrayList<GameObject> hellTerrainObjects;
+    public ArrayList<GameObject> heavenTerrainObjects;
+    public ArrayList<Star> hellStarObjects;
+    public ArrayList<Star> heavenStarObjects;
+    public Portal portal;
+    public Player player;
+    public ArrayList<Platform> platforms_HELL;
+    public ArrayList<Platform> platforms_HEAVEN;
 
     public TiledMap tiledMap;
     public OrthogonalTiledMapRenderer tiledMapRenderer;
@@ -45,8 +55,8 @@ public class Level {
         portal = new Portal(5, 20);
         player = new Player(5, 10);
 
-        this.hellTerrainObjects = new ArrayList<Block>();
-        this.heavenTerrainObjects = new ArrayList<Block>();
+        this.hellTerrainObjects = new ArrayList<GameObject>();
+        this.heavenTerrainObjects = new ArrayList<GameObject>();
 
         this.hellStarObjects = new ArrayList<Star>();
         this.heavenStarObjects = new ArrayList<Star>();
@@ -54,42 +64,68 @@ public class Level {
         this.platforms_HELL = new ArrayList<Platform>();
         this.platforms_HEAVEN = new ArrayList<Platform>();
 
-        tiledMap = new TmxMapLoader().load("android/assets/levels/EarlyLevel.tmx");
-        //tiledMap = new TmxMapLoader().load(LEVEL_PATH + "Level" + levelNumber + ".tmx");
+        try {
+            tiledMap = new TmxMapLoader().load(LEVEL_PATH + "Level" + levelNumber + ".tmx");
+        } catch (Exception e) {
+            tiledMap = new TmxMapLoader().load(LEVEL_PATH + "Level" + 1 + ".tmx");
+        }
+        addObjects();
 
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
 
-        TiledMapTileLayer layer1 = (TiledMapTileLayer) tiledMap.getLayers().get("Tile Layer 1");
-        TiledMapTileLayer layer2 = (TiledMapTileLayer) tiledMap.getLayers().get("Tile Layer 2");
-        TiledMapTileLayer layer3 = (TiledMapTileLayer) tiledMap.getLayers().get("Tile Layer 3");
+    }
 
-        for (int row = 0; row < layer1.getHeight(); row++) {
-            for (int col = 0; col < layer1.getWidth(); col++) {
-                TiledMapTileLayer.Cell cell = layer1.getCell(col, row);
-                if (cell == null || cell.getTile() == null) {
-                    continue;
-                }
-                hellTerrainObjects.add(new Block(col, row));
-            }
+    /**
+     * gets objects from TiledMap and adds to proper ArrayList
+     */
+    private void addObjects() {
+        MapLayers mapLayers = tiledMap.getLayers();
+
+        for (MapLayer mapLayer : mapLayers) {
+            addObjectToWorld((TiledMapTileLayer) mapLayer);
+        }
+    }
+
+    private void addObjectToWorld(TiledMapTileLayer mapTileLayer) {
+        ArrayList<GameObject> tempArrayList = new ArrayList<GameObject>();
+        String layerName = mapTileLayer.getName();
+        if (layerName.contains(OBJECT_BLOCK)) {
+            addToArrayList(tempArrayList, mapTileLayer, OBJECT_BLOCK);
+        } else if (layerName.contains(OBJECT_CRUMBLING)) {
+            addToArrayList(tempArrayList, mapTileLayer, OBJECT_CRUMBLING);
         }
 
-        for (int row = 0; row < layer2.getHeight(); row++) {
-            for (int col = 0; col < layer2.getWidth(); col++) {
-                TiledMapTileLayer.Cell cell = layer2.getCell(col, row);
-                if (cell == null || cell.getTile() == null) {
-                    continue;
-                }
-                hellTerrainObjects.add(new Block(col, row));
-            }
+        if (layerName.contains(WORLD_BOTH)) {
+            hellTerrainObjects.addAll(tempArrayList);
+            heavenTerrainObjects.addAll(tempArrayList);
+        } else if (layerName.contains(WORLD_HELL)) {
+            hellTerrainObjects.addAll(tempArrayList);
+        } else if (layerName.contains(WORLD_HEAVEN)) {
+            heavenTerrainObjects.addAll(tempArrayList);
         }
+    }
 
-        for (int row = 0; row < layer3.getHeight(); row++) {
-            for (int col = 0; col < layer3.getWidth(); col++) {
-                TiledMapTileLayer.Cell cell = layer3.getCell(col, row);
+    private void addToArrayList(ArrayList<GameObject> arrayList, TiledMapTileLayer mapTileLayer, String objectKey) {
+        for (int row = 0; row < mapTileLayer.getHeight(); row++) {
+            for (int col = 0; col < mapTileLayer.getWidth(); col++) {
+                TiledMapTileLayer.Cell cell = mapTileLayer.getCell(col, row);
                 if (cell == null || cell.getTile() == null) {
                     continue;
                 }
-                hellTerrainObjects.add(new Block(col, row));
+
+                if (objectKey.equals(OBJECT_BLOCK)) {
+                    arrayList.add(new Block(col, row));
+                } else if (objectKey.equals(OBJECT_CRUMBLING)) {
+                    arrayList.add(new CrumblingBlock(col, row));
+                } else if (objectKey.equals(OBJECT_LAVA)) {
+                    arrayList.add(new LavaBlock(col, row));
+                } else if (objectKey.equals(OBJECT_PLAYER)) {
+                    player = new Player(col, row);
+                    arrayList.add(new Player(col, row));
+                } else if (objectKey.equals(OBJECT_PORTAL)) {
+                    portal = new Portal(col, row);
+                    arrayList.add(new Portal(col, row));
+                }
             }
         }
     }
