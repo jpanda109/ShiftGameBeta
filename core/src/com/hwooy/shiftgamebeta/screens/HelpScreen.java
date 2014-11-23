@@ -68,7 +68,6 @@ public class HelpScreen extends ScreenAdapter {
 //            TODO provide actions inputs
             if (backBounds.contains(touchPoint.x, touchPoint.y)) {
                 screenManager.setScreen(ScreenManager.Screens.START);
-                //screenManager.setScreen(new GameScreen(screenManager, 1));
             }
             else if (helpBounds.contains(touchPoint.x, touchPoint.y)) {
             }

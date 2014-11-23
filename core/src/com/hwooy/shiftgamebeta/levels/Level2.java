@@ -8,6 +8,7 @@ import com.hwooy.shiftgamebeta.models.PlatformFactory;
  * Created by Anna Hwang on 11/18/2014.
  *
  * Testing lava or some obstacle that can destroy player
+ * TODO OBSOLETE
  */
 public class Level2 extends Level{
 

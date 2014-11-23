@@ -12,7 +12,7 @@ import com.badlogic.gdx.math.Vector3;
 
 /**
  * Created by jason on 11/14/14.
- * This is the first screen seen upon uponing up the application
+ * This is the first screen seen upon opening up the application
  */
 public class StartScreen extends ScreenAdapter {
 
