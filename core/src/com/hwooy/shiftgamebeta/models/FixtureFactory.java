@@ -1,6 +1,5 @@
 package com.hwooy.shiftgamebeta.models;
 
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.hwooy.shiftgamebeta.levels.Level;
 
@@ -43,6 +42,8 @@ public class FixtureFactory {
      */
     public void makeFixtures() {
         makeTerrainFixtures();
+        makeLavaBlocks();
+        makeCrumblingBlocks();
         makeStarFixtures();
         makePlayerFixture();
         makePortalFixture();
@@ -62,18 +63,82 @@ public class FixtureFactory {
         fixtureDef.friction = 4f;
         Body body = heaven.createBody(bodyDef);
 
-        for (GameObject object : level.heavenTerrainObjects) {
-            polygonShape.setAsBox(Block.WIDTH, Block.HEIGHT, object.position, 0);
-            Fixture fixture = body.createFixture(fixtureDef);
-            object.setBody(body);
+        for (GameObject object : level.heavenObjects) {
+            if (object.getClass().equals(Block.class)) {
+                polygonShape.setAsBox(Block.WIDTH, Block.HEIGHT, object.position, 0);
+                Fixture fixture = body.createFixture(fixtureDef);
+                object.setBody(body);
+            }
         }
 
         body = hell.createBody(bodyDef);
-        for (GameObject object : level.hellTerrainObjects) {
-            polygonShape.setAsBox(Block.WIDTH, Block.HEIGHT, object.position, 0);
-            Fixture fixture = body.createFixture(fixtureDef);
-            object.setBody(body);
+        for (GameObject object : level.hellObjects) {
+            if (object.getClass().equals(Block.class)) {
+                polygonShape.setAsBox(Block.WIDTH, Block.HEIGHT, object.position, 0);
+                Fixture fixture = body.createFixture(fixtureDef);
+                object.setBody(body);
+            }
         }
+    }
+
+    private void makeLavaBlocks() {
+        bodyDef = new BodyDef();
+        fixtureDef = new FixtureDef();
+        bodyDef.type = BodyDef.BodyType.StaticBody;
+        polygonShape.setAsBox(Block.WIDTH, Block.HEIGHT);
+        fixtureDef.shape = polygonShape;
+
+        Body body = heaven.createBody(bodyDef);
+        for (GameObject object : level.heavenObjects) {
+            if (object.getClass().equals(LavaBlock.class)) {
+                polygonShape.setAsBox(Block.WIDTH, Block.HEIGHT, object.position, 0);
+                Fixture fixture = body.createFixture(fixtureDef);
+                fixture.setUserData("Lava");
+                object.setBody(body);
+            }
+        }
+        body.setUserData("Lava");
+
+        body = hell.createBody(bodyDef);
+        for (GameObject object : level.heavenObjects) {
+            if (object.getClass().equals(LavaBlock.class)) {
+                polygonShape.setAsBox(Block.WIDTH, Block.HEIGHT, object.position, 0);
+                Fixture fixture = body.createFixture(fixtureDef);
+                fixture.setUserData("Lava");
+                object.setBody(body);
+            }
+        }
+        body.setUserData("Lava");
+    }
+
+    private void makeCrumblingBlocks() {
+        bodyDef = new BodyDef();
+        fixtureDef = new FixtureDef();
+        bodyDef.type = BodyDef.BodyType.StaticBody;
+        polygonShape.setAsBox(Block.WIDTH, Block.HEIGHT);
+        fixtureDef.shape = polygonShape;
+
+        Body body = heaven.createBody(bodyDef);
+        for (GameObject object : level.heavenObjects) {
+            if (object.getClass().equals(CrumblingBlock.class)) {
+                polygonShape.setAsBox(Block.WIDTH, Block.HEIGHT, object.position, 0);
+                Fixture fixture = body.createFixture(fixtureDef);
+                fixture.setUserData("Crumbling");
+                object.setBody(body);
+            }
+        }
+        body.setUserData("Lava");
+
+        body = hell.createBody(bodyDef);
+        for (GameObject object : level.heavenObjects) {
+            if (object.getClass().equals(CrumblingBlock.class)) {
+                polygonShape.setAsBox(Block.WIDTH, Block.HEIGHT, object.position, 0);
+                Fixture fixture = body.createFixture(fixtureDef);
+                fixture.setUserData("Crumbling");
+                object.setBody(body);
+            }
+        }
+        body.setUserData("Lava");
     }
 
     /**

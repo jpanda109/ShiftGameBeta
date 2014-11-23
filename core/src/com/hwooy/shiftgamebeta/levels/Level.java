@@ -36,8 +36,8 @@ public class Level {
 
     public static final float LEVEL_GRAVITY = -10f;
 
-    public ArrayList<GameObject> hellTerrainObjects;
-    public ArrayList<GameObject> heavenTerrainObjects;
+    public ArrayList<GameObject> hellObjects;
+    public ArrayList<GameObject> heavenObjects;
     public ArrayList<Star> hellStarObjects;
     public ArrayList<Star> heavenStarObjects;
     public Portal portal;
@@ -49,14 +49,11 @@ public class Level {
     public OrthogonalTiledMapRenderer tiledMapRenderer;
 
     /**
-     * Default constructor initializing the hellTerrainObjects list
+     * Default constructor initializing the hellObjects list
      */
     public Level(int levelNumber) {
-        portal = new Portal(5, 20);
-        player = new Player(5, 10);
-
-        this.hellTerrainObjects = new ArrayList<GameObject>();
-        this.heavenTerrainObjects = new ArrayList<GameObject>();
+        this.hellObjects = new ArrayList<GameObject>();
+        this.heavenObjects = new ArrayList<GameObject>();
 
         this.hellStarObjects = new ArrayList<Star>();
         this.heavenStarObjects = new ArrayList<Star>();
@@ -89,23 +86,19 @@ public class Level {
     private void addObjectToWorld(TiledMapTileLayer mapTileLayer) {
         ArrayList<GameObject> tempArrayList = new ArrayList<GameObject>();
         String layerName = mapTileLayer.getName();
-        if (layerName.contains(OBJECT_BLOCK)) {
-            addToArrayList(tempArrayList, mapTileLayer, OBJECT_BLOCK);
-        } else if (layerName.contains(OBJECT_CRUMBLING)) {
-            addToArrayList(tempArrayList, mapTileLayer, OBJECT_CRUMBLING);
-        }
+        addToArrayList(tempArrayList, mapTileLayer);
 
         if (layerName.contains(WORLD_BOTH)) {
-            hellTerrainObjects.addAll(tempArrayList);
-            heavenTerrainObjects.addAll(tempArrayList);
+            hellObjects.addAll(tempArrayList);
+            heavenObjects.addAll(tempArrayList);
         } else if (layerName.contains(WORLD_HELL)) {
-            hellTerrainObjects.addAll(tempArrayList);
+            hellObjects.addAll(tempArrayList);
         } else if (layerName.contains(WORLD_HEAVEN)) {
-            heavenTerrainObjects.addAll(tempArrayList);
+            heavenObjects.addAll(tempArrayList);
         }
     }
 
-    private void addToArrayList(ArrayList<GameObject> arrayList, TiledMapTileLayer mapTileLayer, String objectKey) {
+    private void addToArrayList(ArrayList<GameObject> arrayList, TiledMapTileLayer mapTileLayer) {
         for (int row = 0; row < mapTileLayer.getHeight(); row++) {
             for (int col = 0; col < mapTileLayer.getWidth(); col++) {
                 TiledMapTileLayer.Cell cell = mapTileLayer.getCell(col, row);
@@ -113,18 +106,17 @@ public class Level {
                     continue;
                 }
 
-                if (objectKey.equals(OBJECT_BLOCK)) {
-                    arrayList.add(new Block(col, row));
-                } else if (objectKey.equals(OBJECT_CRUMBLING)) {
+                String objectName = mapTileLayer.getName();
+                if (objectName.contains(OBJECT_CRUMBLING)) {
                     arrayList.add(new CrumblingBlock(col, row));
-                } else if (objectKey.equals(OBJECT_LAVA)) {
+                } else if (objectName.contains(OBJECT_LAVA)) {
                     arrayList.add(new LavaBlock(col, row));
-                } else if (objectKey.equals(OBJECT_PLAYER)) {
+                } else if (objectName.contains(OBJECT_PLAYER)) {
                     player = new Player(col, row);
-                    arrayList.add(new Player(col, row));
-                } else if (objectKey.equals(OBJECT_PORTAL)) {
+                } else if (objectName.contains(OBJECT_PORTAL)) {
                     portal = new Portal(col, row);
-                    arrayList.add(new Portal(col, row));
+                } else {
+                    arrayList.add(new Block(col, row));
                 }
             }
         }

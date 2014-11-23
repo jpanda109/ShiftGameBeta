@@ -233,7 +233,7 @@ public class GameScreen extends ScreenAdapter{
         if (player.getBody().getPosition().x > 48 + Player.PLAYER_WIDTH/2
                 || player.getBody().getPosition().x < 0 - Player.PLAYER_WIDTH/2
                 || player.getBody().getPosition().y < 0 - Player.PLAYER_HEIGHT/2) {
-            screenManager.setGameScreen(levelNumber);
+            restartLevel();
         }
     }
 
@@ -286,6 +286,13 @@ public class GameScreen extends ScreenAdapter{
         draw();
     }
 
+
+    /**
+     * do you really need an explanation
+     */
+    public void restartLevel() {
+        screenManager.setGameScreen(levelNumber);
+    }
     /**
      * Upon reaching the goal, moves player to the next level.
      */

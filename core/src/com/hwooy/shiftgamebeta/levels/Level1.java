@@ -20,24 +20,24 @@ public class Level1 extends Level {
     public void populateLevel() {
         // populate hell
         for (int i = 0; i < LEVEL_WIDTH; i+= Block.WIDTH * 2) {
-            hellTerrainObjects.add(new Block(i, 0));
-            hellTerrainObjects.add(new Block(i, LEVEL_HEIGHT));
+            hellObjects.add(new Block(i, 0));
+            hellObjects.add(new Block(i, LEVEL_HEIGHT));
         }
         for (int i = (int) Block.HEIGHT; i < LEVEL_HEIGHT; i += Block.HEIGHT * 2) {
-            hellTerrainObjects.add(new Block(0, i));
-            hellTerrainObjects.add(new Block(LEVEL_WIDTH, i));
-            hellTerrainObjects.add(new Block(50, i));
+            hellObjects.add(new Block(0, i));
+            hellObjects.add(new Block(LEVEL_WIDTH, i));
+            hellObjects.add(new Block(50, i));
         }
 
         // populate heaven
         for (int i = 0; i < LEVEL_WIDTH; i+= Block.WIDTH * 2) {
-            heavenTerrainObjects.add(new Block(i, 0));
-            heavenTerrainObjects.add(new Block(i, LEVEL_HEIGHT));
+            heavenObjects.add(new Block(i, 0));
+            heavenObjects.add(new Block(i, LEVEL_HEIGHT));
         }
         for (int i = (int) Block.HEIGHT; i < LEVEL_HEIGHT; i += Block.HEIGHT * 2) {
-            heavenTerrainObjects.add(new Block(0, i));
-            heavenTerrainObjects.add(new Block(LEVEL_WIDTH, i));
-            heavenTerrainObjects.add(new Block(100, i));
+            heavenObjects.add(new Block(0, i));
+            heavenObjects.add(new Block(LEVEL_WIDTH, i));
+            heavenObjects.add(new Block(100, i));
         }
 
         // create player

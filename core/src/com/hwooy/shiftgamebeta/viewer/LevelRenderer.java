@@ -52,7 +52,7 @@ public class LevelRenderer {
      * renders the terrain in this level
      */
     private void renderTerrain() {
-        ArrayList<GameObject> objects = level.hellTerrainObjects;
+        ArrayList<GameObject> objects = level.hellObjects;
         int size = objects.size();
         for (int i = 0; i < size; i++) {
             GameObject object = objects.get(i);
