@@ -3,12 +3,12 @@
  <tileset firstgid="1" name="tileset" tilewidth="10" tileheight="10">
   <image source="tileset.png" width="100" height="100"/>
  </tileset>
- <layer name="Heaven GreenPlat" width="48" height="32">
+ <layer name="Heaven Block" width="48" height="32">
   <data encoding="base64" compression="zlib">
    eJztwwEJAAAIA7CHtX8GC9wAwgZLAAC4TAkAAAAfLAAjAfU=
   </data>
  </layer>
- <layer name="Hell GreenPlat" width="48" height="32">
+ <layer name="Hell Block" width="48" height="32">
   <data encoding="base64" compression="zlib">
    eJztzrEJwDAQBEEV6/5rcK7AgcyzCGbg0/tda9YzvD9Nf0t/S//Zz/3+bN1Mf0t/S39Lf0t/S39Lf0t/S39Lf0t/S/+3F4s2DnU=
   </data>
@@ -18,12 +18,12 @@
    eJztzjENAAAIA7Dd+BeMjEHSKmgCcM+0AwAAAADw3ALZ6AAL
   </data>
  </layer>
- <layer name="Both BlackPlat" width="48" height="32">
+ <layer name="Both Block" width="48" height="32">
   <data encoding="base64" compression="zlib">
    eJzt00EJADAMBMFTUv8yayCPPAoJZQZWwiYA/OYUAbv4FOZ0//MpzPEfALxxATOEAu8=
   </data>
  </layer>
- <layer name="Both StartPlat" width="48" height="32">
+ <layer name="Both StartBlock" width="48" height="32">
   <data encoding="base64" compression="zlib">
    eJztwzENAAAIA7DpxL8QDOzg5GiTJgAAAAAAd1MC/yx+ogHD
   </data>
@@ -31,6 +31,11 @@
  <layer name="Both Portal" width="48" height="32">
   <data encoding="base64" compression="zlib">
    eJztzjEOQFAURcG/MZQoUWL/23DX8JqXyExy+jMG/NeU5rR0jxStaUt790jRkc50dY8U3elJb/cIAAAAABR8zRkDnQ==
+  </data>
+ </layer>
+ <layer name="Hell Player" width="48" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztzrENACAIAEFKbXX/XWUHCwK5S77/CAAAAADoaWW7euLDyW71BDDWAxF3ADc=
   </data>
  </layer>
 </map>
