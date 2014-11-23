@@ -23,7 +23,7 @@ public class GameObject {
      * @param height height of object
      */
     public GameObject(float x, float y, float width, float height) {
-        this.position = new Vector2(x, y);
+        this.position = new Vector2(x + .5f, y + .5f);
         this.bounds = new Rectangle(x, y, width, height);
     }
 

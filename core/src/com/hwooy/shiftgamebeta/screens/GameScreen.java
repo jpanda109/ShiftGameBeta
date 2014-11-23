@@ -225,6 +225,12 @@ public class GameScreen extends ScreenAdapter{
             }
             heaven.step(delta, 6, 2);
         }
+
+        if (player.getBody().getPosition().x > 48 + Player.PLAYER_WIDTH/2
+                || player.getBody().getPosition().x < 0 - Player.PLAYER_WIDTH/2
+                || player.getBody().getPosition().y < 0 - Player.PLAYER_HEIGHT/2) {
+            screenManager.setGameScreen(levelNumber);
+        }
     }
 
     private void updatePaused() {
