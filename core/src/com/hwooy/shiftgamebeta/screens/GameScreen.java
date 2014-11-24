@@ -152,6 +152,10 @@ public class GameScreen extends ScreenAdapter{
      * Switched dimensional layer of the player by creating a body in the other world and destroying the previous one
      */
     public void playerShiftDimension() {
+        Fixture playerFixture = player.getBody().getFixtureList().get(0);
+        Filter filter = playerFixture.getFilterData();
+        filter.maskBits = (short) ((~filter.maskBits) & FixtureFactory.BIT_BOTH);
+        playerFixture.setFilterData(filter);
     }
 
     /**

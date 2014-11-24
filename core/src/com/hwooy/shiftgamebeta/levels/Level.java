@@ -88,7 +88,7 @@ public class Level {
             }
         } else if (layerName.contains(WORLD_HEAVEN)) {
             for (GameObject gameObject : tempArrayList) {
-                gameObject.collisionType = GameObject.CollisionType.HELL;
+                gameObject.collisionType = GameObject.CollisionType.HEAVEN;
             }
         }
         gameObjects.addAll(tempArrayList);
