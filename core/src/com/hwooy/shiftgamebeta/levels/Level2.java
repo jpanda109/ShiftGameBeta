@@ -22,7 +22,6 @@ public class Level2 extends Level{
     public Level2() {
         super(0);
         platforms_HELL.add(PlatformFactory.makePlatform(hell_begin.x, hell_begin.y, 15, 1, 40, hell_begin, hell_end));
-        platforms_HEAVEN.add(PlatformFactory.makePlatform(heaven_begin.x, heaven_begin.y, 10, 1, 20, heaven_begin, heaven_end));
         populateLevel();
     }
 
@@ -50,23 +49,12 @@ public class Level2 extends Level{
         if(isHell)
         {
             for (int i = 0; i < LEVEL_WIDTH; i+= Block.WIDTH * 2) {
-                hellObjects.add(new Block(i, 0));
-                hellObjects.add(new Block(i, LEVEL_HEIGHT));
+                gameObjects.add(new Block(i, 0));
+                gameObjects.add(new Block(i, LEVEL_HEIGHT));
             }
             for (int i = (int) Block.HEIGHT; i < LEVEL_HEIGHT; i += Block.HEIGHT * 2) {
-                hellObjects.add(new Block(0, i));
-                hellObjects.add(new Block(LEVEL_WIDTH, i));
-            }
-        }
-        else
-        {
-            for (int i = 0; i < LEVEL_WIDTH; i+= Block.WIDTH * 2) {
-                heavenObjects.add(new Block(i, 0));
-                heavenObjects.add(new Block(i, LEVEL_HEIGHT));
-            }
-            for (int i = (int) Block.HEIGHT; i < LEVEL_HEIGHT; i += Block.HEIGHT * 2) {
-                heavenObjects.add(new Block(0, i));
-                heavenObjects.add(new Block(LEVEL_WIDTH, i));
+                gameObjects.add(new Block(0, i));
+                gameObjects.add(new Block(LEVEL_WIDTH, i));
             }
         }
     }

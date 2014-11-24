@@ -7,17 +7,20 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 /**
  * Created by jason on 11/15/14.
- * Factory class to populate box2d hell with necessary blocks
+ * Factory class to populate box2d world with necessary blocks
  */
 public class FixtureFactory {
 
-    public static final short BIT_TERRAIN = 1;
-    public static final short BIT_STAR_PORTAL = 2;
-    public static final short BIT_PLAYER = 4;
+    // note to self
+    // bool collide = (filterA.maskBits & filterB.categoryBits != 0 &&
+    //                  filterA.categoryBits & filterB.maskBits != 0)
+    public static final short BIT_BOTH = 3; // 0000 0000 0000 0011
+    public static final short BIT_HELL = 1; // 0000 0000 0000 0001
+    public static final short BIT_HEAVEN = 2; // 0000 0000 0000 0010
+    public static final short BIT_PLAYER = 4; // 0000 0000 0000 0100
 
     Level level;
-    World hell;
-    World heaven;
+    World world;
     BodyDef bodyDef;
     PolygonShape polygonShape;
     FixtureDef fixtureDef;
@@ -25,13 +28,11 @@ public class FixtureFactory {
     /**
      * Constructor for the FixtureFactory taking in the level to be built and worlds in which to build them
      * @param level
-     * @param hell
-     * @param heaven
+     * @param world
      */
-    public FixtureFactory(Level level, World hell, World heaven) {
+    public FixtureFactory(Level level, World world) {
         this.level = level;
-        this.hell = hell;
-        this.heaven = heaven;
+        this.world = world;
         bodyDef = new BodyDef();
         polygonShape = new PolygonShape();
         fixtureDef = new FixtureDef();
@@ -61,19 +62,22 @@ public class FixtureFactory {
         fixtureDef.shape = polygonShape;
         fixtureDef.density = 1f;
         fixtureDef.friction = 4f;
-        Body body = heaven.createBody(bodyDef);
+        fixtureDef.filter.maskBits = BIT_PLAYER;
 
-        for (GameObject object : level.heavenObjects) {
+        Body body = world.createBody(bodyDef);
+        for (GameObject object : level.gameObjects) {
             if (object.getClass().equals(Block.class)) {
-                polygonShape.setAsBox(Block.WIDTH, Block.HEIGHT, object.position, 0);
-                Fixture fixture = body.createFixture(fixtureDef);
-                object.setBody(body);
-            }
-        }
-
-        body = hell.createBody(bodyDef);
-        for (GameObject object : level.hellObjects) {
-            if (object.getClass().equals(Block.class)) {
+                switch (object.collisionType) {
+                    case BOTH:
+                        fixtureDef.filter.categoryBits = BIT_BOTH;
+                        break;
+                    case HELL:
+                        fixtureDef.filter.categoryBits = BIT_HELL;
+                        break;
+                    case HEAVEN:
+                        fixtureDef.filter.categoryBits = BIT_HEAVEN;
+                        break;
+                }
                 polygonShape.setAsBox(Block.WIDTH, Block.HEIGHT, object.position, 0);
                 Fixture fixture = body.createFixture(fixtureDef);
                 object.setBody(body);
@@ -88,19 +92,8 @@ public class FixtureFactory {
         polygonShape.setAsBox(Block.WIDTH, Block.HEIGHT);
         fixtureDef.shape = polygonShape;
 
-        Body body = heaven.createBody(bodyDef);
-        for (GameObject object : level.heavenObjects) {
-            if (object.getClass().equals(LavaBlock.class)) {
-                polygonShape.setAsBox(Block.WIDTH, Block.HEIGHT, object.position, 0);
-                Fixture fixture = body.createFixture(fixtureDef);
-                fixture.setUserData("Lava");
-                object.setBody(body);
-            }
-        }
-        body.setUserData("Lava");
-
-        body = hell.createBody(bodyDef);
-        for (GameObject object : level.heavenObjects) {
+        Body body = world.createBody(bodyDef);
+        for (GameObject object : level.gameObjects) {
             if (object.getClass().equals(LavaBlock.class)) {
                 polygonShape.setAsBox(Block.WIDTH, Block.HEIGHT, object.position, 0);
                 Fixture fixture = body.createFixture(fixtureDef);
@@ -118,19 +111,8 @@ public class FixtureFactory {
         polygonShape.setAsBox(Block.WIDTH, Block.HEIGHT);
         fixtureDef.shape = polygonShape;
 
-        Body body = heaven.createBody(bodyDef);
-        for (GameObject object : level.heavenObjects) {
-            if (object.getClass().equals(CrumblingBlock.class)) {
-                polygonShape.setAsBox(Block.WIDTH, Block.HEIGHT, object.position, 0);
-                Fixture fixture = body.createFixture(fixtureDef);
-                fixture.setUserData("Crumbling");
-                object.setBody(body);
-            }
-        }
-        body.setUserData("Lava");
-
-        body = hell.createBody(bodyDef);
-        for (GameObject object : level.heavenObjects) {
+        Body body = world.createBody(bodyDef);
+        for (GameObject object : level.gameObjects) {
             if (object.getClass().equals(CrumblingBlock.class)) {
                 polygonShape.setAsBox(Block.WIDTH, Block.HEIGHT, object.position, 0);
                 Fixture fixture = body.createFixture(fixtureDef);
@@ -153,21 +135,14 @@ public class FixtureFactory {
 
         for (GameObject object : level.hellStarObjects) {
             bodyDef.position.set(object.position);
-            Body body = hell.createBody(bodyDef);
-            Fixture fixture = body.createFixture(fixtureDef);
-            object.setBody(body);
-        }
-
-        for (GameObject object : level.heavenStarObjects) {
-            bodyDef.position.set(object.position);
-            Body body = heaven.createBody(bodyDef);
+            Body body = world.createBody(bodyDef);
             Fixture fixture = body.createFixture(fixtureDef);
             object.setBody(body);
         }
     }
 
     /**
-     * creates the player in hell
+     * creates the player in world
      */
     public void makePlayerFixture() {
         bodyDef = new BodyDef();
@@ -177,14 +152,16 @@ public class FixtureFactory {
         fixtureDef.shape = polygonShape;
         fixtureDef.density = 1f;
         fixtureDef.friction = 4f;
+        fixtureDef.filter.categoryBits = BIT_PLAYER;
+        fixtureDef.filter.maskBits = BIT_HELL;
         bodyDef.position.set(level.player.position);
-        Body body = hell.createBody(bodyDef);
+        Body body = world.createBody(bodyDef);
         body.createFixture(fixtureDef).setUserData("Player");
         level.player.setBody(body);
     }
 
     /**
-     * creates the portal in hell
+     * creates the portal in world
      */
     public void makePortalFixture() {
         bodyDef.type = BodyDef.BodyType.StaticBody;
@@ -192,7 +169,7 @@ public class FixtureFactory {
         fixtureDef.shape = polygonShape;
         fixtureDef.isSensor = true;
         bodyDef.position.set(level.portal.position);
-        Body body = hell.createBody(bodyDef);
+        Body body = world.createBody(bodyDef);
         body.createFixture(fixtureDef).setUserData("Portal");
         level.portal.setBody(body);
     }
@@ -206,24 +183,12 @@ public class FixtureFactory {
         fixtureDef.isSensor = false;
 
         int i = 0;
-        for (Platform plat : level.platforms_HEAVEN)
-        {
-            bodyDef.position.set(plat.position);
-            polygonShape.setAsBox(plat.PLATFORM_WIDTH, plat.PLATFORM_HEIGHT);
-            Body body = heaven.createBody(bodyDef);
-            Fixture fixture = body.createFixture(fixtureDef);
-            fixture.setUserData("HeavenPlatform" + Integer.toString(i));
-
-            plat.setBody(body);
-            plat.setInitialSpeed();
-            ++i;
-        }
 
         for (Platform plat : level.platforms_HELL)
         {
             bodyDef.position.set(plat.position);
             polygonShape.setAsBox(plat.PLATFORM_WIDTH, plat.PLATFORM_HEIGHT);
-            Body body = hell.createBody(bodyDef);
+            Body body = world.createBody(bodyDef);
             Fixture fixture = body.createFixture(fixtureDef);
             fixture.setUserData("HellPlatform" + Integer.toString(i));
 

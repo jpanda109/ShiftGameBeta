@@ -36,30 +36,24 @@ public class Level {
 
     public static final float LEVEL_GRAVITY = -10f;
 
-    public ArrayList<GameObject> hellObjects;
-    public ArrayList<GameObject> heavenObjects;
+    public ArrayList<GameObject> gameObjects;
     public ArrayList<Star> hellStarObjects;
-    public ArrayList<Star> heavenStarObjects;
     public Portal portal;
     public Player player;
     public ArrayList<Platform> platforms_HELL;
-    public ArrayList<Platform> platforms_HEAVEN;
 
     public TiledMap tiledMap;
     public OrthogonalTiledMapRenderer tiledMapRenderer;
 
     /**
-     * Default constructor initializing the hellObjects list
+     * Default constructor initializing the gameObjects list
      */
     public Level(int levelNumber) {
-        this.hellObjects = new ArrayList<GameObject>();
-        this.heavenObjects = new ArrayList<GameObject>();
+        this.gameObjects = new ArrayList<GameObject>();
 
         this.hellStarObjects = new ArrayList<Star>();
-        this.heavenStarObjects = new ArrayList<Star>();
 
         this.platforms_HELL = new ArrayList<Platform>();
-        this.platforms_HEAVEN = new ArrayList<Platform>();
 
         try {
             tiledMap = new TmxMapLoader().load(LEVEL_PATH + "Level" + levelNumber + ".tmx");
@@ -88,14 +82,16 @@ public class Level {
         String layerName = mapTileLayer.getName();
         addToArrayList(tempArrayList, mapTileLayer);
 
-        if (layerName.contains(WORLD_BOTH)) {
-            hellObjects.addAll(tempArrayList);
-            heavenObjects.addAll(tempArrayList);
-        } else if (layerName.contains(WORLD_HELL)) {
-            hellObjects.addAll(tempArrayList);
+        if (layerName.contains(WORLD_HELL)) {
+            for (GameObject gameObject : tempArrayList) {
+                gameObject.collisionType = GameObject.CollisionType.HELL;
+            }
         } else if (layerName.contains(WORLD_HEAVEN)) {
-            heavenObjects.addAll(tempArrayList);
+            for (GameObject gameObject : tempArrayList) {
+                gameObject.collisionType = GameObject.CollisionType.HELL;
+            }
         }
+        gameObjects.addAll(tempArrayList);
     }
 
     private void addToArrayList(ArrayList<GameObject> arrayList, TiledMapTileLayer mapTileLayer) {

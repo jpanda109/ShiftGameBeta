@@ -43,7 +43,6 @@ public class GameScreen extends ScreenAdapter{
     Box2DDebugRenderer renderer;
     Vector3 touchPoint;
     World hell;
-    World heaven;
     Player player;
     boolean inHell;
     TheContactListener theContactListener;
@@ -68,12 +67,10 @@ public class GameScreen extends ScreenAdapter{
 
         //Making heaven and hell
         hell = new World(new Vector2(0, -30f), false);
-        heaven = new World(new Vector2(0, -30f), false);
 
         //Settings listeners
         theContactListener = new TheContactListener(this);
         hell.setContactListener(theContactListener);
-        heaven.setContactListener(theContactListener);
 
         //Sets the stage
         this.screenManager = screenManager;
@@ -90,7 +87,7 @@ public class GameScreen extends ScreenAdapter{
         level = new Level(levelNumber);
 
         //Making the fixtures for all of the bodies
-        FixtureFactory fixtureFactory = new FixtureFactory(level, hell, heaven);
+        FixtureFactory fixtureFactory = new FixtureFactory(level, hell);
         fixtureFactory.makeFixtures();
 
         //Rendering stuff
@@ -155,29 +152,6 @@ public class GameScreen extends ScreenAdapter{
      * Switched dimensional layer of the player by creating a body in the other world and destroying the previous one
      */
     public void playerShiftDimension() {
-        BodyDef bodyDef = new BodyDef();
-        PolygonShape polygonShape = new PolygonShape();
-        FixtureDef fixtureDef = new FixtureDef();
-        bodyDef.type = BodyDef.BodyType.DynamicBody;
-        polygonShape.setAsBox(Player.PLAYER_WIDTH, Player.PLAYER_HEIGHT);
-        fixtureDef.shape = polygonShape;
-        bodyDef.position.set(player.getBody().getPosition());
-        bodyDef.linearVelocity.set(player.getBody().getLinearVelocity());
-        Body body;
-
-        if (inHell) {
-            body = heaven.createBody(bodyDef);
-            hell.destroyBody(player.getBody());
-            inHell = false;
-        }
-        else {
-            body = hell.createBody(bodyDef);
-            heaven.destroyBody(player.getBody());
-            inHell = true;
-        }
-
-        body.createFixture(fixtureDef);
-        player.setBody(body);
     }
 
     /**
@@ -217,18 +191,11 @@ public class GameScreen extends ScreenAdapter{
         handleInput(delta);
         updatePlayerState();
 
-        if (inHell) {
-            for(Platform plat: level.platforms_HELL){
-                plat.update();
-            }
-            hell.step(delta, 6, 2);
+        for(Platform plat: level.platforms_HELL){
+            plat.update();
         }
-        else {
-            for(Platform plat: level.platforms_HEAVEN){
-                plat.update();
-            }
-            heaven.step(delta, 6, 2);
-        }
+        hell.step(delta, 6, 2);
+
 
         if (player.getBody().getPosition().x > 48 + Player.PLAYER_WIDTH/2
                 || player.getBody().getPosition().x < 0 - Player.PLAYER_WIDTH/2
@@ -262,11 +229,7 @@ public class GameScreen extends ScreenAdapter{
         level.tiledMapRenderer.setView(lockedCam);
         level.tiledMapRenderer.render();
 
-        if (inHell) {
-            renderer.render(hell, mapCam.combined);
-        } else {
-            renderer.render(heaven, mapCam.combined);
-        }
+        renderer.render(hell, mapCam.combined);
 
         debugRenderer.setProjectionMatrix(mapCam.combined);
         debugRenderer.begin(ShapeRenderer.ShapeType.Filled);

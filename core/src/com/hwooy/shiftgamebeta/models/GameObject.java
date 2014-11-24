@@ -11,6 +11,13 @@ import com.badlogic.gdx.physics.box2d.Body;
  * Useful for factory pattern.
  */
 public class GameObject {
+
+    public enum CollisionType {
+        BOTH, HELL, HEAVEN
+    }
+
+    public CollisionType collisionType;
+
     public final Vector2 position;
     public final Rectangle bounds;
     Body body;
@@ -25,6 +32,7 @@ public class GameObject {
     public GameObject(float x, float y, float width, float height) {
         this.position = new Vector2(x + width, y + height);
         this.bounds = new Rectangle(x, y, width, height);
+        collisionType = CollisionType.BOTH;
     }
 
     public void setBody(Body body) {

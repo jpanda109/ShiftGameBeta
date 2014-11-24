@@ -36,7 +36,7 @@ public class Level3 extends Level {
                 if (cell == null || cell.getTile() == null) {
                     continue;
                 }
-                hellObjects.add(new Block(col, row));
+                gameObjects.add(new Block(col, row));
             }
         }
 
@@ -46,7 +46,7 @@ public class Level3 extends Level {
                 if (cell == null || cell.getTile() == null) {
                     continue;
                 }
-                hellObjects.add(new Block(col, row));
+                gameObjects.add(new Block(col, row));
             }
         }
 
@@ -56,7 +56,7 @@ public class Level3 extends Level {
                 if (cell == null || cell.getTile() == null) {
                     continue;
                 }
-                hellObjects.add(new Block(col, row));
+                gameObjects.add(new Block(col, row));
             }
         }
     }
