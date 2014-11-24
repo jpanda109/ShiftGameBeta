@@ -91,6 +91,8 @@ public class FixtureFactory {
         bodyDef.type = BodyDef.BodyType.StaticBody;
         polygonShape.setAsBox(Block.WIDTH, Block.HEIGHT);
         fixtureDef.shape = polygonShape;
+        fixtureDef.filter.categoryBits = BIT_BOTH;
+        fixtureDef.filter.maskBits = BIT_PLAYER;
 
         Body body = world.createBody(bodyDef);
         for (GameObject object : level.gameObjects) {
@@ -110,6 +112,8 @@ public class FixtureFactory {
         bodyDef.type = BodyDef.BodyType.StaticBody;
         polygonShape.setAsBox(Block.WIDTH, Block.HEIGHT);
         fixtureDef.shape = polygonShape;
+        fixtureDef.filter.categoryBits = BIT_BOTH;
+        fixtureDef.filter.maskBits = BIT_PLAYER;
 
         Body body = world.createBody(bodyDef);
         for (GameObject object : level.gameObjects) {
@@ -132,6 +136,8 @@ public class FixtureFactory {
         bodyDef.type = BodyDef.BodyType.StaticBody;
         polygonShape.setAsBox(Block.WIDTH, Block.HEIGHT);
         fixtureDef.shape = polygonShape;
+        fixtureDef.filter.categoryBits = BIT_BOTH;
+        fixtureDef.filter.maskBits = BIT_PLAYER;
 
         for (GameObject object : level.hellStarObjects) {
             bodyDef.position.set(object.position);
@@ -168,6 +174,8 @@ public class FixtureFactory {
         polygonShape.setAsBox(Portal.PORTAL_WIDTH, Portal.PORTAL_HEIGHT);
         fixtureDef.shape = polygonShape;
         fixtureDef.isSensor = true;
+        fixtureDef.filter.categoryBits = BIT_BOTH;
+        fixtureDef.filter.maskBits = BIT_PLAYER;
         bodyDef.position.set(level.portal.position);
         Body body = world.createBody(bodyDef);
         body.createFixture(fixtureDef).setUserData("Portal");
