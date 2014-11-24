@@ -115,16 +115,15 @@ public class FixtureFactory {
         fixtureDef.filter.categoryBits = BIT_BOTH;
         fixtureDef.filter.maskBits = BIT_PLAYER;
 
-        Body body = world.createBody(bodyDef);
         for (GameObject object : level.gameObjects) {
             if (object.getClass().equals(CrumblingBlock.class)) {
                 polygonShape.setAsBox(Block.WIDTH, Block.HEIGHT, object.position, 0);
+                Body body = world.createBody(bodyDef);
                 Fixture fixture = body.createFixture(fixtureDef);
                 fixture.setUserData("Crumbling");
                 object.setBody(body);
             }
         }
-        body.setUserData("Lava");
     }
 
     /**

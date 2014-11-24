@@ -20,7 +20,7 @@ public class Player extends GameObject {
     public float stateTime;
 
     public Player(float x, float y) {
-        super(x, y, PLAYER_WIDTH, PLAYER_HEIGHT);
+        super(x - PLAYER_WIDTH, y - PLAYER_HEIGHT, PLAYER_WIDTH, PLAYER_HEIGHT);
         state = State.IDLE;
         stateTime = 0;
         isFlying = false;

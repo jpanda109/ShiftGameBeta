@@ -3,6 +3,8 @@ package com.hwooy.shiftgamebeta.listeners;
 import com.badlogic.gdx.physics.box2d.*;
 import com.hwooy.shiftgamebeta.screens.GameScreen;
 
+import java.util.ArrayList;
+
 /**
  * Created by jason on 11/16/14.
  * contact listener
@@ -10,10 +12,12 @@ import com.hwooy.shiftgamebeta.screens.GameScreen;
 public class TheContactListener implements ContactListener {
 
     GameScreen gameScreen;
+    public ArrayList<Body> bodiesToRemove;
 
     public TheContactListener(GameScreen gameScreen) {
         super();
         this.gameScreen = gameScreen;
+        bodiesToRemove = new ArrayList<Body>();
     }
 
     /**
@@ -63,10 +67,12 @@ public class TheContactListener implements ContactListener {
         // Player contact with crumbling block
         if (fixtureA.getUserData() != null && fixtureA.getUserData().toString().contains("Crumbling")) {
             System.out.println("Crumbling Contact");
+            bodiesToRemove.add(fixtureA.getBody());
 
         }
         if (fixtureB.getUserData() != null && fixtureB.getUserData().toString().contains("Crumbling")) {
             System.out.println("Crumbling Contact");
+            bodiesToRemove.add(fixtureB.getBody());
         }
     }
 

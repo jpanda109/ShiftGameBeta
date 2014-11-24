@@ -10,6 +10,6 @@ public class Portal extends GameObject {
     public static final float PORTAL_HEIGHT = 2.5f;
 
     public Portal(float x, float y) {
-        super(x, y, PORTAL_WIDTH, PORTAL_HEIGHT);
+        super(x - PORTAL_WIDTH, y - PORTAL_HEIGHT, PORTAL_WIDTH, PORTAL_HEIGHT);
     }
 }

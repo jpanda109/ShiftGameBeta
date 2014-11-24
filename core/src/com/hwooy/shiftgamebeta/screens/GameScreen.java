@@ -14,7 +14,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
 import com.hwooy.shiftgamebeta.levels.Level;
-import com.hwooy.shiftgamebeta.levels.LevelFactory;
 import com.hwooy.shiftgamebeta.listeners.TheContactListener;
 import com.hwooy.shiftgamebeta.listeners.PlayerInputListener;
 import com.hwooy.shiftgamebeta.models.FixtureFactory;
@@ -42,9 +41,8 @@ public class GameScreen extends ScreenAdapter{
     //LevelRenderer renderer;
     Box2DDebugRenderer renderer;
     Vector3 touchPoint;
-    World hell;
+    World world;
     Player player;
-    boolean inHell;
     TheContactListener theContactListener;
     PlayerInputListener playerInputListener;
     float lastShifted;
@@ -65,12 +63,12 @@ public class GameScreen extends ScreenAdapter{
         //Renders the shapes of the objects for debugging purposes
         debugRenderer = new ShapeRenderer();
 
-        //Making heaven and hell
-        hell = new World(new Vector2(0, -30f), false);
+        //Making heaven and world
+        world = new World(new Vector2(0, -30f), false);
 
         //Settings listeners
         theContactListener = new TheContactListener(this);
-        hell.setContactListener(theContactListener);
+        world.setContactListener(theContactListener);
 
         //Sets the stage
         this.screenManager = screenManager;
@@ -87,7 +85,7 @@ public class GameScreen extends ScreenAdapter{
         level = new Level(levelNumber);
 
         //Making the fixtures for all of the bodies
-        FixtureFactory fixtureFactory = new FixtureFactory(level, hell);
+        FixtureFactory fixtureFactory = new FixtureFactory(level, world);
         fixtureFactory.makeFixtures();
 
         //Rendering stuff
@@ -97,7 +95,6 @@ public class GameScreen extends ScreenAdapter{
         //Private members
         touchPoint = new Vector3();
         lastShifted = 0;
-        inHell = true;
         player = level.player;
         multiplier = 2.5f;
 
@@ -198,8 +195,12 @@ public class GameScreen extends ScreenAdapter{
         for(Platform plat: level.platforms_HELL){
             plat.update();
         }
-        hell.step(delta, 6, 2);
+        world.step(delta, 6, 2);
 
+        for (Body body : theContactListener.bodiesToRemove) {
+            world.destroyBody(body);
+        }
+        theContactListener.bodiesToRemove.clear();
 
         if (player.getBody().getPosition().x > 48 + Player.PLAYER_WIDTH/2
                 || player.getBody().getPosition().x < 0 - Player.PLAYER_WIDTH/2
@@ -233,7 +234,7 @@ public class GameScreen extends ScreenAdapter{
         level.tiledMapRenderer.setView(lockedCam);
         level.tiledMapRenderer.render();
 
-        renderer.render(hell, mapCam.combined);
+        renderer.render(world, mapCam.combined);
 
         debugRenderer.setProjectionMatrix(mapCam.combined);
         debugRenderer.begin(ShapeRenderer.ShapeType.Filled);
