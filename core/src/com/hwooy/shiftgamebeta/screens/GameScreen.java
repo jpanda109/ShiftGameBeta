@@ -13,12 +13,13 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.utils.Array;
 import com.hwooy.shiftgamebeta.levels.Level;
 import com.hwooy.shiftgamebeta.listeners.TheContactListener;
 import com.hwooy.shiftgamebeta.listeners.PlayerInputListener;
-import com.hwooy.shiftgamebeta.models.FixtureFactory;
-import com.hwooy.shiftgamebeta.models.Platform;
-import com.hwooy.shiftgamebeta.models.Player;
+import com.hwooy.shiftgamebeta.models.*;
+
+import java.util.ArrayList;
 
 /**
  * Created by jason on 11/14/14.
@@ -170,6 +171,29 @@ public class GameScreen extends ScreenAdapter{
         }
     }
 
+    private void updateCrumblingBlocks(float delta) {
+        ArrayList<GameObject> objectsToRemove = new ArrayList<GameObject>();
+        for (GameObject object : level.gameObjects) {
+            if (object.getClass() == CrumblingBlock.class) {
+                CrumblingBlock crumblingBlock = (CrumblingBlock) object;
+                for (Body body : theContactListener.bodiesToRemove) {
+                    if (object.getBody().equals(body)) {
+                        crumblingBlock.state = CrumblingBlock.State.CRUMBLING;
+                    }
+                }
+                crumblingBlock.update(delta);
+                if (crumblingBlock.crumblingStateTime >= 1f) {
+                    objectsToRemove.add(object);
+                    world.destroyBody(crumblingBlock.getBody());
+                }
+            }
+        }
+        for (GameObject object : objectsToRemove) {
+            level.gameObjects.remove(object);
+        }
+        theContactListener.bodiesToRemove.clear();
+    }
+
     /**
      * updates screenManager screen based on user input
      */
@@ -197,10 +221,7 @@ public class GameScreen extends ScreenAdapter{
         }
         world.step(delta, 6, 2);
 
-        for (Body body : theContactListener.bodiesToRemove) {
-            world.destroyBody(body);
-        }
-        theContactListener.bodiesToRemove.clear();
+        updateCrumblingBlocks(delta);
 
         if (player.getBody().getPosition().x > 48 + Player.PLAYER_WIDTH/2
                 || player.getBody().getPosition().x < 0 - Player.PLAYER_WIDTH/2

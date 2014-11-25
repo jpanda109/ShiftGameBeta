@@ -13,11 +13,11 @@ public class CrumblingBlock extends Block {
     }
     public State state;
 
-    public int crumblingStateTime;
+    public float crumblingStateTime;
 
     public CrumblingBlock(float x, float y) {
         super(x, y);
-        state = State.CRUMBLING;
+        state = State.IDLE;
         crumblingStateTime = 0;
     }
 
