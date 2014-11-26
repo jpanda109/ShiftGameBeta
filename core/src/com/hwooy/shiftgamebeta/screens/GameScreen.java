@@ -59,7 +59,7 @@ public class GameScreen extends ScreenAdapter{
      */
     public GameScreen(ScreenManager screenManager, int levelNumber) {
         //The pause square
-        pauseBounds = new Rectangle(0, 95, 5, 5);
+        pauseBounds = new Rectangle(0, 31, 1, 1);
 
         //Renders the shapes of the objects for debugging purposes
         debugRenderer = new ShapeRenderer();
