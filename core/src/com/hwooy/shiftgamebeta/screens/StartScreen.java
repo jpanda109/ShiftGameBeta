@@ -5,6 +5,8 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
@@ -16,8 +18,8 @@ import com.badlogic.gdx.math.Vector3;
  */
 public class StartScreen extends ScreenAdapter {
 
-    public static final int CAM_WIDTH = 150; //Gdx.graphics.getWidth();
-    public static final int CAM_HEIGHT = 100; //Gdx.graphics.getHeight();
+    public static final int CAM_WIDTH = 480; //Gdx.graphics.getWidth();
+    public static final int CAM_HEIGHT = 320; //Gdx.graphics.getHeight();
     public static final float PLAY_BOUNDS_WIDTH_RATIO = .5f;
     public static final float PLAY_BOUNDS_HEIGHT_RATIO = .2f;
     public static final float HELP_BOUNDS_WIDTH_RATIO = .5f;
@@ -32,6 +34,9 @@ public class StartScreen extends ScreenAdapter {
     Rectangle settingsBounds;
     Vector3 touchPoint;
     ShapeRenderer debugRenderer;
+
+    private SpriteBatch spriteBatch;
+    private BitmapFont font;
 
     /**
      * constructor for the start screen
@@ -58,6 +63,10 @@ public class StartScreen extends ScreenAdapter {
                 (int) (CAM_HEIGHT * SETTINGS_BOUNDS_HEIGHT_RATIO));
         touchPoint = new Vector3();
         debugRenderer = new ShapeRenderer();
+
+        spriteBatch = new SpriteBatch();
+        font = new BitmapFont();
+        font.setColor(Color.BLUE);
     }
 
     /**
@@ -99,6 +108,12 @@ public class StartScreen extends ScreenAdapter {
         debugRenderer.setColor(new Color(Color.GREEN));
         debugRenderer.rect(helpBounds.getX(), helpBounds.getY(), helpBounds.getWidth(), helpBounds.getHeight());
         debugRenderer.end();
+
+        spriteBatch.begin();
+        font.draw(spriteBatch, "Play Game", 200, 250);
+        font.draw(spriteBatch, "Settings", 5, 40);
+        font.draw(spriteBatch, "Help", 200, 180);
+        spriteBatch.end();
     }
 
     /**
@@ -109,6 +124,13 @@ public class StartScreen extends ScreenAdapter {
     public void render(float delta) {
         update();
         draw();
+    }
+
+    @Override
+    public void dispose() {
+        spriteBatch.dispose();
+        font.dispose();
+        super.dispose();
     }
 
 }
