@@ -18,6 +18,7 @@ import com.hwooy.shiftgamebeta.levels.Level;
 import com.hwooy.shiftgamebeta.listeners.TheContactListener;
 import com.hwooy.shiftgamebeta.listeners.PlayerInputListener;
 import com.hwooy.shiftgamebeta.models.*;
+import com.hwooy.shiftgamebeta.viewer.LevelRenderer;
 
 import java.util.ArrayList;
 
@@ -37,13 +38,13 @@ public class GameScreen extends ScreenAdapter{
     ScreenManager screenManager;
     OrthographicCamera mapCam;
     OrthographicCamera lockedCam;
-    Level level;
+    public Level level;
     int levelNumber;
     //LevelRenderer renderer;
     Box2DDebugRenderer renderer;
     Vector3 touchPoint;
-    World world;
-    Player player;
+    public World world;
+    public Player player;
     TheContactListener theContactListener;
     PlayerInputListener playerInputListener;
     float lastShifted;
@@ -248,6 +249,9 @@ public class GameScreen extends ScreenAdapter{
      * draws needed objects onto the screenManager screen
      */
     private void draw() {
+        LevelRenderer levelRenderer = new LevelRenderer(this);
+        levelRenderer.render();
+        /*
         GL20 gl = Gdx.gl;
         gl.glClearColor(1, 1, 1, 1);
         gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -263,6 +267,7 @@ public class GameScreen extends ScreenAdapter{
         debugRenderer.rect(pauseBounds.x, pauseBounds.y, pauseBounds.width, pauseBounds.height);
         debugRenderer.end();
         mapCam.update();
+        */
     }
 
     /**
