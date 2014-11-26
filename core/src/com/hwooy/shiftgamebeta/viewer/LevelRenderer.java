@@ -46,18 +46,20 @@ public class LevelRenderer {
         box2DDebugRenderer = new Box2DDebugRenderer();
 
         spriteBatch = new SpriteBatch();
-        playerTexture = new Texture(Gdx.files.internal("android/assets/portal.png"));
+        playerTexture = new Texture(Gdx.files.internal("android/assets/player.png"));
     }
 
     public void render() {
-        spriteBatch.begin();
-        Player player = gameScreen.player;
-        spriteBatch.draw(playerTexture, player.getBody().getPosition().x * 10, player.getBody().getPosition().y * 10,
-                Player.PLAYER_WIDTH * 10, Player.PLAYER_HEIGHT * 10);
-        spriteBatch.end();
         GL20 gl = Gdx.gl;
         gl.glClearColor(1, 1, 1, 1);
         gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        spriteBatch.begin();
+        Player player = gameScreen.player;
+        spriteBatch.draw(playerTexture, (player.getBody().getPosition().x - Player.PLAYER_WIDTH) * 10,
+                (player.getBody().getPosition().y - Player.PLAYER_HEIGHT)* 10,
+                Player.PLAYER_WIDTH * 20, Player.PLAYER_HEIGHT * 20);
+        spriteBatch.end();
 
         gameScreen.level.tiledMapRenderer.setView(lockedCam);
         gameScreen.level.tiledMapRenderer.render();
