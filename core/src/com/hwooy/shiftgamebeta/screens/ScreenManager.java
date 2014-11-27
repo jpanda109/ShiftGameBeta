@@ -15,7 +15,7 @@ public class ScreenManager {
     public Stack<Screen> screens;
 
     public enum Screens {
-        START, GAME, HELP
+        START, GAME, HELP, LEVELS
     }
 
     public ScreenManager(ShiftGameBeta game) {
@@ -42,6 +42,8 @@ public class ScreenManager {
             screens.push(new GameScreen(this, level));
         } else if (screen == Screens.HELP) {
             screens.push(new HelpScreen(this));
+        } else if (screen == Screens.LEVELS) {
+            screens.push(new LevelsScreen(this));
         }
         game.setScreen(screens.peek());
     }
