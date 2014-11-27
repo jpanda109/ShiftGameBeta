@@ -27,7 +27,6 @@ public class LevelsScreen extends ScreenAdapter {
     Vector3 touchPoint;
     ShapeRenderer debugRenderer;
 
-    ArrayList<ArrayList<Integer>> levels;
     ArrayList<Rectangle> rectangles;
 
     /**
@@ -39,22 +38,12 @@ public class LevelsScreen extends ScreenAdapter {
         cam = new OrthographicCamera(CAM_WIDTH, CAM_HEIGHT);
         cam.position.set(CAM_WIDTH / 2, CAM_HEIGHT / 2, 0);
 
-        levels = new ArrayList<ArrayList<Integer>>();
         rectangles = new ArrayList<Rectangle>();
-
-        int levelCount = 1;
-        for (int i = 0; i < CUR_LEVEL_AMOUNT / 5; ++i) {
-            levels.add(new ArrayList<Integer>(5));
-            for (int j = 0; j < 5; ++j) {
-                levels.get(i).add(levelCount);
-                ++levelCount;
-            }
-        }
 
         int x = 20;
         int y = 260;
-        for (ArrayList<Integer> array : levels) {
-            for (Integer level : array) {
+        for (int i = 0; i < CUR_LEVEL_AMOUNT / 5; ++i) {
+            for (int j = 0; j < 5; ++j) {
                 rectangles.add(new Rectangle(x, y, 20, 20));
                 x += 40;
             }
