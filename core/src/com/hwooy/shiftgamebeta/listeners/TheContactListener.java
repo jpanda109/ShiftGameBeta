@@ -45,33 +45,27 @@ public class TheContactListener implements ContactListener {
 
         // If something (player) comes into collision with a platform, call portal contacted
         if (fixtureA.getUserData() != null && fixtureA.getUserData().toString().contains("Platform")) {
-            System.out.println("platform contact");
 
         }
         if (fixtureB.getUserData() != null && fixtureB.getUserData().toString().contains("Portal")) {
-            System.out.println("Platform contact");
         }
 
         // Player contact with lava
         if (fixtureA.getUserData() != null && fixtureA.getUserData().toString().contains("Lava")) {
-            System.out.println("Lava Contact");
             gameScreen.restartLevel();
 
         }
         if (fixtureB.getUserData() != null && fixtureB.getUserData().toString().contains("Lava")) {
-            System.out.println("Lava Contact");
             gameScreen.restartLevel();
         }
 
 
         // Player contact with crumbling block
         if (fixtureA.getUserData() != null && fixtureA.getUserData().toString().contains("Crumbling")) {
-            System.out.println("Crumbling Contact");
             bodiesToRemove.add(fixtureA.getBody());
 
         }
         if (fixtureB.getUserData() != null && fixtureB.getUserData().toString().contains("Crumbling")) {
-            System.out.println("Crumbling Contact");
             bodiesToRemove.add(fixtureB.getBody());
         }
     }

@@ -33,8 +33,9 @@ public class Settings {
     }
 
     public void saveNextLevel() {
-        preferences.putInteger(CURRENT_LEVEL, preferences.getInteger(CURRENT_LEVEL, 1));
+        preferences.putInteger(CURRENT_LEVEL, preferences.getInteger(CURRENT_LEVEL, 1) + 1);
         preferences.flush();
+        System.out.println(getLevel());
     }
 
 }

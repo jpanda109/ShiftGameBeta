@@ -70,7 +70,6 @@ public class LevelsScreen extends ScreenAdapter {
             int levelNumber = 1;
             for (Rectangle rectangle : rectangles) {
                 if (rectangle.contains(touchPoint.x, touchPoint.y) && levelNumber <= settings.getLevel()) {
-                    System.out.println(levelNumber);
                     screenManager.setGameScreen(levelNumber);
                     break;
                 }
