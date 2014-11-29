@@ -79,8 +79,10 @@ public class GameScreen extends ScreenAdapter{
         //Sets the stage
         this.screenManager = screenManager;
         state = State.RUNNING;
-        mapCam = new OrthographicCamera(48, 32);
-        mapCam.position.set(24, 16, 0);
+        mapCam = new OrthographicCamera();
+        mapCam.setToOrtho(false, 48, 32);
+        //mapCam = new OrthographicCamera(48, 32);
+        //mapCam.position.set(24, 16, 0);
         lockedCam = new OrthographicCamera();
         lockedCam.setToOrtho(false, 480, 320);
 
@@ -136,7 +138,7 @@ public class GameScreen extends ScreenAdapter{
             mapCam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
 
             //If the pause button was touched... pause the game
-            if (touchPoint.x < -23 && touchPoint.y > 15) {
+            if (pauseBounds.contains(touchPoint.x, touchPoint.y)) {
                 state = State.PAUSED;
             }
         }
@@ -246,7 +248,7 @@ public class GameScreen extends ScreenAdapter{
         {
             mapCam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
 
-            if (touchPoint.x < 23 && touchPoint.y > 15) {
+            if (pauseBounds.contains(touchPoint.x, touchPoint.y)) {
                 state = State.RUNNING;
             }
         }
