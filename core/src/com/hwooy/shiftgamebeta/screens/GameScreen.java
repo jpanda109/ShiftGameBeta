@@ -136,8 +136,11 @@ public class GameScreen extends ScreenAdapter{
             mapCam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
 
             //If the pause button was touched... pause the game
-            if (pauseBounds.contains(touchPoint.x, touchPoint.y)) {
+            if (touchPoint.x < -23 && touchPoint.y > 15) {
+                System.out.println("pause");
                 state = State.PAUSED;
+            } else {
+                System.out.println(touchPoint.x + " " + touchPoint.y);
             }
         }
     }
@@ -246,7 +249,7 @@ public class GameScreen extends ScreenAdapter{
         {
             mapCam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
 
-            if (pauseBounds.contains(touchPoint.x, touchPoint.y)) {
+            if (touchPoint.x < 23 && touchPoint.y > 15) {
                 state = State.RUNNING;
             }
         }

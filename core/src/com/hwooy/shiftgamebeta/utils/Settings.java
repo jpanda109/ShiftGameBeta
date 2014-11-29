@@ -10,6 +10,8 @@ import com.badlogic.gdx.Preferences;
  */
 public class Settings {
 
+    // TODO add asset loading here preferably
+
     public static final String PREFERENCE_NAME = "com.hwooy.shiftgamebeta.preferences";
     public static final String CURRENT_LEVEL = "CURRENT_LEVEL";
 
