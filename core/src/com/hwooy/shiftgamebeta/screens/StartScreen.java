@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
+import com.hwooy.shiftgamebeta.utils.Settings;
 
 
 /**
@@ -37,6 +38,8 @@ public class StartScreen extends ScreenAdapter {
 
     private SpriteBatch spriteBatch;
     private BitmapFont font;
+
+    Settings settings;
 
     /**
      * constructor for the start screen
@@ -67,6 +70,8 @@ public class StartScreen extends ScreenAdapter {
         spriteBatch = new SpriteBatch();
         font = new BitmapFont();
         font.setColor(Color.BLUE);
+
+        settings = Settings.getInstance();
     }
 
     /**
