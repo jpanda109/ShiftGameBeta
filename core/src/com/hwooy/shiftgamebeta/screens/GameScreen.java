@@ -33,6 +33,7 @@ public class GameScreen extends ScreenAdapter{
         RUNNING, PAUSED
     }
 
+    LevelRenderer levelRenderer;
     Rectangle pauseBounds;
     ShapeRenderer debugRenderer;
     State state;
@@ -56,12 +57,16 @@ public class GameScreen extends ScreenAdapter{
 
     Settings settings;
 
+    float garbageCollect;
+
     /**
      * Constructor for GameScreen which takes in an instance of the screenManager and a level number
      * @param screenManager instance of screenManager
      * @param levelNumber of the level to be played
      */
     public GameScreen(ScreenManager screenManager, int levelNumber) {
+        levelRenderer = new LevelRenderer(this);
+
         //The pause square
         pauseBounds = new Rectangle(0, 31, 1, 1);
 
@@ -113,6 +118,8 @@ public class GameScreen extends ScreenAdapter{
         Gdx.input.setInputProcessor(new GestureDetector(playerInputListener));
 
         settings = Settings.getInstance();
+
+        garbageCollect = 0;
     }
 
     /**
@@ -256,7 +263,6 @@ public class GameScreen extends ScreenAdapter{
      * draws needed objects onto the screenManager screen
      */
     private void draw() {
-        LevelRenderer levelRenderer = new LevelRenderer(this);
         levelRenderer.render();
     }
 
@@ -268,6 +274,7 @@ public class GameScreen extends ScreenAdapter{
     public void render(float delta) {
         update(delta);
         draw();
+        garbageCollect += delta;
     }
 
 

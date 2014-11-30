@@ -2,6 +2,10 @@ package com.hwooy.shiftgamebeta.utils;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 
 /**
  * Created by jason on 11/28/14.
@@ -10,12 +14,16 @@ import com.badlogic.gdx.Preferences;
  */
 public class Settings {
 
-    // TODO add asset loading here preferably
-
+    // PREFERENCE KEYS
     public static final String PREFERENCE_NAME = "com.hwooy.shiftgamebeta.preferences";
     public static final String CURRENT_LEVEL = "CURRENT_LEVEL";
 
-    private static Preferences preferences;
+    // PATHS
+    public static final String LEVEL_PATH = "android/assets/levels/";
+
+    private final Preferences preferences;
+    private AssetManager assetManager;
+
     // eager initialization - no need for lazy as settings is always used
     private static final Settings settingsInstance = new Settings();
 
@@ -37,6 +45,22 @@ public class Settings {
             preferences.putInteger(CURRENT_LEVEL, preferences.getInteger(CURRENT_LEVEL, 1) + 1);
             preferences.flush();
         }
+    }
+
+    public TiledMap loadTiledMap(int levelNumber) {
+        AssetManager assetManager = new AssetManager();
+        assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
+        assetManager.load(LEVEL_PATH + "Level" + levelNumber + ".tmx", TiledMap.class);
+        assetManager.load(LEVEL_PATH + "Level" + 1 + ".tmx", TiledMap.class);
+        assetManager.finishLoading();
+        TiledMap tiledMap;
+        try {
+            tiledMap = assetManager.get(LEVEL_PATH + "Level" + levelNumber + ".tmx");
+        } catch (Exception e) {
+            tiledMap = assetManager.get(LEVEL_PATH + "Level" + levelNumber + ".tmx");
+        }
+        //assetManager.dispose();
+        return tiledMap;
     }
 
 }
