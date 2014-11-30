@@ -76,5 +76,10 @@ public class LevelRenderer {
         mapCam.update();
     }
 
+    // TODO implement this
+    // i hate memory
+    public void dispose() {
+
+    }
 
 }

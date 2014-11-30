@@ -48,6 +48,7 @@ public class Settings {
         }
     }
 
+    // TODO im too sleepy but fix so you don't need to reload everytime
     public TiledMap loadTiledMap(int levelNumber) {
         assetManager = new AssetManager();
         assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
