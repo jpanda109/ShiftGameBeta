@@ -10,7 +10,8 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 /**
  * Created by jason on 11/28/14.
  * Settings class for game (duh)
- * holds Preference keys
+ * holds Preference keys, loads necessary assets
+ * Yeah it's a singleton come at me
  */
 public class Settings {
 
@@ -48,7 +49,7 @@ public class Settings {
     }
 
     public TiledMap loadTiledMap(int levelNumber) {
-        AssetManager assetManager = new AssetManager();
+        assetManager = new AssetManager();
         assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
         assetManager.load(LEVEL_PATH + "Level" + levelNumber + ".tmx", TiledMap.class);
         assetManager.load(LEVEL_PATH + "Level" + 1 + ".tmx", TiledMap.class);
@@ -59,8 +60,12 @@ public class Settings {
         } catch (Exception e) {
             tiledMap = assetManager.get(LEVEL_PATH + "Level" + levelNumber + ".tmx");
         }
-        //assetManager.dispose();
         return tiledMap;
+    }
+
+    // i hate memory leaks
+    public void dispose() {
+        assetManager.dispose();
     }
 
 }

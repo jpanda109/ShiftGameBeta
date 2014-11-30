@@ -282,12 +282,14 @@ public class GameScreen extends ScreenAdapter{
      * do you really need an explanation
      */
     public void restartLevel() {
+        settings.dispose();
         screenManager.setGameScreen(levelNumber);
     }
     /**
      * Upon reaching the goal, moves player to the next level.
      */
     public void nextLevel() {
+        settings.dispose();
         settings.saveNextLevel(levelNumber);
         screenManager.setGameScreen(++levelNumber);
     }

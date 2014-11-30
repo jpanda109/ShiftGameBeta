@@ -7,11 +7,13 @@ import java.util.Stack;
 
 /**
  * Created by jason on 11/16/14.
- * Manages all the screens in the screenManager so as to not overload the fucking memory
+ * Manages all the screens in the screenManager so as to not overload the friggin memory
+ * self documenting method names (I hope)
  */
 public class ScreenManager {
 
     public ShiftGameBeta game;
+    // WHY AM I USING A STACK
     public Stack<Screen> screens;
 
     public enum Screens {
