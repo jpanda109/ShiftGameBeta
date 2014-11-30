@@ -23,6 +23,8 @@ import java.util.HashMap;
  */
 public class LevelRenderer {
 
+    // TODO FIX MEMORY LEAK
+
     private Rectangle pauseBounds;
 
     GameScreen gameScreen;
