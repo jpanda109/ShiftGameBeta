@@ -140,7 +140,8 @@ public class GameScreen extends ScreenAdapter{
 
             //If the pause button was touched... pause the game
             if (pauseBounds.contains(touchPoint.x, touchPoint.y)) {
-                state = State.PAUSED;
+                //state = State.PAUSED;
+                nextLevel();
             }
         }
     }

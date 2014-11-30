@@ -19,6 +19,9 @@ public class Settings {
     public static final String PREFERENCE_NAME = "com.hwooy.shiftgamebeta.preferences";
     public static final String CURRENT_LEVEL = "CURRENT_LEVEL";
 
+    // global variables
+    public static final int CURRENT_MAX_LEVEL = 3;
+
     // PATHS
     public static final String LEVEL_PATH = "android/assets/levels/";
 
@@ -32,6 +35,10 @@ public class Settings {
     private Settings() {
         preferences = Gdx.app.getPreferences(PREFERENCE_NAME);
         assetManager = new AssetManager();
+        assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
+        // always load level 1 as default
+        assetManager.load(LEVEL_PATH + "Level" + 1 + ".tmx", TiledMap.class);
+        assetManager.finishLoading();
     }
 
     public static Settings getInstance() {
@@ -51,15 +58,17 @@ public class Settings {
 
     // TODO im too sleepy but fix so you don't need to reload everytime
     public TiledMap loadTiledMap(int levelNumber) {
-        assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
-        assetManager.load(LEVEL_PATH + "Level" + levelNumber + ".tmx", TiledMap.class);
-        assetManager.load(LEVEL_PATH + "Level" + 1 + ".tmx", TiledMap.class);
-        assetManager.finishLoading();
         TiledMap tiledMap;
         try {
             tiledMap = assetManager.get(LEVEL_PATH + "Level" + levelNumber + ".tmx");
         } catch (Exception e) {
-            tiledMap = assetManager.get(LEVEL_PATH + "Level" + levelNumber + ".tmx");
+            try {
+                assetManager.load(LEVEL_PATH + "Level" + levelNumber + ".tmx", TiledMap.class);
+                assetManager.finishLoading();
+                tiledMap = assetManager.get(LEVEL_PATH + "Level" + levelNumber + ".tmx");
+            } catch (Exception e2) {
+                tiledMap = assetManager.get(LEVEL_PATH + "Level" + CURRENT_MAX_LEVEL + ".tmx");
+            }
         }
         return tiledMap;
     }
