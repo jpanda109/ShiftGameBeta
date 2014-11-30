@@ -1,8 +1,5 @@
 package com.hwooy.shiftgamebeta.levels;
 
-import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.assets.loaders.resolvers.ExternalFileHandleResolver;
-import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapLayers;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -19,7 +16,7 @@ import java.util.ArrayList;
  */
 public class Level {
 
-    public static final String LEVEL_PATH = "levels/";
+    public static final String LEVEL_PATH = "android/assets/levels/";
 
     // layer keys
     public static final String WORLD_BOTH = "Both";
@@ -58,19 +55,10 @@ public class Level {
 
         this.platforms_HELL = new ArrayList<Platform>();
 
-
-        AssetManager assetManager = new AssetManager();
-        assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
-        assetManager.load(LEVEL_PATH + "Level" + levelNumber + ".tmx", TiledMap.class);
-        assetManager.load(LEVEL_PATH + "Level" + 1 + ".tmx", TiledMap.class);
-        assetManager.finishLoading();
-
         try {
-            tiledMap = assetManager.get(LEVEL_PATH + "Level" + levelNumber + ".tmx");
-            //tiledMap = new TmxMapLoader().load(LEVEL_PATH + "Level" + levelNumber + ".tmx");
+            tiledMap = new TmxMapLoader().load(LEVEL_PATH + "Level" + levelNumber + ".tmx");
         } catch (Exception e) {
-            tiledMap = assetManager.get(LEVEL_PATH + "Level" + levelNumber + ".tmx");
-            //tiledMap = new TmxMapLoader().load(LEVEL_PATH + "Level" + 1 + ".tmx");
+            tiledMap = new TmxMapLoader().load(LEVEL_PATH + "Level" + 1 + ".tmx");
         }
         addObjects();
 

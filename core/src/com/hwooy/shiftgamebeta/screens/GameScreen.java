@@ -15,11 +15,9 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import com.hwooy.shiftgamebeta.levels.Level;
-import com.hwooy.shiftgamebeta.listeners.PlayerInputProcessor;
 import com.hwooy.shiftgamebeta.listeners.TheContactListener;
 import com.hwooy.shiftgamebeta.listeners.PlayerInputListener;
 import com.hwooy.shiftgamebeta.models.*;
-import com.hwooy.shiftgamebeta.utils.Settings;
 import com.hwooy.shiftgamebeta.viewer.LevelRenderer;
 
 import java.util.ArrayList;
@@ -53,8 +51,6 @@ public class GameScreen extends ScreenAdapter{
     boolean idleGlitch = false;
     float multiplier;
 
-    Settings settings;
-
     Application.ApplicationType applicationType;
 
     /**
@@ -79,10 +75,8 @@ public class GameScreen extends ScreenAdapter{
         //Sets the stage
         this.screenManager = screenManager;
         state = State.RUNNING;
-        mapCam = new OrthographicCamera();
-        mapCam.setToOrtho(false, 48, 32);
-        //mapCam = new OrthographicCamera(48, 32);
-        //mapCam.position.set(24, 16, 0);
+        mapCam = new OrthographicCamera(48, 32);
+        mapCam.position.set(24, 16, 0);
         lockedCam = new OrthographicCamera();
         lockedCam.setToOrtho(false, 480, 320);
 
@@ -112,9 +106,6 @@ public class GameScreen extends ScreenAdapter{
         // Using custom inputProcessor to handle screen touches (primarily fling actions for the phone)
         playerInputListener = new PlayerInputListener(this);
         Gdx.input.setInputProcessor(new GestureDetector(playerInputListener));
-        //Gdx.input.setInputProcessor(new PlayerInputProcessor());
-
-        settings = Settings.getInstance();
     }
 
     /**
@@ -301,7 +292,6 @@ public class GameScreen extends ScreenAdapter{
      */
     public void nextLevel() {
         screenManager.setGameScreen(++levelNumber);
-        settings.saveNextLevel();
     }
 
 }

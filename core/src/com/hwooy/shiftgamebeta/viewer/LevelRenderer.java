@@ -46,7 +46,7 @@ public class LevelRenderer {
         box2DDebugRenderer = new Box2DDebugRenderer();
 
         spriteBatch = new SpriteBatch();
-        playerTexture = new Texture(Gdx.files.internal("player.png"));
+        playerTexture = new Texture(Gdx.files.internal("android/assets/player.png"));
     }
 
     public void render() {

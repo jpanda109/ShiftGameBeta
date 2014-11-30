@@ -170,6 +170,7 @@ public class FixtureFactory {
      */
     public void makePortalFixture() {
         bodyDef.type = BodyDef.BodyType.StaticBody;
+        bodyDef.fixedRotation = true;
         polygonShape.setAsBox(Portal.PORTAL_WIDTH, Portal.PORTAL_HEIGHT);
         fixtureDef.shape = polygonShape;
         fixtureDef.isSensor = true;
