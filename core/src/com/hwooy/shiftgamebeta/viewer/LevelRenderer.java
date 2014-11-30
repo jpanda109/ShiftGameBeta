@@ -9,13 +9,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.hwooy.shiftgamebeta.levels.Level;
-import com.hwooy.shiftgamebeta.models.GameObject;
 import com.hwooy.shiftgamebeta.models.Player;
 import com.hwooy.shiftgamebeta.screens.GameScreen;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Created by jason on 11/14/14.
@@ -30,7 +25,7 @@ public class LevelRenderer {
     GameScreen gameScreen;
     private OrthographicCamera mapCam;
     private OrthographicCamera lockedCam;
-    private ShapeRenderer debugRengerer;
+    private ShapeRenderer debugRenderer;
     private Box2DDebugRenderer box2DDebugRenderer;
 
     private Texture playerTexture;
@@ -44,7 +39,7 @@ public class LevelRenderer {
         mapCam.setToOrtho(false, 48, 32);
         this.lockedCam = new OrthographicCamera();
         lockedCam.setToOrtho(false, 480, 320);
-        debugRengerer = new ShapeRenderer();
+        debugRenderer = new ShapeRenderer();
         box2DDebugRenderer = new Box2DDebugRenderer();
 
         spriteBatch = new SpriteBatch();
@@ -68,18 +63,19 @@ public class LevelRenderer {
 
         box2DDebugRenderer.render(gameScreen.world, mapCam.combined);
 
-        debugRengerer.setProjectionMatrix(mapCam.combined);
-        debugRengerer.begin(ShapeRenderer.ShapeType.Filled);
-        debugRengerer.setColor(Color.BLACK);
-        debugRengerer.rect(pauseBounds.x, pauseBounds.y, pauseBounds.width, pauseBounds.height);
-        debugRengerer.end();
+        debugRenderer.setProjectionMatrix(mapCam.combined);
+        debugRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        debugRenderer.setColor(Color.BLACK);
+        debugRenderer.rect(pauseBounds.x, pauseBounds.y, pauseBounds.width, pauseBounds.height);
+        debugRenderer.end();
         mapCam.update();
     }
 
     // TODO implement this
     // i hate memory
     public void dispose() {
-
+        //spriteBatch.dispose();
+        playerTexture.dispose();
     }
 
 }

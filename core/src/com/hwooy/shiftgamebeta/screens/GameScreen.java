@@ -57,8 +57,6 @@ public class GameScreen extends ScreenAdapter{
 
     Settings settings;
 
-    float garbageCollect;
-
     /**
      * Constructor for GameScreen which takes in an instance of the screenManager and a level number
      * @param screenManager instance of screenManager
@@ -118,8 +116,6 @@ public class GameScreen extends ScreenAdapter{
         Gdx.input.setInputProcessor(new GestureDetector(playerInputListener));
 
         settings = Settings.getInstance();
-
-        garbageCollect = 0;
     }
 
     /**
@@ -274,7 +270,6 @@ public class GameScreen extends ScreenAdapter{
     public void render(float delta) {
         update(delta);
         draw();
-        garbageCollect += delta;
     }
 
 
@@ -282,14 +277,16 @@ public class GameScreen extends ScreenAdapter{
      * do you really need an explanation
      */
     public void restartLevel() {
-        settings.dispose();
+        levelRenderer.dispose();
+        //settings.dispose();
         screenManager.setGameScreen(levelNumber);
     }
     /**
      * Upon reaching the goal, moves player to the next level.
      */
     public void nextLevel() {
-        settings.dispose();
+        levelRenderer.dispose();
+        //settings.dispose();
         settings.saveNextLevel(levelNumber);
         screenManager.setGameScreen(++levelNumber);
     }

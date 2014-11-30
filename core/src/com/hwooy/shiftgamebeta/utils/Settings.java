@@ -31,6 +31,7 @@ public class Settings {
     // force singleton
     private Settings() {
         preferences = Gdx.app.getPreferences(PREFERENCE_NAME);
+        assetManager = new AssetManager();
     }
 
     public static Settings getInstance() {
@@ -50,7 +51,6 @@ public class Settings {
 
     // TODO im too sleepy but fix so you don't need to reload everytime
     public TiledMap loadTiledMap(int levelNumber) {
-        assetManager = new AssetManager();
         assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
         assetManager.load(LEVEL_PATH + "Level" + levelNumber + ".tmx", TiledMap.class);
         assetManager.load(LEVEL_PATH + "Level" + 1 + ".tmx", TiledMap.class);
