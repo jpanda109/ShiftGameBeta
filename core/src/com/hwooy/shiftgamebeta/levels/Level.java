@@ -7,6 +7,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.hwooy.shiftgamebeta.models.*;
+import com.hwooy.shiftgamebeta.utils.Settings;
 
 import java.util.ArrayList;
 
@@ -55,11 +56,7 @@ public class Level {
 
         this.platforms_HELL = new ArrayList<Platform>();
 
-        try {
-            tiledMap = new TmxMapLoader().load(LEVEL_PATH + "Level" + levelNumber + ".tmx");
-        } catch (Exception e) {
-            tiledMap = new TmxMapLoader().load(LEVEL_PATH + "Level" + 1 + ".tmx");
-        }
+        tiledMap = Settings.getInstance().loadTiledMap(levelNumber);
         addObjects();
 
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
