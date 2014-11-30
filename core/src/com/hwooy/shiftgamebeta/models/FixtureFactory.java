@@ -153,6 +153,7 @@ public class FixtureFactory {
         bodyDef = new BodyDef();
         fixtureDef = new FixtureDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
+        bodyDef.fixedRotation = true;
         polygonShape.setAsBox(Player.PLAYER_WIDTH, Player.PLAYER_HEIGHT);
         fixtureDef.shape = polygonShape;
         fixtureDef.density = 1f;
@@ -170,7 +171,6 @@ public class FixtureFactory {
      */
     public void makePortalFixture() {
         bodyDef.type = BodyDef.BodyType.StaticBody;
-        bodyDef.fixedRotation = true;
         polygonShape.setAsBox(Portal.PORTAL_WIDTH, Portal.PORTAL_HEIGHT);
         fixtureDef.shape = polygonShape;
         fixtureDef.isSensor = true;

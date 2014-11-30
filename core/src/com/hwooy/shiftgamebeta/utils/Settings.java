@@ -17,7 +17,7 @@ public class Settings {
 
     private static Preferences preferences;
     // eager initialization - no need for lazy as settings is always used
-    private static Settings settingsInstance = new Settings();
+    private static final Settings settingsInstance = new Settings();
 
     // force singleton
     private Settings() {
@@ -32,10 +32,11 @@ public class Settings {
         return preferences.getInteger(CURRENT_LEVEL, 1);
     }
 
-    public void saveNextLevel() {
-        preferences.putInteger(CURRENT_LEVEL, preferences.getInteger(CURRENT_LEVEL, 1) + 1);
-        preferences.flush();
-        System.out.println(getLevel());
+    public void saveNextLevel(int completedLevelNumber) {
+        if (completedLevelNumber <= preferences.getInteger(CURRENT_LEVEL, 1)) {
+            preferences.putInteger(CURRENT_LEVEL, preferences.getInteger(CURRENT_LEVEL, 1) + 1);
+            preferences.flush();
+        }
     }
 
 }

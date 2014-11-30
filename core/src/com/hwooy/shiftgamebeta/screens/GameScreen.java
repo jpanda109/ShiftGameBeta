@@ -18,6 +18,7 @@ import com.hwooy.shiftgamebeta.levels.Level;
 import com.hwooy.shiftgamebeta.listeners.TheContactListener;
 import com.hwooy.shiftgamebeta.listeners.PlayerInputListener;
 import com.hwooy.shiftgamebeta.models.*;
+import com.hwooy.shiftgamebeta.utils.Settings;
 import com.hwooy.shiftgamebeta.viewer.LevelRenderer;
 
 import java.util.ArrayList;
@@ -53,6 +54,8 @@ public class GameScreen extends ScreenAdapter{
 
     Application.ApplicationType applicationType;
 
+    Settings settings;
+
     /**
      * Constructor for GameScreen which takes in an instance of the screenManager and a level number
      * @param screenManager instance of screenManager
@@ -75,8 +78,10 @@ public class GameScreen extends ScreenAdapter{
         //Sets the stage
         this.screenManager = screenManager;
         state = State.RUNNING;
-        mapCam = new OrthographicCamera(48, 32);
-        mapCam.position.set(24, 16, 0);
+        mapCam = new OrthographicCamera();
+        mapCam.setToOrtho(false, 48, 32);
+        //mapCam = new OrthographicCamera(48, 32);
+        //mapCam.position.set(24, 16, 0);
         lockedCam = new OrthographicCamera();
         lockedCam.setToOrtho(false, 480, 320);
 
@@ -106,6 +111,8 @@ public class GameScreen extends ScreenAdapter{
         // Using custom inputProcessor to handle screen touches (primarily fling actions for the phone)
         playerInputListener = new PlayerInputListener(this);
         Gdx.input.setInputProcessor(new GestureDetector(playerInputListener));
+
+        settings = Settings.getInstance();
     }
 
     /**
@@ -251,23 +258,6 @@ public class GameScreen extends ScreenAdapter{
     private void draw() {
         LevelRenderer levelRenderer = new LevelRenderer(this);
         levelRenderer.render();
-        /*
-        GL20 gl = Gdx.gl;
-        gl.glClearColor(1, 1, 1, 1);
-        gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        level.tiledMapRenderer.setView(lockedCam);
-        level.tiledMapRenderer.render();
-
-        renderer.render(world, mapCam.combined);
-
-        debugRenderer.setProjectionMatrix(mapCam.combined);
-        debugRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        debugRenderer.setColor(Color.BLACK);
-        debugRenderer.rect(pauseBounds.x, pauseBounds.y, pauseBounds.width, pauseBounds.height);
-        debugRenderer.end();
-        mapCam.update();
-        */
     }
 
     /**
@@ -291,6 +281,7 @@ public class GameScreen extends ScreenAdapter{
      * Upon reaching the goal, moves player to the next level.
      */
     public void nextLevel() {
+        settings.saveNextLevel(levelNumber);
         screenManager.setGameScreen(++levelNumber);
     }
 
