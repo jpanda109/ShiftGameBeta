@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.hwooy.shiftgamebeta.models.Player;
@@ -28,6 +30,7 @@ public class LevelRenderer {
     private OrthographicCamera lockedCam;
     private ShapeRenderer debugRenderer;
     private Box2DDebugRenderer box2DDebugRenderer;
+    private TiledMapRenderer tiledMapRenderer;
 
     private Texture playerTexture;
     private SpriteBatch spriteBatch;
@@ -42,6 +45,8 @@ public class LevelRenderer {
         lockedCam.setToOrtho(false, 480, 320);
         debugRenderer = new ShapeRenderer();
         box2DDebugRenderer = new Box2DDebugRenderer();
+        tiledMapRenderer = new OrthogonalTiledMapRenderer(gameScreen.level.tiledMap);
+        tiledMapRenderer.setView(lockedCam);
 
         spriteBatch = Settings.getInstance().getSpriteBatch();
         playerTexture = Settings.getInstance().loadPlayerTexture();
@@ -59,8 +64,7 @@ public class LevelRenderer {
                 Player.PLAYER_WIDTH * 20, Player.PLAYER_HEIGHT * 20);
         spriteBatch.end();
 
-        gameScreen.level.tiledMapRenderer.setView(lockedCam);
-        gameScreen.level.tiledMapRenderer.render();
+        tiledMapRenderer.render();
 
         if (Settings.getInstance().isDebug()) {
             box2DDebugRenderer.render(gameScreen.world, mapCam.combined);

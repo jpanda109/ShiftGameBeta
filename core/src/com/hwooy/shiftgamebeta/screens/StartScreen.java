@@ -79,7 +79,7 @@ public class StartScreen extends ScreenAdapter {
 
 //            TODO provide actions inputs
             if (playBounds.contains(touchPoint.x, touchPoint.y)) {
-                screenManager.setGameScreen(1);
+                //screenManager.setGameScreen(1);
                 screenManager.setScreen(ScreenManager.Screens.LEVELS);
                 //screenManager.setScreen(new GameScreen(screenManager, 1));
             }

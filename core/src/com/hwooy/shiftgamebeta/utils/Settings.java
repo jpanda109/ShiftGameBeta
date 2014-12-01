@@ -43,12 +43,18 @@ public class Settings {
     private Settings() {
         preferences = Gdx.app.getPreferences(PREFERENCE_NAME);
         assetManager = new AssetManager();
-        assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
         // always load level 1 as default
-        assetManager.load(LEVELS_PATH + "Level" + 1 + ".tmx", TiledMap.class);
-        assetManager.finishLoading();
+        loadAllTiledMaps();
 
         spriteBatch = new SpriteBatch();
+    }
+
+    private void loadAllTiledMaps() {
+        assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
+        for (int i = 1; i <= CURRENT_MAX_LEVEL; ++i) {
+            assetManager.load(LEVELS_PATH + "Level" + i + ".tmx", TiledMap.class);
+        }
+        assetManager.finishLoading();
     }
 
     public static Settings getInstance() {
@@ -66,19 +72,12 @@ public class Settings {
         }
     }
 
-    // TODO im too sleepy but fix so you don't need to reload every time
     public TiledMap loadTiledMap(int levelNumber) {
         TiledMap tiledMap;
         try {
             tiledMap = assetManager.get(LEVELS_PATH + "Level" + levelNumber + ".tmx");
         } catch (Exception e) {
-            try {
-                assetManager.load(LEVELS_PATH + "Level" + levelNumber + ".tmx", TiledMap.class);
-                assetManager.finishLoading();
-                tiledMap = assetManager.get(LEVELS_PATH + "Level" + levelNumber + ".tmx");
-            } catch (Exception e2) {
-                tiledMap = assetManager.get(LEVELS_PATH + "Level" + CURRENT_MAX_LEVEL + ".tmx");
-            }
+            tiledMap = assetManager.get(LEVELS_PATH + "Level" + CURRENT_MAX_LEVEL + ".tmx");
         }
         return tiledMap;
     }

@@ -44,7 +44,6 @@ public class Level {
     public ArrayList<Platform> platforms_HELL;
 
     public TiledMap tiledMap;
-    public OrthogonalTiledMapRenderer tiledMapRenderer;
 
     /**
      * Default constructor initializing the gameObjects list
@@ -58,8 +57,6 @@ public class Level {
 
         tiledMap = Settings.getInstance().loadTiledMap(levelNumber);
         addObjects();
-
-        tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
 
     }
 

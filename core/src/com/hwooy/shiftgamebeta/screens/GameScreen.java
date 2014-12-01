@@ -41,7 +41,7 @@ public class GameScreen extends ScreenAdapter{
     OrthographicCamera mapCam;
     OrthographicCamera lockedCam;
     public Level level;
-    int levelNumber;
+    public int levelNumber;
     //LevelRenderer renderer;
     Box2DDebugRenderer renderer;
     Vector3 touchPoint;
@@ -63,7 +63,6 @@ public class GameScreen extends ScreenAdapter{
      * @param levelNumber of the level to be played
      */
     public GameScreen(ScreenManager screenManager, int levelNumber) {
-        levelRenderer = new LevelRenderer(this);
 
         //The pause square
         pauseBounds = new Rectangle(0, 31, 1, 1);
@@ -92,7 +91,10 @@ public class GameScreen extends ScreenAdapter{
         this.levelNumber = levelNumber;
         //level = LevelFactory.makeLevel(levelNumber);
 
+        // LEVELRENDERER MUST GO AFTER LEVEL
+        // BAD DESIGN? PROBABLY
         level = new Level(levelNumber);
+        levelRenderer = new LevelRenderer(this);
 
         //Making the fixtures for all of the bodies
         FixtureFactory fixtureFactory = new FixtureFactory(level, world);
