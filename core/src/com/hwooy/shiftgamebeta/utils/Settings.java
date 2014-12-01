@@ -34,7 +34,7 @@ public class Settings {
 
     private SpriteBatch spriteBatch;
 
-    private boolean debug;
+    private boolean debug = false;
 
     // eager initialization - no need for lazy as settings is always used
     private static final Settings settingsInstance = new Settings();
@@ -49,8 +49,6 @@ public class Settings {
         assetManager.finishLoading();
 
         spriteBatch = new SpriteBatch();
-
-        debug = false;
     }
 
     public static Settings getInstance() {
