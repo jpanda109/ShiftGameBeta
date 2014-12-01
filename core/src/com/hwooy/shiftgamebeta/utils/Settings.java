@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 
@@ -23,10 +25,14 @@ public class Settings {
     public static final int CURRENT_MAX_LEVEL = 3;
 
     // PATHS
-    public static final String LEVEL_PATH = "android/assets/levels/";
+    public static final String GENERAL_PATH = "android/assets/";
+    public static final String LEVELS_PATH = "android/assets/levels/";
+    public static final String PLAYER_PATH = "android/assets/player.png";
 
     private final Preferences preferences;
     private AssetManager assetManager;
+
+    private SpriteBatch spriteBatch;
 
     // eager initialization - no need for lazy as settings is always used
     private static final Settings settingsInstance = new Settings();
@@ -37,8 +43,10 @@ public class Settings {
         assetManager = new AssetManager();
         assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
         // always load level 1 as default
-        assetManager.load(LEVEL_PATH + "Level" + 1 + ".tmx", TiledMap.class);
+        assetManager.load(LEVELS_PATH + "Level" + 1 + ".tmx", TiledMap.class);
         assetManager.finishLoading();
+
+        spriteBatch = new SpriteBatch();
     }
 
     public static Settings getInstance() {
@@ -56,21 +64,31 @@ public class Settings {
         }
     }
 
-    // TODO im too sleepy but fix so you don't need to reload everytime
+    // TODO im too sleepy but fix so you don't need to reload every time
     public TiledMap loadTiledMap(int levelNumber) {
         TiledMap tiledMap;
         try {
-            tiledMap = assetManager.get(LEVEL_PATH + "Level" + levelNumber + ".tmx");
+            tiledMap = assetManager.get(LEVELS_PATH + "Level" + levelNumber + ".tmx");
         } catch (Exception e) {
             try {
-                assetManager.load(LEVEL_PATH + "Level" + levelNumber + ".tmx", TiledMap.class);
+                assetManager.load(LEVELS_PATH + "Level" + levelNumber + ".tmx", TiledMap.class);
                 assetManager.finishLoading();
-                tiledMap = assetManager.get(LEVEL_PATH + "Level" + levelNumber + ".tmx");
+                tiledMap = assetManager.get(LEVELS_PATH + "Level" + levelNumber + ".tmx");
             } catch (Exception e2) {
-                tiledMap = assetManager.get(LEVEL_PATH + "Level" + CURRENT_MAX_LEVEL + ".tmx");
+                tiledMap = assetManager.get(LEVELS_PATH + "Level" + CURRENT_MAX_LEVEL + ".tmx");
             }
         }
         return tiledMap;
+    }
+
+    public Texture loadPlayerTexture() {
+        assetManager.load(PLAYER_PATH, Texture.class);
+        assetManager.finishLoading();
+        return assetManager.get(PLAYER_PATH);
+    }
+
+    public SpriteBatch getSpriteBatch() {
+        return spriteBatch;
     }
 
     // i hate memory leaks

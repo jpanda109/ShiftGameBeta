@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.hwooy.shiftgamebeta.models.Player;
 import com.hwooy.shiftgamebeta.screens.GameScreen;
+import com.hwooy.shiftgamebeta.utils.Settings;
 
 /**
  * Created by jason on 11/14/14.
@@ -42,8 +43,8 @@ public class LevelRenderer {
         debugRenderer = new ShapeRenderer();
         box2DDebugRenderer = new Box2DDebugRenderer();
 
-        spriteBatch = new SpriteBatch();
-        playerTexture = new Texture(Gdx.files.internal("android/assets/player.png"));
+        spriteBatch = Settings.getInstance().getSpriteBatch();
+        playerTexture = Settings.getInstance().loadPlayerTexture();
     }
 
     public void render() {
@@ -75,7 +76,7 @@ public class LevelRenderer {
     // i hate memory
     public void dispose() {
         //spriteBatch.dispose();
-        playerTexture.dispose();
+        //playerTexture.dispose();
     }
 
 }
