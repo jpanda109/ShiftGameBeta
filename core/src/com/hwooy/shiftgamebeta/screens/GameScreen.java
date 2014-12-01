@@ -278,18 +278,22 @@ public class GameScreen extends ScreenAdapter{
      * do you really need an explanation
      */
     public void restartLevel() {
-        levelRenderer.dispose();
-        //settings.dispose();
         screenManager.setGameScreen(levelNumber);
     }
     /**
      * Upon reaching the goal, moves player to the next level.
      */
     public void nextLevel() {
-        levelRenderer.dispose();
-        //settings.dispose();
         settings.saveNextLevel(levelNumber);
         screenManager.setGameScreen(++levelNumber);
+    }
+
+    @Override
+    public void dispose() {
+        // for some reason world disposing messes with box2ddebugrenderer
+        if (!settings.isDebug()) {
+            world.dispose();
+        }
     }
 
 }

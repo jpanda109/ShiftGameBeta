@@ -49,6 +49,7 @@ public class FixtureFactory {
         makePlayerFixture();
         makePortalFixture();
         makePlatformFixture();
+        polygonShape.dispose();
     }
 
     /**

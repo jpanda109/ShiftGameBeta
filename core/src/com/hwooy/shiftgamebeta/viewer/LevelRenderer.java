@@ -62,7 +62,9 @@ public class LevelRenderer {
         gameScreen.level.tiledMapRenderer.setView(lockedCam);
         gameScreen.level.tiledMapRenderer.render();
 
-        box2DDebugRenderer.render(gameScreen.world, mapCam.combined);
+        if (Settings.getInstance().isDebug()) {
+            box2DDebugRenderer.render(gameScreen.world, mapCam.combined);
+        }
 
         debugRenderer.setProjectionMatrix(mapCam.combined);
         debugRenderer.begin(ShapeRenderer.ShapeType.Filled);
@@ -70,13 +72,6 @@ public class LevelRenderer {
         debugRenderer.rect(pauseBounds.x, pauseBounds.y, pauseBounds.width, pauseBounds.height);
         debugRenderer.end();
         mapCam.update();
-    }
-
-    // TODO implement this
-    // i hate memory
-    public void dispose() {
-        //spriteBatch.dispose();
-        //playerTexture.dispose();
     }
 
 }
