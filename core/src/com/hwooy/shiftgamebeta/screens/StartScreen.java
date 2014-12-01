@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
+import com.hwooy.shiftgamebeta.utils.Settings;
 
 
 /**
@@ -64,7 +65,7 @@ public class StartScreen extends ScreenAdapter {
         touchPoint = new Vector3();
         debugRenderer = new ShapeRenderer();
 
-        spriteBatch = new SpriteBatch();
+        spriteBatch = Settings.getInstance().getSpriteBatch();
         font = new BitmapFont();
         font.setColor(Color.BLUE);
     }
@@ -129,7 +130,6 @@ public class StartScreen extends ScreenAdapter {
 
     @Override
     public void dispose() {
-        spriteBatch.dispose();
         font.dispose();
         super.dispose();
     }
