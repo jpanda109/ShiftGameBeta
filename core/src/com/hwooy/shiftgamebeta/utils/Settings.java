@@ -72,7 +72,7 @@ public class Settings {
         }
     }
 
-    public TiledMap loadTiledMap(int levelNumber) {
+    public TiledMap getTiledMap(int levelNumber) {
         TiledMap tiledMap;
         try {
             tiledMap = assetManager.get(LEVELS_PATH + "Level" + levelNumber + ".tmx");

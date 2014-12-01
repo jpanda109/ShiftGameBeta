@@ -4,8 +4,6 @@ import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapLayers;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.hwooy.shiftgamebeta.models.*;
 import com.hwooy.shiftgamebeta.utils.Settings;
 
@@ -55,7 +53,7 @@ public class Level {
 
         this.platforms_HELL = new ArrayList<Platform>();
 
-        tiledMap = Settings.getInstance().loadTiledMap(levelNumber);
+        tiledMap = Settings.getInstance().getTiledMap(levelNumber);
         addObjects();
 
     }
