@@ -65,7 +65,6 @@ public class FixtureFactory {
         fixtureDef.friction = 4f;
         fixtureDef.filter.maskBits = BIT_PLAYER;
 
-        Body body = world.createBody(bodyDef);
         for (GameObject object : level.gameObjects) {
             if (object.getClass().equals(Block.class)) {
                 switch (object.collisionType) {
@@ -80,6 +79,7 @@ public class FixtureFactory {
                         break;
                 }
                 polygonShape.setAsBox(Block.WIDTH, Block.HEIGHT, object.position, 0);
+                Body body = world.createBody(bodyDef);
                 Fixture fixture = body.createFixture(fixtureDef);
                 object.setBody(body);
             }
@@ -95,16 +95,15 @@ public class FixtureFactory {
         fixtureDef.filter.categoryBits = BIT_BOTH;
         fixtureDef.filter.maskBits = BIT_PLAYER;
 
-        Body body = world.createBody(bodyDef);
         for (GameObject object : level.gameObjects) {
             if (object.getClass().equals(LavaBlock.class)) {
                 polygonShape.setAsBox(Block.WIDTH, Block.HEIGHT, object.position, 0);
+                Body body = world.createBody(bodyDef);
                 Fixture fixture = body.createFixture(fixtureDef);
                 fixture.setUserData("Lava");
                 object.setBody(body);
             }
         }
-        body.setUserData("Lava");
     }
 
     private void makeCrumblingBlocks() {

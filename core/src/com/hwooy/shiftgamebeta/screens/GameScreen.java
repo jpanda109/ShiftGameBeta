@@ -292,4 +292,15 @@ public class GameScreen extends ScreenAdapter{
         screenManager.setGameScreen(++levelNumber);
     }
 
+    @Override
+    public void dispose() {
+        for (GameObject object : level.gameObjects) {
+            world.destroyBody(object.getBody());
+        }
+        level.gameObjects.clear();
+        world.destroyBody(player.getBody());
+        world.destroyBody(level.portal.getBody());
+        level.tiledMap.dispose();
+    }
+
 }
