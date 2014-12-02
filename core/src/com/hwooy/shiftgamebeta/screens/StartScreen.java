@@ -7,10 +7,15 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.hwooy.shiftgamebeta.utils.Settings;
+import com.hwooy.shiftgamebeta.ShiftGameBeta;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 
 /**
@@ -28,13 +33,16 @@ public class StartScreen extends ScreenAdapter {
     public static final float SETTINGS_BOUNDS_WIDTH_RATIO = .2f;
     public static final float SETTINGS_BOUNDS_HEIGHT_RATIO = .2f;
 
-    ScreenManager screenManager;
-    OrthographicCamera cam;
-    Rectangle playBounds;
-    Rectangle helpBounds;
-    Rectangle settingsBounds;
-    Vector3 touchPoint;
-    ShapeRenderer debugRenderer;
+    private ScreenManager screenManager;
+    private OrthographicCamera cam;
+    private Rectangle playBounds;
+    private Rectangle helpBounds;
+    private Rectangle settingsBounds;
+    private Vector3 touchPoint;
+    private ShapeRenderer debugRenderer;
+    private SpriteBatch batch;
+    private Texture texture;
+    private Sprite start;
 
     private SpriteBatch spriteBatch;
     private BitmapFont font;
@@ -45,6 +53,11 @@ public class StartScreen extends ScreenAdapter {
      */
     public StartScreen(ScreenManager screenManager) {
         this.screenManager = screenManager;
+
+        batch = new SpriteBatch();
+        texture = new Texture(Gdx.files.internal("start.png"));
+        start = new Sprite(texture);
+
         cam = new OrthographicCamera(CAM_WIDTH, CAM_HEIGHT);
         cam.position.set(CAM_WIDTH / 2, CAM_HEIGHT / 2, 0);
         playBounds = new Rectangle(
@@ -75,7 +88,7 @@ public class StartScreen extends ScreenAdapter {
      */
     public void update() {
         if (Gdx.input.justTouched()) {
-            cam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
+           cam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
 
 //            TODO provide actions inputs
             if (playBounds.contains(touchPoint.x, touchPoint.y)) {
@@ -133,5 +146,4 @@ public class StartScreen extends ScreenAdapter {
         font.dispose();
         super.dispose();
     }
-
 }
