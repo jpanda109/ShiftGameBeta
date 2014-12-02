@@ -5,7 +5,7 @@
  </tileset>
  <layer name="Heaven Block" width="48" height="32">
   <data encoding="base64" compression="zlib">
-   eJztwwEJAAAIA7CHtX8GC9wAwgZLAAC4TAkAAAAfLAAjAfU=
+   eJztwwEJAAAIA7B3tX8HC9wAwgZLAAC4TAkAAAAfLLYYAfA=
   </data>
  </layer>
  <layer name="Hell Block" width="48" height="32">
