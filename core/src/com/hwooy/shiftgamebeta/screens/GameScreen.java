@@ -100,7 +100,7 @@ public class GameScreen extends ScreenAdapter{
 
         //Rendering stuff
         //renderer = new LevelRenderer(level);
-        renderer = new Box2DDebugRenderer();
+        //renderer = new Box2DDebugRenderer();
 
         //Private members
         touchPoint = new Vector3();
@@ -300,6 +300,7 @@ public class GameScreen extends ScreenAdapter{
         level.gameObjects.clear();
         world.destroyBody(player.getBody());
         world.destroyBody(level.portal.getBody());
+        world.dispose();
         level.tiledMap.dispose();
     }
 

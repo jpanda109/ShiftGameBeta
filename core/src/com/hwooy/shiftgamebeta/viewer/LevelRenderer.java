@@ -27,7 +27,7 @@ public class LevelRenderer {
     private OrthographicCamera mapCam;
     private OrthographicCamera lockedCam;
     private ShapeRenderer debugRenderer;
-    private Box2DDebugRenderer box2DDebugRenderer;
+    //private Box2DDebugRenderer box2DDebugRenderer;
 
     private Texture playerTexture;
     private SpriteBatch spriteBatch;
@@ -41,7 +41,7 @@ public class LevelRenderer {
         this.lockedCam = new OrthographicCamera();
         lockedCam.setToOrtho(false, 480, 320);
         debugRenderer = new ShapeRenderer();
-        box2DDebugRenderer = new Box2DDebugRenderer();
+        //box2DDebugRenderer = new Box2DDebugRenderer();
 
         spriteBatch = Settings.getInstance().getSpriteBatch();
         playerTexture = Settings.getInstance().loadPlayerTexture();
@@ -62,7 +62,7 @@ public class LevelRenderer {
         gameScreen.level.tiledMapRenderer.setView(lockedCam);
         gameScreen.level.tiledMapRenderer.render();
 
-        box2DDebugRenderer.render(gameScreen.world, mapCam.combined);
+        //box2DDebugRenderer.render(gameScreen.world, mapCam.combined);
 
         debugRenderer.setProjectionMatrix(mapCam.combined);
         debugRenderer.begin(ShapeRenderer.ShapeType.Filled);
