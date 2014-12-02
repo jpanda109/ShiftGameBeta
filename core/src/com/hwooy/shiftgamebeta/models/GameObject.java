@@ -1,45 +1,36 @@
 package com.hwooy.shiftgamebeta.models;
 
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.Body;
 
 /**
- * Created by jason on 11/14/14.
- * A very basic object that has a position and size (bounds). This is the object from which other objects
- * in the game will be inherited.
- * Useful for factory pattern.
+ * Created by jason on 12/2/14.
  */
 public class GameObject {
 
-    public enum CollisionType {
-        BOTH, HELL, HEAVEN
-    }
+    public Texture texture;
+    public Body body;
+    public float width;
+    public float height;
 
-    public CollisionType collisionType;
-
-    public final Vector2 position;
-    public final Rectangle bounds;
-    Body body;
-
-    /**
-     * constructor for StaticObject
-     * @param x left margin
-     * @param y bottom margin
-     * @param width width of object
-     * @param height height of object
-     */
-    public GameObject(float x, float y, float width, float height) {
-        this.position = new Vector2(x + width, y + height);
-        this.bounds = new Rectangle(x, y, width, height);
-        collisionType = CollisionType.BOTH;
-    }
-
-    public void setBody(Body body) {
+    public GameObject(Body body) {
         this.body = body;
     }
 
-    public Body getBody() {
-        return body;
+    public void render(SpriteBatch spriteBatch) {
+        spriteBatch.begin();
+        spriteBatch.draw(texture,
+                (body.getPosition().x - width) * 10,
+                (body.getPosition().y - height)* 10,
+                width * 20,
+                height * 20);
+        spriteBatch.end();
     }
+
+    public void dispose() {
+        texture.dispose();
+    }
+
 }
