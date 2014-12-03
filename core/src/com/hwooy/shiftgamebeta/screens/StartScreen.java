@@ -34,6 +34,8 @@ public class StartScreen extends ScreenAdapter {
     Rectangle settingsBounds;
     Vector3 touchPoint;
     Settings settings;
+    ShapeRenderer shapeRenderer;
+    SpriteBatch spriteBatch;
     BitmapFont font;
     /**
      * constructor for the start screen
@@ -60,7 +62,10 @@ public class StartScreen extends ScreenAdapter {
                 (int) (CAM_HEIGHT * SETTINGS_BOUNDS_HEIGHT_RATIO));
         touchPoint = new Vector3();
         settings = Settings.getInstance();
-        settings.font.setColor(Color.BLUE);
+        shapeRenderer = Settings.getInstance().shapeRenderer;
+        spriteBatch = Settings.getInstance().spriteBatch;
+        font = Settings.getInstance().font;
+        font.setColor(Color.BLUE);
     }
     /**
      * handles user input response
@@ -89,23 +94,22 @@ public class StartScreen extends ScreenAdapter {
         gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         cam.update();
 
-        settings.shapeRenderer.setProjectionMatrix(cam.combined);
-        settings.shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        settings.shapeRenderer.setColor(new Color(Color.RED));
-        settings.shapeRenderer.rect(playBounds.getX(), playBounds.getY(), playBounds.getWidth(), playBounds.getHeight());
-        settings.shapeRenderer.setColor(new Color(Color.BLUE));
-        settings.shapeRenderer.rect(settingsBounds.getX(), settingsBounds.getY(), settingsBounds.getWidth(), settingsBounds.getHeight());
-        settings.shapeRenderer.setColor(new Color(Color.GREEN));
-        settings.shapeRenderer.rect(helpBounds.getX(), helpBounds.getY(), helpBounds.getWidth(), helpBounds.getHeight());
-        settings.shapeRenderer.end();
-        settings.spriteBatch.begin();
-        settings.font.draw(settings.spriteBatch, "Play Game", 200, 250);
-        settings.font.draw(settings.spriteBatch, "Settings", 5, 40);
-        settings.font.draw(settings.spriteBatch, "Help", 200, 180);
-        settings.spriteBatch.end();
+        shapeRenderer.setProjectionMatrix(cam.combined);
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+        shapeRenderer.setColor(new Color(Color.RED));
+        shapeRenderer.rect(playBounds.getX(), playBounds.getY(), playBounds.getWidth(), playBounds.getHeight());
+        shapeRenderer.setColor(new Color(Color.BLUE));
+        shapeRenderer.rect(settingsBounds.getX(), settingsBounds.getY(), settingsBounds.getWidth(), settingsBounds.getHeight());
+        shapeRenderer.setColor(new Color(Color.GREEN));
+        shapeRenderer.rect(helpBounds.getX(), helpBounds.getY(), helpBounds.getWidth(), helpBounds.getHeight());
+        shapeRenderer.end();
+        spriteBatch.begin();
+        font.draw(spriteBatch, "Play Game", 200, 250);
+        font.draw(spriteBatch, "Settings", 5, 40);
+        font.draw(spriteBatch, "Help", 200, 180);
+        spriteBatch.end();
     }
     /**
-     * renders shit on screen
      * @param delta time since last render
      */
     @Override
