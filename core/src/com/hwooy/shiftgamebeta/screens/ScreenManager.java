@@ -42,9 +42,9 @@ public class ScreenManager {
             System.out.println("called");
             screens.push(new StartScreen(this));
             System.out.print(screens.size());
-        } /* else if (screen == Screens.GAME) {
+        }  else if (screen == Screens.GAME) {
             screens.push(new GameScreen(this, level));
-        } else if (screen == Screens.HELP) {
+        } /* else if (screen == Screens.HELP) {
             screens.push(new HelpScreen(this));
         } */ else if (screen == Screens.LEVELS) {
             screens.push(new LevelsScreen(this));

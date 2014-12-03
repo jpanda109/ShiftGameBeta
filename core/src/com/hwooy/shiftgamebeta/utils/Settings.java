@@ -3,10 +3,13 @@ package com.hwooy.shiftgamebeta.utils;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 
 /**
  * Created by jason on 12/3/14.
@@ -31,11 +34,12 @@ public final class Settings {
 
     private Settings() {
         assetManager = new AssetManager();
+        assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
         spriteBatch = new SpriteBatch();
         font = new BitmapFont();
         preferences = Gdx.app.getPreferences(PREFERENCE_NAME);
         shapeRenderer = new ShapeRenderer();
-        loadAllAssets();
+        loadAllTextures();
     }
 
     public static Settings getInstance() {
@@ -46,12 +50,22 @@ public final class Settings {
         return assetManager.get(path, Texture.class);
     }
 
-    private void loadAllAssets() {
+    private void loadAllTextures() {
         assetManager.load(PLAYER_PATH, Texture.class);
         assetManager.load(TERRAIN_PATH, Texture.class);
         assetManager.load(PORTAL_PATH, Texture.class);
         assetManager.load(STAR_PATH, Texture.class);
         assetManager.finishLoading();
+    }
+
+    public TiledMap getTiledMap(int levelNumber) {
+        assetManager.load("levels/Level" + levelNumber + ".tmx", TiledMap.class);
+        assetManager.finishLoading();
+        return assetManager.get("levels/Level" + levelNumber + ".tmx", TiledMap.class);
+    }
+
+    public int getLevel() {
+        return preferences.getInteger(CURRENT_LEVEL, 1);
     }
 
     public void dispose() {
@@ -61,7 +75,4 @@ public final class Settings {
         shapeRenderer.dispose();
     }
 
-    public int getLevel() {
-        return preferences.getInteger(CURRENT_LEVEL, 1);
-    }
 }
