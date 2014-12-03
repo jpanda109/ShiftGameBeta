@@ -39,14 +39,17 @@ public class ScreenManager {
 
     private void pushScreen(Screens screen, int level) {
         if (screen == Screens.START) {
+            System.out.println("called");
             screens.push(new StartScreen(this));
-        } else if (screen == Screens.GAME) {
+            System.out.print(screens.size());
+        } /* else if (screen == Screens.GAME) {
             screens.push(new GameScreen(this, level));
         } else if (screen == Screens.HELP) {
             screens.push(new HelpScreen(this));
-        } else if (screen == Screens.LEVELS) {
+        } */ else if (screen == Screens.LEVELS) {
             screens.push(new LevelsScreen(this));
         }
+
         game.setScreen(screens.peek());
     }
 

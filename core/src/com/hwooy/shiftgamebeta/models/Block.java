@@ -16,10 +16,8 @@ public class Block extends GameObject {
     }
     public BlockType type;
 
-    public Block(Body body, BlockType type) {
-        super(body);
-        this.width = BLOCK_WIDTH;
-        this.height = BLOCK_HEIGHT;
+    public Block(Body body, String texturePath, BlockType type) {
+        super(body, texturePath, BLOCK_WIDTH, BLOCK_HEIGHT);
         this.type = type;
     }
 }

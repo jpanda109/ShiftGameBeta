@@ -10,7 +10,7 @@ import com.hwooy.shiftgamebeta.utils.Settings;
 public class TerrainBlock extends Block {
 
     public TerrainBlock(Body body, Block.BlockType type) {
-        super(body, type);
+        super(body, Settings.TERRAIN_PATH, type);
         texture = Settings.getInstance().getTexture(Settings.TERRAIN_PATH);
     }
 }
