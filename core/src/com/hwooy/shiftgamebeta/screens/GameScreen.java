@@ -8,10 +8,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.World;
 import com.hwooy.shiftgamebeta.listeners.PlayerGestureDetector;
 import com.hwooy.shiftgamebeta.listeners.ShiftContactListener;
-import com.hwooy.shiftgamebeta.models.Block;
-import com.hwooy.shiftgamebeta.models.GameObject;
-import com.hwooy.shiftgamebeta.models.Player;
-import com.hwooy.shiftgamebeta.models.Portal;
+import com.hwooy.shiftgamebeta.object_classes.ShiftObject;
 import com.hwooy.shiftgamebeta.utils.Settings;
 import com.hwooy.shiftgamebeta.viewers.GameRenderer;
 
@@ -26,7 +23,7 @@ public class GameScreen extends ScreenAdapter {
         RUNNING, PAUSED
     }
     ScreenManager screenManager;
-    ArrayList<GameObject> gameObjects;
+    ArrayList<ShiftObject> gameObjects;
     GameState state;
     GameRenderer gameRenderer;
     ShapeRenderer shapeRenderer;
@@ -41,7 +38,7 @@ public class GameScreen extends ScreenAdapter {
         this.screenManager = screenManager;
         this.levelNumber = levelNumber;
 
-        gameObjects = new ArrayList<GameObject>();
+        gameObjects = new ArrayList<ShiftObject>();
         state = GameState.RUNNING;
         world = new World(new Vector2(0, -10f), false);
         //playerGestureDetector = new PlayerGestureDetector();

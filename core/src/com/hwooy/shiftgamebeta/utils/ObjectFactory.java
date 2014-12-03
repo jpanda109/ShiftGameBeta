@@ -6,10 +6,10 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import com.hwooy.shiftgamebeta.models.Block;
-import com.hwooy.shiftgamebeta.models.GameObject;
-import com.hwooy.shiftgamebeta.models.Player;
-import com.hwooy.shiftgamebeta.models.TerrainBlock;
+import com.hwooy.shiftgamebeta.block_classes.TerrainBlock;
+import com.hwooy.shiftgamebeta.block_classes.Block;
+import com.hwooy.shiftgamebeta.object_classes.Player;
+import com.hwooy.shiftgamebeta.object_classes.ShiftObject;
 
 import java.util.ArrayList;
 
@@ -26,12 +26,12 @@ public class ObjectFactory {
     TiledMap tiledMap;
     Player player;
     MapLayers layers;
-    ArrayList<GameObject> gameObjects;
+    ArrayList<ShiftObject> gameObjects;
 
     public ObjectFactory(int levelNumber) {
         tiledMap = Settings.getInstance().getTiledMap(levelNumber);
         layers = tiledMap.getLayers();
-        gameObjects = new ArrayList<GameObject>();
+        gameObjects = new ArrayList<ShiftObject>();
     }
 
     public World createWorld() {

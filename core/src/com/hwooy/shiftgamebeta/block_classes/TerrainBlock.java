@@ -1,7 +1,6 @@
 package com.hwooy.shiftgamebeta.block_classes;
 
 import com.badlogic.gdx.physics.box2d.Body;
-import com.hwooy.shiftgamebeta.object_classes.Block;
 import com.hwooy.shiftgamebeta.utils.Settings;
 
 /**
