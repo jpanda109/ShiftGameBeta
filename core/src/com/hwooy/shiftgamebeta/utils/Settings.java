@@ -20,10 +20,10 @@ public final class Settings {
     public static final String PREFERENCE_NAME = "com.hwooy.shiftgamebeta.preferences";
     public static final String CURRENT_LEVEL = "CURRENT_LEVEL";
 
-    public static final String PLAYER_PATH = "player.png";
-    public static final String TERRAIN_PATH = "terrain.png";
-    public static final String PORTAL_PATH = "portal.png";
-    public static final String STAR_PATH = "star.png";
+    public static final String PLAYER_PATH = "player/player_front.png";
+    public static final String TERRAIN_PATH = "blocks/terrain.png";
+    public static final String PORTAL_PATH = "portal/portal.png";
+    public static final String STAR_PATH = "star/star.png";
 
     static final Settings settings = new Settings();
     public final AssetManager assetManager;
