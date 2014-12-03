@@ -1,4 +1,4 @@
-package com.hwooy.shiftgamebeta.models;
+package com.hwooy.shiftgamebeta.object_classes;
 
 import com.badlogic.gdx.physics.box2d.Body;
 import com.hwooy.shiftgamebeta.utils.Settings;
@@ -6,7 +6,7 @@ import com.hwooy.shiftgamebeta.utils.Settings;
 /**
  * Created by jason on 12/3/14.
  */
-public class Star extends GameObject {
+public class Star extends ShiftObject {
 
     public static final float STAR_WIDTH = 1f;
     public static final float STAR_HEIGHT = 1f;
