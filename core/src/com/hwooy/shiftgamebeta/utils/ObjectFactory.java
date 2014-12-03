@@ -10,6 +10,7 @@ import com.hwooy.shiftgamebeta.block_classes.TerrainBlock;
 import com.hwooy.shiftgamebeta.block_classes.Block;
 import com.hwooy.shiftgamebeta.object_classes.Player;
 import com.hwooy.shiftgamebeta.object_classes.ShiftObject;
+import com.hwooy.shiftgamebeta.object_classes.Star;
 import com.hwooy.shiftgamebeta.screens.GameScreen;
 
 import java.util.ArrayList;
@@ -39,13 +40,15 @@ public class ObjectFactory {
 
     private void createWorld() {
         world = new World(new Vector2(0, -10f), false);
-        for (MapLayer layer : layers) {
+        for (MapLayer mapLayer : layers) {
+            TiledMapTileLayer layer = (TiledMapTileLayer) mapLayer;
             if (layer.getName().contains("Block")) {
-                addTerrainFixtures(world, (TiledMapTileLayer) layer);
+                addTerrainFixtures(layer);
             } else if (layer.getName().contains("Star")) {
-
+                addStarFixtures(layer);
             } else if (layer.getName().contains("Player")) {
-
+                System.out.println("hi");
+                addPlayerFixture(layer);
             } else if (layer.getName().contains("Portal")) {
 
             } else if (layer.getName().contains("Lava")) {
@@ -56,7 +59,7 @@ public class ObjectFactory {
         }
     }
 
-    private void addTerrainFixtures(World world, TiledMapTileLayer layer) {
+    private void addTerrainFixtures(TiledMapTileLayer layer) {
         BodyDef bodyDef = new BodyDef();
         FixtureDef fixtureDef = new FixtureDef();
         PolygonShape polygonShape = new PolygonShape();
@@ -67,7 +70,6 @@ public class ObjectFactory {
         fixtureDef.friction = 4f;
         fixtureDef.filter.maskBits = BIT_PLAYER;
 
-        System.out.println("hi");
         for (int row = 0; row < layer.getHeight(); ++row) {
             for (int col = 0; col < layer.getWidth(); ++col) {
                 TiledMapTileLayer.Cell cell = layer.getCell(col, row);
@@ -91,6 +93,66 @@ public class ObjectFactory {
                     body.createFixture(fixtureDef);
                     gameObjects.add(new TerrainBlock(body, Block.BlockType.TWO));
                 }
+            }
+        }
+
+        polygonShape.dispose();
+    }
+
+    private void addStarFixtures(TiledMapTileLayer layer) {
+        BodyDef bodyDef = new BodyDef();
+        FixtureDef fixtureDef = new FixtureDef();
+        PolygonShape polygonShape = new PolygonShape();
+        bodyDef.type = BodyDef.BodyType.StaticBody;
+        polygonShape.setAsBox(Star.STAR_WIDTH, Star.STAR_HEIGHT);
+        fixtureDef.shape = polygonShape;
+        fixtureDef.density = 1f;
+        fixtureDef.friction = 4f;
+        fixtureDef.filter.maskBits = BIT_PLAYER;
+        fixtureDef.isSensor = true;
+
+        for (int row = 0; row < layer.getHeight(); ++row) {
+            for (int col = 0; col < layer.getWidth(); ++col) {
+                TiledMapTileLayer.Cell cell = layer.getCell(col, row);
+                if (cell == null || cell.getTile() == null) {
+                    continue;
+                }
+
+                bodyDef.position.set(col, row);
+                Body body = world.createBody(bodyDef);
+                body.createFixture(fixtureDef);
+                gameObjects.add(new Star(body));
+            }
+        }
+
+        polygonShape.dispose();
+    }
+
+    private void addPlayerFixture(TiledMapTileLayer layer) {
+        BodyDef bodyDef = new BodyDef();
+        FixtureDef fixtureDef = new FixtureDef();
+        PolygonShape polygonShape = new PolygonShape();
+        bodyDef.type = BodyDef.BodyType.DynamicBody;
+        polygonShape.setAsBox(Player.PLAYER_WIDTH, Player.PLAYER_HEIGHT);
+        fixtureDef.shape = polygonShape;
+        fixtureDef.density = 1f;
+        fixtureDef.friction = 4f;
+        fixtureDef.filter.maskBits = BIT_TYPE_BOTH | BIT_TYPE_ONE | BIT_TYPE_TWO;
+        fixtureDef.filter.categoryBits = BIT_PLAYER;
+
+        for (int row = 0; row < layer.getHeight(); ++row) {
+            for (int col = 0; col < layer.getWidth(); ++col) {
+                TiledMapTileLayer.Cell cell = layer.getCell(col, row);
+                if (cell == null || cell.getTile() == null) {
+                    continue;
+                }
+
+                bodyDef.position.set(col, row);
+                Body body = world.createBody(bodyDef);
+                body.createFixture(fixtureDef);
+                gameObjects.add(new Player(body));
+                polygonShape.dispose();
+                return;
             }
         }
 

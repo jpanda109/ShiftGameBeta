@@ -25,9 +25,9 @@ public class ShiftObject {
     public void render(SpriteBatch spriteBatch) {
         spriteBatch.draw(texture,
                         (body.getPosition().x - width) * 10,
-                        (body.getPosition().y - height) * 10,
-                        width * 10,
-                        height * 10);
+                        (body.getPosition().y - height) * 10);//,
+                        //width * 10,
+                        //height * 10);
     }
 
     public void dispose() {
