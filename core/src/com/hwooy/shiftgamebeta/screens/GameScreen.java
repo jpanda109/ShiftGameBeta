@@ -9,6 +9,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.hwooy.shiftgamebeta.listeners.PlayerGestureDetector;
 import com.hwooy.shiftgamebeta.listeners.ShiftContactListener;
 import com.hwooy.shiftgamebeta.object_classes.ShiftObject;
+import com.hwooy.shiftgamebeta.utils.ObjectFactory;
 import com.hwooy.shiftgamebeta.utils.Settings;
 import com.hwooy.shiftgamebeta.viewers.GameRenderer;
 
@@ -23,11 +24,10 @@ public class GameScreen extends ScreenAdapter {
         RUNNING, PAUSED
     }
     ScreenManager screenManager;
-    ArrayList<ShiftObject> gameObjects;
+    public ArrayList<ShiftObject> gameObjects;
     GameState state;
     GameRenderer gameRenderer;
     ShapeRenderer shapeRenderer;
-    OrthographicCamera guiCam;
     int levelNumber;
     Vector3 touchPoint;
     World world;
@@ -37,17 +37,31 @@ public class GameScreen extends ScreenAdapter {
     public GameScreen(ScreenManager screenManager, int levelNumber) {
         this.screenManager = screenManager;
         this.levelNumber = levelNumber;
-
-        gameObjects = new ArrayList<ShiftObject>();
         state = GameState.RUNNING;
-        world = new World(new Vector2(0, -10f), false);
+
+        ObjectFactory objectFactory = new ObjectFactory(levelNumber);
+        world = objectFactory.getWorld();
+        gameObjects = objectFactory.getGameObjects();
         //playerGestureDetector = new PlayerGestureDetector();
         //shiftContactListener = new ShiftContactListener();
         //world.setContactListener(shiftContactListener);
         touchPoint = new Vector3();
-        guiCam = new OrthographicCamera(480, 320);
-        gameRenderer = new GameRenderer();
+        gameRenderer = new GameRenderer(this);
         shapeRenderer = Settings.getInstance().shapeRenderer;
+    }
+
+    public void update(float delta) {
+        world.step(delta, 6, 2);
+    }
+
+    public void draw() {
+        gameRenderer.render();
+    }
+
+    @Override
+    public void render(float delta) {
+        update(delta);
+        draw();
     }
 
 

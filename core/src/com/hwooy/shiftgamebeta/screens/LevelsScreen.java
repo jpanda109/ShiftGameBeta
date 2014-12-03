@@ -75,7 +75,7 @@ public class LevelsScreen extends ScreenAdapter {
         gl.glClearColor(1, 1, 1, 1);
         gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         cam.update();
-// TODO change from shitty colors to real drawings
+
         debugRenderer.setProjectionMatrix(cam.combined);
         debugRenderer.begin(ShapeRenderer.ShapeType.Line);
         debugRenderer.setColor(Color.BLACK);

@@ -23,13 +23,11 @@ public class ShiftObject {
     }
 
     public void render(SpriteBatch spriteBatch) {
-        spriteBatch.begin();
         spriteBatch.draw(texture,
                         (body.getPosition().x - width) * 10,
-                        (body.getPosition().y - height)* 10,
-                        width * 20,
-                        height * 20);
-        spriteBatch.end();
+                        (body.getPosition().y - height) * 10,
+                        width * 10,
+                        height * 10);
     }
 
     public void dispose() {

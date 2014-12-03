@@ -42,7 +42,6 @@ public class ScreenManager {
 
     private void pushScreen(Screens screen, int level) {
         if (screen == Screens.START) {
-            System.out.println("called");
             screens.push(new StartScreen(this));
             System.out.print(screens.size());
         }  else if (screen == Screens.GAME) {

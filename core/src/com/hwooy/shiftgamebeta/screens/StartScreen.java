@@ -132,7 +132,6 @@ public class StartScreen extends ScreenAdapter {
     @Override
     public void dispose() {
         super.dispose();
-        spriteBatch.dispose();
     }
 
 }

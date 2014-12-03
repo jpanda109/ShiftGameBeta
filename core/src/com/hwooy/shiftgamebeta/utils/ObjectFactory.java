@@ -10,6 +10,7 @@ import com.hwooy.shiftgamebeta.block_classes.TerrainBlock;
 import com.hwooy.shiftgamebeta.block_classes.Block;
 import com.hwooy.shiftgamebeta.object_classes.Player;
 import com.hwooy.shiftgamebeta.object_classes.ShiftObject;
+import com.hwooy.shiftgamebeta.screens.GameScreen;
 
 import java.util.ArrayList;
 
@@ -26,18 +27,20 @@ public class ObjectFactory {
     TiledMap tiledMap;
     Player player;
     MapLayers layers;
+    World world;
     ArrayList<ShiftObject> gameObjects;
 
     public ObjectFactory(int levelNumber) {
         tiledMap = Settings.getInstance().getTiledMap(levelNumber);
         layers = tiledMap.getLayers();
         gameObjects = new ArrayList<ShiftObject>();
+        createWorld();
     }
 
-    public World createWorld() {
-        World world = new World(new Vector2(0, -10f), false);
+    private void createWorld() {
+        world = new World(new Vector2(0, -10f), false);
         for (MapLayer layer : layers) {
-            if (layer.getName().contains("Terrain")) {
+            if (layer.getName().contains("Block")) {
                 addTerrainFixtures(world, (TiledMapTileLayer) layer);
             } else if (layer.getName().contains("Star")) {
 
@@ -51,8 +54,6 @@ public class ObjectFactory {
 
             }
         }
-
-        return world;
     }
 
     private void addTerrainFixtures(World world, TiledMapTileLayer layer) {
@@ -66,6 +67,7 @@ public class ObjectFactory {
         fixtureDef.friction = 4f;
         fixtureDef.filter.maskBits = BIT_PLAYER;
 
+        System.out.println("hi");
         for (int row = 0; row < layer.getHeight(); ++row) {
             for (int col = 0; col < layer.getWidth(); ++col) {
                 TiledMapTileLayer.Cell cell = layer.getCell(col, row);
@@ -75,12 +77,32 @@ public class ObjectFactory {
 
                 bodyDef.position.set(col, row);
                 Body body = world.createBody(bodyDef);
-                body.createFixture(fixtureDef);
-                gameObjects.add(new TerrainBlock(body, Block.BlockType.BOTH));
+                if (layer.getName().contains("Both")) {
+                    fixtureDef.filter.categoryBits = BIT_TYPE_BOTH;
+                    body.createFixture(fixtureDef);
+                    gameObjects.add(new TerrainBlock(body, Block.BlockType.BOTH));
+                } else if (layer.getName().contains("Hell")) {
+                    fixtureDef.filter.categoryBits = BIT_TYPE_ONE;
+                    body.createFixture(fixtureDef);
+                    gameObjects.add(new TerrainBlock(body, Block.BlockType.ONE));
+
+                } else if (layer.getName().contains("Heaven")) {
+                    fixtureDef.filter.categoryBits = BIT_TYPE_TWO;
+                    body.createFixture(fixtureDef);
+                    gameObjects.add(new TerrainBlock(body, Block.BlockType.TWO));
+                }
             }
         }
 
         polygonShape.dispose();
+    }
+
+    public ArrayList<ShiftObject> getGameObjects() {
+        return gameObjects;
+    }
+
+    public World getWorld() {
+        return world;
     }
 
 }
