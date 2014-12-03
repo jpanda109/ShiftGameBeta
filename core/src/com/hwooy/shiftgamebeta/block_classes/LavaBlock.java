@@ -1,4 +1,4 @@
-package com.hwooy.shiftgamebeta.models;
+package com.hwooy.shiftgamebeta.block_classes;
 
 /**
  * Created by jason on 12/3/14.

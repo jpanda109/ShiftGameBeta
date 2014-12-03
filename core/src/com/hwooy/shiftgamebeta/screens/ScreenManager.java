@@ -12,9 +12,13 @@ import java.util.Stack;
  */
 public class ScreenManager {
 
+    /**
+     * Member Variables
+     */
     public ShiftGameBeta game;
-    // WHY AM I USING A STACK
     public Stack<Screen> screens;
+
+    /**BEGINNING OF FUNCTIONS--------------------------------------------------------**/
 
     public enum Screens {
         START, GAME, HELP, LEVELS
@@ -25,7 +29,6 @@ public class ScreenManager {
         screens = new Stack<Screen>();
         pushScreen(Screens.START, 0);
     }
-
 
     public void setScreen(Screens screen) {
         popScreen();
@@ -49,7 +52,6 @@ public class ScreenManager {
         } */ else if (screen == Screens.LEVELS) {
             screens.push(new LevelsScreen(this));
         }
-
         game.setScreen(screens.peek());
     }
 

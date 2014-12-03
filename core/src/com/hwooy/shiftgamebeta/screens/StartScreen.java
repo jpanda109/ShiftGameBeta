@@ -18,15 +18,16 @@ import com.hwooy.shiftgamebeta.utils.Settings;
  */
 public class StartScreen extends ScreenAdapter {
 
-
     public static final int CAM_WIDTH = 480; //Gdx.graphics.getWidth();
     public static final int CAM_HEIGHT = 320; //Gdx.graphics.getHeight();
+
     public static final float PLAY_BOUNDS_WIDTH_RATIO = .5f;
     public static final float PLAY_BOUNDS_HEIGHT_RATIO = .2f;
     public static final float HELP_BOUNDS_WIDTH_RATIO = .5f;
     public static final float HELP_BOUNDS_HEIGHT_RATIO = .2f;
     public static final float SETTINGS_BOUNDS_WIDTH_RATIO = .2f;
     public static final float SETTINGS_BOUNDS_HEIGHT_RATIO = .2f;
+
     ScreenManager screenManager;
     OrthographicCamera cam;
     Rectangle playBounds;
@@ -37,6 +38,7 @@ public class StartScreen extends ScreenAdapter {
     ShapeRenderer shapeRenderer;
     SpriteBatch spriteBatch;
     BitmapFont font;
+
     /**
      * constructor for the start screen
      * @param screenManager instance of screenManager being played
@@ -45,6 +47,7 @@ public class StartScreen extends ScreenAdapter {
         this.screenManager = screenManager;
         cam = new OrthographicCamera(CAM_WIDTH, CAM_HEIGHT);
         cam.position.set(CAM_WIDTH / 2, CAM_HEIGHT / 2, 0);
+
         playBounds = new Rectangle(
                 (int) (CAM_WIDTH * PLAY_BOUNDS_WIDTH_RATIO / 2),
                 (int) (CAM_HEIGHT * .7),
@@ -60,6 +63,7 @@ public class StartScreen extends ScreenAdapter {
                 0,
                 (int) (CAM_WIDTH * SETTINGS_BOUNDS_WIDTH_RATIO),
                 (int) (CAM_HEIGHT * SETTINGS_BOUNDS_HEIGHT_RATIO));
+
         touchPoint = new Vector3();
         settings = Settings.getInstance();
         shapeRenderer = Settings.getInstance().shapeRenderer;
@@ -73,7 +77,7 @@ public class StartScreen extends ScreenAdapter {
     public void update() {
         if (Gdx.input.justTouched()) {
             cam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
-            if (playBounds.contains(touchPoint.x, touchPoint.y)) {
+            if      (playBounds.contains(touchPoint.x, touchPoint.y)) {
                 screenManager.setScreen(ScreenManager.Screens.LEVELS);
             }
             else if (helpBounds.contains(touchPoint.x, touchPoint.y)) {
@@ -96,19 +100,26 @@ public class StartScreen extends ScreenAdapter {
 
         shapeRenderer.setProjectionMatrix(cam.combined);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+
         shapeRenderer.setColor(new Color(Color.RED));
         shapeRenderer.rect(playBounds.getX(), playBounds.getY(), playBounds.getWidth(), playBounds.getHeight());
+
         shapeRenderer.setColor(new Color(Color.BLUE));
         shapeRenderer.rect(settingsBounds.getX(), settingsBounds.getY(), settingsBounds.getWidth(), settingsBounds.getHeight());
+
         shapeRenderer.setColor(new Color(Color.GREEN));
         shapeRenderer.rect(helpBounds.getX(), helpBounds.getY(), helpBounds.getWidth(), helpBounds.getHeight());
+
         shapeRenderer.end();
+
         spriteBatch.begin();
         font.draw(spriteBatch, "Play Game", 200, 250);
         font.draw(spriteBatch, "Settings", 5, 40);
         font.draw(spriteBatch, "Help", 200, 180);
+
         spriteBatch.end();
     }
+
     /**
      * @param delta time since last render
      */
@@ -117,8 +128,11 @@ public class StartScreen extends ScreenAdapter {
         update();
         draw();
     }
+
     @Override
     public void dispose() {
         super.dispose();
+        spriteBatch.dispose();
     }
+
 }
