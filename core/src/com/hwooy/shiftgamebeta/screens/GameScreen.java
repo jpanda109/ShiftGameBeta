@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.Filter;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.hwooy.shiftgamebeta.listeners.PlayerGestureDetector;
@@ -60,6 +62,13 @@ public class GameScreen extends ScreenAdapter {
         if (player.state == Player.State.IDLE) {
             player.body.applyForceToCenter(xVelocity, yVelocity, true);
         }
+    }
+
+    public void shiftPlayer() {
+        Fixture playerFixture = player.body.getFixtureList().get(0);
+        Filter filter = playerFixture.getFilterData();
+        filter.maskBits = (short) ((~filter.maskBits) ^ (ObjectFactory.BIT_TYPE_ONE | ObjectFactory.BIT_TYPE_TWO));
+        playerFixture.setFilterData(filter);
     }
 
     private void handleInput(float delta) {

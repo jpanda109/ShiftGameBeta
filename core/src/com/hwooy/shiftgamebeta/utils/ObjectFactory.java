@@ -83,11 +83,13 @@ public class ObjectFactory {
                     body.createFixture(fixtureDef);
                     gameObjects.add(new TerrainBlock(body, Block.BlockType.BOTH));
                 } else if (layer.getName().contains("Hell")) {
+                    System.out.println("Hell");
                     fixtureDef.filter.categoryBits = BIT_TYPE_ONE;
                     body.createFixture(fixtureDef);
                     gameObjects.add(new TerrainBlock(body, Block.BlockType.ONE));
 
                 } else if (layer.getName().contains("Heaven")) {
+                    System.out.println("Heaven");
                     fixtureDef.filter.categoryBits = BIT_TYPE_TWO;
                     body.createFixture(fixtureDef);
                     gameObjects.add(new TerrainBlock(body, Block.BlockType.TWO));
@@ -137,7 +139,7 @@ public class ObjectFactory {
         fixtureDef.shape = polygonShape;
         fixtureDef.density = 1f;
         fixtureDef.friction = 4f;
-        fixtureDef.filter.maskBits = BIT_TYPE_BOTH | BIT_TYPE_ONE | BIT_TYPE_TWO;
+        fixtureDef.filter.maskBits = BIT_TYPE_BOTH | BIT_TYPE_TWO;
         fixtureDef.filter.categoryBits = BIT_PLAYER;
 
         for (int row = 0; row < layer.getHeight(); ++row) {

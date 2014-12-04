@@ -33,7 +33,11 @@ public class PlayerGestureDetector implements GestureDetector.GestureListener{
     @Override
     public boolean fling(float velocityX, float velocityY, int button) {
         System.out.println("fling");
-        gameScreen.flingPlayer(velocityX, -velocityY);
+        if (velocityY > 0) {
+            gameScreen.shiftPlayer();
+        } else {
+            gameScreen.flingPlayer(velocityX, -velocityY);
+        }
         return false;
     }
 

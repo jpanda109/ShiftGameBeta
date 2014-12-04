@@ -59,6 +59,6 @@ public class ShiftContactListener implements ContactListener {
 
     private void portalContact()
     {
-       //gameScreen.nextLevel();
+       gameScreen.nextLevel();
     }
 }
