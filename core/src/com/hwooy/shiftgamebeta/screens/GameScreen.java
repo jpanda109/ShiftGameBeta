@@ -67,7 +67,7 @@ public class GameScreen extends ScreenAdapter {
         if (Gdx.input.justTouched()) {
             gameRenderer.guiCam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
             if (gameRenderer.pauseBounds.contains(touchPoint.x, touchPoint.y)) {
-                restartLevel();
+                nextLevel();
             }
         }
     }
@@ -103,6 +103,14 @@ public class GameScreen extends ScreenAdapter {
 
     public void restartLevel() {
         screenManager.setGameScreen(levelNumber);
+    }
+
+    public void nextLevel() {
+        if (levelNumber < God.MAX_LEVEL) {
+            screenManager.setGameScreen(++levelNumber);
+        } else {
+            screenManager.setScreen(ScreenManager.Screens.WIN);
+        }
     }
 
     @Override

@@ -9,6 +9,7 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.hwooy.shiftgamebeta.block_classes.TerrainBlock;
 import com.hwooy.shiftgamebeta.block_classes.Block;
 import com.hwooy.shiftgamebeta.object_classes.Player;
+import com.hwooy.shiftgamebeta.object_classes.Portal;
 import com.hwooy.shiftgamebeta.object_classes.ShiftObject;
 import com.hwooy.shiftgamebeta.object_classes.Star;
 
@@ -46,10 +47,9 @@ public class ObjectFactory {
             } else if (layer.getName().contains("Star")) {
                 addStarFixtures(layer);
             } else if (layer.getName().contains("Player")) {
-                System.out.println("hi");
                 addPlayerFixture(layer);
             } else if (layer.getName().contains("Portal")) {
-
+                addPortalFixture(layer);
             } else if (layer.getName().contains("Lava")) {
 
             } else if (layer.getName().contains("Crumbling")) {
@@ -152,6 +152,38 @@ public class ObjectFactory {
                 body.createFixture(fixtureDef);
                 player = new Player(body);
                 gameObjects.add(player);
+                polygonShape.dispose();
+                return;
+            }
+        }
+
+        polygonShape.dispose();
+    }
+
+    private void addPortalFixture(TiledMapTileLayer layer) {
+        BodyDef bodyDef = new BodyDef();
+        FixtureDef fixtureDef = new FixtureDef();
+        PolygonShape polygonShape = new PolygonShape();
+        bodyDef.type = BodyDef.BodyType.StaticBody;
+        bodyDef.fixedRotation = true;
+        polygonShape.setAsBox(Player.PLAYER_WIDTH, Player.PLAYER_HEIGHT);
+        fixtureDef.shape = polygonShape;
+        fixtureDef.isSensor = true;
+        fixtureDef.filter.maskBits = BIT_PLAYER;
+        fixtureDef.filter.categoryBits = BIT_TYPE_BOTH;
+
+        for (int row = 0; row < layer.getHeight(); ++row) {
+            for (int col = 0; col < layer.getWidth(); ++col) {
+                TiledMapTileLayer.Cell cell = layer.getCell(col, row);
+                if (cell == null || cell.getTile() == null) {
+                    continue;
+                }
+
+                bodyDef.position.set(col, row);
+                Body body = world.createBody(bodyDef);
+                body.createFixture(fixtureDef);
+                body.setUserData("Portal");
+                gameObjects.add(new Portal(body));
                 polygonShape.dispose();
                 return;
             }

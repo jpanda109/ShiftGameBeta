@@ -30,6 +30,8 @@ public final class God {
     public static final String PLAY_PATH = "buttons/button_play.png";
     public static final String SELECT_PATH = "buttons/button_select_level.png";
 
+    public static final int MAX_LEVEL = 3;
+
     static final God GOD = new God();
     public final AssetManager assetManager;
     public final SpriteBatch spriteBatch;
