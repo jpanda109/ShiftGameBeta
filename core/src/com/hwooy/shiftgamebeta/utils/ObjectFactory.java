@@ -22,7 +22,7 @@ public class ObjectFactory {
 
     public static final short BIT_TYPE_ONE = 1;  // 0001
     public static final short BIT_TYPE_TWO = 2;  // 0010
-    public static final short BIT_TYPE_BOTH = 4; // 0100
+    public static final short BIT_TYPE_BOTH = BIT_TYPE_ONE | BIT_TYPE_TWO; // 0100
     public static final short BIT_PLAYER = 8; // 1000
 
     TiledMap tiledMap;
@@ -83,13 +83,11 @@ public class ObjectFactory {
                     body.createFixture(fixtureDef);
                     gameObjects.add(new TerrainBlock(body, Block.BlockType.BOTH));
                 } else if (layer.getName().contains("Hell")) {
-                    System.out.println("Hell");
                     fixtureDef.filter.categoryBits = BIT_TYPE_ONE;
                     body.createFixture(fixtureDef);
                     gameObjects.add(new TerrainBlock(body, Block.BlockType.ONE));
 
                 } else if (layer.getName().contains("Heaven")) {
-                    System.out.println("Heaven");
                     fixtureDef.filter.categoryBits = BIT_TYPE_TWO;
                     body.createFixture(fixtureDef);
                     gameObjects.add(new TerrainBlock(body, Block.BlockType.TWO));
@@ -139,7 +137,7 @@ public class ObjectFactory {
         fixtureDef.shape = polygonShape;
         fixtureDef.density = 1f;
         fixtureDef.friction = 4f;
-        fixtureDef.filter.maskBits = BIT_TYPE_BOTH | BIT_TYPE_TWO;
+        fixtureDef.filter.maskBits = BIT_TYPE_ONE;
         fixtureDef.filter.categoryBits = BIT_PLAYER;
 
         for (int row = 0; row < layer.getHeight(); ++row) {

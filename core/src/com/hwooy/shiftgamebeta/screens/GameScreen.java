@@ -1,6 +1,8 @@
 package com.hwooy.shiftgamebeta.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.input.GestureDetector;
@@ -11,6 +13,7 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.hwooy.shiftgamebeta.listeners.PlayerGestureDetector;
+import com.hwooy.shiftgamebeta.listeners.PlayerInputListener;
 import com.hwooy.shiftgamebeta.listeners.ShiftContactListener;
 import com.hwooy.shiftgamebeta.object_classes.Player;
 import com.hwooy.shiftgamebeta.object_classes.ShiftObject;
@@ -38,6 +41,7 @@ public class GameScreen extends ScreenAdapter {
     Vector3 touchPoint;
     World world;
     PlayerGestureDetector playerGestureDetector;
+    PlayerInputListener playerInputListener;
     ShiftContactListener shiftContactListener;
 
     public GameScreen(ScreenManager screenManager, int levelNumber) {
@@ -49,8 +53,13 @@ public class GameScreen extends ScreenAdapter {
         ObjectFactory objectFactory = new ObjectFactory(levelNumber, world);
         gameObjects = objectFactory.getGameObjects();
         player = objectFactory.getPlayer();
+
         playerGestureDetector = new PlayerGestureDetector(this);
-        Gdx.input.setInputProcessor(new GestureDetector(playerGestureDetector));
+        playerInputListener = new PlayerInputListener(this);
+        InputMultiplexer mux = new InputMultiplexer();
+        mux.addProcessor(new GestureDetector(playerGestureDetector));
+        mux.addProcessor(playerInputListener);
+        Gdx.input.setInputProcessor(mux);
         //shiftContactListener = new ShiftContactListener();
         //world.setContactListener(shiftContactListener);
         touchPoint = new Vector3();
@@ -67,7 +76,7 @@ public class GameScreen extends ScreenAdapter {
     public void shiftPlayer() {
         Fixture playerFixture = player.body.getFixtureList().get(0);
         Filter filter = playerFixture.getFilterData();
-        filter.maskBits = (short) ((~filter.maskBits) ^ (ObjectFactory.BIT_TYPE_ONE | ObjectFactory.BIT_TYPE_TWO));
+        filter.maskBits = (short) ((filter.maskBits) ^ (ObjectFactory.BIT_TYPE_BOTH));
         playerFixture.setFilterData(filter);
     }
 
