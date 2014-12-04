@@ -48,21 +48,9 @@ public class StartScreen extends ScreenAdapter {
         cam = new OrthographicCamera(CAM_WIDTH, CAM_HEIGHT);
         cam.position.set(CAM_WIDTH / 2, CAM_HEIGHT / 2, 0);
 
-        playBounds = new Rectangle(
-                (int) (CAM_WIDTH * PLAY_BOUNDS_WIDTH_RATIO / 2),
-                (int) (CAM_HEIGHT * .7),
-                (int) (CAM_WIDTH * PLAY_BOUNDS_WIDTH_RATIO),
-                (int) (CAM_HEIGHT * PLAY_BOUNDS_HEIGHT_RATIO));
-        helpBounds = new Rectangle(
-                (int) (CAM_WIDTH * HELP_BOUNDS_WIDTH_RATIO / 2),
-                (int) (CAM_HEIGHT * .4),
-                (int) (CAM_WIDTH * HELP_BOUNDS_WIDTH_RATIO),
-                (int) (CAM_HEIGHT * HELP_BOUNDS_HEIGHT_RATIO));
-        settingsBounds = new Rectangle(
-                0,
-                0,
-                (int) (CAM_WIDTH * SETTINGS_BOUNDS_WIDTH_RATIO),
-                (int) (CAM_HEIGHT * SETTINGS_BOUNDS_HEIGHT_RATIO));
+        playBounds = new Rectangle(215, 280, 50, 25);
+        helpBounds = new Rectangle(215, 250, 50, 25);
+        settingsBounds = new Rectangle(215, 220, 50, 25);
 
         touchPoint = new Vector3();
         god = God.getInstance();
@@ -97,7 +85,7 @@ public class StartScreen extends ScreenAdapter {
         gl.glClearColor(1, 1, 1, 1);
         gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         cam.update();
-
+/*
         shapeRenderer.setProjectionMatrix(cam.combined);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
 
@@ -111,12 +99,19 @@ public class StartScreen extends ScreenAdapter {
         shapeRenderer.rect(helpBounds.getX(), helpBounds.getY(), helpBounds.getWidth(), helpBounds.getHeight());
 
         shapeRenderer.end();
+*/
 
+        God g = God.getInstance();
+        spriteBatch.begin();
+        spriteBatch.draw(g.getTexture(g.PLAY_PATH), 215, 280);
+        spriteBatch.draw(g.getTexture(g.HELP_PATH), 215, 250);
+        spriteBatch.draw(g.getTexture(g.SELECT_PATH), 215, 220);
+/*
         spriteBatch.begin();
         font.draw(spriteBatch, "Play Game", 200, 250);
         font.draw(spriteBatch, "Settings", 5, 40);
         font.draw(spriteBatch, "Help", 200, 180);
-
+*/
         spriteBatch.end();
     }
 

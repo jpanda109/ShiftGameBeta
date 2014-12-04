@@ -26,6 +26,9 @@ public final class God {
     public static final String TERRAIN_PATH = "blocks/terrain.png";
     public static final String PORTAL_PATH = "portal/portal.png";
     public static final String STAR_PATH = "star/star.png";
+    public static final String HELP_PATH = "buttons/button_help.png";
+    public static final String PLAY_PATH = "buttons/button_play.png";
+    public static final String SELECT_PATH = "buttons/button_select_level.png";
 
     static final God GOD = new God();
     public final AssetManager assetManager;
@@ -59,6 +62,9 @@ public final class God {
         assetManager.load(TERRAIN_PATH, Texture.class);
         assetManager.load(PORTAL_PATH, Texture.class);
         assetManager.load(STAR_PATH, Texture.class);
+        assetManager.load(HELP_PATH, Texture.class);
+        assetManager.load(PLAY_PATH, Texture.class);
+        assetManager.load(SELECT_PATH, Texture.class);
         assetManager.finishLoading();
     }
 
