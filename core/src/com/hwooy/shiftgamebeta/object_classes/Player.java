@@ -1,7 +1,7 @@
 package com.hwooy.shiftgamebeta.object_classes;
 
 import com.badlogic.gdx.physics.box2d.Body;
-import com.hwooy.shiftgamebeta.utils.Settings;
+import com.hwooy.shiftgamebeta.utils.God;
 
 /**
  * Created by jason on 12/3/14.
@@ -17,7 +17,7 @@ public class Player extends ShiftObject {
     public State state;
 
     public Player(Body body) {
-        super(body, Settings.PLAYER_PATH, PLAYER_WIDTH, PLAYER_HEIGHT);
+        super(body, God.PLAYER_PATH, PLAYER_WIDTH, PLAYER_HEIGHT);
         state = State.IDLE;
     }
 }

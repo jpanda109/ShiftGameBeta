@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.hwooy.shiftgamebeta.object_classes.ShiftObject;
 import com.hwooy.shiftgamebeta.screens.GameScreen;
-import com.hwooy.shiftgamebeta.utils.Settings;
+import com.hwooy.shiftgamebeta.utils.God;
 
 /**
  * Created by jason on 12/3/14.
@@ -17,9 +17,9 @@ import com.hwooy.shiftgamebeta.utils.Settings;
 public class GameRenderer {
 
     GameScreen gameScreen;
-    OrthographicCamera guiCam;
+    public OrthographicCamera guiCam;
     ShapeRenderer shapeRenderer;
-    Rectangle pauseBounds;
+    public Rectangle pauseBounds;
 
     SpriteBatch spriteBatch;
 
@@ -28,8 +28,8 @@ public class GameRenderer {
         guiCam = new OrthographicCamera();
         guiCam.setToOrtho(false, 48, 32);
         //spriteBatch = Settings.getInstance().spriteBatch;
-        spriteBatch = new SpriteBatch();
-        shapeRenderer = Settings.getInstance().shapeRenderer;
+        spriteBatch = God.getInstance().spriteBatch;
+        shapeRenderer = God.getInstance().shapeRenderer;
         pauseBounds = new Rectangle(0, 31, 2, 2);
     }
 

@@ -3,7 +3,7 @@ package com.hwooy.shiftgamebeta.object_classes;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.hwooy.shiftgamebeta.utils.Settings;
+import com.hwooy.shiftgamebeta.utils.God;
 
 /**
  * Created by jason on 12/2/14.
@@ -17,7 +17,7 @@ public class ShiftObject {
 
     public ShiftObject(Body body, String texturePath, float width, float height) {
         this.body = body;
-        this.texture = Settings.getInstance().getTexture(texturePath);
+        this.texture = God.getInstance().getTexture(texturePath);
         this.width = width;
         this.height = height;
     }

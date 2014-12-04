@@ -11,7 +11,6 @@ import com.hwooy.shiftgamebeta.block_classes.Block;
 import com.hwooy.shiftgamebeta.object_classes.Player;
 import com.hwooy.shiftgamebeta.object_classes.ShiftObject;
 import com.hwooy.shiftgamebeta.object_classes.Star;
-import com.hwooy.shiftgamebeta.screens.GameScreen;
 
 import java.util.ArrayList;
 
@@ -31,15 +30,15 @@ public class ObjectFactory {
     World world;
     ArrayList<ShiftObject> gameObjects;
 
-    public ObjectFactory(int levelNumber) {
-        tiledMap = Settings.getInstance().getTiledMap(levelNumber);
+    public ObjectFactory(int levelNumber, World world) {
+        this.world = world;
+        tiledMap = God.getInstance().getTiledMap(levelNumber);
         layers = tiledMap.getLayers();
         gameObjects = new ArrayList<ShiftObject>();
         createWorld();
     }
 
     private void createWorld() {
-        world = new World(new Vector2(0, -10f), false);
         for (MapLayer mapLayer : layers) {
             TiledMapTileLayer layer = (TiledMapTileLayer) mapLayer;
             if (layer.getName().contains("Block")) {

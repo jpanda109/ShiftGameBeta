@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
-import com.hwooy.shiftgamebeta.utils.Settings;
+import com.hwooy.shiftgamebeta.utils.God;
 
 
 /**
@@ -34,7 +34,7 @@ public class StartScreen extends ScreenAdapter {
     Rectangle helpBounds;
     Rectangle settingsBounds;
     Vector3 touchPoint;
-    Settings settings;
+    God god;
     ShapeRenderer shapeRenderer;
     SpriteBatch spriteBatch;
     BitmapFont font;
@@ -65,10 +65,10 @@ public class StartScreen extends ScreenAdapter {
                 (int) (CAM_HEIGHT * SETTINGS_BOUNDS_HEIGHT_RATIO));
 
         touchPoint = new Vector3();
-        settings = Settings.getInstance();
-        shapeRenderer = Settings.getInstance().shapeRenderer;
-        spriteBatch = Settings.getInstance().spriteBatch;
-        font = Settings.getInstance().font;
+        god = God.getInstance();
+        shapeRenderer = God.getInstance().shapeRenderer;
+        spriteBatch = God.getInstance().spriteBatch;
+        font = God.getInstance().font;
         font.setColor(Color.BLUE);
     }
     /**

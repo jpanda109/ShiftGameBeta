@@ -1,16 +1,17 @@
 package com.hwooy.shiftgamebeta.screens;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Array;
 import com.hwooy.shiftgamebeta.listeners.PlayerGestureDetector;
 import com.hwooy.shiftgamebeta.listeners.ShiftContactListener;
 import com.hwooy.shiftgamebeta.object_classes.ShiftObject;
 import com.hwooy.shiftgamebeta.utils.ObjectFactory;
-import com.hwooy.shiftgamebeta.utils.Settings;
+import com.hwooy.shiftgamebeta.utils.God;
 import com.hwooy.shiftgamebeta.viewers.GameRenderer;
 
 import java.util.ArrayList;
@@ -39,19 +40,44 @@ public class GameScreen extends ScreenAdapter {
         this.levelNumber = levelNumber;
         state = GameState.RUNNING;
 
-        ObjectFactory objectFactory = new ObjectFactory(levelNumber);
-        world = objectFactory.getWorld();
+        world = God.getInstance().world;
+        ObjectFactory objectFactory = new ObjectFactory(levelNumber, world);
         gameObjects = objectFactory.getGameObjects();
         //playerGestureDetector = new PlayerGestureDetector();
         //shiftContactListener = new ShiftContactListener();
         //world.setContactListener(shiftContactListener);
         touchPoint = new Vector3();
         gameRenderer = new GameRenderer(this);
-        shapeRenderer = Settings.getInstance().shapeRenderer;
+        shapeRenderer = God.getInstance().shapeRenderer;
+    }
+
+    private void handleInput(float delta) {
+
+        if (Gdx.input.justTouched()) {
+            gameRenderer.guiCam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
+            if (gameRenderer.pauseBounds.contains(touchPoint.x, touchPoint.y)) {
+                restartLevel();
+            }
+        }
+    }
+
+    private void updateRunning(float delta) {
+        handleInput(delta);
+        world.step(delta, 6, 2);
+    }
+
+    private void updatePaused(float delta) {
+
     }
 
     public void update(float delta) {
-        world.step(delta, 6, 2);
+        switch (state) {
+            case RUNNING:
+                updateRunning(delta);
+                break;
+            case PAUSED:
+                updatePaused(delta);
+        }
     }
 
     public void draw() {
@@ -64,6 +90,19 @@ public class GameScreen extends ScreenAdapter {
         draw();
     }
 
+    public void restartLevel() {
+        screenManager.setGameScreen(levelNumber);
+    }
+
+    @Override
+    public void dispose() {
+        Array<Body> bodies = new Array<Body>();
+        world.getBodies(bodies);
+        for (Body body : bodies) {
+            world.destroyBody(body);
+        }
+        super.dispose();
+    }
 
 
 }

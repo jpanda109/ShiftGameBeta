@@ -10,11 +10,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.World;
 
 /**
  * Created by jason on 12/3/14.
  */
-public final class Settings {
+public final class God {
 
     // PREFERENCE KEYS
     public static final String PREFERENCE_NAME = "com.hwooy.shiftgamebeta.preferences";
@@ -25,25 +27,27 @@ public final class Settings {
     public static final String PORTAL_PATH = "portal/portal.png";
     public static final String STAR_PATH = "star/star.png";
 
-    static final Settings settings = new Settings();
+    static final God GOD = new God();
     public final AssetManager assetManager;
     public final SpriteBatch spriteBatch;
     public final BitmapFont font;
     public final Preferences preferences;
     public final ShapeRenderer shapeRenderer;
+    public final World world;
 
-    private Settings() {
+    private God() {
         assetManager = new AssetManager();
         assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
         spriteBatch = new SpriteBatch();
         font = new BitmapFont();
         preferences = Gdx.app.getPreferences(PREFERENCE_NAME);
         shapeRenderer = new ShapeRenderer();
+        world = new World(new Vector2(0, -10f), false);
         loadAllTextures();
     }
 
-    public static Settings getInstance() {
-        return settings;
+    public static God getInstance() {
+        return GOD;
     }
 
     public Texture getTexture(String path) {
@@ -73,6 +77,7 @@ public final class Settings {
         spriteBatch.dispose();
         font.dispose();
         shapeRenderer.dispose();
+        world.dispose();
     }
 
 }

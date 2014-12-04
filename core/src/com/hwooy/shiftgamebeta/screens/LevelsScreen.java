@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
-import com.hwooy.shiftgamebeta.utils.Settings;
+import com.hwooy.shiftgamebeta.utils.God;
 
 import java.util.ArrayList;
 
@@ -25,7 +25,7 @@ public class LevelsScreen extends ScreenAdapter {
     Vector3 touchPoint;
     ShapeRenderer debugRenderer;
     ArrayList<Rectangle> rectangles;
-    Settings settings;
+    God god;
     /**
      * constructor for the start screen
      * @param screenManager instance of screenManager being played
@@ -47,7 +47,7 @@ public class LevelsScreen extends ScreenAdapter {
         }
         touchPoint = new Vector3();
         debugRenderer = new ShapeRenderer();
-        settings = Settings.getInstance();
+        god = God.getInstance();
     }
     /**
      * handles user input response
@@ -58,7 +58,7 @@ public class LevelsScreen extends ScreenAdapter {
             int levelNumber = 1;
             for (Rectangle rectangle : rectangles) {
                 if (rectangle.contains(touchPoint.x, touchPoint.y)) {
-                    if (levelNumber <= settings.getLevel()) {
+                    if (levelNumber <= god.getLevel()) {
                         screenManager.setGameScreen(levelNumber);
                         break;
                     }

@@ -1,25 +1,22 @@
 package com.hwooy.shiftgamebeta;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.hwooy.shiftgamebeta.screens.ScreenManager;
-import com.hwooy.shiftgamebeta.utils.Settings;
+import com.hwooy.shiftgamebeta.utils.God;
 
 public class ShiftGameBeta extends Game {
-	Settings settings;
+	God god;
 	ScreenManager screenManager;
 	
 	@Override
 	public void create () {
-		settings = Settings.getInstance();
+		god = God.getInstance();
 		screenManager = new ScreenManager(this);
 	}
 
 	@Override
 	public void dispose() {
-		settings.dispose();
+		god.dispose();
 	}
 
 }
