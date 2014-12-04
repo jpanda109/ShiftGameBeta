@@ -39,7 +39,7 @@ public class GameScreen extends ScreenAdapter {
     ShapeRenderer shapeRenderer;
     int levelNumber;
     Vector3 touchPoint;
-    World world;
+    public World world;
     PlayerGestureDetector playerGestureDetector;
     PlayerInputListener playerInputListener;
     ShiftContactListener shiftContactListener;
@@ -50,6 +50,8 @@ public class GameScreen extends ScreenAdapter {
         state = GameState.RUNNING;
 
         world = God.getInstance().world;
+        shiftContactListener = new ShiftContactListener(this);
+        world.setContactListener(shiftContactListener);
         ObjectFactory objectFactory = new ObjectFactory(levelNumber, world);
         gameObjects = objectFactory.getGameObjects();
         player = objectFactory.getPlayer();

@@ -181,8 +181,7 @@ public class ObjectFactory {
 
                 bodyDef.position.set(col, row);
                 Body body = world.createBody(bodyDef);
-                body.createFixture(fixtureDef);
-                body.setUserData("Portal");
+                body.createFixture(fixtureDef).setUserData("Portal");
                 gameObjects.add(new Portal(body));
                 polygonShape.dispose();
                 return;

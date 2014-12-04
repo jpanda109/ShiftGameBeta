@@ -39,7 +39,7 @@ public class PlayerGestureDetector implements GestureDetector.GestureListener {
         if (velocityY > 0) {
             gameScreen.shiftPlayer();
         } else {
-            gameScreen.flingPlayer(3 * velocityX, - 3 * velocityY);
+            gameScreen.flingPlayer(velocityX, - velocityY);
         }
         return false;
     }

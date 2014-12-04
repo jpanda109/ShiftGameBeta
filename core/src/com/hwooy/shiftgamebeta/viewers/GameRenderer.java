@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.hwooy.shiftgamebeta.object_classes.ShiftObject;
 import com.hwooy.shiftgamebeta.screens.GameScreen;
 import com.hwooy.shiftgamebeta.utils.God;
@@ -23,6 +24,8 @@ public class GameRenderer {
 
     SpriteBatch spriteBatch;
 
+    Box2DDebugRenderer debugRenderer;
+
     public GameRenderer(GameScreen gameScreen) {
         this.gameScreen = gameScreen;
         guiCam = new OrthographicCamera();
@@ -31,12 +34,15 @@ public class GameRenderer {
         spriteBatch = God.getInstance().spriteBatch;
         shapeRenderer = God.getInstance().shapeRenderer;
         pauseBounds = new Rectangle(0, 31, 2, 2);
+        debugRenderer =  new Box2DDebugRenderer();
     }
 
     public void render() {
         GL20 gl = Gdx.gl20;
         gl.glClearColor(1, 1, 1, 1);
         gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        debugRenderer.render(gameScreen.world, guiCam.combined);
 
         spriteBatch.begin();
         for (ShiftObject shiftObject : gameScreen.gameObjects) {
