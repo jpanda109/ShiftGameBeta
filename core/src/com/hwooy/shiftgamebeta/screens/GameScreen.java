@@ -24,16 +24,19 @@ public class GameScreen extends ScreenAdapter {
     public enum GameState {
         RUNNING, PAUSED
     }
+
     ScreenManager screenManager;
-    public ArrayList<ShiftObject> gameObjects;
-    GameState state;
     GameRenderer gameRenderer;
     ShapeRenderer shapeRenderer;
+
+    PlayerGestureDetector playerGestureDetector;
+    ShiftContactListener shiftContactListener;
+
+    GameState state;
     int levelNumber;
     Vector3 touchPoint;
     World world;
-    PlayerGestureDetector playerGestureDetector;
-    ShiftContactListener shiftContactListener;
+    public ArrayList<ShiftObject> gameObjects;
 
     public GameScreen(ScreenManager screenManager, int levelNumber) {
         this.screenManager = screenManager;
@@ -43,9 +46,11 @@ public class GameScreen extends ScreenAdapter {
         world = God.getInstance().world;
         ObjectFactory objectFactory = new ObjectFactory(levelNumber, world);
         gameObjects = objectFactory.getGameObjects();
+
         //playerGestureDetector = new PlayerGestureDetector();
         //shiftContactListener = new ShiftContactListener();
         //world.setContactListener(shiftContactListener);
+
         touchPoint = new Vector3();
         gameRenderer = new GameRenderer(this);
         shapeRenderer = God.getInstance().shapeRenderer;
