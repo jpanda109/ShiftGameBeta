@@ -3,12 +3,14 @@ package com.hwooy.shiftgamebeta.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.hwooy.shiftgamebeta.listeners.PlayerGestureDetector;
 import com.hwooy.shiftgamebeta.listeners.ShiftContactListener;
+import com.hwooy.shiftgamebeta.object_classes.Player;
 import com.hwooy.shiftgamebeta.object_classes.ShiftObject;
 import com.hwooy.shiftgamebeta.utils.ObjectFactory;
 import com.hwooy.shiftgamebeta.utils.God;
@@ -26,6 +28,7 @@ public class GameScreen extends ScreenAdapter {
     }
     ScreenManager screenManager;
     public ArrayList<ShiftObject> gameObjects;
+    Player player;
     GameState state;
     GameRenderer gameRenderer;
     ShapeRenderer shapeRenderer;
@@ -43,12 +46,20 @@ public class GameScreen extends ScreenAdapter {
         world = God.getInstance().world;
         ObjectFactory objectFactory = new ObjectFactory(levelNumber, world);
         gameObjects = objectFactory.getGameObjects();
-        //playerGestureDetector = new PlayerGestureDetector();
+        player = objectFactory.getPlayer();
+        playerGestureDetector = new PlayerGestureDetector(this);
+        Gdx.input.setInputProcessor(new GestureDetector(playerGestureDetector));
         //shiftContactListener = new ShiftContactListener();
         //world.setContactListener(shiftContactListener);
         touchPoint = new Vector3();
         gameRenderer = new GameRenderer(this);
         shapeRenderer = God.getInstance().shapeRenderer;
+    }
+
+    public void flingPlayer(float xVelocity, float yVelocity) {
+        if (player.state == Player.State.IDLE) {
+            player.body.applyForceToCenter(xVelocity, yVelocity, true);
+        }
     }
 
     private void handleInput(float delta) {
@@ -103,6 +114,5 @@ public class GameScreen extends ScreenAdapter {
         }
         super.dispose();
     }
-
 
 }

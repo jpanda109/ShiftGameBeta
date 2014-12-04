@@ -132,6 +132,7 @@ public class ObjectFactory {
         FixtureDef fixtureDef = new FixtureDef();
         PolygonShape polygonShape = new PolygonShape();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
+        bodyDef.fixedRotation = true;
         polygonShape.setAsBox(Player.PLAYER_WIDTH, Player.PLAYER_HEIGHT);
         fixtureDef.shape = polygonShape;
         fixtureDef.density = 1f;
@@ -149,7 +150,8 @@ public class ObjectFactory {
                 bodyDef.position.set(col, row);
                 Body body = world.createBody(bodyDef);
                 body.createFixture(fixtureDef);
-                gameObjects.add(new Player(body));
+                player = new Player(body);
+                gameObjects.add(player);
                 polygonShape.dispose();
                 return;
             }
@@ -164,6 +166,10 @@ public class ObjectFactory {
 
     public World getWorld() {
         return world;
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 
 }
