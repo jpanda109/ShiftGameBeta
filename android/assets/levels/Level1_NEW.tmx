@@ -3,7 +3,7 @@
  <tileset firstgid="1" name="tileset_new" tilewidth="8" tileheight="8">
   <image source="tileset_new.png" width="80" height="80"/>
  </tileset>
- <layer name="Both StartBlock" width="60" height="40">
+ <layer name="Both StartTerrain" width="60" height="40" opacity="0.99">
   <data encoding="base64" compression="zlib">
    eJztwzENAAAMA6DqmX+BU9C/ByQkAAAAAAAAAAAsuRLY870VAP0=
   </data>
@@ -13,24 +13,29 @@
    eJztzrENACAIAEG0xf3nldIJJCR3yfcfAQAAAAAAAABMtardPfFRVqd7AuBxAZ+IABs=
   </data>
  </layer>
- <layer name="Both Block" width="60" height="40">
+ <layer name="Both Terrain" width="60" height="40">
   <data encoding="base64" compression="zlib">
    eJzt1EEJAEAIAEFL2L+qCe4Qxd8MbIWNAAAAAOBaPgKgb/JS/wXY81IAgL8CysQB+Q==
   </data>
  </layer>
- <layer name="Hell Block" width="60" height="40">
+ <layer name="Hell Terrain" width="60" height="40">
   <data encoding="base64" compression="zlib">
    eJzNzqENACAUxNC/BL77T4nF4EjLS05fZ3wEnyXqABl1gIw6QEYdIKMOkFEHyKgDZNQBMuoAGXWAjDrgwGWvP15al/2COkBGHSCjDpBRB8ioA2TUATLqABl1gIw6QEYdIKMOkFEHyKgDZNQBMuoAGXWAjDpARh0gow6QUQfIqANk1AEy6gAZdYCMOkBGHSAj/N4jfgY/
   </data>
  </layer>
- <layer name="Heaven Block" width="60" height="40">
+ <layer name="Heaven Terrain" width="60" height="40">
   <data encoding="base64" compression="zlib">
    eJztwzENAAAIA7CpwL9UFOzgpk2aAAAAAPwyJQAAAADA1QKqrgCF
   </data>
  </layer>
  <layer name="Both Portal" width="60" height="40">
   <data encoding="base64" compression="zlib">
-   eJztzjEKgDAQRNHcKWm1Na223v8e7hmi7CK8B78cmNYAANb1aFSfSLRFe/WJREc0X+zvr44kOaOr+gQAAAAAAAC/8gAriQJw
+   eJztzrENwCAMAEF2Ii20SQv7D4NnoLAV6U76/lsDALjXo6d6ItGIZvVEojf6qicSrWhXTwAAAAAAAPArB4rXAhU=
+  </data>
+ </layer>
+ <layer name="Both Star" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztzkERAAAMAiB7rn+PpfD8QAISAADouHUAAAAAAAAAyh7GIwBc
   </data>
  </layer>
 </map>
