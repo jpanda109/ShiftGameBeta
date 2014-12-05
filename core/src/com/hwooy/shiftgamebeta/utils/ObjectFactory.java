@@ -42,7 +42,7 @@ public class ObjectFactory {
     private void createWorld() {
         for (MapLayer mapLayer : layers) {
             TiledMapTileLayer layer = (TiledMapTileLayer) mapLayer;
-            if (layer.getName().contains("Block")) {
+            if (layer.getName().contains("Terrain")) {
                 addTerrainFixtures(layer);
             } else if (layer.getName().contains("Star")) {
                 addStarFixtures(layer);
