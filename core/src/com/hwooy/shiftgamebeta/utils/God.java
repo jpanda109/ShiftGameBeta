@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 
 /**
@@ -31,7 +32,7 @@ public final class God {
     public static final String PLAY_PATH = "buttons/button_play.png";
     public static final String SELECT_PATH = "buttons/button_select_level.png";
 
-    public static final int MAX_LEVEL = 1;
+    public static final int MAX_LEVEL = 2;
 
     static final God GOD = new God();
     public final AssetManager assetManager;
@@ -39,6 +40,7 @@ public final class God {
     public final BitmapFont font;
     public final Preferences preferences;
     public final ShapeRenderer shapeRenderer;
+    public final Box2DDebugRenderer debugRenderer;
     public final World world;
 
     private God() {
@@ -48,6 +50,7 @@ public final class God {
         font = new BitmapFont();
         preferences = Gdx.app.getPreferences(PREFERENCE_NAME);
         shapeRenderer = new ShapeRenderer();
+        debugRenderer = new Box2DDebugRenderer();
         world = new World(new Vector2(0, -10f), false);
         loadAllTextures();
     }
@@ -86,6 +89,7 @@ public final class God {
         spriteBatch.dispose();
         font.dispose();
         shapeRenderer.dispose();
+        debugRenderer.dispose();
         world.dispose();
     }
 

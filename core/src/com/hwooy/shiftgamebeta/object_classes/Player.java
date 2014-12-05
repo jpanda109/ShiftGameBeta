@@ -23,12 +23,12 @@ public class Player extends ShiftObject {
     }
 
     @Override
-    public void render(SpriteBatch spriteBatch) {
+    public void update(float delta) {
         if (Math.abs(body.getLinearVelocity().x) <= .0001f && Math.abs(body.getLinearVelocity().y) <= .0001f) {
             state = State.IDLE;
         } else {
             state = State.MOVING;
         }
-        super.render(spriteBatch);
     }
+
 }

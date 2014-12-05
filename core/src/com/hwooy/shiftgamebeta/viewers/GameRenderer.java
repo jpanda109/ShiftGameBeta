@@ -33,8 +33,8 @@ public class GameRenderer {
         //spriteBatch = Settings.getInstance().spriteBatch;
         spriteBatch = God.getInstance().spriteBatch;
         shapeRenderer = God.getInstance().shapeRenderer;
-        pauseBounds = new Rectangle(0, 59, 1, 1);
-        debugRenderer =  new Box2DDebugRenderer();
+        pauseBounds = new Rectangle(0, 39, 1, 1);
+        debugRenderer =  God.getInstance().debugRenderer;
     }
 
     public void render() {

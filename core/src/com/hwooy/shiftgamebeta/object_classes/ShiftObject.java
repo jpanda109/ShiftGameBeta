@@ -30,6 +30,10 @@ public class ShiftObject {
                         //height * 10);
     }
 
+    public void update(float delta) {
+
+    }
+
     public void dispose() {
         texture.dispose();
     }

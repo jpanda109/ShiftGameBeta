@@ -98,6 +98,10 @@ public class GameScreen extends ScreenAdapter {
 
     private void updateRunning(float delta) {
         handleInput(delta);
+        // update object states
+        for (ShiftObject object : gameObjects) {
+            object.update(delta);
+        }
         world.step(delta, 6, 2);
     }
 

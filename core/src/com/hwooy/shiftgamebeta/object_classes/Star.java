@@ -8,8 +8,8 @@ import com.hwooy.shiftgamebeta.utils.God;
  */
 public class Star extends ShiftObject {
 
-    public static final float STAR_WIDTH = 1f;
-    public static final float STAR_HEIGHT = 1f;
+    public static final float STAR_WIDTH = .5f;
+    public static final float STAR_HEIGHT = .5f;
 
     public Star(Body body) {
         super(body, God.STAR_PATH, STAR_WIDTH, STAR_HEIGHT);
