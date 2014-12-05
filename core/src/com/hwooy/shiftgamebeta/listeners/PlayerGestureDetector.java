@@ -1,13 +1,17 @@
 package com.hwooy.shiftgamebeta.listeners;
 
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 import com.hwooy.shiftgamebeta.screens.GameScreen;
 
+
 /**
  * Created by jason on 12/3/14.
  */
-public class PlayerGestureDetector implements GestureDetector.GestureListener{
+public class PlayerGestureDetector implements GestureDetector.GestureListener {
 
     GameScreen gameScreen;
 
@@ -32,8 +36,11 @@ public class PlayerGestureDetector implements GestureDetector.GestureListener{
 
     @Override
     public boolean fling(float velocityX, float velocityY, int button) {
-        System.out.println("fling");
-        gameScreen.flingPlayer(velocityX, -velocityY);
+        if (velocityY > 0) {
+            gameScreen.shiftPlayer();
+        } else {
+            gameScreen.flingPlayer(velocityX, - velocityY);
+        }
         return false;
     }
 
@@ -56,4 +63,6 @@ public class PlayerGestureDetector implements GestureDetector.GestureListener{
     public boolean pinch(Vector2 initialPointer1, Vector2 initialPointer2, Vector2 pointer1, Vector2 pointer2) {
         return false;
     }
+
+
 }

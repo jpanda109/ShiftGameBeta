@@ -31,15 +31,15 @@ public class ShiftContactListener implements ContactListener {
         Object a_data = a.getUserData();
         Object b_data = b.getUserData();
 
-        if(a_data != null)
+        if(b_data != null)
         {
-            if(b_data.toString() == "Portal") portalContact();
+            if(b_data.toString().contains("Portal")) portalContact();
             //if(b_data.toString().contains("Lava")) gameScreen.restartLevel();
             if(b_data.toString().contains("Crumbling")) deadBodies.add(b.getBody());
         }
-        if(b_data != null)
+        if(a_data != null)
         {
-            if(a_data.toString() == "Portal") portalContact();
+            if(a_data.toString().contains("Portal")) portalContact();
             //if(a_data.toString().contains("Lava")) gameScreen.restartLevel();
             if(a_data.toString().contains("Crumbling")) deadBodies.add(a.getBody());
         }
@@ -59,6 +59,7 @@ public class ShiftContactListener implements ContactListener {
 
     private void portalContact()
     {
+        System.out.println("debugportacontact");
        //gameScreen.nextLevel();
     }
 }

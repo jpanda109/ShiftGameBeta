@@ -21,7 +21,7 @@ public class ScreenManager {
     /**BEGINNING OF FUNCTIONS--------------------------------------------------------**/
 
     public enum Screens {
-        START, GAME, HELP, LEVELS
+        START, GAME, HELP, LEVELS, WIN
     }
 
     public ScreenManager(ShiftGameBeta game) {
@@ -50,6 +50,8 @@ public class ScreenManager {
             screens.push(new HelpScreen(this));
         } */ else if (screen == Screens.LEVELS) {
             screens.push(new LevelsScreen(this));
+        } else if (screen == Screens.WIN) {
+            screens.push(new WinScreen(this));
         }
         game.setScreen(screens.peek());
     }
