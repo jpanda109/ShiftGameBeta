@@ -15,6 +15,7 @@ import com.badlogic.gdx.physics.box2d.World;
 
 /**
  * Created by jason on 12/3/14.
+ * Singleton class to manage resources for disposable objects
  */
 public final class God {
 
