@@ -30,7 +30,7 @@ public final class God {
     public static final String PLAY_PATH = "buttons/button_play.png";
     public static final String SELECT_PATH = "buttons/button_select_level.png";
 
-    public static final int MAX_LEVEL = 3;
+    public static final int MAX_LEVEL = 1;
 
     static final God GOD = new God();
     public final AssetManager assetManager;
@@ -71,9 +71,9 @@ public final class God {
     }
 
     public TiledMap getTiledMap(int levelNumber) {
-        assetManager.load("levels/Level" + levelNumber + ".tmx", TiledMap.class);
+        assetManager.load("levels/Level" + levelNumber + "_NEW.tmx", TiledMap.class);
         assetManager.finishLoading();
-        return assetManager.get("levels/Level" + levelNumber + ".tmx", TiledMap.class);
+        return assetManager.get("levels/Level" + levelNumber + "_NEW.tmx", TiledMap.class);
     }
 
     public int getLevel() {

@@ -29,11 +29,11 @@ public class GameRenderer {
     public GameRenderer(GameScreen gameScreen) {
         this.gameScreen = gameScreen;
         guiCam = new OrthographicCamera();
-        guiCam.setToOrtho(false, 48, 32);
+        guiCam.setToOrtho(false, 60, 40);
         //spriteBatch = Settings.getInstance().spriteBatch;
         spriteBatch = God.getInstance().spriteBatch;
         shapeRenderer = God.getInstance().shapeRenderer;
-        pauseBounds = new Rectangle(0, 31, 2, 2);
+        pauseBounds = new Rectangle(0, 59, 1, 1);
         debugRenderer =  new Box2DDebugRenderer();
     }
 
