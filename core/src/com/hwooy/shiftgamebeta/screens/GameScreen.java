@@ -25,11 +25,12 @@ import java.util.ArrayList;
 
 /**
  * Created by jason on 12/3/14.
+ * Game Screen(playing the actual game, rendering is in GameRenderer
  */
 public class GameScreen extends ScreenAdapter {
 
     public enum GameState {
-        RUNNING, PAUSED
+        RUNNING, PAUSED, RESTART, NEXT_LEVEL
     }
     ScreenManager screenManager;
     public ArrayList<ShiftObject> gameObjects;
@@ -49,6 +50,7 @@ public class GameScreen extends ScreenAdapter {
         this.levelNumber = levelNumber;
         state = GameState.RUNNING;
 
+        // initialize world, fill it with objects and set the contact listener
         world = God.getInstance().world;
         shiftContactListener = new ShiftContactListener(this);
         world.setContactListener(shiftContactListener);
@@ -56,14 +58,14 @@ public class GameScreen extends ScreenAdapter {
         gameObjects = objectFactory.getGameObjects();
         player = objectFactory.getPlayer();
 
+        // set custom input processors
         playerGestureDetector = new PlayerGestureDetector(this);
         playerInputListener = new PlayerInputListener(this);
         InputMultiplexer mux = new InputMultiplexer();
         mux.addProcessor(new GestureDetector(playerGestureDetector));
         mux.addProcessor(playerInputListener);
         Gdx.input.setInputProcessor(mux);
-        //shiftContactListener = new ShiftContactListener();
-        //world.setContactListener(shiftContactListener);
+
         touchPoint = new Vector3();
         gameRenderer = new GameRenderer(this);
         shapeRenderer = God.getInstance().shapeRenderer;
@@ -75,10 +77,11 @@ public class GameScreen extends ScreenAdapter {
         }
     }
 
+    // shift player collision type
     public void shiftPlayer() {
         Fixture playerFixture = player.body.getFixtureList().get(0);
         Filter filter = playerFixture.getFilterData();
-        filter.maskBits = (short) ((filter.maskBits) ^ (ObjectFactory.BIT_TYPE_BOTH));
+        filter.maskBits = (short) (filter.maskBits ^ ObjectFactory.BIT_TYPE_BOTH);
         playerFixture.setFilterData(filter);
     }
 
@@ -90,6 +93,7 @@ public class GameScreen extends ScreenAdapter {
                 nextLevel();
             }
         }
+
     }
 
     private void updateRunning(float delta) {
@@ -108,6 +112,13 @@ public class GameScreen extends ScreenAdapter {
                 break;
             case PAUSED:
                 updatePaused(delta);
+                break;
+            case RESTART:
+                restartLevel();
+                break;
+            case NEXT_LEVEL:
+                nextLevel();
+                break;
         }
     }
 
@@ -121,11 +132,15 @@ public class GameScreen extends ScreenAdapter {
         draw();
     }
 
-    public void restartLevel() {
+    public void setGameState(GameState state) {
+        this.state = state;
+    }
+
+    private void restartLevel() {
         screenManager.setGameScreen(levelNumber);
     }
 
-    public void nextLevel() {
+    private void nextLevel() {
         if (levelNumber < God.MAX_LEVEL) {
             screenManager.setGameScreen(++levelNumber);
         } else {

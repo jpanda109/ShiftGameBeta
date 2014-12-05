@@ -59,7 +59,6 @@ public class ShiftContactListener implements ContactListener {
 
     private void portalContact()
     {
-        System.out.println("debugportacontact");
-       //gameScreen.nextLevel();
+        gameScreen.setGameState(GameScreen.GameState.NEXT_LEVEL);
     }
 }
