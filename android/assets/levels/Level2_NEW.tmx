@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="60" height="40" tilewidth="8" tileheight="8">
+ <tileset firstgid="1" name="tileset_new" tilewidth="8" tileheight="8">
+  <image source="tileset_new.png" width="80" height="80"/>
+ </tileset>
+ <layer name="Both StartTerrain" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztw0EJAAAIBLDLY/+AJrivIGywBAAAAAAAAAAA4J8pLy2dmAD9
+  </data>
+ </layer>
+ <layer name="Hell Player" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztzsENACAIADH0q/vPK1NIAm1y/4sAAAAAAAAAAIDeVrarJz462a2eGOIBTRAAGw==
+  </data>
+ </layer>
+ <layer name="Both Lava" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztz7EJADAIRUE3cf8tM0EawQT0Duws/osAoFv+HvCY3tn0zratFwAAAACAffJy1T+AA+X1Ai8=
+  </data>
+ </layer>
+ <layer name="Heaven Terrain" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt1qENADAIAEGmQLP/lAg0CXUVd8nv8BEAACOXAHhXSwD8zRMDAMCdfwaA0WN6Ak0=
+  </data>
+ </layer>
+ <layer name="Hell Terrain" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztw0EJAAAIBLCLYv+UJrivIGywBAAAAAAA4K8pAQAALiyNhwDB
+  </data>
+ </layer>
+ <layer name="Both Crumbling" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt1jEKADAIA0C/0/9/sLtrpUG4g2xmDVYBAAmnZfr+tQcAAJv5gwGy7DBAlh0GgL8uVd4D2Q==
+  </data>
+ </layer>
+ <layer name="Both Star" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztzgEJAAAMA6D1fP8ejzEYmsAEAAAAAAAAYN+1AwDApAchOQBc
+  </data>
+ </layer>
+ <layer name="Both Terrain" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztwzENAAAIA7CZwL9VFOzhpU2aAADcTQkAAAAAAADwwQKA/gB/
+  </data>
+ </layer>
+ <layer name="Both Portal" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztzrERwCAMADF2Ii20SQv7D4OXwE4h3X3/rQH8R4+e6olEI5rVE4ne6KueSLSiXT0BAAAAAAAAwFUHRa8CFQ==
+  </data>
+ </layer>
+</map>
