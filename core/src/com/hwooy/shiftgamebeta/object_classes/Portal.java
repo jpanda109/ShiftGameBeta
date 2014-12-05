@@ -8,8 +8,8 @@ import com.hwooy.shiftgamebeta.utils.God;
  */
 public class Portal extends ShiftObject {
 
-    public static final float PORTAL_WIDTH = 3f;
-    public static final float PORTAL_HEIGHT = 4f;
+    public static final float PORTAL_WIDTH = 3f / 2;
+    public static final float PORTAL_HEIGHT = 4f / 2;
 
     public Portal(Body body) {
         super(body, God.PORTAL_PATH, PORTAL_WIDTH, PORTAL_HEIGHT);

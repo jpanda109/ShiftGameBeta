@@ -9,8 +9,8 @@ import com.hwooy.shiftgamebeta.utils.God;
  */
 public class Player extends ShiftObject {
 
-    public static final float PLAYER_WIDTH = 1f;
-    public static final float PLAYER_HEIGHT = 1f;
+    public static final float PLAYER_WIDTH = 2f / 2;
+    public static final float PLAYER_HEIGHT = 2f / 2;
 
     public enum State {
         IDLE, MOVING

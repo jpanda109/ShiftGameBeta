@@ -8,8 +8,8 @@ import com.hwooy.shiftgamebeta.object_classes.ShiftObject;
  */
 public class Block extends ShiftObject {
 
-    public static final float BLOCK_WIDTH = 1f;
-    public static final float BLOCK_HEIGHT = 1f;
+    public static final float BLOCK_WIDTH = 1f / 2;
+    public static final float BLOCK_HEIGHT = 1f / 2;
 
     // collision type of block
     public enum BlockType {
