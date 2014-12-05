@@ -14,18 +14,12 @@ import com.hwooy.shiftgamebeta.utils.God;
 
 /**
  * Created by jason on 12/4/14.
+ * TODO CURRENTLY A DEBUG SCREEN, PLS CHANGE
  */
 public class WinScreen extends ScreenAdapter {
 
     public static final int CAM_WIDTH = 480; //Gdx.graphics.getWidth();
     public static final int CAM_HEIGHT = 320; //Gdx.graphics.getHeight();
-
-    public static final float PLAY_BOUNDS_WIDTH_RATIO = .5f;
-    public static final float PLAY_BOUNDS_HEIGHT_RATIO = .2f;
-    public static final float HELP_BOUNDS_WIDTH_RATIO = .5f;
-    public static final float HELP_BOUNDS_HEIGHT_RATIO = .2f;
-    public static final float SETTINGS_BOUNDS_WIDTH_RATIO = .2f;
-    public static final float SETTINGS_BOUNDS_HEIGHT_RATIO = .2f;
 
     ScreenManager screenManager;
     OrthographicCamera cam;
@@ -84,33 +78,13 @@ public class WinScreen extends ScreenAdapter {
         gl.glClearColor(1, 1, 1, 1);
         gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         cam.update();
-/*
-        shapeRenderer.setProjectionMatrix(cam.combined);
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-
-        shapeRenderer.setColor(new Color(Color.RED));
-        shapeRenderer.rect(playBounds.getX(), playBounds.getY(), playBounds.getWidth(), playBounds.getHeight());
-
-        shapeRenderer.setColor(new Color(Color.BLUE));
-        shapeRenderer.rect(settingsBounds.getX(), settingsBounds.getY(), settingsBounds.getWidth(), settingsBounds.getHeight());
-
-        shapeRenderer.setColor(new Color(Color.GREEN));
-        shapeRenderer.rect(helpBounds.getX(), helpBounds.getY(), helpBounds.getWidth(), helpBounds.getHeight());
-
-        shapeRenderer.end();
-*/
 
         God g = God.getInstance();
         spriteBatch.begin();
-        spriteBatch.draw(g.getTexture(g.PLAY_PATH), 215, 280);
-        spriteBatch.draw(g.getTexture(g.HELP_PATH), 215, 250);
-        spriteBatch.draw(g.getTexture(g.SELECT_PATH), 215, 220);
-/*
-        spriteBatch.begin();
-        font.draw(spriteBatch, "Play Game", 200, 250);
-        font.draw(spriteBatch, "Settings", 5, 40);
-        font.draw(spriteBatch, "Help", 200, 180);
-*/
+        spriteBatch.draw(g.getTexture(God.PLAY_PATH), 215, 280);
+        spriteBatch.draw(g.getTexture(God.HELP_PATH), 215, 250);
+        spriteBatch.draw(g.getTexture(God.SELECT_PATH), 215, 220);
+
         spriteBatch.end();
     }
 

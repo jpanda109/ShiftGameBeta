@@ -17,9 +17,7 @@ public class PlayerInputListener extends InputAdapter {
 
     @Override
     public boolean keyDown(int keycode) {
-        System.out.println(keycode);
         if (keycode == Input.Keys.SPACE) {
-            System.out.println("hi");
             gameScreen.shiftPlayer();
         }
         return false;

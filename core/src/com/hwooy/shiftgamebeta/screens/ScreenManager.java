@@ -43,7 +43,6 @@ public class ScreenManager {
     private void pushScreen(Screens screen, int level) {
         if (screen == Screens.START) {
             screens.push(new StartScreen(this));
-            System.out.print(screens.size());
         }  else if (screen == Screens.GAME) {
             screens.push(new GameScreen(this, level));
         } /* else if (screen == Screens.HELP) {
