@@ -20,11 +20,15 @@ public class GameRenderer {
     GameScreen gameScreen;
     public OrthographicCamera guiCam;
     ShapeRenderer shapeRenderer;
-    public Rectangle pauseBounds;
 
     SpriteBatch spriteBatch;
 
     Box2DDebugRenderer debugRenderer;
+
+    public Rectangle pauseBounds;
+    public Rectangle resumeBounds;
+    public Rectangle restartBounds;
+    public Rectangle quitBounds;
 
     public GameRenderer(GameScreen gameScreen) {
         this.gameScreen = gameScreen;
@@ -34,8 +38,30 @@ public class GameRenderer {
         //spriteBatch = Settings.getInstance().spriteBatch;
         spriteBatch = God.getInstance().spriteBatch;
         shapeRenderer = God.getInstance().shapeRenderer;
-        pauseBounds = new Rectangle(0, 38, 2, 2);
         debugRenderer =  God.getInstance().debugRenderer;
+
+        this.pauseBounds = gameScreen.pauseBounds;
+        resumeBounds = gameScreen.resumeBounds;
+        restartBounds = gameScreen.restartBounds;
+        quitBounds = gameScreen.quitBounds;
+    }
+
+    private void drawRunning() {
+        shapeRenderer.setProjectionMatrix(guiCam.combined);
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        shapeRenderer.setColor(Color.BLACK);
+        shapeRenderer.rect(pauseBounds.x, pauseBounds.y, pauseBounds.width, pauseBounds.height);
+        shapeRenderer.end();
+    }
+
+    private void drawPaused() {
+        shapeRenderer.setProjectionMatrix(guiCam.combined);
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        shapeRenderer.setColor(Color.BLACK);
+        shapeRenderer.rect(resumeBounds.x, resumeBounds.y, resumeBounds.width, resumeBounds.height);
+        shapeRenderer.rect(restartBounds.x, restartBounds.y, restartBounds.width, restartBounds.height);
+        shapeRenderer.rect(quitBounds.x, quitBounds.y, quitBounds.width, quitBounds.height);
+        shapeRenderer.end();
     }
 
     public void render() {
@@ -50,11 +76,16 @@ public class GameRenderer {
             shiftObject.render(spriteBatch);
         }
         spriteBatch.end();
-        shapeRenderer.setProjectionMatrix(guiCam.combined);
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.setColor(Color.BLACK);
-        shapeRenderer.rect(pauseBounds.x, pauseBounds.y, pauseBounds.width, pauseBounds.height);
-        shapeRenderer.end();
+
+        switch (gameScreen.state) {
+            case RUNNING:
+                drawRunning();
+                break;
+            case PAUSED:
+                drawPaused();
+                break;
+        }
+
         guiCam.update();
     }
 }

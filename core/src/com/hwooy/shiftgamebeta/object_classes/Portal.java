@@ -16,6 +16,4 @@ public class Portal extends ShiftObject {
         super(body, God.PORTAL_PATH, PORTAL_WIDTH, PORTAL_HEIGHT);
     }
 
-    @Override
-    public void render(SpriteBatch spriteBatch) {}
 }

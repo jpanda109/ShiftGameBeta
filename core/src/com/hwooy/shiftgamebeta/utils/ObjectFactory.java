@@ -188,7 +188,7 @@ public class ObjectFactory {
                     continue;
                 }
 
-                bodyDef.position.set(col, row);
+                bodyDef.position.set(col + Portal.PORTAL_WIDTH - .5f, row + Portal.PORTAL_HEIGHT - .5f);
                 System.out.println(bodyDef.position);
                 Body body = world.createBody(bodyDef);
                 body.createFixture(fixtureDef).setUserData("Portal");

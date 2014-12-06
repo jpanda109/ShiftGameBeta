@@ -6,6 +6,7 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.input.GestureDetector;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Filter;
@@ -33,20 +34,24 @@ import java.util.ListIterator;
 public class GameScreen extends ScreenAdapter {
 
     public enum GameState {
-        RUNNING, PAUSED, RESTART, NEXT_LEVEL
+        RUNNING, PAUSED, RESTART, NEXT_LEVEL, QUIT
     }
     ScreenManager screenManager;
     public ArrayList<ShiftObject> gameObjects;
     Player player;
-    GameState state;
+    public GameState state;
     GameRenderer gameRenderer;
-    ShapeRenderer shapeRenderer;
     int levelNumber;
     Vector3 touchPoint;
     public World world;
     PlayerGestureDetector playerGestureDetector;
     PlayerInputListener playerInputListener;
     ShiftContactListener shiftContactListener;
+
+    public Rectangle pauseBounds;
+    public Rectangle resumeBounds;
+    public Rectangle restartBounds;
+    public Rectangle quitBounds;
 
     public GameScreen(ScreenManager screenManager, int levelNumber) {
         this.screenManager = screenManager;
@@ -70,8 +75,13 @@ public class GameScreen extends ScreenAdapter {
         Gdx.input.setInputProcessor(mux);
 
         touchPoint = new Vector3();
+
+        pauseBounds = new Rectangle(0, 38, 2, 2);
+        resumeBounds = new Rectangle(10, 20, 3, 3);
+        restartBounds = new Rectangle(20, 20, 3, 3);
+        quitBounds = new Rectangle(30, 20, 3, 3);
+
         gameRenderer = new GameRenderer(this);
-        shapeRenderer = God.getInstance().shapeRenderer;
     }
 
     public void flingPlayer(float xVelocity, float yVelocity) {
@@ -104,13 +114,19 @@ public class GameScreen extends ScreenAdapter {
 
             switch (state) {
                 case RUNNING:
-                    if (gameRenderer.pauseBounds.contains(touchPoint.x, touchPoint.y)) {
+                    if (pauseBounds.contains(touchPoint.x, touchPoint.y)) {
                         setGameState(GameState.PAUSED);
                     }
                     break;
                 case PAUSED:
-                    if (gameRenderer.pauseBounds.contains(touchPoint.x, touchPoint.y)) {
+                    if (resumeBounds.contains(touchPoint.x, touchPoint.y)) {
                         setGameState(GameState.RUNNING);
+                    }
+                    else if (restartBounds.contains(touchPoint.x, touchPoint.y)) {
+                        setGameState(GameState.RESTART);
+                    }
+                    else if (quitBounds.contains(touchPoint.x, touchPoint.y)) {
+                        setGameState(GameState.QUIT);
                     }
             }
         }
@@ -170,6 +186,9 @@ public class GameScreen extends ScreenAdapter {
             case NEXT_LEVEL:
                 nextLevel();
                 break;
+            case QUIT:
+                quitGame();
+                break;
         }
     }
 
@@ -197,6 +216,10 @@ public class GameScreen extends ScreenAdapter {
         } else {
             screenManager.setScreen(ScreenManager.Screens.WIN);
         }
+    }
+
+    private void quitGame() {
+        screenManager.setScreen(ScreenManager.Screens.START);
     }
 
     @Override
