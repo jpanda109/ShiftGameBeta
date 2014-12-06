@@ -53,8 +53,8 @@ public class ObjectFactory {
             } else if (layer.getName().contains("Portal")) {
                 addPortalFixture(layer);
             } else if (layer.getName().contains("Lava")) {
+                addLavaFixture(layer);
             } else if (layer.getName().contains("Crumbling")) {
-                System.out.println("hi");
                 addCrumblingFixtures(layer);
 
             }
@@ -189,6 +189,34 @@ public class ObjectFactory {
                 gameObjects.add(new Portal(body));
                 polygonShape.dispose();
                 return;
+            }
+        }
+
+        polygonShape.dispose();
+    }
+
+    private void addLavaFixture(TiledMapTileLayer layer) {
+        BodyDef bodyDef = new BodyDef();
+        FixtureDef fixtureDef = new FixtureDef();
+        PolygonShape polygonShape = new PolygonShape();
+        bodyDef.type = BodyDef.BodyType.StaticBody;
+        bodyDef.fixedRotation = true;
+        polygonShape.setAsBox(Block.BLOCK_WIDTH, Block.BLOCK_HEIGHT);
+        fixtureDef.shape = polygonShape;
+        fixtureDef.filter.maskBits = BIT_PLAYER;
+        fixtureDef.filter.categoryBits = BIT_TYPE_BOTH;
+
+        for (int row = 0; row < layer.getHeight(); ++row) {
+            for (int col = 0; col < layer.getWidth(); ++col) {
+                TiledMapTileLayer.Cell cell = layer.getCell(col, row);
+                if (cell == null || cell.getTile() == null) {
+                    continue;
+                }
+
+                bodyDef.position.set(col, row);
+                Body body = world.createBody(bodyDef);
+                body.createFixture(fixtureDef).setUserData("Lava");
+                gameObjects.add(new LavaBlock(body, Block.BlockType.BOTH));
             }
         }
 

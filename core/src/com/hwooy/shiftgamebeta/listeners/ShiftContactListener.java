@@ -34,13 +34,13 @@ public class ShiftContactListener implements ContactListener {
         if(b_data != null)
         {
             if(b_data.toString().contains("Portal")) portalContact();
-            //if(b_data.toString().contains("Lava")) gameScreen.restartLevel();
+            if(b_data.toString().contains("Lava")) gameScreen.setGameState(GameScreen.GameState.RESTART);
             if(b_data.toString().contains("Crumbling")) deadBodies.add(b.getBody());
         }
         if(a_data != null)
         {
             if(a_data.toString().contains("Portal")) portalContact();
-            //if(a_data.toString().contains("Lava")) gameScreen.restartLevel();
+            if(a_data.toString().contains("Lava")) gameScreen.setGameState(GameScreen.GameState.RESTART);
             if(a_data.toString().contains("Crumbling")) deadBodies.add(a.getBody());
         }
     }

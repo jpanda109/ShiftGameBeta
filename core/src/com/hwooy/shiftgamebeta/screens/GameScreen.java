@@ -108,6 +108,9 @@ public class GameScreen extends ScreenAdapter {
         // update object states
         for (ShiftObject object : gameObjects) {
             object.update(delta);
+            if (object.body == null) {
+                gameObjects.remove(object);
+            }
         }
         world.step(delta, 6, 2);
     }
