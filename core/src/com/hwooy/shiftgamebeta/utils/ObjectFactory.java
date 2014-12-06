@@ -169,7 +169,7 @@ public class ObjectFactory {
         PolygonShape polygonShape = new PolygonShape();
         bodyDef.type = BodyDef.BodyType.StaticBody;
         bodyDef.fixedRotation = true;
-        polygonShape.setAsBox(Player.PLAYER_WIDTH, Player.PLAYER_HEIGHT);
+        polygonShape.setAsBox(Portal.PORTAL_WIDTH, Portal.PORTAL_HEIGHT);
         fixtureDef.shape = polygonShape;
         fixtureDef.isSensor = true;
         fixtureDef.filter.maskBits = BIT_PLAYER;
@@ -183,6 +183,7 @@ public class ObjectFactory {
                 }
 
                 bodyDef.position.set(col, row);
+                System.out.println(bodyDef.position);
                 Body body = world.createBody(bodyDef);
                 body.createFixture(fixtureDef).setUserData("Portal");
                 gameObjects.add(new Portal(body));
