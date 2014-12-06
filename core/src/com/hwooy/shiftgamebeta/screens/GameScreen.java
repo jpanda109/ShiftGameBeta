@@ -101,15 +101,23 @@ public class GameScreen extends ScreenAdapter {
 
         if (Gdx.input.justTouched()) {
             gameRenderer.guiCam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
-            if (gameRenderer.pauseBounds.contains(touchPoint.x, touchPoint.y)) {
-                nextLevel();
+
+            switch (state) {
+                case RUNNING:
+                    if (gameRenderer.pauseBounds.contains(touchPoint.x, touchPoint.y)) {
+                        setGameState(GameState.PAUSED);
+                    }
+                    break;
+                case PAUSED:
+                    if (gameRenderer.pauseBounds.contains(touchPoint.x, touchPoint.y)) {
+                        setGameState(GameState.RUNNING);
+                    }
             }
         }
 
     }
 
     private void updateRunning(float delta) {
-        handleInput(delta);
         world.step(delta, 6, 2);
         updateGameObjects(delta);
         checkPlayerBounds();
@@ -148,6 +156,7 @@ public class GameScreen extends ScreenAdapter {
     }
 
     public void update(float delta) {
+        handleInput(delta);
         switch (state) {
             case RUNNING:
                 updateRunning(delta);

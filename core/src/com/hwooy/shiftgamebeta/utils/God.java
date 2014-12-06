@@ -34,6 +34,8 @@ public final class God {
     public static final String PLAY_PATH = "buttons/button_play.png";
     public static final String SELECT_PATH = "buttons/button_select_level.png";
 
+    public static final boolean DEBUG = true;
+
     public static final int MAX_LEVEL = 5;
 
     static final God GOD = new God();
