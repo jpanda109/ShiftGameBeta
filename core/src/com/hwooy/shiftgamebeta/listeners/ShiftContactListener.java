@@ -11,13 +11,15 @@ import java.util.ArrayList;
 public class ShiftContactListener implements ContactListener {
 
     GameScreen gameScreen;
-    public ArrayList<Body> deadBodies;
+    //public ArrayList<Body> deadBodies;
+    public ArrayList<Body> crumblingBodies;
 
     public ShiftContactListener(GameScreen gameScreen)
     {
         super();
         this.gameScreen = gameScreen;
-        deadBodies = new ArrayList<Body>();
+        crumblingBodies = new ArrayList<Body>();
+        //deadBodies = new ArrayList<Body>();
     }
 
     @Override
@@ -35,13 +37,13 @@ public class ShiftContactListener implements ContactListener {
         {
             if(b_data.toString().contains("Portal")) portalContact();
             if(b_data.toString().contains("Lava")) gameScreen.setGameState(GameScreen.GameState.RESTART);
-            if(b_data.toString().contains("Crumbling")) deadBodies.add(b.getBody());
+            if(b_data.toString().contains("Crumbling")) crumblingBodies.add(b.getBody());
         }
         if(a_data != null)
         {
             if(a_data.toString().contains("Portal")) portalContact();
             if(a_data.toString().contains("Lava")) gameScreen.setGameState(GameScreen.GameState.RESTART);
-            if(a_data.toString().contains("Crumbling")) deadBodies.add(a.getBody());
+            if(a_data.toString().contains("Crumbling")) crumblingBodies.add(a.getBody());
         }
     }
 

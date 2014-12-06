@@ -12,6 +12,7 @@ import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
+import com.hwooy.shiftgamebeta.block_classes.CrumblingBlock;
 import com.hwooy.shiftgamebeta.listeners.PlayerGestureDetector;
 import com.hwooy.shiftgamebeta.listeners.PlayerInputListener;
 import com.hwooy.shiftgamebeta.listeners.ShiftContactListener;
@@ -22,6 +23,8 @@ import com.hwooy.shiftgamebeta.utils.God;
 import com.hwooy.shiftgamebeta.viewers.GameRenderer;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.ListIterator;
 
 /**
  * Created by jason on 12/3/14.
@@ -105,14 +108,41 @@ public class GameScreen extends ScreenAdapter {
 
     private void updateRunning(float delta) {
         handleInput(delta);
+        world.step(delta, 6, 2);
         // update object states
-        for (ShiftObject object : gameObjects) {
+        Iterator<ShiftObject> iterator = gameObjects.iterator();
+        while (iterator.hasNext()) {
+            ShiftObject object = iterator.next();
+            for (Body body : shiftContactListener.crumblingBodies) {
+                if (object.body == body) {
+                    ((CrumblingBlock) object).state = CrumblingBlock.State.CRUMBLING;
+                }
+            }
             object.update(delta);
-            if (object.body == null) {
-                gameObjects.remove(object);
+            if (object.getClass() == CrumblingBlock.class) {
+                if (((CrumblingBlock) object).state == CrumblingBlock.State.DEAD) {
+                    world.destroyBody(object.body);
+                    iterator.remove();
+                }
             }
         }
-        world.step(delta, 6, 2);
+        /*
+        for (ShiftObject object : gameObjects) {
+            for (Body body : shiftContactListener.crumblingBodies) {
+                if (object.body == body) {
+                    ((CrumblingBlock) object).state = CrumblingBlock.State.CRUMBLING;
+                }
+            }
+            object.update(delta);
+            if (object.getClass() == CrumblingBlock.class) {
+                if (((CrumblingBlock) object).state == CrumblingBlock.State.DEAD) {
+                    world.destroyBody(object.body);
+                    gameObjects.remove(object);
+                }
+            }
+        }
+        */
+        shiftContactListener.crumblingBodies.clear();
     }
 
     private void updatePaused(float delta) {
