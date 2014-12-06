@@ -44,33 +44,39 @@ public class ObjectFactory {
     private void createWorld() {
         for (MapLayer mapLayer : layers) {
             TiledMapTileLayer layer = (TiledMapTileLayer) mapLayer;
-            if (layer.getName().contains("Terrain")) {
-                addTerrainFixtures(layer);
+            if (layer.getName().contains("Block")) {
+                addBlockFixtures(layer);
             } else if (layer.getName().contains("Star")) {
                 addStarFixtures(layer);
             } else if (layer.getName().contains("Player")) {
                 addPlayerFixture(layer);
             } else if (layer.getName().contains("Portal")) {
                 addPortalFixture(layer);
-            } else if (layer.getName().contains("Lava")) {
-                addLavaFixture(layer);
-            } else if (layer.getName().contains("Crumbling")) {
-                addCrumblingFixtures(layer);
-
             }
         }
     }
 
-    private void addTerrainFixtures(TiledMapTileLayer layer) {
+    private void addBlockFixtures(TiledMapTileLayer layer) {
         BodyDef bodyDef = new BodyDef();
         FixtureDef fixtureDef = new FixtureDef();
         PolygonShape polygonShape = new PolygonShape();
         bodyDef.type = BodyDef.BodyType.StaticBody;
-        polygonShape.setAsBox(TerrainBlock.BLOCK_WIDTH, TerrainBlock.BLOCK_HEIGHT);
+        polygonShape.setAsBox(Block.BLOCK_WIDTH, Block.BLOCK_HEIGHT);
         fixtureDef.shape = polygonShape;
         fixtureDef.density = 1f;
         fixtureDef.friction = 4f;
         fixtureDef.filter.maskBits = BIT_PLAYER;
+        Block.BlockType type = Block.BlockType.BOTH;
+        if (layer.getName().contains("Both")) {
+            fixtureDef.filter.categoryBits = BIT_TYPE_BOTH;
+            type = Block.BlockType.BOTH;
+        } else if (layer.getName().contains("Hell")) {
+            fixtureDef.filter.categoryBits = BIT_TYPE_ONE;
+            type = Block.BlockType.BOTH;
+        } else if (layer.getName().contains("Heaven")) {
+            fixtureDef.filter.categoryBits = BIT_TYPE_TWO;
+            type  = Block.BlockType.BOTH;
+        }
 
         for (int row = 0; row < layer.getHeight(); ++row) {
             for (int col = 0; col < layer.getWidth(); ++col) {
@@ -81,19 +87,15 @@ public class ObjectFactory {
 
                 bodyDef.position.set(col, row);
                 Body body = world.createBody(bodyDef);
-                if (layer.getName().contains("Both")) {
-                    fixtureDef.filter.categoryBits = BIT_TYPE_BOTH;
-                    body.createFixture(fixtureDef);
-                    gameObjects.add(new TerrainBlock(body, Block.BlockType.BOTH));
-                } else if (layer.getName().contains("Hell")) {
-                    fixtureDef.filter.categoryBits = BIT_TYPE_ONE;
-                    body.createFixture(fixtureDef);
-                    gameObjects.add(new TerrainBlock(body, Block.BlockType.ONE));
-
-                } else if (layer.getName().contains("Heaven")) {
-                    fixtureDef.filter.categoryBits = BIT_TYPE_TWO;
-                    body.createFixture(fixtureDef);
-                    gameObjects.add(new TerrainBlock(body, Block.BlockType.TWO));
+                if (layer.getName().contains("Terrain")) {
+                    body.createFixture(fixtureDef).setUserData("Terrain");
+                    gameObjects.add(new TerrainBlock(body, type));
+                } else if (layer.getName().contains("Lava")) {
+                    gameObjects.add(new LavaBlock(body, type));
+                    body.createFixture(fixtureDef).setUserData("Lava");
+                } else if (layer.getName().contains("Crumbling")) {
+                    gameObjects.add(new CrumblingBlock(body, type));
+                    body.createFixture(fixtureDef).setUserData("Crumbling");
                 }
             }
         }
@@ -189,62 +191,6 @@ public class ObjectFactory {
                 gameObjects.add(new Portal(body));
                 polygonShape.dispose();
                 return;
-            }
-        }
-
-        polygonShape.dispose();
-    }
-
-    private void addLavaFixture(TiledMapTileLayer layer) {
-        BodyDef bodyDef = new BodyDef();
-        FixtureDef fixtureDef = new FixtureDef();
-        PolygonShape polygonShape = new PolygonShape();
-        bodyDef.type = BodyDef.BodyType.StaticBody;
-        bodyDef.fixedRotation = true;
-        polygonShape.setAsBox(Block.BLOCK_WIDTH, Block.BLOCK_HEIGHT);
-        fixtureDef.shape = polygonShape;
-        fixtureDef.filter.maskBits = BIT_PLAYER;
-        fixtureDef.filter.categoryBits = BIT_TYPE_BOTH;
-
-        for (int row = 0; row < layer.getHeight(); ++row) {
-            for (int col = 0; col < layer.getWidth(); ++col) {
-                TiledMapTileLayer.Cell cell = layer.getCell(col, row);
-                if (cell == null || cell.getTile() == null) {
-                    continue;
-                }
-
-                bodyDef.position.set(col, row);
-                Body body = world.createBody(bodyDef);
-                body.createFixture(fixtureDef).setUserData("Lava");
-                gameObjects.add(new LavaBlock(body, Block.BlockType.BOTH));
-            }
-        }
-
-        polygonShape.dispose();
-    }
-
-    private void addCrumblingFixtures(TiledMapTileLayer layer) {
-        BodyDef bodyDef = new BodyDef();
-        FixtureDef fixtureDef = new FixtureDef();
-        PolygonShape polygonShape = new PolygonShape();
-        bodyDef.type = BodyDef.BodyType.StaticBody;
-        bodyDef.fixedRotation = true;
-        polygonShape.setAsBox(Block.BLOCK_WIDTH, Block.BLOCK_HEIGHT);
-        fixtureDef.shape = polygonShape;
-        fixtureDef.filter.maskBits = BIT_PLAYER;
-        fixtureDef.filter.categoryBits = BIT_TYPE_BOTH;
-
-        for (int row = 0; row < layer.getHeight(); ++row) {
-            for (int col = 0; col < layer.getWidth(); ++col) {
-                TiledMapTileLayer.Cell cell = layer.getCell(col, row);
-                if (cell == null || cell.getTile() == null) {
-                    continue;
-                }
-
-                bodyDef.position.set(col, row);
-                Body body = world.createBody(bodyDef);
-                body.createFixture(fixtureDef).setUserData("Crumbling");
-                gameObjects.add(new CrumblingBlock(body, Block.BlockType.BOTH));
             }
         }
 
