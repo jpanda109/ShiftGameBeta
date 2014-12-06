@@ -3,11 +3,6 @@
  <tileset firstgid="1" name="tileset_new" tilewidth="8" tileheight="8">
   <image source="tileset_new.png" width="80" height="80"/>
  </tileset>
- <layer name="Both StartBlock" width="60" height="40" opacity="0.99">
-  <data encoding="base64" compression="zlib">
-   eJztwzENAAAMA6DqmX+BU9C/ByQkAAAAAAAAAAAsuRLY870VAP0=
-  </data>
- </layer>
  <layer name="Hell Player" width="60" height="40">
   <data encoding="base64" compression="zlib">
    eJztzrENACAIAEG0xf3nldIJJCR3yfcfAQAAAAAAAABMtardPfFRVqd7AuBxAZ+IABs=
@@ -15,7 +10,7 @@
  </layer>
  <layer name="Both TerrainBlock" width="60" height="40">
   <data encoding="base64" compression="zlib">
-   eJzt1EEJAEAIAEFL2L+qCe4Qxd8MbIWNAAAAAOBaPgKgb/JS/wXY81IAgL8CysQB+Q==
+   eJzt1AEJADAIAEFLrH9VEwgykTG4g6/wEQAAAABsO0UA9N281H8B5rwU4A3/hX8klpYCdw==
   </data>
  </layer>
  <layer name="Hell TerrainBlock" width="60" height="40">

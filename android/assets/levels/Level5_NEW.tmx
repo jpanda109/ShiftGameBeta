@@ -6,11 +6,6 @@
  <tileset firstgid="101" name="tileset_new" tilewidth="8" tileheight="8">
   <image source="tileset_new.png" width="80" height="80"/>
  </tileset>
- <layer name="Both StartBlock" width="60" height="40">
-  <data encoding="base64" compression="zlib">
-   eJztw0EJAAAIBLDLY/+AJrivIGywBOCnKQEAAAAAAAAArixaiAD9
-  </data>
- </layer>
  <layer name="Heaven TerrainBlock" width="60" height="40">
   <data encoding="base64" compression="zlib">
    eJzt17ENACAIBECmcP9RrSwsrDH8XcIAXzyBKoAc6zEAR9pOkHc2eWdLy0sP9zMAAAC/87vCTSegxwZzUgKV
@@ -38,7 +33,7 @@
  </layer>
  <layer name="Both TerrainBlock" width="60" height="40">
   <data encoding="base64" compression="zlib">
-   eJztwzENAAAIA7CZwL9VFOzhpU2aAABwMSUAAAAAAADwxwIE9gB/
+   eJzt1EEJAAAMA7GamH+rU9DvYJDAWbgE4KcpAVzxIQAAAAAAAGABH3oA/Q==
   </data>
  </layer>
  <layer name="Both Portal" width="60" height="40">
