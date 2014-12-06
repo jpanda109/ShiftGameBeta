@@ -73,6 +73,13 @@ public class GameScreen extends ScreenAdapter {
 
     public void flingPlayer(float xVelocity, float yVelocity) {
         if (player.state == Player.State.IDLE) {
+            float maxVelocity = 3000f;
+            if (xVelocity > maxVelocity) {
+                xVelocity = maxVelocity;
+            }
+            if (yVelocity > maxVelocity) {
+                yVelocity = maxVelocity;
+            }
             player.body.applyForceToCenter(xVelocity, yVelocity, true);
         }
     }
