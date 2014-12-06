@@ -5,47 +5,47 @@
  </tileset>
  <layer name="Both StartBlock" width="60" height="40">
   <data encoding="base64" compression="zlib">
-   eJztw0EJAAAIBLDLY/+AJrivIGywBAAAAAAAAAAA4J8pLy2dmAD9
-  </data>
- </layer>
- <layer name="Hell Player" width="60" height="40">
-  <data encoding="base64" compression="zlib">
-   eJztzsENACAIADH0q/vPK1NIAm1y/4sAAAAAAAAAAIDeVrarJz462a2eGOIBTRAAGw==
-  </data>
- </layer>
- <layer name="Both LavaBlock" width="60" height="40">
-  <data encoding="base64" compression="zlib">
-   eJztz7EJADAIRUE3cf8tM0EawQT0Duws/osAoFv+HvCY3tn0zratFwAAAACAffJy1T+AA+X1Ai8=
+   eJztw0EJAAAIBLDLY/+AJri3CBssAQAAAAAAAACAG1PCFwvUtgD9
   </data>
  </layer>
  <layer name="Heaven TerrainBlock" width="60" height="40">
   <data encoding="base64" compression="zlib">
-   eJzt1qENADAIAEGmQLP/lAg0CXUVd8nv8BEAACOXAHhXSwD8zRMDAMCdfwaA0WN6Ak0=
+   eJzt1qENACAMRUGmYP9RUSiCwJSmvUvwvKo/Btv8/YFgemvTW1u33hfdbqO3Nr21deuNNi8PAAAyu+1YWxYAAE62M5kslpICqw==
   </data>
  </layer>
- <layer name="Hell TerrainBlock" width="60" height="40">
+ <layer name="Both LavaBlock" width="60" height="40">
   <data encoding="base64" compression="zlib">
-   eJztw0EJAAAIBLCLYv+UJrivIGywBAAAAAAA4K8pAQAALiyNhwDB
-  </data>
- </layer>
- <layer name="Both CrumblingBlock" width="60" height="40">
-  <data encoding="base64" compression="zlib">
-   eJzt1jEKADAIA0C/0/9/sLtrpUG4g2xmDVYBAAmnZfr+tQcAAJv5gwGy7DBAlh0GgL8uVd4D2Q==
-  </data>
- </layer>
- <layer name="Both Star" width="60" height="40">
-  <data encoding="base64" compression="zlib">
-   eJztzgEJAAAMA6D1fP8ejzEYmsAEAAAAAAAAYN+1AwDApAchOQBc
+   eJztz7ENADAIBDE2yf5bogwBegm7v+KqAAAAAAAAAPjeUpPC70yTwu9Mk+LaLyRrlVABdQ==
   </data>
  </layer>
  <layer name="Both TerrainBlock" width="60" height="40">
   <data encoding="base64" compression="zlib">
-   eJztwzENAAAIA7CZwL9VFOzhpU2aAADcTQkAAAAAAADwwQKA/gB/
+   eJzt1lEJAEAIREFL2L+qCU7wQw5kBqzw1ggAYEs+DuCiSev0EQCA6/y8AHTsBMAf+suWAlTlAss=
+  </data>
+ </layer>
+ <layer name="Hell TerrainBlock" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztzrEJADEQA0GXov6r/AouetCBPQNKxZ4DAPfKsD9/L8l2QFm2A8qyHVCW7YCybAcAUJNhALwhwwAAAOj5AOj8AwE=
+  </data>
+ </layer>
+ <layer name="Both CrumblingBlock" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt1LEJAAAIA0HXcf8F7a0FRe7gu9SJAIB92ZraAvCH/wcAAAAAAC4qghEB7Q==
   </data>
  </layer>
  <layer name="Both Portal" width="60" height="40">
   <data encoding="base64" compression="zlib">
-   eJztzrERwCAMADF2Ii20SQv7D4OXwE4h3X3/rQH8R4+e6olEI5rVE4ne6KueSLSiXT0BAAAAAAAAwFUHRa8CFQ==
+   eJztzrENwCAMAEF2Ii20SQv7D4N3QLIV6U76/lsD/qJHT/VEohHN6olEb/RVTyRa0a6eAAAAAAAAAIBLBx+dAhU=
+  </data>
+ </layer>
+ <layer name="Hell Player" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztzrERACAIADG0xf3nlQ3shCK5+/4jAAAAAAAAAADmW9Xunvgoq9M9ATxdh5AAGw==
+  </data>
+ </layer>
+ <layer name="Tile Layer 9" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20Hb6AAAAAAAAAAAAB4DCWAAAE=
   </data>
  </layer>
 </map>
