@@ -109,7 +109,11 @@ public class GameScreen extends ScreenAdapter {
     private void updateRunning(float delta) {
         handleInput(delta);
         world.step(delta, 6, 2);
-        // update object states
+        updateGameObjects(delta);
+        checkPlayerBounds();
+    }
+
+    private void updateGameObjects(float delta) {
         Iterator<ShiftObject> iterator = gameObjects.iterator();
         while (iterator.hasNext()) {
             ShiftObject object = iterator.next();
@@ -127,6 +131,14 @@ public class GameScreen extends ScreenAdapter {
             }
         }
         shiftContactListener.crumblingBodies.clear();
+    }
+
+    private void checkPlayerBounds() {
+        if (player.body.getPosition().x < -.5f
+                || player.body.getPosition().x > 60
+                || player.body.getPosition().y < -.5f) {
+            setGameState(GameState.RESTART);
+        }
     }
 
     private void updatePaused(float delta) {

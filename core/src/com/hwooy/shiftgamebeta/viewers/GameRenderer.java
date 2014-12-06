@@ -34,7 +34,7 @@ public class GameRenderer {
         //spriteBatch = Settings.getInstance().spriteBatch;
         spriteBatch = God.getInstance().spriteBatch;
         shapeRenderer = God.getInstance().shapeRenderer;
-        pauseBounds = new Rectangle(0, 39, 1, 1);
+        pauseBounds = new Rectangle(0, 38, 2, 2);
         debugRenderer =  God.getInstance().debugRenderer;
     }
 
