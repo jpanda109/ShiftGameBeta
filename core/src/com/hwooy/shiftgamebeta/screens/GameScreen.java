@@ -78,9 +78,11 @@ public class GameScreen extends ScreenAdapter {
         if (player.state == Player.State.IDLE) {
             float maxVelocity = 3500f;
             if (xVelocity > maxVelocity) {
+                yVelocity /= xVelocity / maxVelocity;
                 xVelocity = maxVelocity;
             }
             if (yVelocity > maxVelocity) {
+                xVelocity /= yVelocity / maxVelocity;
                 yVelocity = maxVelocity;
             }
             player.body.applyForceToCenter(xVelocity, yVelocity, true);
