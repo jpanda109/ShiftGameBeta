@@ -20,7 +20,7 @@
  </layer>
  <layer name="Both LavaBlock" width="60" height="40">
   <data encoding="base64" compression="zlib">
-   eJztz8EJADAMA7Fskv237BCBljoS+O+rAgAA0vTrA5fpzaY327Ze+E0PBgAAALDFATZ4Aow=
+   eJztz9EJACAIRdE2cf8tmyAIKgw9B/yVd8cAAACqiewBm27t1Psnvbl/XtNbW7de1uLgAAAAALqY+KYDZQ==
   </data>
  </layer>
  <layer name="Both TerrainBlock" width="60" height="40">
