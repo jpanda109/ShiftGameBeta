@@ -126,22 +126,6 @@ public class GameScreen extends ScreenAdapter {
                 }
             }
         }
-        /*
-        for (ShiftObject object : gameObjects) {
-            for (Body body : shiftContactListener.crumblingBodies) {
-                if (object.body == body) {
-                    ((CrumblingBlock) object).state = CrumblingBlock.State.CRUMBLING;
-                }
-            }
-            object.update(delta);
-            if (object.getClass() == CrumblingBlock.class) {
-                if (((CrumblingBlock) object).state == CrumblingBlock.State.DEAD) {
-                    world.destroyBody(object.body);
-                    gameObjects.remove(object);
-                }
-            }
-        }
-        */
         shiftContactListener.crumblingBodies.clear();
     }
 
