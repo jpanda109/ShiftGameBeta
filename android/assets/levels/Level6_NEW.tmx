@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="60" height="40" tilewidth="8" tileheight="8">
+ <tileset firstgid="1" name="tileset_new" tilewidth="8" tileheight="8">
+  <image source="tileset_new.png" width="80" height="80"/>
+ </tileset>
+ <layer name="Both TerrainBlock" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt2UEOgCAMRFEuwf2v6p6gtprM0Oa/hB0yNEgT4xgAAMTNzcjOf3vmJOteK+39C+rV5z/di7v782es6yu53yfq7ZXnzqfe3vmZ/hxZIzun+/lSrzdfnefOV+e589V57v4c/c7MzjmlP6tRLwAAQE3V/8MAQBcXTL0JBw==
+  </data>
+ </layer>
+ <layer name="Hell TerrainBlock" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztzLEJAAAIBDFH+f2ntBestUjg2qsCAOCDjAAAAACAW1n6+gUAbjQVBgIB
+  </data>
+ </layer>
+ <layer name="Heaven TerrainBlock" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt2EEJAAAIBEFT2D+q/wMNIDOwJbYKAAAA2HQEAAAA8F3+EF8E4DZ4fgDd
+  </data>
+ </layer>
+ <layer name="Both LavaBlock" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt1KERAAAIAzE2Yf8tmQABCExy9666EQAAAMBGNk03ANz5ZAAAAOBLASw4Auk=
+  </data>
+ </layer>
+ <layer name="Both Star" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztzjENAAAIA7D5xL8P7ikgJK2CJgAAAAAAba4DAAAAAE8sSnIAXA==
+  </data>
+ </layer>
+ <layer name="Both Portal" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztzqERACEMAEF64i1Y3kL/xZAqEsHuzPlrDQAAAAAAAHhdj77qiUQjmtUTiVb0V08k2tGpngDgGRciAAIV
+  </data>
+ </layer>
+ <layer name="Both Player" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztzrENACAIAEG0xf3nlR1MhOIu+f4jAGZY1e6e+Cir0z0BAAAAAAAAADy5aEUAGw==
+  </data>
+ </layer>
+</map>
