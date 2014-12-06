@@ -87,20 +87,24 @@ public class ObjectFactory {
 
                 bodyDef.position.set(col, row);
                 Body body = world.createBody(bodyDef);
-                if (layer.getName().contains("Terrain")) {
-                    body.createFixture(fixtureDef).setUserData("Terrain");
-                    gameObjects.add(new TerrainBlock(body, type));
-                } else if (layer.getName().contains("Lava")) {
-                    gameObjects.add(new LavaBlock(body, type));
-                    body.createFixture(fixtureDef).setUserData("Lava");
-                } else if (layer.getName().contains("Crumbling")) {
-                    gameObjects.add(new CrumblingBlock(body, type));
-                    body.createFixture(fixtureDef).setUserData("Crumbling");
-                }
+                body.createFixture(fixtureDef).setUserData(layer.getName());
+                gameObjects.add(makeBlock(layer.getName(), body, type));
             }
         }
 
         polygonShape.dispose();
+    }
+
+    private Block makeBlock(String layerName, Body body, Block.BlockType type) {
+        if (layerName.contains("Terrain")) {
+            return new TerrainBlock(body, type);
+        } else if (layerName.contains("Lava")) {
+            return new LavaBlock(body, type);
+        } else if (layerName.contains("Crumbling")) {
+            return new CrumblingBlock(body, type);
+        } else {
+            return new TerrainBlock(body, type);
+        }
     }
 
     private void addStarFixtures(TiledMapTileLayer layer) {

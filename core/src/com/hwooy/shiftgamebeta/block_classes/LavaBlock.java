@@ -10,6 +10,6 @@ import com.hwooy.shiftgamebeta.utils.God;
 public class LavaBlock extends Block {
 
     public LavaBlock(Body body, BlockType type) {
-        super(body, God.TERRAIN_PATH, type);
+        super(body, God.LAVA_PATH, type);
     }
 }

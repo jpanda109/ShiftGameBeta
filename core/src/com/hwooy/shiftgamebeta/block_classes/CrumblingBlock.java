@@ -15,7 +15,7 @@ public class CrumblingBlock extends Block {
     public float crumblingTime;
 
     public CrumblingBlock(Body body, Block.BlockType type) {
-        super(body, God.TERRAIN_PATH, type);
+        super(body, God.CRUMBLING_PATH, type);
         state = State.IDLE;
         crumblingTime = 0;
     }
