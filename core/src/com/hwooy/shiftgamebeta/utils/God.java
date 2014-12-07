@@ -27,7 +27,9 @@ public final class God {
     public static final String TOTAL_STARS = "TOTAL_STARS";
 
     public static final String PLAYER_PATH = "player/player_front.png";
-    public static final String TERRAIN_PATH = "blocks/terrain.png";
+    public static final String TERRAIN_PATH = "blocks/TerrainBOTH.png";
+    public static final String TERRAIN_ONE_PATH = "blocks/TerrainONE.png";
+    public static final String TERRAIN_TWO_PATH = "blocks/TerrainTWO.png";
     public static final String CRUMBLING_PATH = "blocks/CrumblingBlock.png";
     public static final String LAVA_PATH = "blocks/LavaBlock.png";
     public static final String PORTAL_PATH = "portal/portal.png";
@@ -72,6 +74,8 @@ public final class God {
     private void loadAllTextures() {
         assetManager.load(PLAYER_PATH, Texture.class);
         assetManager.load(TERRAIN_PATH, Texture.class);
+        assetManager.load(TERRAIN_ONE_PATH, Texture.class);
+        assetManager.load(TERRAIN_TWO_PATH, Texture.class);
         assetManager.load(LAVA_PATH, Texture.class);
         assetManager.load(CRUMBLING_PATH, Texture.class);
         assetManager.load(PORTAL_PATH, Texture.class);

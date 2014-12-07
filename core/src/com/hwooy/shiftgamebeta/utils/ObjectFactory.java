@@ -72,10 +72,10 @@ public class ObjectFactory {
             type = Block.BlockType.BOTH;
         } else if (layer.getName().contains("Hell")) {
             fixtureDef.filter.categoryBits = BIT_TYPE_ONE;
-            type = Block.BlockType.BOTH;
+            type = Block.BlockType.ONE;
         } else if (layer.getName().contains("Heaven")) {
             fixtureDef.filter.categoryBits = BIT_TYPE_TWO;
-            type  = Block.BlockType.BOTH;
+            type  = Block.BlockType.TWO;
         }
 
         for (int row = 0; row < layer.getHeight(); ++row) {

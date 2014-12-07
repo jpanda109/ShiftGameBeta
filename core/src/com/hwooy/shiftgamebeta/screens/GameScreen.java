@@ -101,7 +101,6 @@ public class GameScreen extends ScreenAdapter {
             if (Math.abs(xVelocity) > maxXVelocity) {
                 xVelocity *= maxXVelocity / Math.abs(xVelocity);
             }
-            System.out.println(xVelocity + " " + yVelocity);
             player.body.applyLinearImpulse(new Vector2(xVelocity, yVelocity), player.body.getPosition(), true);
         }
     }
