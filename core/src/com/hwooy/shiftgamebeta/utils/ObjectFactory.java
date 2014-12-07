@@ -133,7 +133,6 @@ public class ObjectFactory {
                 gameObjects.add(new Star(body));
             }
         }
-
         polygonShape.dispose();
     }
 
@@ -166,7 +165,6 @@ public class ObjectFactory {
                 return;
             }
         }
-
         polygonShape.dispose();
     }
 
@@ -197,7 +195,6 @@ public class ObjectFactory {
                 return;
             }
         }
-
         polygonShape.dispose();
     }
 
