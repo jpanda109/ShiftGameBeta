@@ -23,6 +23,8 @@ public final class God {
     // PREFERENCE KEYS
     public static final String PREFERENCE_NAME = "com.hwooy.shiftgamebeta.preferences";
     public static final String CURRENT_LEVEL = "CURRENT_LEVEL";
+    public static final String STARS_GATHERED_IN_LEVEL = "STARS_GATHERED_IN_LEVEL"; // + levellNumber;
+    public static final String TOTAL_STARS = "TOTAL_STARS";
 
     public static final String PLAYER_PATH = "player/player_front.png";
     public static final String TERRAIN_PATH = "blocks/terrain.png";
@@ -88,6 +90,18 @@ public final class God {
 
     public int getLevel() {
         return preferences.getInteger(CURRENT_LEVEL, 1);
+    }
+
+    public int getTotalStars() {
+        return preferences.getInteger(TOTAL_STARS, 0);
+    }
+
+    public void updateStarsGathered(int levelNumber, int starsGathered) {
+        int prevGathered = preferences.getInteger(STARS_GATHERED_IN_LEVEL + levelNumber, 0);
+        if (starsGathered > prevGathered) {
+            preferences.putInteger(STARS_GATHERED_IN_LEVEL + levelNumber, starsGathered);
+            preferences.putInteger(TOTAL_STARS, getTotalStars() + starsGathered - prevGathered); // add offset to total stars
+        }
     }
 
     public void dispose() {

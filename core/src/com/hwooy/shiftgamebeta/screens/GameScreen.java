@@ -53,6 +53,8 @@ public class GameScreen extends ScreenAdapter {
     public Rectangle restartBounds;
     public Rectangle quitBounds;
 
+    int starsGathered;
+
     public GameScreen(ScreenManager screenManager, int levelNumber) {
         this.screenManager = screenManager;
         this.levelNumber = levelNumber;
@@ -81,7 +83,9 @@ public class GameScreen extends ScreenAdapter {
         restartBounds = new Rectangle(20, 20, 3, 3);
         quitBounds = new Rectangle(30, 20, 3, 3);
 
-        gameRenderer = new GameRenderer(this);
+        gameRenderer = new GameRenderer(this); // must be initialized after bounds
+
+        starsGathered = 0;
     }
 
     public void flingPlayer(float xVelocity, float yVelocity) {
@@ -143,16 +147,23 @@ public class GameScreen extends ScreenAdapter {
         Iterator<ShiftObject> iterator = gameObjects.iterator();
         while (iterator.hasNext()) {
             ShiftObject object = iterator.next();
-            for (Body body : shiftContactListener.crumblingBodies) {
+            for (Body body : shiftContactListener.crumblingBodies) { // update crumbling block states
                 if (object.body == body) {
                     ((CrumblingBlock) object).state = CrumblingBlock.State.CRUMBLING;
                 }
             }
             object.update(delta);
-            if (object.getClass() == CrumblingBlock.class) {
+            if (object.getClass() == CrumblingBlock.class) { // destroy and remove crumbling blocks
                 if (((CrumblingBlock) object).state == CrumblingBlock.State.DEAD) {
                     world.destroyBody(object.body);
                     iterator.remove();
+                }
+            }
+            for (Body body : shiftContactListener.gatheredStars) { // destroy and remove gathered stars
+                if (object.body == body) {
+                    world.destroyBody(object.body);
+                    iterator.remove();
+                    ++starsGathered;
                 }
             }
         }
@@ -160,9 +171,9 @@ public class GameScreen extends ScreenAdapter {
     }
 
     private void checkPlayerBounds() {
-        if (player.body.getPosition().x < -.5f
+        if (player.body.getPosition().x < -1f
                 || player.body.getPosition().x > 60
-                || player.body.getPosition().y < -.5f) {
+                || player.body.getPosition().y < -1f) {
             setGameState(GameState.RESTART);
         }
     }
@@ -211,6 +222,8 @@ public class GameScreen extends ScreenAdapter {
     }
 
     private void nextLevel() {
+        God.getInstance().updateStarsGathered(levelNumber, starsGathered);
+        System.out.println("Current Total Stars: " + God.getInstance().getTotalStars());
         if (levelNumber < God.MAX_LEVEL) {
             screenManager.setGameScreen(++levelNumber);
         } else {

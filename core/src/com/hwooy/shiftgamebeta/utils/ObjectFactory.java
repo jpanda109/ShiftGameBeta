@@ -117,6 +117,7 @@ public class ObjectFactory {
         fixtureDef.density = 1f;
         fixtureDef.friction = 4f;
         fixtureDef.filter.maskBits = BIT_PLAYER;
+        fixtureDef.filter.categoryBits = BIT_TYPE_BOTH;
         fixtureDef.isSensor = true;
 
         for (int row = 0; row < layer.getHeight(); ++row) {
@@ -128,7 +129,7 @@ public class ObjectFactory {
 
                 bodyDef.position.set(col, row);
                 Body body = world.createBody(bodyDef);
-                body.createFixture(fixtureDef);
+                body.createFixture(fixtureDef).setUserData("Star");
                 gameObjects.add(new Star(body));
             }
         }
@@ -189,7 +190,6 @@ public class ObjectFactory {
                 }
 
                 bodyDef.position.set(col + Portal.PORTAL_WIDTH - .5f, row + Portal.PORTAL_HEIGHT - .5f);
-                System.out.println(bodyDef.position);
                 Body body = world.createBody(bodyDef);
                 body.createFixture(fixtureDef).setUserData("Portal");
                 gameObjects.add(new Portal(body));

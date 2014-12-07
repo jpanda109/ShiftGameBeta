@@ -1,6 +1,7 @@
 package com.hwooy.shiftgamebeta.listeners;
 
 import com.badlogic.gdx.physics.box2d.*;
+import com.hwooy.shiftgamebeta.object_classes.Star;
 import com.hwooy.shiftgamebeta.screens.GameScreen;
 
 import java.util.ArrayList;
@@ -13,12 +14,14 @@ public class ShiftContactListener implements ContactListener {
     GameScreen gameScreen;
     //public ArrayList<Body> deadBodies;
     public ArrayList<Body> crumblingBodies;
+    public ArrayList<Body> gatheredStars;
 
     public ShiftContactListener(GameScreen gameScreen)
     {
         super();
         this.gameScreen = gameScreen;
         crumblingBodies = new ArrayList<Body>();
+        gatheredStars = new ArrayList<Body>();
         //deadBodies = new ArrayList<Body>();
     }
 
@@ -38,12 +41,14 @@ public class ShiftContactListener implements ContactListener {
             if(b_data.toString().contains("Portal")) portalContact();
             if(b_data.toString().contains("Lava")) gameScreen.setGameState(GameScreen.GameState.RESTART);
             if(b_data.toString().contains("Crumbling")) crumblingBodies.add(b.getBody());
+            if(b_data.toString().contains("Star")) gatheredStars.add(b.getBody());
         }
         if(a_data != null)
         {
             if(a_data.toString().contains("Portal")) portalContact();
             if(a_data.toString().contains("Lava")) gameScreen.setGameState(GameScreen.GameState.RESTART);
             if(a_data.toString().contains("Crumbling")) crumblingBodies.add(a.getBody());
+            if(a_data.toString().contains("Star")) gatheredStars.add(a.getBody());
         }
     }
 
