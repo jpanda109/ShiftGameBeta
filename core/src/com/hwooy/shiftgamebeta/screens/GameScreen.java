@@ -7,6 +7,7 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Filter;
@@ -90,13 +91,17 @@ public class GameScreen extends ScreenAdapter {
 
     public void flingPlayer(float xVelocity, float yVelocity) {
         if (player.state == Player.State.IDLE) {
-            float maxXVelocity = 1500f;
-            xVelocity /= (float) Math.sqrt(Math.abs(xVelocity)) / 35;
-            yVelocity /= (float) Math.sqrt(Math.abs(yVelocity)) / 35;
+            float maxXVelocity = 25f;
+            float maxYVelocity = 50f;
+            xVelocity /= 69; //(float) Math.sqrt(Math.abs(xVelocity));
+            yVelocity /= 40; //(float) Math.sqrt(Math.abs(yVelocity));
+            if (Math.abs(yVelocity) > maxYVelocity) {
+                yVelocity *= maxYVelocity / Math.abs(yVelocity);
+            }
             if (Math.abs(xVelocity) > maxXVelocity) {
                 xVelocity *= maxXVelocity / Math.abs(xVelocity);
             }
-            player.body.applyForceToCenter(xVelocity, yVelocity, true);
+            player.body.applyLinearImpulse(new Vector2(xVelocity, yVelocity), player.body.getPosition(), true);
         }
     }
 

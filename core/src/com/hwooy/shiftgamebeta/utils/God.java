@@ -27,7 +27,9 @@ public final class God {
     public static final String TOTAL_STARS = "TOTAL_STARS";
 
     public static final String PLAYER_PATH = "player/player_front.png";
-    public static final String TERRAIN_PATH = "blocks/terrain.png";
+    public static final String TERRAIN_PATH = "blocks/TerrainBOTH.png";
+    public static final String TERRAIN_ONE_PATH = "blocks/TerrainONE.png";
+    public static final String TERRAIN_TWO_PATH = "blocks/TerrainTWO.png";
     public static final String CRUMBLING_PATH = "blocks/CrumblingBlock.png";
     public static final String LAVA_PATH = "blocks/LavaBlock.png";
     public static final String PORTAL_PATH = "portal/portal.png";
@@ -38,7 +40,7 @@ public final class God {
 
     public static final boolean DEBUG = true;
 
-    public static final int MAX_LEVEL = 5;
+    public static final int MAX_LEVEL = 6;
 
     static final God GOD = new God();
     public final AssetManager assetManager;
@@ -72,6 +74,8 @@ public final class God {
     private void loadAllTextures() {
         assetManager.load(PLAYER_PATH, Texture.class);
         assetManager.load(TERRAIN_PATH, Texture.class);
+        assetManager.load(TERRAIN_ONE_PATH, Texture.class);
+        assetManager.load(TERRAIN_TWO_PATH, Texture.class);
         assetManager.load(LAVA_PATH, Texture.class);
         assetManager.load(CRUMBLING_PATH, Texture.class);
         assetManager.load(PORTAL_PATH, Texture.class);
@@ -96,9 +100,15 @@ public final class God {
         return preferences.getInteger(TOTAL_STARS, 0);
     }
 
+    public int getGatheredStars(int levelNumber) {
+        return preferences.getInteger(STARS_GATHERED_IN_LEVEL + levelNumber, 0);
+    }
+
     public void updateStarsGathered(int levelNumber, int starsGathered) {
         int prevGathered = preferences.getInteger(STARS_GATHERED_IN_LEVEL + levelNumber, 0);
+        System.out.println("Stars gathered in level :" + starsGathered);
         if (starsGathered > prevGathered) {
+            System.out.println("new stars value written to prefs");
             preferences.putInteger(STARS_GATHERED_IN_LEVEL + levelNumber, starsGathered);
             preferences.putInteger(TOTAL_STARS, getTotalStars() + starsGathered - prevGathered); // add offset to total stars
         }

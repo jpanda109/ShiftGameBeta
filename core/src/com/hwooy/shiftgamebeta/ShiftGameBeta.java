@@ -17,6 +17,7 @@ public class ShiftGameBeta extends Game {
 	@Override
 	public void dispose() {
 		god.dispose();
+		super.dispose();
 	}
 
 }
