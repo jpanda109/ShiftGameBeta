@@ -6,6 +6,7 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.input.GestureDetector;
+import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -65,7 +66,7 @@ public class GameScreen extends ScreenAdapter {
         world = God.getInstance().world;
         shiftContactListener = new ShiftContactListener(this);
         world.setContactListener(shiftContactListener);
-        ObjectFactory objectFactory = new ObjectFactory(levelNumber, world);
+        ObjectFactory objectFactory = new ObjectFactory(God.getInstance().getTiledMap(levelNumber), world);
         gameObjects = objectFactory.getGameObjects();
         player = objectFactory.getPlayer();
 
