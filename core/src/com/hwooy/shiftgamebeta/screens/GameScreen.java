@@ -91,16 +91,17 @@ public class GameScreen extends ScreenAdapter {
 
     public void flingPlayer(float xVelocity, float yVelocity) {
         if (player.state == Player.State.IDLE) {
-            float maxXVelocity = 1500f;
-            float maxYVelocity = 2900f;
-            xVelocity /= 100; //(float) Math.sqrt(Math.abs(xVelocity));
-            yVelocity /= 100; //(float) Math.sqrt(Math.abs(yVelocity));
+            float maxXVelocity = 25f;
+            float maxYVelocity = 50f;
+            xVelocity /= 69; //(float) Math.sqrt(Math.abs(xVelocity));
+            yVelocity /= 40; //(float) Math.sqrt(Math.abs(yVelocity));
             if (Math.abs(yVelocity) > maxYVelocity) {
                 yVelocity *= maxYVelocity / Math.abs(yVelocity);
             }
             if (Math.abs(xVelocity) > maxXVelocity) {
                 xVelocity *= maxXVelocity / Math.abs(xVelocity);
             }
+            System.out.println(xVelocity + " " + yVelocity);
             player.body.applyLinearImpulse(new Vector2(xVelocity, yVelocity), player.body.getPosition(), true);
         }
     }
