@@ -90,14 +90,11 @@ public class GameScreen extends ScreenAdapter {
 
     public void flingPlayer(float xVelocity, float yVelocity) {
         if (player.state == Player.State.IDLE) {
-            float maxVelocity = 3000f;
-            if (xVelocity > maxVelocity) {
-                yVelocity /= xVelocity / maxVelocity;
-                xVelocity = maxVelocity;
-            }
-            if (yVelocity > maxVelocity) {
-                xVelocity /= yVelocity / maxVelocity;
-                yVelocity = maxVelocity;
+            float maxXVelocity = 1500f;
+            xVelocity /= (float) Math.sqrt(Math.abs(xVelocity)) / 35;
+            yVelocity /= (float) Math.sqrt(Math.abs(yVelocity)) / 35;
+            if (Math.abs(xVelocity) > maxXVelocity) {
+                xVelocity *= maxXVelocity / Math.abs(xVelocity);
             }
             player.body.applyForceToCenter(xVelocity, yVelocity, true);
         }
