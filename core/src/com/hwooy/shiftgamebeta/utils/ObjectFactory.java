@@ -33,9 +33,9 @@ public class ObjectFactory {
     World world;
     ArrayList<ShiftObject> gameObjects;
 
-    public ObjectFactory(int levelNumber, World world) {
+    public ObjectFactory(TiledMap tiledMap, World world) {
         this.world = world;
-        tiledMap = God.getInstance().getTiledMap(levelNumber);
+        this.tiledMap = tiledMap;
         layers = tiledMap.getLayers();
         gameObjects = new ArrayList<ShiftObject>();
         createWorld();
