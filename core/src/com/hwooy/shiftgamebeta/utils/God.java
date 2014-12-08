@@ -63,7 +63,7 @@ public final class God {
         shapeRenderer = new ShapeRenderer();
         debugRenderer = new Box2DDebugRenderer();
         world = new World(new Vector2(0, -10f), false);
-        music = Gdx.audio.newMusic(Gdx.files.internal("music/Scythuz_Withering Leaves.ogg"));
+        music = Gdx.audio.newMusic(Gdx.files.internal("music/Scythuz_Cybernetic Sheep.ogg"));
         loadAllTextures();
         music.setLooping(true);
         playMusic(isMusicOn());

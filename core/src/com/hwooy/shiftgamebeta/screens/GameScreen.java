@@ -226,7 +226,6 @@ public class GameScreen extends ScreenAdapter {
 
     private void nextLevel() {
         God.getInstance().updateStarsGathered(levelNumber, starsGathered);
-        System.out.println("Current Total Stars: " + God.getInstance().getTotalStars());
         if (levelNumber < God.MAX_LEVEL) {
             screenManager.setGameScreen(++levelNumber);
         } else {
@@ -245,6 +244,7 @@ public class GameScreen extends ScreenAdapter {
         for (Body body : bodies) {
             world.destroyBody(body);
         }
+        Gdx.input.setInputProcessor(null);
         super.dispose();
     }
 
