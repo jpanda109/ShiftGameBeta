@@ -12,6 +12,8 @@ import com.hwooy.shiftgamebeta.object_classes.ShiftObject;
 import com.hwooy.shiftgamebeta.screens.GameScreen;
 import com.hwooy.shiftgamebeta.utils.God;
 
+import java.util.Random;
+
 /**
  * Created by jason on 12/3/14.
  */
@@ -30,6 +32,10 @@ public class GameRenderer {
     public Rectangle restartBounds;
     public Rectangle quitBounds;
 
+    public float red;
+    public float green;
+    public float blue;
+
     public GameRenderer(GameScreen gameScreen) {
         this.gameScreen = gameScreen;
         guiCam = new OrthographicCamera(60, 40);
@@ -44,6 +50,12 @@ public class GameRenderer {
         resumeBounds = gameScreen.resumeBounds;
         restartBounds = gameScreen.restartBounds;
         quitBounds = gameScreen.quitBounds;
+
+        Random rand = new Random();
+        red = rand.nextFloat() * 30 + 235;
+        green = rand.nextFloat() * 30 + 235;
+        blue = rand.nextFloat() * 30 + 235;
+
     }
 
     private void drawRunning() {
@@ -66,7 +78,7 @@ public class GameRenderer {
 
     public void render() {
         GL20 gl = Gdx.gl20;
-        gl.glClearColor(1, 1, 1, 1);
+        gl.glClearColor(red / 255f, green / 255f, blue / 255f, 1);
         gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         debugRenderer.render(gameScreen.world, guiCam.combined);
