@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -25,6 +26,7 @@ public final class God {
     public static final String CURRENT_LEVEL = "CURRENT_LEVEL";
     public static final String STARS_GATHERED_IN_LEVEL = "STARS_GATHERED_IN_LEVEL"; // + levellNumber;
     public static final String TOTAL_STARS = "TOTAL_STARS";
+    public static final String MUSIC_ON = "MUSIC_ON";
 
     public static final String PLAYER_PATH = "player/player_front.png";
     public static final String TERRAIN_PATH = "blocks/TerrainBOTH.png";
@@ -50,6 +52,7 @@ public final class God {
     public final ShapeRenderer shapeRenderer;
     public final Box2DDebugRenderer debugRenderer;
     public final World world;
+    public final Music music;
 
     private God() {
         assetManager = new AssetManager();
@@ -60,7 +63,10 @@ public final class God {
         shapeRenderer = new ShapeRenderer();
         debugRenderer = new Box2DDebugRenderer();
         world = new World(new Vector2(0, -10f), false);
+        music = Gdx.audio.newMusic(Gdx.files.internal("music/Scythuz_Withering Leaves.ogg"));
         loadAllTextures();
+        music.setLooping(true);
+        playMusic(isMusicOn());
     }
 
     public static God getInstance() {
@@ -127,6 +133,25 @@ public final class God {
         shapeRenderer.dispose();
         debugRenderer.dispose();
         world.dispose();
+        music.dispose();
+    }
+
+    public void playMusic(boolean play) {
+        if (play) {
+            music.play();
+        } else {
+            music.stop();
+        }
+        preferences.putBoolean(MUSIC_ON, play);
+    }
+
+    public void toggleMusic() {
+        preferences.putBoolean(MUSIC_ON, !music.isPlaying());
+        playMusic(isMusicOn());
+    }
+
+    public boolean isMusicOn() {
+        return preferences.getBoolean(MUSIC_ON, true);
     }
 
 }

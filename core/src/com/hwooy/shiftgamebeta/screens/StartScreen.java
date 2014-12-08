@@ -27,6 +27,7 @@ public class StartScreen extends ScreenAdapter {
     Rectangle playBounds;
     Rectangle helpBounds;
     Rectangle settingsBounds;
+    Rectangle soundBounds;
     Vector3 touchPoint;
     God god;
     ShapeRenderer shapeRenderer;
@@ -45,6 +46,7 @@ public class StartScreen extends ScreenAdapter {
         playBounds = new Rectangle(215, 280, 50, 25);
         helpBounds = new Rectangle(215, 250, 50, 25);
         settingsBounds = new Rectangle(215, 220, 50, 25);
+        soundBounds = new Rectangle(0, 0, 30, 30);
 
         touchPoint = new Vector3();
         god = God.getInstance();
@@ -68,6 +70,8 @@ public class StartScreen extends ScreenAdapter {
             else if (settingsBounds.contains(touchPoint.x, touchPoint.y)) {
                 // TODO THIS IS DEBUG PLS CHANGE LATER
                 screenManager.setScreen(ScreenManager.Screens.START);
+            } else if (soundBounds.contains(touchPoint.x, touchPoint.y)) {
+                god.toggleMusic();
             }
         }
     }
@@ -79,6 +83,10 @@ public class StartScreen extends ScreenAdapter {
         gl.glClearColor(1, 1, 1, 1);
         gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         cam.update();
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        shapeRenderer.setColor(Color.BLACK);
+        shapeRenderer.rect(soundBounds.x, soundBounds.y, soundBounds.width, soundBounds.height);
+        shapeRenderer.end();
 
         spriteBatch.begin();
         spriteBatch.draw(god.getTexture(God.PLAY_PATH), 215, 280);
