@@ -106,7 +106,7 @@ public final class God {
         return assetManager.get("levels/Tutorials/Tutorial_Level_" + levelNumber + ".tmx", TiledMap.class);
     }
 
-    public int getLevel() {
+    public int getUnlockedLevels() {
         return preferences.getInteger(CURRENT_LEVEL, 1);
     }
 
@@ -118,13 +118,14 @@ public final class God {
         return preferences.getInteger(STARS_GATHERED_IN_LEVEL + levelNumber, 0);
     }
 
-    public void updateStarsGathered(int levelNumber, int starsGathered) {
+    public void saveProgress(int levelNumber, int starsGathered) {
         int prevGathered = preferences.getInteger(STARS_GATHERED_IN_LEVEL + levelNumber, 0);
-        System.out.println("Stars gathered in level :" + starsGathered);
         if (starsGathered > prevGathered) {
-            System.out.println("new stars value written to prefs");
             preferences.putInteger(STARS_GATHERED_IN_LEVEL + levelNumber, starsGathered);
             preferences.putInteger(TOTAL_STARS, getTotalStars() + starsGathered - prevGathered); // add offset to total stars
+        }
+        if (levelNumber > getUnlockedLevels() && levelNumber < MAX_LEVEL) {
+            preferences.putInteger(CURRENT_LEVEL, ++levelNumber);
         }
     }
 

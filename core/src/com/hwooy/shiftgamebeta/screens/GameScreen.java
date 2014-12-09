@@ -1,12 +1,9 @@
 package com.hwooy.shiftgamebeta.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.input.GestureDetector;
-import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -27,7 +24,6 @@ import com.hwooy.shiftgamebeta.viewers.GameRenderer;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.ListIterator;
 
 /**
  * Created by jason on 12/3/14.
@@ -226,7 +222,7 @@ public class GameScreen extends ScreenAdapter {
     }
 
     private void nextLevel() {
-        God.getInstance().updateStarsGathered(levelNumber, starsGathered);
+        God.getInstance().saveProgress(levelNumber, starsGathered);
         if (levelNumber < God.MAX_LEVEL) {
             screenManager.setGameScreen(++levelNumber);
         } else {
