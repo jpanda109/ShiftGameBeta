@@ -15,12 +15,12 @@
  </layer>
  <layer name="Heaven TerrainBlock" width="60" height="40">
   <data encoding="base64" compression="zlib">
-   eJzt1qENADAIAEGmQLP/lAg0CXUVd8nv8BEAACOXAHhXSwD8zRMDAMCdfwaA0WN6Ak0=
+   eJzt1rEJAAAIBDGncP9RLb4W7E3gdrgqAIDoJQAA+MITAwDAnX8GgBha7AGN
   </data>
  </layer>
  <layer name="Hell TerrainBlock" width="60" height="40">
   <data encoding="base64" compression="zlib">
-   eJztw0EJAAAIBLCLYv+UJrivIGywBAAAAAAA4K8pAQAALiyNhwDB
+   eJztwzENAAAIA7BJmX+VKOAjXG3SBAAAgGtdAgAA97oEAAD4MJYVAYE=
   </data>
  </layer>
  <layer name="Both CrumblingBlock" width="60" height="40">
