@@ -112,6 +112,7 @@ public class GameScreen extends ScreenAdapter {
         Filter filter = playerFixture.getFilterData();
         filter.maskBits = (short) (filter.maskBits ^ ObjectFactory.BIT_TYPE_BOTH);
         playerFixture.setFilterData(filter);
+        player.playerShift();
     }
 
     private void handleInput(float delta) {
