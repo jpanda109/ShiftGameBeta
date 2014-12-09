@@ -5,22 +5,22 @@
  </tileset>
  <layer name="Both TerrainBlock" width="60" height="40">
   <data encoding="base64" compression="zlib">
-   eJzt2UEOgCAMRFEuwf2v6p6gtprM0Oa/hB0yNEgT4xgAAMTNzcjOf3vmJOteK+39C+rV5z/di7v782es6yu53yfq7ZXnzqfe3vmZ/hxZIzun+/lSrzdfnefOV+e589V57v4c/c7MzjmlP6tRLwAAQE3V/8MAQBcXTL0JBw==
+   eJzt2UEKwCAMRFEv4f2v6qobEaOCGZP+B25a0zFQRLAUAADW1cHYnW/VvKRfa6S1n6Bfbf737Oaw8m9S/0/0mytPnU+/ufOt/XlWdzLvb/sz/WrzvfPU+d556nzvPEX+6ll3Vrfz/f59ZvQLAAAQU/R7GADIogE8/QkH
   </data>
  </layer>
  <layer name="Hell TerrainBlock" width="60" height="40">
   <data encoding="base64" compression="zlib">
-   eJztzLEJAAAIBDFH+f2ntBestUjg2qsCAOCDjAAAAACAW1n6+gUAbjQVBgIB
+   eJztzLEJADAIAEGnSO3+U6YNgrVC7uDbjwAAYEqWANjhPAEAAPCvbNr6BQBmXNvxAkM=
   </data>
  </layer>
  <layer name="Heaven TerrainBlock" width="60" height="40">
   <data encoding="base64" compression="zlib">
-   eJzt2EEJAAAIBEFT2D+q/wMNIDOwJbYKAAAA2HQEAAAA8F3+EF8E4DZ4fgDd
+   eJztzjENAAAIBDFUvH+pGIAVlja5/aoAAACATb4HAAAAAI5lCYBZA7ukAJs=
   </data>
  </layer>
  <layer name="Both LavaBlock" width="60" height="40">
   <data encoding="base64" compression="zlib">
-   eJzt1KERAAAIAzE2Yf8tmQABCExy9666EQAAAMBGNk03ANz5ZAAAAOBLASw4Auk=
+   eJzt1LEJAAAIA0E3cf8tnUAQEWzu4LvUiQAAAACmsmm7A+CGfwYAAAC+FDfYAuk=
   </data>
  </layer>
  <layer name="Both Star" width="60" height="40">
