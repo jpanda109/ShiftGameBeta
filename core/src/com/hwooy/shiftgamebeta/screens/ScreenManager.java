@@ -45,9 +45,9 @@ public class ScreenManager {
             screens.push(new StartScreen(this));
         }  else if (screen == Screens.GAME) {
             screens.push(new GameScreen(this, level));
-        } /* else if (screen == Screens.HELP) {
+        } else if (screen == Screens.HELP) {
             screens.push(new HelpScreen(this));
-        } */ else if (screen == Screens.LEVELS) {
+        } else if (screen == Screens.LEVELS) {
             screens.push(new LevelsScreen(this));
         } else if (screen == Screens.WIN) {
             screens.push(new WinScreen(this));

@@ -59,7 +59,7 @@ public final class God {
         assetManager = new AssetManager();
         assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
         spriteBatch = new SpriteBatch();
-        font = new BitmapFont();
+        font = new BitmapFont(Gdx.files.internal("fonts/GloriaHallelujah.fnt"));
         preferences = Gdx.app.getPreferences(PREFERENCE_NAME);
         shapeRenderer = new ShapeRenderer();
         debugRenderer = new Box2DDebugRenderer();
