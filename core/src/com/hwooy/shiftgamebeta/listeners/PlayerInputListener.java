@@ -31,8 +31,9 @@ public class PlayerInputListener extends InputAdapter {
         }
         if (keycode == Input.Keys.W) {
             Vector2 pos = gameScreen.player.body.getPosition();
-            gameScreen.flingPlayer((Gdx.input.getX() - 8 * pos.x) * 30, (320 - (Gdx.input.getY() - 8 * pos.y)) * 8);
-            System.out.println(320 - (Gdx.input.getY() - pos.y));
+            float mult = Gdx.graphics.getWidth() / 60;
+            gameScreen.flingPlayer((Gdx.input.getX() - mult * pos.x) * mult, (Gdx.graphics.getHeight() - (Gdx.input.getY() - mult * pos.y)) * mult);
+            System.out.println(Gdx.input.getX() - mult * pos.x);
         }
 
         // dev cheats
