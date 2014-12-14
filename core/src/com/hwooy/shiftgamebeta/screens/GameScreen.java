@@ -36,7 +36,7 @@ public class GameScreen extends ScreenAdapter {
     }
     ScreenManager screenManager;
     public ArrayList<ShiftObject> gameObjects;
-    Player player;
+    public Player player;
     public GameState state;
     GameRenderer gameRenderer;
     int levelNumber;
