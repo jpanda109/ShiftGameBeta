@@ -55,6 +55,9 @@ public final class God {
     public final World world;
     public final Music music;
 
+    public static float camHeight;
+    public static float camWidth;
+
     private God() {
         assetManager = new AssetManager();
         assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
@@ -67,7 +70,10 @@ public final class God {
         music = Gdx.audio.newMusic(Gdx.files.internal("music/Scythuz_Cybernetic Sheep.ogg"));
         loadAllTextures();
         music.setLooping(true);
-        playMusic(isMusicOn());
+        // music was pipssing me off so i turned it off, turn it back on later
+        //playMusic(isMusicOn());
+        camHeight = Gdx.graphics.getHeight();
+        camWidth = Gdx.graphics.getWidth();
     }
 
     public static God getInstance() {
