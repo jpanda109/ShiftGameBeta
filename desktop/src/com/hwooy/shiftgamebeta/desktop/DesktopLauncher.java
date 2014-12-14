@@ -9,7 +9,7 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.width = 480;
-		config.height = 320;
+		config.height = 270;
 		config.addIcon("player/player_front.png", Files.FileType.Internal);
 		new LwjglApplication(new ShiftGameBeta(), config);
 	}

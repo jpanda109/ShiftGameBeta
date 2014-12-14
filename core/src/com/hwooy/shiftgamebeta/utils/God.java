@@ -45,6 +45,9 @@ public final class God {
     public static final String RESTART_BUTTON_PATH = "buttons/Restart_Button.png";
     public static final String QUIT_BUTTON_PATH = "buttons/Power_Button.png";
 
+    public static final float WORLD_HEIGHT = 40f;
+    public static final float WORLD_WIDTH = 60f;
+
     public static final boolean DEBUG = true;
 
     public static final int MAX_LEVEL = 6;
@@ -59,8 +62,8 @@ public final class God {
     public final World world;
     public final Music music;
 
-    public static float camHeight;
-    public static float camWidth;
+    public static float camHeight = Gdx.graphics.getHeight();
+    public static float camWidth = Gdx.graphics.getWidth();
 
     private God() {
         assetManager = new AssetManager();
