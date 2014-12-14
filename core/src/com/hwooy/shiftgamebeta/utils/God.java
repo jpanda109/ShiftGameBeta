@@ -40,6 +40,10 @@ public final class God {
     public static final String HELP_PATH = "buttons/button_help.png";
     public static final String PLAY_PATH = "buttons/button_play.png";
     public static final String SELECT_PATH = "buttons/button_select_level.png";
+    public static final String PAUSE_BUTTON_PATH = "buttons/Pause_Button.png";
+    public static final String RESUME_BUTTON_PATH = "buttons/Play_Button.png";
+    public static final String RESTART_BUTTON_PATH = "buttons/Restart_Button.png";
+    public static final String QUIT_BUTTON_PATH = "buttons/Power_Button.png";
 
     public static final boolean DEBUG = true;
 
@@ -97,6 +101,10 @@ public final class God {
         assetManager.load(HELP_PATH, Texture.class);
         assetManager.load(PLAY_PATH, Texture.class);
         assetManager.load(SELECT_PATH, Texture.class);
+        assetManager.load(PAUSE_BUTTON_PATH, Texture.class);
+        assetManager.load(RESUME_BUTTON_PATH, Texture.class);
+        assetManager.load(RESTART_BUTTON_PATH, Texture.class);
+        assetManager.load(QUIT_BUTTON_PATH, Texture.class);
         assetManager.finishLoading();
     }
 
