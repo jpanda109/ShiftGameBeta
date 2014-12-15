@@ -20,7 +20,7 @@ import com.hwooy.shiftgamebeta.utils.God;
 public class StartScreen extends ScreenAdapter {
 
     public static final int CAM_WIDTH = 480; //Gdx.graphics.getWidth();
-    public static final int CAM_HEIGHT = 320; //Gdx.graphics.getHeight();
+    public static final int CAM_HEIGHT = 270; //Gdx.graphics.getHeight();
 
     ScreenManager screenManager;
     OrthographicCamera cam;
@@ -43,8 +43,8 @@ public class StartScreen extends ScreenAdapter {
         cam = new OrthographicCamera(CAM_WIDTH, CAM_HEIGHT);
         cam.position.set(CAM_WIDTH / 2, CAM_HEIGHT / 2, 0);
 
-        playBounds = new Rectangle(215, 280, 50, 25);
-        helpBounds = new Rectangle(215, 250, 50, 25);
+        playBounds = new Rectangle(215, 220, 50, 25);
+        helpBounds = new Rectangle(215, 180, 50, 25);
         settingsBounds = new Rectangle(215, 220, 50, 25);
         soundBounds = new Rectangle(0, 0, 30, 30);
 
@@ -90,9 +90,9 @@ public class StartScreen extends ScreenAdapter {
         shapeRenderer.end();
 
         spriteBatch.begin();
-        spriteBatch.draw(god.getTexture(God.PLAY_PATH), 215, 280);
-        spriteBatch.draw(god.getTexture(God.HELP_PATH), 215, 250);
-        spriteBatch.draw(god.getTexture(God.SELECT_PATH), 215, 220);
+        spriteBatch.draw(god.getTexture(God.PLAY_PATH), playBounds.x, playBounds.y);
+        spriteBatch.draw(god.getTexture(God.HELP_PATH), helpBounds.x, helpBounds.y);
+//        spriteBatch.draw(god.getTexture(God.SELECT_PATH), 215, 170);
 
         spriteBatch.end();
     }
