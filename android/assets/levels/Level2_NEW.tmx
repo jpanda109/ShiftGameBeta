@@ -1,46 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="60" height="40" tilewidth="8" tileheight="8">
+<map version="1.0" orientation="orthogonal" width="64" height="36" tilewidth="8" tileheight="8">
  <tileset firstgid="1" name="tileset_new" tilewidth="8" tileheight="8">
   <image source="tileset_new.png" width="80" height="80"/>
  </tileset>
- <layer name="Hell Player" width="60" height="40">
+ <layer name="Hell Player" width="64" height="36">
   <data encoding="base64" compression="zlib">
-   eJztzsENACAIADH0q/vPK1NIAm1y/4sAAAAAAAAAAIDeVrarJz462a2eGOIBTRAAGw==
+   eJztzrENACAMBLFAC/vPS2ZI8wW2dP1VAQAAAAAAAAAwtbqdngg63U1PfO4BTjAAGw==
   </data>
  </layer>
- <layer name="Both LavaBlock" width="60" height="40">
+ <layer name="Both LavaBlock" width="64" height="36">
   <data encoding="base64" compression="zlib">
-   eJztz7EJADAIRUE3cf8tM0EawQT0Duws/osAoFv+HvCY3tn0zratFwAAAACAffJy1T+AA+X1Ai8=
+   eJztz8EJACAMBMF0kv67tAI/Iga5Gcgvj9sqftfTA4bpz6Y/W3o/AAAAAADwVm/u9A/glgXBMwIv
   </data>
  </layer>
- <layer name="Heaven TerrainBlock" width="60" height="40">
+ <layer name="Heaven TerrainBlock" width="64" height="36">
   <data encoding="base64" compression="zlib">
-   eJzt1rEJAAAIBDGncP9RLb4W7E3gdrgqAIDoJQAA+MITAwDAnX8GgBha7AGN
+   eJzt1jENAAAIwDBU4F8qCriB0CbzsAiAnbIJAAC4wdMDAMAf/h8AZhU8KgGN
   </data>
  </layer>
- <layer name="Hell TerrainBlock" width="60" height="40">
+ <layer name="Hell TerrainBlock" width="64" height="36">
   <data encoding="base64" compression="zlib">
-   eJztwzENAAAIA7BJmX+VKOAjXG3SBAAAgGtdAgAA97oEAAD4MJYVAYE=
+   eJztw7EJAAAIAzBP6f9XugsuuiaQKgAA+MkSAABgyhIAAIC7BmizAYE=
   </data>
  </layer>
- <layer name="Both CrumblingBlock" width="60" height="40">
+ <layer name="Both CrumblingBlock" width="64" height="36">
   <data encoding="base64" compression="zlib">
-   eJzt1jEKADAIA0C/0/9/sLtrpUG4g2xmDVYBAAmnZfr+tQcAAJv5gwGy7DBAlh0GgL8uVd4D2Q==
+   eJzt1jEKADAIA8B8x/9/sLurhYK9g2xmDSYASbXcvp/2AACAd/zxALvZeYDd7DwA/OEAvGkD2Q==
   </data>
  </layer>
- <layer name="Both Star" width="60" height="40">
+ <layer name="Both Star" width="64" height="36">
   <data encoding="base64" compression="zlib">
-   eJztzgEJAAAMA6D1fP8ejzEYmsAEAAAAAAAAYN+1AwDApAchOQBc
+   eJztzgEJAAAIA7D3tH8PUxxBtgRLAAAAAAAA4Le5DgAAFC1QEQBc
   </data>
  </layer>
- <layer name="Both TerrainBlock" width="60" height="40">
+ <layer name="Both TerrainBlock" width="64" height="36">
   <data encoding="base64" compression="zlib">
-   eJzt2UEJAAAIBMErYf+qJvAjCD5mYFNsAgCwV0MAAAAAAAAA1z78yga9CgD9
+   eJzt2TENAAAIBLE3gX+rKGBjIKRNTsUlAH/UEAAAAAAAAABsuvSnG7eZAP0=
   </data>
  </layer>
- <layer name="Both Portal" width="60" height="40">
+ <layer name="Both Portal" width="64" height="36">
   <data encoding="base64" compression="zlib">
-   eJztzrERwCAMADF2Ii20SQv7D4OXwE4h3X3/rQH8R4+e6olEI5rVE4ne6KueSLSiXT0BAAAAAAAAwFUHRa8CFQ==
+   eJztzrENwCAQBEF6wimkdgr9F8M3gU6yZqTNt7X/6tWTngga1UxPBL3Vl54IWtVOTwAAAAAAAAAA1x2oqwIV
   </data>
  </layer>
 </map>
