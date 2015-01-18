@@ -123,13 +123,13 @@ public class GameScreen extends ScreenAdapter {
                     }
                     break;
                 case PAUSED:
-                    if (resumeBounds.contains(touchPoint.x, touchPoint.y)) {
+                    if (resumeBounds.contains(touchPoint.x - resumeBounds.width/2, touchPoint.y - resumeBounds.height/2)) {
                         setGameState(GameState.RUNNING);
                     }
-                    else if (restartBounds.contains(touchPoint.x, touchPoint.y)) {
+                    else if (restartBounds.contains(touchPoint.x - restartBounds.width/2, touchPoint.y - restartBounds.height/2)) {
                         setGameState(GameState.RESTART);
                     }
-                    else if (quitBounds.contains(touchPoint.x, touchPoint.y)) {
+                    else if (quitBounds.contains(touchPoint.x - quitBounds.width/2, touchPoint.y - quitBounds.height/2)) {
                         setGameState(GameState.QUIT);
                     }
             }
