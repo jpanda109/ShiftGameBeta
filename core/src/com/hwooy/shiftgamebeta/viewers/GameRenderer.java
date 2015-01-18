@@ -95,9 +95,9 @@ public class GameRenderer {
         */
 
         spriteBatch.begin();
-        spriteBatch.draw(resumeTexture, (resumeBounds.x) * 8, (resumeBounds.y) * 8, resumeBounds.width * 8, resumeBounds.height * 8);
-        spriteBatch.draw(restartTexture, (restartBounds.x) * 8, (restartBounds.y )* 8, restartBounds.width * 8, restartBounds.height * 8);
-        spriteBatch.draw(quitTexture, (quitBounds.x) * 8, (quitBounds.y )* 8, quitBounds.width * 8, quitBounds.height * 8);
+        spriteBatch.draw(resumeTexture, (resumeBounds.x) * 7.5f, (resumeBounds.y) * 7.5f, resumeBounds.width * 7.5f, resumeBounds.height * 7.5f);
+        spriteBatch.draw(restartTexture, (restartBounds.x) * 7.5f, (restartBounds.y )* 7.5f, restartBounds.width * 7.5f, restartBounds.height * 7.5f);
+        spriteBatch.draw(quitTexture, (quitBounds.x) * 7.5f, (quitBounds.y )* 7.5f, quitBounds.width * 7.5f, quitBounds.height * 7.5f);
         spriteBatch.end();
     }
 
