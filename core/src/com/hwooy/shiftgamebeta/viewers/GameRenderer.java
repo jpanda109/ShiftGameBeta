@@ -44,8 +44,8 @@ public class GameRenderer {
 
     public GameRenderer(GameScreen gameScreen) {
         this.gameScreen = gameScreen;
-        guiCam = new OrthographicCamera(60, 40);
-        guiCam.position.set(30f, 20f, 0f);
+        guiCam = new OrthographicCamera(64, 36);
+        guiCam.position.set(32f, 18f, 0f);
         //guiCam.setToOrtho(false, 60, 40);
         //spriteBatch = Settings.getInstance().spriteBatch;
         spriteBatch = God.getInstance().spriteBatch;
@@ -79,7 +79,7 @@ public class GameRenderer {
 
 */
         spriteBatch.begin();
-        spriteBatch.draw(pauseTexture, (pauseBounds.x) * 8, (pauseBounds.y )* 8, pauseBounds.width * 8, pauseBounds.height * 8);
+        spriteBatch.draw(pauseTexture, (pauseBounds.x) * 7.5f, (pauseBounds.y )* 7.5f, pauseBounds.width * 7.5f, pauseBounds.height * 7.5f);
         spriteBatch.end();
     }
 

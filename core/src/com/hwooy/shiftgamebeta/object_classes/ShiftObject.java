@@ -23,8 +23,8 @@ public class ShiftObject {
         this.texture = God.getInstance().getTexture(texturePath);
         this.width = width;
         this.height = height;
-        multiplierY = God.camHeight / 40;
-        multiplierX = God.camWidth / 60;
+        multiplierY = God.camHeight / 36;
+        multiplierX = God.camWidth / 64;
     }
 
     public void render(SpriteBatch spriteBatch) {

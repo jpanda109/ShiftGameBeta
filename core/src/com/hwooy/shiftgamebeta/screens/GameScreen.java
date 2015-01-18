@@ -76,7 +76,7 @@ public class GameScreen extends ScreenAdapter {
 
         touchPoint = new Vector3();
 
-        pauseBounds = new Rectangle(0, 38, 2, 2);
+        pauseBounds = new Rectangle(0, 34, 2, 2);
         resumeBounds = new Rectangle(10, 20, 3, 3);
         restartBounds = new Rectangle(20, 20, 3, 3);
         quitBounds = new Rectangle(30, 20, 3, 3);
