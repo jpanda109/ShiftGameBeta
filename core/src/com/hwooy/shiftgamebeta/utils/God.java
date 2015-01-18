@@ -78,7 +78,7 @@ public final class God {
         loadAllTextures();
         music.setLooping(true);
         // music was pipssing me off so i turned it off, turn it back on later
-        //playMusic(isMusicOn());
+        playMusic(isMusicOn());
         camHeight = Gdx.graphics.getHeight();
         camWidth = Gdx.graphics.getWidth();
     }
