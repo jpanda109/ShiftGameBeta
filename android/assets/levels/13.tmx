@@ -18,7 +18,7 @@
  </layer>
  <layer name="Both LavaBlock" width="64" height="36">
   <data encoding="base64" compression="zlib">
-   eJzt17EJACAQA0CXsHb/La1FbLSRzx1kgDSBtAakGhcBYPWyl7YWAAAA6vH3d/pn0z9bev8f9EOAeiYFrQTb
+   eJzt17EJACAMRNFs4v5bWod0Chbee5ABfnOQKiDVOjgAupu9tLUAAADwH//+pD+b/mzp/QAvbRpbBF0=
   </data>
  </layer>
  <layer name="Both CrumblingBlock" width="64" height="36">
@@ -33,7 +33,7 @@
  </layer>
  <layer name="Both TerrainBlock" width="64" height="36">
   <data encoding="base64" compression="zlib">
-   eJztwwENAAAIA6CXsH9VEzyADjYSAAAAAAD4b0oAAIDrFn2OAH8=
+   eJzt1gENAAAIw7CbwL9VFGDgtMk8LAEAAAAAgH5zBADQyv/AHwto4AD9
   </data>
  </layer>
  <layer name="Both Portal" width="64" height="36">
