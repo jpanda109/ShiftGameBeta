@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="64" height="36" tilewidth="8" tileheight="8">
+ <tileset firstgid="1" name="tileset_new" tilewidth="8" tileheight="8">
+  <image source="tileset_new.png" width="80" height="80"/>
+ </tileset>
+ <tileset firstgid="101" name="tileset_new" tilewidth="8" tileheight="8">
+  <image source="tileset_new.png" width="80" height="80"/>
+ </tileset>
+ <layer name="Heaven TerrainBlock" width="64" height="36">
+  <data encoding="base64" compression="zlib">
+   eJzt2EENAAAMAjFUzL/UKdifLG1yDniRANBkjgAAAAAAoJ1vm+9sHGi19dUBNQ==
+  </data>
+ </layer>
+ <layer name="Hell TerrainBlock" width="64" height="36">
+  <data encoding="base64" compression="zlib">
+   eJztzsEJACAQA0FLSf9V2oD3lCDOwP53LQBel0MAt2QIAAD4Q9oDZWkPlKU9UJb2AAAADDZglAHh
+  </data>
+ </layer>
+ <layer name="Both LavaBlock" width="64" height="36">
+  <data encoding="base64" compression="zlib">
+   eJzt2LENwCAMBEA2Yf8ts0AQQaHA/J1kySVvURhaO09fLAAA+Gp119xZ/Jc+R/mzzfJXnc+uc8tfk/zAjUb7v3cBN0i/w/Jnq5i/D/oU8r/3KeT3N53oAfyRCRY=
+  </data>
+ </layer>
+ <layer name="Both CrumblingBlock" width="64" height="36">
+  <data encoding="base64" compression="zlib">
+   eJzt1kEOgCAMBEC+4/8/6N2IAmljMTOJJ5Nti6K0trcjKfPpiqpRKWc0s1rfozkzz/GP80dlVuvb/PHMn18vo+8olefP+h9fa6zci6rxtYzzz1tm5fUAAIgyc/5xXoI++wP67A9WeE/gnu8psLMTsCkOlA==
+  </data>
+ </layer>
+ <layer name="Both Star" width="64" height="36">
+  <data encoding="base64" compression="zlib">
+   eJztzjENAAAIA7D5xL8PTCzhoFXQhE/mOgAAAAAAAAAAQNUCQGQAXA==
+  </data>
+ </layer>
+ <layer name="Both TerrainBlock" width="64" height="36">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAIBXAyQAAAE=
+  </data>
+ </layer>
+ <layer name="Both Portal" width="64" height="36">
+  <data encoding="base64" compression="zlib">
+   eJztzrENwCAQBEF6wimkdgr9F8NXwUnWjLT5tgYAAAAAAADA3/TqSU8EjWqmJ4Le6ktPBK1qpyfgogP9WAIV
+  </data>
+ </layer>
+ <layer name="Both Player" width="64" height="36">
+  <data encoding="base64" compression="zlib">
+   eJztziESACAMBLGChf+/l9o63JlkZv1WAQBMq9vpiaDT3fQEAAAAAAAAfHrhpgAb
+  </data>
+ </layer>
+</map>
