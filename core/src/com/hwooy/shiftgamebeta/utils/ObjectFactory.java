@@ -24,7 +24,7 @@ public class ObjectFactory {
 
     public static final short BIT_TYPE_ONE = 1;  // 0001
     public static final short BIT_TYPE_TWO = 2;  // 0010
-    public static final short BIT_TYPE_BOTH = BIT_TYPE_ONE | BIT_TYPE_TWO; // 0100
+    public static final short BIT_TYPE_BOTH = BIT_TYPE_ONE | BIT_TYPE_TWO; // 0011
     public static final short BIT_PLAYER = 8; // 1000
 
     TiledMap tiledMap;
@@ -46,11 +46,14 @@ public class ObjectFactory {
             TiledMapTileLayer layer = (TiledMapTileLayer) mapLayer;
             if (layer.getName().contains("Block")) {
                 addBlockFixtures(layer);
-            } else if (layer.getName().contains("Star")) {
+            }
+            else if (layer.getName().contains("Star")) {
                 addStarFixtures(layer);
-            } else if (layer.getName().contains("Player")) {
+            }
+            else if (layer.getName().contains("Player")) {
                 addPlayerFixture(layer);
-            } else if (layer.getName().contains("Portal")) {
+            }
+            else if (layer.getName().contains("Portal")) {
                 addPortalFixture(layer);
             }
         }
@@ -60,50 +63,51 @@ public class ObjectFactory {
         BodyDef bodyDef = new BodyDef();
         FixtureDef fixtureDef = new FixtureDef();
         PolygonShape polygonShape = new PolygonShape();
+
         bodyDef.type = BodyDef.BodyType.StaticBody;
         polygonShape.setAsBox(Block.BLOCK_WIDTH, Block.BLOCK_HEIGHT);
+
         fixtureDef.shape = polygonShape;
         fixtureDef.density = 1f;
         fixtureDef.friction = 4f;
         fixtureDef.filter.maskBits = BIT_PLAYER;
+
         Block.BlockType type = Block.BlockType.BOTH;
+
         if (layer.getName().contains("Both")) {
             fixtureDef.filter.categoryBits = BIT_TYPE_BOTH;
             type = Block.BlockType.BOTH;
-        } else if (layer.getName().contains("Hell")) {
+        }
+        else if (layer.getName().contains("Hell")) {
             fixtureDef.filter.categoryBits = BIT_TYPE_ONE;
             type = Block.BlockType.ONE;
-        } else if (layer.getName().contains("Heaven")) {
+        }
+        else if (layer.getName().contains("Heaven")) {
             fixtureDef.filter.categoryBits = BIT_TYPE_TWO;
             type  = Block.BlockType.TWO;
         }
 
-        for (int row = 0; row < layer.getHeight(); ++row) {
-            for (int col = 0; col < layer.getWidth(); ++col) {
-                TiledMapTileLayer.Cell cell = layer.getCell(col, row);
-                if (cell == null || cell.getTile() == null) {
-                    continue;
-                }
-
-                bodyDef.position.set(col, row);
-                Body body = world.createBody(bodyDef);
-                body.createFixture(fixtureDef).setUserData(layer.getName());
-                gameObjects.add(makeBlock(layer.getName(), body, type));
-            }
-        }
-
+        makeObjects(layer, bodyDef, fixtureDef, "block", type);
         polygonShape.dispose();
     }
 
     private Block makeBlock(String layerName, Body body, Block.BlockType type) {
         if (layerName.contains("Terrain")) {
-            return new TerrainBlock(body, type);
+            if(type == Block.BlockType.ONE) {
+                return new TerrainBlock(body, type, God.TERRAIN_COLOR_1);
+            }
+            else if(type == Block.BlockType.TWO) {
+                return new TerrainBlock(body, type, God.TERRAIN_COLOR_2);
+            }
+            else {
+                return new TerrainBlock(body, type, God.TERRAIN_BOTH);
+            }
         } else if (layerName.contains("Lava")) {
             return new LavaBlock(body, type);
         } else if (layerName.contains("Crumbling")) {
             return new CrumblingBlock(body, type);
         } else {
-            return new TerrainBlock(body, type);
+            return new TerrainBlock(body, type, God.TERRAIN_BOTH);
         }
     }
 
@@ -111,6 +115,7 @@ public class ObjectFactory {
         BodyDef bodyDef = new BodyDef();
         FixtureDef fixtureDef = new FixtureDef();
         PolygonShape polygonShape = new PolygonShape();
+
         bodyDef.type = BodyDef.BodyType.StaticBody;
         polygonShape.setAsBox(Star.STAR_WIDTH, Star.STAR_HEIGHT);
         fixtureDef.shape = polygonShape;
@@ -120,20 +125,39 @@ public class ObjectFactory {
         fixtureDef.filter.categoryBits = BIT_TYPE_BOTH;
         fixtureDef.isSensor = true;
 
-        for (int row = 0; row < layer.getHeight(); ++row) {
-            for (int col = 0; col < layer.getWidth(); ++col) {
-                TiledMapTileLayer.Cell cell = layer.getCell(col, row);
+        makeObjects(layer, bodyDef, fixtureDef, "star", Block.BlockType.BOTH);
+        polygonShape.dispose();
+    }
+
+    private void makeObjects(TiledMapTileLayer layer, BodyDef bodyDef, FixtureDef fixtureDef, String obj, Block.BlockType type) {
+        for (int col = 0; col < layer.getHeight(); ++col) {
+            for (int row = 0; row < layer.getWidth(); ++row) {
+                TiledMapTileLayer.Cell cell = layer.getCell(row, col);
                 if (cell == null || cell.getTile() == null) {
                     continue;
                 }
 
-                bodyDef.position.set(col, row);
+                bodyDef.position.set(row, col);
                 Body body = world.createBody(bodyDef);
-                body.createFixture(fixtureDef).setUserData("Star");
-                gameObjects.add(new Star(body));
+                body.createFixture(fixtureDef).setUserData(layer.getName());
+
+                if(obj.equals("block")) {
+                    gameObjects.add(makeBlock(layer.getName(), body, type));
+                }
+                else if(obj.equals("star")){
+                    gameObjects.add(new Star(body));
+                }
+                else if(obj.equals("player")){
+                    player = new Player(body);
+                    gameObjects.add(player);
+                    return;
+                }
+                else if(obj.equals("portal")) {
+                    gameObjects.add(new Portal(body));
+                    return;
+                }
             }
         }
-        polygonShape.dispose();
     }
 
     private void addPlayerFixture(TiledMapTileLayer layer) {
@@ -149,22 +173,7 @@ public class ObjectFactory {
         fixtureDef.filter.maskBits = BIT_TYPE_ONE;
         fixtureDef.filter.categoryBits = BIT_PLAYER;
 
-        for (int row = 0; row < layer.getHeight(); ++row) {
-            for (int col = 0; col < layer.getWidth(); ++col) {
-                TiledMapTileLayer.Cell cell = layer.getCell(col, row);
-                if (cell == null || cell.getTile() == null) {
-                    continue;
-                }
-
-                bodyDef.position.set(col, row);
-                Body body = world.createBody(bodyDef);
-                body.createFixture(fixtureDef);
-                player = new Player(body);
-                gameObjects.add(player);
-                polygonShape.dispose();
-                return;
-            }
-        }
+        makeObjects(layer, bodyDef, fixtureDef, "player", Block.BlockType.BOTH);
         polygonShape.dispose();
     }
 
@@ -180,21 +189,7 @@ public class ObjectFactory {
         fixtureDef.filter.maskBits = BIT_PLAYER;
         fixtureDef.filter.categoryBits = BIT_TYPE_BOTH;
 
-        for (int row = 0; row < layer.getHeight(); ++row) {
-            for (int col = 0; col < layer.getWidth(); ++col) {
-                TiledMapTileLayer.Cell cell = layer.getCell(col, row);
-                if (cell == null || cell.getTile() == null) {
-                    continue;
-                }
-
-                bodyDef.position.set(col + Portal.PORTAL_WIDTH - .5f, row + Portal.PORTAL_HEIGHT - .5f);
-                Body body = world.createBody(bodyDef);
-                body.createFixture(fixtureDef).setUserData("Portal");
-                gameObjects.add(new Portal(body));
-                polygonShape.dispose();
-                return;
-            }
-        }
+        makeObjects(layer, bodyDef, fixtureDef, "portal", Block.BlockType.BOTH);
         polygonShape.dispose();
     }
 

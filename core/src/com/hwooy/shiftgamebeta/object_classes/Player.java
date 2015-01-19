@@ -21,9 +21,9 @@ public class Player extends ShiftObject {
     public State state;
 
     public Player(Body body) {
-        super(body, God.PLAYER_HEAVEN_PATH, PLAYER_WIDTH, PLAYER_HEIGHT);
-        playerHellTexture = God.getInstance().getTexture(God.PLAYER_HELL_PATH);
-        playerHeavenTexture = God.getInstance().getTexture(God.PLAYER_HEAVEN_PATH);
+        super(body, God.PLAYER_COLOR_1_PATH, PLAYER_WIDTH, PLAYER_HEIGHT);
+        playerHellTexture = God.getInstance().getTexture(God.PLAYER_COLOR_2_PATH);
+        playerHeavenTexture = God.getInstance().getTexture(God.PLAYER_COLOR_1_PATH);
         state = State.IDLE;
     }
 

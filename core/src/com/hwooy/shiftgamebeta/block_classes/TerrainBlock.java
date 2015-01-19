@@ -8,7 +8,7 @@ import com.hwooy.shiftgamebeta.utils.God;
  */
 public class TerrainBlock extends Block {
 
-    public TerrainBlock(Body body, Block.BlockType type) {
-        super(body, "blocks/Terrain" + type + ".png", type);
+    public TerrainBlock(Body body, Block.BlockType type, String path) {
+        super(body, path, type);
     }
 }

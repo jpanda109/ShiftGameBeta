@@ -28,13 +28,13 @@ public final class God {
     public static final String TOTAL_STARS = "TOTAL_STARS";
     public static final String MUSIC_ON = "MUSIC_ON";
 
-    public static final String PLAYER_HELL_PATH = "player/hell_player_front.png";
-    public static final String PLAYER_HEAVEN_PATH = "player/heaven_player_front.png";
-    public static final String TERRAIN_PATH = "blocks/TerrainBOTH.png";
-    public static final String TERRAIN_ONE_PATH = "blocks/TerrainONE.png";
-    public static final String TERRAIN_TWO_PATH = "blocks/TerrainTWO.png";
+    public static final String PLAYER_COLOR_1_PATH = "blocks/player/player_blue.png";
+    public static final String PLAYER_COLOR_2_PATH = "blocks/player/player_green.png";
+    public static final String TERRAIN_BOTH = "blocks/Terrain/terrain_purple.png";
+    public static final String TERRAIN_COLOR_1 = "blocks/Terrain/terrain_green.png";
+    public static final String TERRAIN_COLOR_2 = "blocks/Terrain/terrain_blue.png";
     public static final String CRUMBLING_PATH = "blocks/CrumblingBlock.png";
-    public static final String LAVA_PATH = "blocks/LavaBlock.png";
+    public static final String LAVA_PATH = "blocks/lava.png";
     public static final String PORTAL_PATH = "portal/portal.png";
     public static final String STAR_PATH = "star/star.png";
     public static final String HELP_PATH = "buttons/button_help.png";
@@ -45,7 +45,7 @@ public final class God {
     public static final String RESTART_BUTTON_PATH = "buttons/Restart_Button.png";
     public static final String QUIT_BUTTON_PATH = "buttons/Power_Button.png";
     public static final String MUSIC_PATH = "music/Scythuz_Cybernetic Sheep.ogg";
-    public static final String FONT_PATH = "fonts/GloriaHallelujah.fnt"
+    public static final String FONT_PATH = "fonts/GloriaHallelujah.fnt";
 
     public static final float WORLD_HEIGHT = 40f;
     public static final float WORLD_WIDTH = 60f;
@@ -94,12 +94,12 @@ public final class God {
     }
 
     private void loadAllTextures() {
-        assetManager.load(PLAYER_HELL_PATH, Texture.class);
-        assetManager.load(PLAYER_HEAVEN_PATH, Texture.class);
+        assetManager.load(PLAYER_COLOR_1_PATH, Texture.class);
+        assetManager.load(PLAYER_COLOR_2_PATH, Texture.class);
 
-        assetManager.load(TERRAIN_PATH, Texture.class);
-        assetManager.load(TERRAIN_ONE_PATH, Texture.class);
-        assetManager.load(TERRAIN_TWO_PATH, Texture.class);
+        assetManager.load(TERRAIN_BOTH, Texture.class);
+        assetManager.load(TERRAIN_COLOR_1, Texture.class);
+        assetManager.load(TERRAIN_COLOR_2, Texture.class);
 
         assetManager.load(LAVA_PATH, Texture.class);
         assetManager.load(CRUMBLING_PATH, Texture.class);
