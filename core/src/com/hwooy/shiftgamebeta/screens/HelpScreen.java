@@ -73,7 +73,7 @@ public class HelpScreen extends ScreenAdapter {
         shapeRenderer.end();
 
         spriteBatch.begin();
-        font.draw(spriteBatch, "This is da help screen", 40, 200);
+        font.draw(spriteBatch, "This is da ShiftGame!", 40, 200);
 
         spriteBatch.end();
     }
