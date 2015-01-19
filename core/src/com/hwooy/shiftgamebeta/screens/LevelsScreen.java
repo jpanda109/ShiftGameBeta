@@ -37,11 +37,14 @@ public class LevelsScreen extends ScreenAdapter {
         this.screenManager = screenManager;
         cam = new OrthographicCamera(CAM_WIDTH, CAM_HEIGHT);
         cam.position.set(CAM_WIDTH / 2, CAM_HEIGHT / 2, 0);
+        god = God.getInstance();
         rectangles = new ArrayList<Rectangle>();
-        spriteBatch = God.getInstance().spriteBatch;
+        spriteBatch = god.spriteBatch;
         font = God.getInstance().font;
+
         int x = 20;
         int y = 240;
+
         for (int i = 0; i < God.MAX_LEVEL / 5; ++i) {
             for (int j = 0; j < 5; ++j) {
                 rectangles.add(new Rectangle(x, y, 20, 20));
@@ -56,7 +59,6 @@ public class LevelsScreen extends ScreenAdapter {
         }
         touchPoint = new Vector3();
         debugRenderer = new ShapeRenderer();
-        god = God.getInstance();
     }
     /**
      * handles user input response
