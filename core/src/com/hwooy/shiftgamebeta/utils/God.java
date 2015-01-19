@@ -47,14 +47,28 @@ public final class God {
     public static final String MUSIC_PATH = "music/Scythuz_Cybernetic Sheep.ogg";
     public static final String FONT_PATH = "fonts/GloriaHallelujah.fnt";
 
-    public static final String LEVEL_1_PATH = "";
+    public static final String LEVEL_1_PATH = "blocks/levels/level_1.png";
+    public static final String LEVEL_2_PATH = "blocks/levels/level_2.png";
+    public static final String LEVEL_3_PATH = "blocks/levels/level_3.png";
+    public static final String LEVEL_4_PATH = "blocks/levels/level_4.png";
+    public static final String LEVEL_5_PATH = "blocks/levels/level_5.png";
+    public static final String LEVEL_6_PATH = "blocks/levels/level_6.png";
+    public static final String LEVEL_7_PATH = "blocks/levels/level_7.png";
+    public static final String LEVEL_8_PATH = "blocks/levels/level_8.png";
+    public static final String LEVEL_9_PATH = "blocks/levels/level_9.png";
+    public static final String LEVEL_10_PATH = "blocks/levels/level_10.png";
+    public static final String LEVEL_11_PATH = "blocks/levels/level_11.png";
+    public static final String LEVEL_12_PATH = "blocks/levels/level_12.png";
+    public static final String LEVEL_13_PATH = "blocks/levels/level_13.png";
+    public static final String LEVEL_14_PATH = "blocks/levels/level_14.png";
+    public static final String LEVEL_15_PATH = "blocks/levels/level_15.png";
 
     public static final float WORLD_HEIGHT = 40f;
     public static final float WORLD_WIDTH = 60f;
 
     public static final boolean DEBUG = true;
 
-    public static final int MAX_LEVEL = 14;
+    public static final int MAX_LEVEL = 15;
 
     static final God GOD = new God();
     public final AssetManager assetManager;
@@ -118,6 +132,22 @@ public final class God {
         assetManager.load(RESUME_BUTTON_PATH, Texture.class);
         assetManager.load(RESTART_BUTTON_PATH, Texture.class);
         assetManager.load(QUIT_BUTTON_PATH, Texture.class);
+
+        assetManager.load(LEVEL_1_PATH, Texture.class);
+        assetManager.load(LEVEL_2_PATH, Texture.class);
+        assetManager.load(LEVEL_3_PATH, Texture.class);
+        assetManager.load(LEVEL_4_PATH, Texture.class);
+        assetManager.load(LEVEL_5_PATH, Texture.class);
+        assetManager.load(LEVEL_6_PATH, Texture.class);
+        assetManager.load(LEVEL_7_PATH, Texture.class);
+        assetManager.load(LEVEL_8_PATH, Texture.class);
+        assetManager.load(LEVEL_9_PATH, Texture.class);
+        assetManager.load(LEVEL_10_PATH, Texture.class);
+        assetManager.load(LEVEL_11_PATH, Texture.class);
+        assetManager.load(LEVEL_12_PATH, Texture.class);
+        assetManager.load(LEVEL_13_PATH, Texture.class);
+        assetManager.load(LEVEL_14_PATH, Texture.class);
+        assetManager.load(LEVEL_15_PATH, Texture.class);
 
         assetManager.finishLoading();
     }

@@ -52,7 +52,8 @@ public class LevelsScreen extends ScreenAdapter {
             }
             y -= 40;
             x = 20;
-        }
+        } //height = 270
+        //width = 480
         for (int i = 0; i < God.MAX_LEVEL % 5; ++i) {
             rectangles.add(new Rectangle(x, y, 20, 20));
             x += 40;
@@ -92,10 +93,13 @@ public class LevelsScreen extends ScreenAdapter {
         debugRenderer.setColor(Color.BLACK);
         spriteBatch.begin();
         int levelNumber = 1;
-        for (Rectangle rectangle : rectangles) {
-            debugRenderer.rect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
-            font.draw(spriteBatch, Integer.toString(God.getInstance().getGatheredStars(levelNumber)), rectangle.x, rectangle.y);
-            ++levelNumber;
+
+        if (God.DEBUG) {
+            for (Rectangle rectangle : rectangles) {
+                debugRenderer.rect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
+                font.draw(spriteBatch, Integer.toString(God.getInstance().getGatheredStars(levelNumber)), rectangle.x, rectangle.y);
+                ++levelNumber;
+            }
         }
         spriteBatch.end();
         debugRenderer.end();
