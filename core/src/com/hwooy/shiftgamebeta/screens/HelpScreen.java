@@ -18,7 +18,7 @@ import com.hwooy.shiftgamebeta.utils.God;
 public class HelpScreen extends ScreenAdapter {
 
     public static final int CAM_WIDTH = 480; //Gdx.graphics.getWidth();
-    public static final int CAM_HEIGHT = 320; //Gdx.graphics.getHeight();
+    public static final int CAM_HEIGHT = 270; //Gdx.graphics.getHeight();
 
     ScreenManager screenManager;
     OrthographicCamera cam;
@@ -38,7 +38,7 @@ public class HelpScreen extends ScreenAdapter {
         cam = new OrthographicCamera(CAM_WIDTH, CAM_HEIGHT);
         cam.position.set(CAM_WIDTH / 2, CAM_HEIGHT / 2, 0);
 
-        backBounds = new Rectangle(0, 280, 30, 20);
+        backBounds = new Rectangle(0, 250, 30, 20);
 
         touchPoint = new Vector3();
         god = God.getInstance();
@@ -46,6 +46,7 @@ public class HelpScreen extends ScreenAdapter {
         spriteBatch = God.getInstance().spriteBatch;
         font = God.getInstance().font;
         font.setColor(Color.BLUE);
+        font.scale(-.5f);
     }
     /**
      * handles user input response
@@ -73,7 +74,8 @@ public class HelpScreen extends ScreenAdapter {
         shapeRenderer.end();
 
         spriteBatch.begin();
-        font.draw(spriteBatch, "This is da ShiftGame!", 40, 200);
+        font.draw(spriteBatch, "This is da ShiftGame!", 70, 250);
+        font.draw(spriteBatch, "Instructions: Fling the player with your finger to traverse levels and complete obstacles!", 300, 250, 0, 5);
 
         spriteBatch.end();
     }

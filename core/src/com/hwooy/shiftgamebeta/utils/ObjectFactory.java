@@ -137,7 +137,7 @@ public class ObjectFactory {
                     continue;
                 }
 
-                bodyDef.position.set(row, col);
+                bodyDef.position.set(row + Block.BLOCK_WIDTH, col + Block.BLOCK_HEIGHT);
                 Body body = world.createBody(bodyDef);
                 body.createFixture(fixtureDef).setUserData(layer.getName());
 
