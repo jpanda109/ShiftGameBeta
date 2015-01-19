@@ -47,12 +47,14 @@ public final class God {
     public static final String MUSIC_PATH = "music/Scythuz_Cybernetic Sheep.ogg";
     public static final String FONT_PATH = "fonts/GloriaHallelujah.fnt";
 
+    public static final String LEVEL_1_PATH = "";
+
     public static final float WORLD_HEIGHT = 40f;
     public static final float WORLD_WIDTH = 60f;
 
     public static final boolean DEBUG = true;
 
-    public static final int MAX_LEVEL = 13;
+    public static final int MAX_LEVEL = 14;
 
     static final God GOD = new God();
     public final AssetManager assetManager;
