@@ -44,6 +44,8 @@ public final class God {
     public static final String RESUME_BUTTON_PATH = "buttons/Play_Button.png";
     public static final String RESTART_BUTTON_PATH = "buttons/Restart_Button.png";
     public static final String QUIT_BUTTON_PATH = "buttons/Power_Button.png";
+    public static final String MUSIC_PATH = "music/Scythuz_Cybernetic Sheep.ogg";
+    public static final String FONT_PATH = "fonts/GloriaHallelujah.fnt"
 
     public static final float WORLD_HEIGHT = 40f;
     public static final float WORLD_WIDTH = 60f;
@@ -69,18 +71,14 @@ public final class God {
         assetManager = new AssetManager();
         assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
         spriteBatch = new SpriteBatch();
-        font = new BitmapFont(Gdx.files.internal("fonts/GloriaHallelujah.fnt"));
+        font = new BitmapFont(Gdx.files.internal(FONT_PATH));
         preferences = Gdx.app.getPreferences(PREFERENCE_NAME);
         shapeRenderer = new ShapeRenderer();
         debugRenderer = new Box2DDebugRenderer();
         world = new World(new Vector2(0, -10f), false);
-        music = Gdx.audio.newMusic(Gdx.files.internal("music/Scythuz_Cybernetic Sheep.ogg"));
+        music = Gdx.audio.newMusic(Gdx.files.internal(MUSIC_PATH));
         loadAllTextures();
         music.setLooping(true);
-        // music was pipssing me off so i turned it off, turn it back on later
-        //playMusic(isMusicOn());
-        camHeight = Gdx.graphics.getHeight();
-        camWidth = Gdx.graphics.getWidth();
     }
 
     public static God getInstance() {
@@ -94,32 +92,39 @@ public final class God {
     private void loadAllTextures() {
         assetManager.load(PLAYER_HELL_PATH, Texture.class);
         assetManager.load(PLAYER_HEAVEN_PATH, Texture.class);
+
         assetManager.load(TERRAIN_PATH, Texture.class);
         assetManager.load(TERRAIN_ONE_PATH, Texture.class);
         assetManager.load(TERRAIN_TWO_PATH, Texture.class);
+
         assetManager.load(LAVA_PATH, Texture.class);
         assetManager.load(CRUMBLING_PATH, Texture.class);
         assetManager.load(PORTAL_PATH, Texture.class);
         assetManager.load(STAR_PATH, Texture.class);
+
         assetManager.load(HELP_PATH, Texture.class);
         assetManager.load(PLAY_PATH, Texture.class);
         assetManager.load(SELECT_PATH, Texture.class);
+
         assetManager.load(PAUSE_BUTTON_PATH, Texture.class);
         assetManager.load(RESUME_BUTTON_PATH, Texture.class);
         assetManager.load(RESTART_BUTTON_PATH, Texture.class);
         assetManager.load(QUIT_BUTTON_PATH, Texture.class);
+
         assetManager.finishLoading();
     }
 
     public TiledMap getTiledMap(int levelNumber) {
         assetManager.load("levels/Level" + levelNumber + "_NEW.tmx", TiledMap.class);
         assetManager.finishLoading();
+
         return assetManager.get("levels/Level" + levelNumber + "_NEW.tmx", TiledMap.class);
     }
 
     public TiledMap getTutorialMap(int levelNumber) {
         assetManager.load("levels/Tutorials/Tutorial_Level_" + levelNumber + ".tmx", TiledMap.class);
         assetManager.finishLoading();
+
         return assetManager.get("levels/Tutorials/Tutorial_Level_" + levelNumber + ".tmx", TiledMap.class);
     }
 
