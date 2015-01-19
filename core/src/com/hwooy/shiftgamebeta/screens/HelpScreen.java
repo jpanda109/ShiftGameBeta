@@ -28,6 +28,7 @@ public class HelpScreen extends ScreenAdapter {
     ShapeRenderer shapeRenderer;
     SpriteBatch spriteBatch;
     BitmapFont font;
+    BitmapFont headerFont;
 
     /**
      * constructor for the start screen
@@ -44,9 +45,12 @@ public class HelpScreen extends ScreenAdapter {
         god = God.getInstance();
         shapeRenderer = God.getInstance().shapeRenderer;
         spriteBatch = God.getInstance().spriteBatch;
+        headerFont = God.getInstance().headerFont;
+        headerFont.setColor(Color.BLUE);
+        headerFont.scale(.15f);
         font = God.getInstance().font;
         font.setColor(Color.BLUE);
-        font.scale(-.5f);
+        font.scale(-.6f);
     }
     /**
      * handles user input response
@@ -74,8 +78,11 @@ public class HelpScreen extends ScreenAdapter {
         shapeRenderer.end();
 
         spriteBatch.begin();
-        font.draw(spriteBatch, "This is da ShiftGame!", 70, 250);
-        font.draw(spriteBatch, "Instructions: Fling the player with your finger to traverse levels and complete obstacles!", 300, 250, 0, 5);
+        headerFont.draw(spriteBatch, "ShiftGame!", 40, 260);
+        font.drawWrapped(spriteBatch, "Instructions: Fling the player with your finger to traverse levels and complete obstacles!", 240, 250, 220);
+        font.drawWrapped(spriteBatch, "Shift colors to pass through terrain of the same color as you", 240, 140, 220);
+        font.drawWrapped(spriteBatch, "This block disappears after a second of touching it", 10, 220, 150);
+        font.drawWrapped(spriteBatch, "Don't touch this block! It burns you", 10, 100, 150);
 
         spriteBatch.end();
     }

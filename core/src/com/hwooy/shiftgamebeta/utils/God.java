@@ -58,6 +58,7 @@ public final class God {
     public final AssetManager assetManager;
     public final SpriteBatch spriteBatch;
     public final BitmapFont font;
+    public final BitmapFont headerFont;
     public final Preferences preferences;
     public final ShapeRenderer shapeRenderer;
     public final Box2DDebugRenderer debugRenderer;
@@ -72,6 +73,7 @@ public final class God {
         assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
         spriteBatch = new SpriteBatch();
         font = new BitmapFont(Gdx.files.internal(FONT_PATH));
+        headerFont = new BitmapFont(Gdx.files.internal(FONT_PATH));
         preferences = Gdx.app.getPreferences(PREFERENCE_NAME);
         shapeRenderer = new ShapeRenderer();
         debugRenderer = new Box2DDebugRenderer();
