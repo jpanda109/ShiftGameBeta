@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class LevelsScreen extends ScreenAdapter {
 
     public static final int CAM_WIDTH = 480; //Gdx.graphics.getWidth();
-    public static final int CAM_HEIGHT = 320; //Gdx.graphics.getHeight();
+    public static final int CAM_HEIGHT = 270; //Gdx.graphics.getHeight();
     ScreenManager screenManager;
     OrthographicCamera cam;
     Vector3 touchPoint;
@@ -41,7 +41,7 @@ public class LevelsScreen extends ScreenAdapter {
         spriteBatch = God.getInstance().spriteBatch;
         font = God.getInstance().font;
         int x = 20;
-        int y = 260;
+        int y = 240;
         for (int i = 0; i < God.MAX_LEVEL / 5; ++i) {
             for (int j = 0; j < 5; ++j) {
                 rectangles.add(new Rectangle(x, y, 20, 20));

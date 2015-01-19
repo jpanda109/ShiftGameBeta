@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="64" height="36" tilewidth="8" tileheight="8">
+ <tileset firstgid="1" name="tileset_new" tilewidth="8" tileheight="8">
+  <image source="tileset_new.png" width="80" height="80"/>
+ </tileset>
+ <tileset firstgid="101" name="tileset_new" tilewidth="8" tileheight="8">
+  <image source="tileset_new.png" width="80" height="80"/>
+ </tileset>
+ <layer name="Heaven TerrainBlock" width="64" height="36">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAIBXAyQAAAE=
+  </data>
+ </layer>
+ <layer name="Hell TerrainBlock" width="64" height="36">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAIBXAyQAAAE=
+  </data>
+ </layer>
+ <layer name="Both LavaBlock" width="64" height="36">
+  <data encoding="base64" compression="zlib">
+   eJzt10EKwCAMBEB/0v//svdCJUtLqXEGvAQvK8bgGMAbjsmCK3eFv0neMPcX5rr0x1e9vvIZsa+0P8xOABJ3/7Cne1eRzM2O+RPy12pdyV+rdSV/rQYAuzkBNmEJFg==
+  </data>
+ </layer>
+ <layer name="Both CrumblingBlock" width="64" height="36">
+  <data encoding="base64" compression="zlib">
+   eJzt1rENQCEIBUDXcf8F/wC/UAqNL9wlNiYUKIJjwNrc2JuLlWwn/2p8khP5J9WJ+9/bq8S/qNK/KvWbkv8p3fPvKqW/r9yaVclnRF/V95H09wOAF1RmpvkKQEfmHwD8fcrfDNE=
+  </data>
+ </layer>
+ <layer name="Both Star" width="64" height="36">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAIBXAyQAAAE=
+  </data>
+ </layer>
+ <layer name="Both TerrainBlock" width="64" height="36">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAIBXAyQAAAE=
+  </data>
+ </layer>
+ <layer name="Both Portal" width="64" height="36">
+  <data encoding="base64" compression="zlib">
+   eJztzrENwCAQBEF6wimkdgr9F8N3cViakTbf1gAAAAAAAP6nV096ImhUMz0R9FZfeiJoVTs9AQBc4wC1HQIV
+  </data>
+ </layer>
+ <layer name="Both Player" width="64" height="36">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAIBXAyQAAAE=
+  </data>
+ </layer>
+</map>
