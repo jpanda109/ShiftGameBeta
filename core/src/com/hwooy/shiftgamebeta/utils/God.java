@@ -33,7 +33,7 @@ public final class God {
     public static final String TERRAIN_BOTH = "blocks/Terrain/terrain_purple.png";
     public static final String TERRAIN_COLOR_1 = "blocks/Terrain/terrain_green.png";
     public static final String TERRAIN_COLOR_2 = "blocks/Terrain/terrain_blue.png";
-    public static final String CRUMBLING_PATH = "blocks/CrumblingBlock.png";
+    public static final String CRUMBLING_PATH = "blocks/crumbling_block.png";
     public static final String LAVA_PATH = "blocks/lava.png";
     public static final String PORTAL_PATH = "portal/portal.png";
     public static final String STAR_PATH = "star/star.png";
