@@ -82,7 +82,11 @@ public class HelpScreen extends ScreenAdapter {
         font.drawWrapped(spriteBatch, "Instructions: Fling the player with your finger to traverse levels and complete obstacles!", 240, 250, 220);
         font.drawWrapped(spriteBatch, "Shift colors to pass through terrain of the same color as you", 240, 140, 220);
         font.drawWrapped(spriteBatch, "This block disappears after a second of touching it", 10, 220, 150);
-        font.drawWrapped(spriteBatch, "Don't touch this block! It burns you", 10, 100, 150);
+        font.drawWrapped(spriteBatch, "Don't touch this block! It burns you", 10, 120, 150);
+        font.draw(spriteBatch, "You can find source code for this crap game if you're so inclined:", 10, 40);
+        font.draw(spriteBatch, "https://github.com/jpanda109/ShiftGameBeta", 10, 20);
+        spriteBatch.draw(God.getInstance().getTexture(God.CRUMBLING_PATH), 155, 180);
+        spriteBatch.draw(God.getInstance().getTexture(God.LAVA_PATH), 155, 80);
 
         spriteBatch.end();
     }
