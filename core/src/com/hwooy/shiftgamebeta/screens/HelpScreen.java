@@ -47,10 +47,10 @@ public class HelpScreen extends ScreenAdapter {
         spriteBatch = God.getInstance().spriteBatch;
         headerFont = God.getInstance().headerFont;
         headerFont.setColor(Color.BLUE);
-        headerFont.scale(.15f);
+        headerFont.setScale(1.15f);
         font = God.getInstance().font;
         font.setColor(Color.BLUE);
-        font.scale(-.6f);
+        font.setScale(.4f);
     }
     /**
      * handles user input response
