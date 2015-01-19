@@ -112,9 +112,9 @@ public final class God {
     }
 
     public TiledMap getTiledMap(int levelNumber) {
-        assetManager.load("levels/Level" + levelNumber + "_NEW.tmx", TiledMap.class);
+        assetManager.load("levels/" + levelNumber + ".tmx", TiledMap.class);
         assetManager.finishLoading();
-        return assetManager.get("levels/Level" + levelNumber + "_NEW.tmx", TiledMap.class);
+        return assetManager.get("levels/" + levelNumber + ".tmx", TiledMap.class);
     }
 
     public TiledMap getTutorialMap(int levelNumber) {
