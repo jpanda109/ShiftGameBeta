@@ -153,6 +153,7 @@ public class ObjectFactory {
                     return;
                 }
                 else if(obj.equals("portal")) {
+                    body.setTransform(body.getPosition().x + Portal.PORTAL_WIDTH - Block.BLOCK_WIDTH, body.getPosition().y + Portal.PORTAL_HEIGHT - Block.BLOCK_HEIGHT, 0);
                     gameObjects.add(new Portal(body));
                     return;
                 }
