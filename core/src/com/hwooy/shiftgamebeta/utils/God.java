@@ -52,7 +52,7 @@ public final class God {
 
     public static final boolean DEBUG = true;
 
-    public static final int MAX_LEVEL = 6;
+    public static final int MAX_LEVEL = 13;
 
     static final God GOD = new God();
     public final AssetManager assetManager;
