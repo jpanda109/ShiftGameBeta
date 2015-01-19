@@ -18,12 +18,12 @@
  </layer>
  <layer name="Both LavaBlock" width="64" height="36">
   <data encoding="base64" compression="zlib">
-   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAIBXAyQAAAE=
+   eJzt1rEJADAMA0Fvkv23zAIGi+AmcAcq1X8VAACJ0+znDwAAMHtt7I2frgcAACB1AcDvA6M=
   </data>
  </layer>
  <layer name="Both CrumblingBlock" width="64" height="36">
   <data encoding="base64" compression="zlib">
-   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAIBXAyQAAAE=
+   eJzt1kEKACAIBMC+0/8/2NUiCIygYgY86V7VUgAAiOpQr2cA6NmlAETjXcj+5qdzu1kA/uQuAMyt9uNt/ewMRA1+3wvb
   </data>
  </layer>
  <layer name="Both Star" width="64" height="36">
@@ -38,12 +38,12 @@
  </layer>
  <layer name="Both Portal" width="64" height="36">
   <data encoding="base64" compression="zlib">
-   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAIBXAyQAAAE=
+   eJztzrENwCAQBEF6wimkdgr9F8M3gU6yZqTNtzX4t1496YmgUc30RNBbfemJoFXt9AQAAAAAAAAAVx1vzwIV
   </data>
  </layer>
  <layer name="Both Player" width="64" height="36">
   <data encoding="base64" compression="zlib">
-   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAIBXAyQAAAE=
+   eJztzsEJACAMBMHoV/uv11SRA5mB/W8VAAAAAAAAAPxldTs9EXS6m54AxjyNkAAb
   </data>
  </layer>
 </map>

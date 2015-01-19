@@ -8,42 +8,42 @@
  </tileset>
  <layer name="Heaven TerrainBlock" width="64" height="36">
   <data encoding="base64" compression="zlib">
-   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAIBXAyQAAAE=
+   eJzt0qENAAAIBLGfgv1HRaAJEtMmt8ElAAAAAAAAAACjluDinT8NyJ4BCQ==
   </data>
  </layer>
  <layer name="Hell TerrainBlock" width="64" height="36">
   <data encoding="base64" compression="zlib">
-   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAIBXAyQAAAE=
+   eJztw0EJAAAIBDCj2D+lCQ7R9warAgAAAAAAAOCqQwB2HfIzAFoBgQ==
   </data>
  </layer>
  <layer name="Both LavaBlock" width="64" height="36">
   <data encoding="base64" compression="zlib">
-   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAIBXAyQAAAE=
+   eJzt17EJACAQA0CXsHb/La1FbLSRzx1kgDSBtAakGhcBYPWyl7YWAAAA6vH3d/pn0z9bev8f9EOAeiYFrQTb
   </data>
  </layer>
  <layer name="Both CrumblingBlock" width="64" height="36">
   <data encoding="base64" compression="zlib">
-   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAIBXAyQAAAE=
+   eJzt2ckJACAMBEDbsf8GfdmARwxmBnyHVRMEW4O6+sIC8tK3b+zsuzODM/QSUJX5B1Rl/hGl+r2SP5/I+ReRP+MeT/L/UWOV/Plq3Jh/r/5DvV/hngEUtQ11
   </data>
  </layer>
  <layer name="Both Star" width="64" height="36">
   <data encoding="base64" compression="zlib">
-   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAIBXAyQAAAE=
+   eJztzjEBAAAIA6D1tH8PQ+zwEBKQ8NlcBwAAAAAAAAAAqCw6tABc
   </data>
  </layer>
  <layer name="Both TerrainBlock" width="64" height="36">
   <data encoding="base64" compression="zlib">
-   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAIBXAyQAAAE=
+   eJztwwENAAAIA6CXsH9VEzyADjYSAAAAAAD4b0oAAIDrFn2OAH8=
   </data>
  </layer>
  <layer name="Both Portal" width="64" height="36">
   <data encoding="base64" compression="zlib">
-   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAIBXAyQAAAE=
+   eJztzrENwCAQBEF6wimkdgr9F8MXgXSBZ6TNtzUAAAAA+J9ePemJoFHN9ETQW33piaBV7fQEAAAA1xzBwQIV
   </data>
  </layer>
  <layer name="Both Player" width="64" height="36">
   <data encoding="base64" compression="zlib">
-   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAIBXAyQAAAE=
+   eJztzsEJACAMBMHoV/uv1zQRDmQG9r9VAAAAAAAAAPxsdTs9EXS6m54AGPQAplgAGw==
   </data>
  </layer>
 </map>

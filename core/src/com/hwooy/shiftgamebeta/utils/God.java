@@ -79,6 +79,10 @@ public final class God {
         music = Gdx.audio.newMusic(Gdx.files.internal(MUSIC_PATH));
         loadAllTextures();
         music.setLooping(true);
+        // music was pipssing me off so i turned it off, turn it back on later
+        playMusic(isMusicOn());
+        camHeight = Gdx.graphics.getHeight();
+        camWidth = Gdx.graphics.getWidth();
     }
 
     public static God getInstance() {
@@ -115,10 +119,9 @@ public final class God {
     }
 
     public TiledMap getTiledMap(int levelNumber) {
-        assetManager.load("levels/Level" + levelNumber + "_NEW.tmx", TiledMap.class);
+        assetManager.load("levels/" + levelNumber + ".tmx", TiledMap.class);
         assetManager.finishLoading();
-
-        return assetManager.get("levels/Level" + levelNumber + "_NEW.tmx", TiledMap.class);
+        return assetManager.get("levels/" + levelNumber + ".tmx", TiledMap.class);
     }
 
     public TiledMap getTutorialMap(int levelNumber) {

@@ -8,42 +8,42 @@
  </tileset>
  <layer name="Heaven TerrainBlock" width="64" height="36">
   <data encoding="base64" compression="zlib">
-   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAIBXAyQAAAE=
+   eJzt17ENADAIAzCu6P+n9oJOZQDFljggQxBUAR3OYwC6pO8U+bPJny09PzO5/wEAAGA2vzv80aF9Lll0ApU=
   </data>
  </layer>
  <layer name="Hell TerrainBlock" width="64" height="36">
   <data encoding="base64" compression="zlib">
-   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAIBXAyQAAAE=
+   eJztw7EJACAQBDBHuf2ndIIrfNBCEshaAABMpQS4JSUAAAAzKQFOpATeS/m7DXRBA8E=
   </data>
  </layer>
  <layer name="Both LavaBlock" width="64" height="36">
   <data encoding="base64" compression="zlib">
-   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAIBXAyQAAAE=
+   eJztz7EJwDAQBMHvxP136QKEwSg4DmkGlIi/YGeAHU9o00p/ZtNKf2bTSn9m00p/ZtNKf2bTSn9m00r/+nZuTvHVfwv9//4AAACArBeW/QVV
   </data>
  </layer>
  <layer name="Both CrumblingBlock" width="64" height="36">
   <data encoding="base64" compression="zlib">
-   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAIBXAyQAAAE=
+   eJzt1cEJAAAIAzHXcf8F/fsXQRO4FdoIAAAANmULgN/8AsBtdh4AgAkFkskB7Q==
   </data>
  </layer>
  <layer name="Both Star" width="64" height="36">
   <data encoding="base64" compression="zlib">
-   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAIBXAyQAAAE=
+   eJztzgENAAAIA6D3tH8PW9zNQQISAAAAAAAAAAA+mesAVQvUUABc
   </data>
  </layer>
  <layer name="Both TerrainBlock" width="64" height="36">
   <data encoding="base64" compression="zlib">
-   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAIBXAyQAAAE=
+   eJzt1EEJAAAIBMErYf+q/gUDiDOwFTYBploCuMLHAAAAAAAA4I8GJdoA/Q==
   </data>
  </layer>
  <layer name="Both Portal" width="64" height="36">
   <data encoding="base64" compression="zlib">
-   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAIBXAyQAAAE=
+   eJztzrENwCAQBEF6wimkdgr9F8M3gU6yZqTNtzXg73r1pCeCRjXTE0Fv9aUngla10xMAAAAAAAAAFx1TYQIV
   </data>
  </layer>
  <layer name="Both Player" width="64" height="36">
   <data encoding="base64" compression="zlib">
-   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAIBXAyQAAAE=
+   eJztzrENACAMBLFAC/vPSxYI7Te2dP1V8bO6nZ4IOt1NTwAAAAAAAAAAMHqXtQAb
   </data>
  </layer>
 </map>

@@ -3,39 +3,47 @@
  <tileset firstgid="1" name="tileset_new" tilewidth="8" tileheight="8">
   <image source="tileset_new.png" width="80" height="80"/>
  </tileset>
- <layer name="Both TerrainBlock" width="60" height="40">
+ <tileset firstgid="101" name="tileset_new" tilewidth="8" tileheight="8">
+  <image source="tileset_new.png" width="80" height="80"/>
+ </tileset>
+ <layer name="Heaven TerrainBlock" width="60" height="40">
   <data encoding="base64" compression="zlib">
-   eJzt2UEKwCAMRFEv4f2v6qobEaOCGZP+B25a0zFQRLAUAADW1cHYnW/VvKRfa6S1n6Bfbf737Oaw8m9S/0/0mytPnU+/ufOt/XlWdzLvb/sz/WrzvfPU+d556nzvPEX+6ll3Vrfz/f59ZvQLAAAQU/R7GADIogE8/QkH
+   eJztwTEBAAAAwqD1T20Hb6AAAAAAAAAAAAB4DCWAAAE=
   </data>
  </layer>
  <layer name="Hell TerrainBlock" width="60" height="40">
   <data encoding="base64" compression="zlib">
-   eJztzLEJADAIAEGnSO3+U6YNgrVC7uDbjwAAYEqWANjhPAEAAPCvbNr6BQBmXNvxAkM=
-  </data>
- </layer>
- <layer name="Heaven TerrainBlock" width="60" height="40">
-  <data encoding="base64" compression="zlib">
-   eJztzjENAAAIBDFUvH+pGIAVlja5/aoAAACATb4HAAAAAI5lCYBZA7ukAJs=
+   eJztwTEBAAAAwqD1T20Hb6AAAAAAAAAAAAB4DCWAAAE=
   </data>
  </layer>
  <layer name="Both LavaBlock" width="60" height="40">
   <data encoding="base64" compression="zlib">
-   eJzt1LEJAAAIA0E3cf8tnUAQEWzu4LvUiQAAAACmsmm7A+CGfwYAAAC+FDfYAuk=
+   eJztwwENAAAMw6A6uX+XVzAHkFAAAAAAAAAAAHUjANsD7AEAuw==
+  </data>
+ </layer>
+ <layer name="Both CrumblingBlock" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20Hb6AAAAAAAAAAAAB4DCWAAAE=
   </data>
  </layer>
  <layer name="Both Star" width="60" height="40">
   <data encoding="base64" compression="zlib">
-   eJztzjEBAAAIA6D1tH8PC+zXAxKQAAAAAAB0cx0AAAAAeG4BR5oAXA==
+   eJztwTEBAAAAwqD1T20Hb6AAAAAAAAAAAAB4DCWAAAE=
+  </data>
+ </layer>
+ <layer name="Both TerrainBlock" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztzjERAAAIAzFM4N8qFpigQ3L3c1sFAAAAAAAAAKTrgz63t18A0gwC9QRv
   </data>
  </layer>
  <layer name="Both Portal" width="60" height="40">
   <data encoding="base64" compression="zlib">
-   eJztzqERACEMAEF64i1Y3kL/xZAqEsHuzPlrDQAAAAAAAHhdj77qiUQjmtUTiVb0V08k2tGpngDgGRciAAIV
+   eJztzrENwCAMAEF2Ii20SQv7D4NHoLIV6U76/lsDAAAAAAAA+LcePdUTiUY0qycSvdFXPZFoRbt6AoBrB5LiAhU=
   </data>
  </layer>
  <layer name="Both Player" width="60" height="40">
   <data encoding="base64" compression="zlib">
-   eJztzrENACAIAEG0xf3nlR1MhOIu+f4jAGZY1e6e+Cir0z0BAAAAAAAAADy5aEUAGw==
+   eJztzsENACAIADH0q/vPK1NIAm1y/4sAAAAAAAAAoIuV7eqJj052qycAGO0B0lAAGw==
   </data>
  </layer>
 </map>

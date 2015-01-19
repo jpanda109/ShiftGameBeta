@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="60" height="40" tilewidth="8" tileheight="8">
  <tileset firstgid="1" name="tileset_new" tilewidth="8" tileheight="8">
-  <image source="../tileset_new.png" width="80" height="80"/>
+  <image source="tileset_new.png" width="80" height="80"/>
  </tileset>
  <tileset firstgid="101" name="tileset_new" tilewidth="8" tileheight="8">
-  <image source="../tileset_new.png" width="80" height="80"/>
+  <image source="tileset_new.png" width="80" height="80"/>
  </tileset>
  <layer name="Heaven TerrainBlock" width="60" height="40">
   <data encoding="base64" compression="zlib">
@@ -28,12 +28,12 @@
  </layer>
  <layer name="Both Star" width="60" height="40">
   <data encoding="base64" compression="zlib">
-   eJztwTEBAAAAwqD1T20Hb6AAAAAAAAAAAAB4DCWAAAE=
+   eJztzgENAAAIA6D3tH8PY3xTSEACAAAAwDXTDgAAAADAEwsYrQBc
   </data>
  </layer>
  <layer name="Both TerrainBlock" width="60" height="40">
   <data encoding="base64" compression="zlib">
-   eJztwwENAAAIA6CXsH9Va9wJGwkAAAAAAAAA0G6eBbhiAZGvBO0=
+   eJzt1UEJAAAIADFL2L+qEQRfKhtchosAAAAAgHuyCQC28jAAprqHfAvgigKMWwY9
   </data>
  </layer>
  <layer name="Both Portal" width="60" height="40">
