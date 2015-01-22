@@ -46,6 +46,7 @@ public final class God {
     public static final String QUIT_BUTTON_PATH = "buttons/Power_Button.png";
     public static final String MUSIC_PATH = "music/Scythuz_Cybernetic Sheep.ogg";
     public static final String FONT_PATH = "fonts/GloriaHallelujah.fnt";
+    public static final String STAR_TRANSPARENT_PATH = "star/star_transparent.png";
 
     public static final String LEVEL_1_PATH = "blocks/levels/level_1.png";
     public static final String LEVEL_2_PATH = "blocks/levels/level_2.png";
@@ -62,6 +63,7 @@ public final class God {
     public static final String LEVEL_13_PATH = "blocks/levels/level_13.png";
     public static final String LEVEL_14_PATH = "blocks/levels/level_14.png";
     public static final String LEVEL_15_PATH = "blocks/levels/level_15.png";
+    public static final String LEVEL_NONE = "blocks/levels/level_none.png";
 
     public static final float WORLD_HEIGHT = 40f;
     public static final float WORLD_WIDTH = 60f;
@@ -87,20 +89,26 @@ public final class God {
     private God() {
         assetManager = new AssetManager();
         assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
+
         spriteBatch = new SpriteBatch();
+
         font = new BitmapFont(Gdx.files.internal(FONT_PATH));
         headerFont = new BitmapFont(Gdx.files.internal(FONT_PATH));
+
         preferences = Gdx.app.getPreferences(PREFERENCE_NAME);
+
         shapeRenderer = new ShapeRenderer();
         debugRenderer = new Box2DDebugRenderer();
-        world = new World(new Vector2(0, -10f), false);
+
         music = Gdx.audio.newMusic(Gdx.files.internal(MUSIC_PATH));
-        loadAllTextures();
         music.setLooping(true);
-        // music was pipssing me off so i turned it off, turn it back on later
         playMusic(isMusicOn());
+
         camHeight = Gdx.graphics.getHeight();
         camWidth = Gdx.graphics.getWidth();
+
+        world = new World(new Vector2(0, -10f), false);
+        loadAllTextures();
     }
 
     public static God getInstance() {
@@ -123,6 +131,7 @@ public final class God {
         assetManager.load(CRUMBLING_PATH, Texture.class);
         assetManager.load(PORTAL_PATH, Texture.class);
         assetManager.load(STAR_PATH, Texture.class);
+        assetManager.load(STAR_TRANSPARENT_PATH, Texture.class);
 
         assetManager.load(HELP_PATH, Texture.class);
         assetManager.load(PLAY_PATH, Texture.class);
@@ -148,6 +157,7 @@ public final class God {
         assetManager.load(LEVEL_13_PATH, Texture.class);
         assetManager.load(LEVEL_14_PATH, Texture.class);
         assetManager.load(LEVEL_15_PATH, Texture.class);
+        assetManager.load(LEVEL_NONE, Texture.class);
 
         assetManager.finishLoading();
     }
@@ -161,7 +171,6 @@ public final class God {
     public TiledMap getTutorialMap(int levelNumber) {
         assetManager.load("levels/Tutorials/Tutorial_Level_" + levelNumber + ".tmx", TiledMap.class);
         assetManager.finishLoading();
-
         return assetManager.get("levels/Tutorials/Tutorial_Level_" + levelNumber + ".tmx", TiledMap.class);
     }
 
@@ -179,6 +188,7 @@ public final class God {
 
     public void saveProgress(int levelNumber, int starsGathered) {
         int prevGathered = preferences.getInteger(STARS_GATHERED_IN_LEVEL + levelNumber, 0);
+
         if (starsGathered > prevGathered) {
             preferences.putInteger(STARS_GATHERED_IN_LEVEL + levelNumber, starsGathered);
             preferences.putInteger(TOTAL_STARS, getTotalStars() + starsGathered - prevGathered); // add offset to total stars

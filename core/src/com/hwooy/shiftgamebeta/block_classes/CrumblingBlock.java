@@ -27,7 +27,6 @@ public class CrumblingBlock extends Block {
         }
         if (crumblingTime > 1f) {
             state = State.DEAD;
-            //body.getWorld().destroyBody(body);
         }
     }
 }

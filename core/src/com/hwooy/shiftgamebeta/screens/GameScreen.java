@@ -34,6 +34,7 @@ public class GameScreen extends ScreenAdapter {
     public enum GameState {
         RUNNING, PAUSED, RESTART, NEXT_LEVEL, QUIT
     }
+
     ScreenManager screenManager;
     public ArrayList<ShiftObject> gameObjects;
     public Player player;
@@ -42,6 +43,7 @@ public class GameScreen extends ScreenAdapter {
     int levelNumber;
     Vector3 touchPoint;
     public World world;
+
     PlayerGestureDetector playerGestureDetector;
     PlayerInputListener playerInputListener;
     ShiftContactListener shiftContactListener;
@@ -112,10 +114,8 @@ public class GameScreen extends ScreenAdapter {
     }
 
     private void handleInput(float delta) {
-
         if (Gdx.input.justTouched()) {
             gameRenderer.guiCam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
-
             switch (state) {
                 case RUNNING:
                     if (pauseBounds.contains(touchPoint.x, touchPoint.y)) {
@@ -172,8 +172,8 @@ public class GameScreen extends ScreenAdapter {
 
     private void checkPlayerBounds() {
         if (player.body.getPosition().x < -1f
-                || player.body.getPosition().x > 60
-                || player.body.getPosition().y < -1f) {
+         || player.body.getPosition().x > 60
+         || player.body.getPosition().y < -1f) {
             setGameState(GameState.RESTART);
         }
     }
@@ -244,6 +244,4 @@ public class GameScreen extends ScreenAdapter {
         Gdx.input.setInputProcessor(null);
         super.dispose();
     }
-
-
 }
