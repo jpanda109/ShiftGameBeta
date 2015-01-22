@@ -27,7 +27,7 @@ public class StartScreen extends ScreenAdapter {
     Rectangle playBounds;
     Rectangle helpBounds;
     Rectangle settingsBounds;
-    Rectangle soundBounds;
+    public static Rectangle soundBounds;
     Vector3 touchPoint;
     God god;
     ShapeRenderer shapeRenderer;
@@ -92,6 +92,7 @@ public class StartScreen extends ScreenAdapter {
         spriteBatch.begin();
         spriteBatch.draw(god.getTexture(God.PLAY_PATH), playBounds.x, playBounds.y);
         spriteBatch.draw(god.getTexture(God.HELP_PATH), helpBounds.x, helpBounds.y);
+        spriteBatch.draw(god.getTexture(God.SOUND_ON_PATH), soundBounds.x, soundBounds.y);
 //        spriteBatch.draw(god.getTexture(God.SELECT_PATH), 215, 170);
 
         spriteBatch.end();

@@ -10,9 +10,7 @@ import java.util.ArrayList;
  * Created by jason on 12/3/14.
  */
 public class ShiftContactListener implements ContactListener {
-
     GameScreen gameScreen;
-    //public ArrayList<Body> deadBodies;
     public ArrayList<Body> crumblingBodies;
     public ArrayList<Body> gatheredStars;
 
@@ -22,7 +20,6 @@ public class ShiftContactListener implements ContactListener {
         this.gameScreen = gameScreen;
         crumblingBodies = new ArrayList<Body>();
         gatheredStars = new ArrayList<Body>();
-        //deadBodies = new ArrayList<Body>();
     }
 
     @Override
@@ -53,16 +50,13 @@ public class ShiftContactListener implements ContactListener {
     }
 
     @Override
-    public void endContact(Contact contact)
-    {}
+    public void endContact(Contact contact){}
 
     @Override
-    public void preSolve(Contact contact, Manifold oldManifold)
-    {}
+    public void preSolve(Contact contact, Manifold oldManifold){}
 
     @Override
-    public void postSolve(Contact contact, ContactImpulse impulse)
-    {}
+    public void postSolve(Contact contact, ContactImpulse impulse){}
 
     private void portalContact()
     {

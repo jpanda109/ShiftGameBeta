@@ -7,6 +7,7 @@ import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -14,6 +15,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.hwooy.shiftgamebeta.screens.StartScreen;
 
 /**
  * Created by jason on 12/3/14.
@@ -45,6 +47,8 @@ public final class God {
     public static final String RESTART_BUTTON_PATH = "buttons/Restart_Button.png";
     public static final String QUIT_BUTTON_PATH = "buttons/Power_Button.png";
     public static final String MUSIC_PATH = "music/Scythuz_Cybernetic Sheep.ogg";
+    public static final String SOUND_ON_PATH = "buttons/on_music_button.png";
+    public static final String SOUND_OFF_PATH = "buttons/stopped_music_button.png";
     public static final String FONT_PATH = "fonts/GloriaHallelujah.fnt";
     public static final String STAR_TRANSPARENT_PATH = "star/star_transparent.png";
 
@@ -82,11 +86,13 @@ public final class God {
     public final Box2DDebugRenderer debugRenderer;
     public final World world;
     public final Music music;
+    public boolean loaded;
 
     public static float camHeight = Gdx.graphics.getHeight();
     public static float camWidth = Gdx.graphics.getWidth();
 
     private God() {
+        loaded = false;
         assetManager = new AssetManager();
         assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
 
@@ -141,6 +147,8 @@ public final class God {
         assetManager.load(RESUME_BUTTON_PATH, Texture.class);
         assetManager.load(RESTART_BUTTON_PATH, Texture.class);
         assetManager.load(QUIT_BUTTON_PATH, Texture.class);
+        assetManager.load(SOUND_ON_PATH, Texture.class);
+        assetManager.load(SOUND_OFF_PATH, Texture.class);
 
         assetManager.load(LEVEL_1_PATH, Texture.class);
         assetManager.load(LEVEL_2_PATH, Texture.class);
@@ -160,6 +168,7 @@ public final class God {
         assetManager.load(LEVEL_NONE, Texture.class);
 
         assetManager.finishLoading();
+        loaded = true;
     }
 
     public TiledMap getTiledMap(int levelNumber) {
@@ -209,12 +218,18 @@ public final class God {
     }
 
     public void playMusic(boolean play) {
+        spriteBatch.begin();
         if (play) {
             music.play();
+            if(loaded) {
+                spriteBatch.draw(getTexture(God.SOUND_ON_PATH), StartScreen.soundBounds.x, StartScreen.soundBounds.y);
+            }
         } else {
             music.stop();
+            spriteBatch.draw(getTexture(God.SOUND_OFF_PATH), StartScreen.soundBounds.x, StartScreen.soundBounds.y);
         }
         preferences.putBoolean(MUSIC_ON, play);
+        spriteBatch.end();
     }
 
     public void toggleMusic() {
