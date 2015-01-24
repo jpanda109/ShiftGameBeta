@@ -5,6 +5,7 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -33,6 +34,7 @@ public class StartScreen extends ScreenAdapter {
     ShapeRenderer shapeRenderer;
     SpriteBatch spriteBatch;
     BitmapFont font;
+    Texture soundTexture;
 
     /**
      * constructor for the start screen
@@ -54,7 +56,13 @@ public class StartScreen extends ScreenAdapter {
         spriteBatch = God.getInstance().spriteBatch;
         font = God.getInstance().font;
         font.setColor(Color.BLUE);
+        setSoundTexture();
     }
+
+    private void setSoundTexture() {
+        soundTexture = god.isMusicOn() ? god.getTexture(God.SOUND_ON_PATH) : god.getTexture(God.SOUND_OFF_PATH);
+    }
+
     /**
      * handles user input response
      */
@@ -72,6 +80,7 @@ public class StartScreen extends ScreenAdapter {
                 screenManager.setScreen(ScreenManager.Screens.START);
             } else if (soundBounds.contains(touchPoint.x, touchPoint.y)) {
                 god.toggleMusic();
+                setSoundTexture();
             }
         }
     }
@@ -92,7 +101,7 @@ public class StartScreen extends ScreenAdapter {
         spriteBatch.begin();
         spriteBatch.draw(god.getTexture(God.PLAY_PATH), playBounds.x, playBounds.y);
         spriteBatch.draw(god.getTexture(God.HELP_PATH), helpBounds.x, helpBounds.y);
-        spriteBatch.draw(god.getTexture(God.SOUND_ON_PATH), soundBounds.x, soundBounds.y);
+        spriteBatch.draw(soundTexture, soundBounds.x, soundBounds.y, soundBounds.width, soundBounds.height);
 //        spriteBatch.draw(god.getTexture(God.SELECT_PATH), 215, 170);
 
         spriteBatch.end();
