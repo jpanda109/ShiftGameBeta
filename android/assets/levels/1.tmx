@@ -28,7 +28,7 @@
  </layer>
  <layer name="Both Star" width="64" height="36">
   <data encoding="base64" compression="zlib">
-   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAIBXAyQAAAE=
+   eJztzjEBAAAMAiB7rn+PNfD1gQQkAAAAAAAAADS3DgBA8YHWAFw=
   </data>
  </layer>
  <layer name="Both TerrainBlock" width="64" height="36">

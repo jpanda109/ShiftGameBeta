@@ -18,17 +18,17 @@
  </layer>
  <layer name="Both LavaBlock" width="64" height="36">
   <data encoding="base64" compression="zlib">
-   eJzt10EKwCAMBEB/0v//svdCJUtLqXEGvAQvK8bgGMAbjsmCK3eFv0neMPcX5rr0x1e9vvIZsa+0P8xOABJ3/7Cne1eRzM2O+RPy12pdyV+rdSV/rQYAuzkBNmEJFg==
+   eJzt10EKwCAMBEB/0v//svdCQ5b2YNMZ8BK8rMSIawFvOIoFV3qF3SQzTP9Czf3I7HpGZh2VtD/0EwCJu3/Y071fkbybE/Mn5O/VppK/V5tK/l4NAP7mBHxSCRY=
   </data>
  </layer>
  <layer name="Both CrumblingBlock" width="64" height="36">
   <data encoding="base64" compression="zlib">
-   eJzt1rENQCEIBUDXcf8F/wC/UAqNL9wlNiYUKIJjwNrc2JuLlWwn/2p8khP5J9WJ+9/bq8S/qNK/KvWbkv8p3fPvKqW/r9yaVclnRF/V95H09wOAF1RmpvkKQEfmHwD8fcrfDNE=
+   eJzt1cEJACEMBEDbsf8Gr4B76D6UBGfAj5BHdEnGgLW5cTcXp7Od/tP6Tk703ykn/n/vLqmvKJlfSX679H/K6/2/qst8r6LqG3Xa1dyX5kOeACCT7Ez7FYAX2X8A8PcB1NAM0Q==
   </data>
  </layer>
  <layer name="Both Star" width="64" height="36">
   <data encoding="base64" compression="zlib">
-   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAIBXAyQAAAE=
+   eJztzjENAAAIA7D5xL8PFCycPK2CJgAAQDPfAQAAAAAAgMMC9mgAXA==
   </data>
  </layer>
  <layer name="Both TerrainBlock" width="64" height="36">
