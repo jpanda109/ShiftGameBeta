@@ -177,12 +177,6 @@ public final class God {
         return assetManager.get("levels/" + levelNumber + ".tmx", TiledMap.class);
     }
 
-    public TiledMap getTutorialMap(int levelNumber) {
-        assetManager.load("levels/Tutorials/Tutorial_Level_" + levelNumber + ".tmx", TiledMap.class);
-        assetManager.finishLoading();
-        return assetManager.get("levels/Tutorials/Tutorial_Level_" + levelNumber + ".tmx", TiledMap.class);
-    }
-
     public int getUnlockedLevels() {
         return preferences.getInteger(CURRENT_LEVEL, 1);
     }
