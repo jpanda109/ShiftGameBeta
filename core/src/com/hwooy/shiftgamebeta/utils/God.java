@@ -30,6 +30,7 @@ public final class God {
     public static final String TOTAL_STARS = "TOTAL_STARS";
     public static final String MUSIC_ON = "MUSIC_ON";
 
+    //Resource paths (textures)
     public static final String PLAYER_COLOR_1_PATH = "blocks/player/player_blue.png";
     public static final String PLAYER_COLOR_2_PATH = "blocks/player/player_green.png";
     public static final String TERRAIN_BOTH = "blocks/Terrain/terrain_purple.png";
@@ -46,12 +47,13 @@ public final class God {
     public static final String RESUME_BUTTON_PATH = "buttons/Play_Button.png";
     public static final String RESTART_BUTTON_PATH = "buttons/Restart_Button.png";
     public static final String QUIT_BUTTON_PATH = "buttons/Power_Button.png";
-    public static final String MUSIC_PATH = "music/Scythuz_Cybernetic Sheep.ogg";
+    public static final String MUSIC_PATH = "music/Kubbi - Paracet.mp3";
     public static final String SOUND_ON_PATH = "buttons/on_music_button.png";
     public static final String SOUND_OFF_PATH = "buttons/stopped_music_button.png";
     public static final String FONT_PATH = "fonts/GloriaHallelujah.fnt";
     public static final String STAR_TRANSPARENT_PATH = "star/star_transparent.png";
 
+    //Level maps (tmx)
     public static final String LEVEL_1_PATH = "blocks/levels/level_1.png";
     public static final String LEVEL_2_PATH = "blocks/levels/level_2.png";
     public static final String LEVEL_3_PATH = "blocks/levels/level_3.png";
@@ -76,6 +78,7 @@ public final class God {
 
     public static final int MAX_LEVEL = 15;
 
+    //Resources for use by other classes
     static final God GOD = new God();
     public final AssetManager assetManager;
     public final SpriteBatch spriteBatch;
@@ -88,22 +91,37 @@ public final class God {
     public final Music music;
     public boolean loaded;
 
+    //The width and height of the display surface
     public static float camHeight = Gdx.graphics.getHeight();
     public static float camWidth = Gdx.graphics.getWidth();
 
     private God() {
         loaded = false;
         assetManager = new AssetManager();
+
+        //Each loader uses an InternalFileHandleResolver that returns a FileHandle pointing at an internal file
+        //Sets assetManager with an AssetLoader for the TiledMap class
         assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
 
+        //SpriteBatch takes the Texture, coordinates, and rectangle it is given
+        //Binds the texture if it is not so already (the main texture being used)
+        //Collects the geometry (that is mapped to the texture)
+        //Submits the collected geometry to be drawn (to OpenGL)
+        //Begins collecting geometry for another new texture
         spriteBatch = new SpriteBatch();
 
         font = new BitmapFont(Gdx.files.internal(FONT_PATH));
         headerFont = new BitmapFont(Gdx.files.internal(FONT_PATH));
 
+        //Gets the preferences of the User (past info, pref like music)
+        //A Preference instance is a hash map holding different values. Stored alongside the game.
+        //Android: SharedPreferences
+        //Desktop: in a Java Preferences file in a ".prefs" directory
         preferences = Gdx.app.getPreferences(PREFERENCE_NAME);
 
+        //Used to render shapes (rect, line, etc)
         shapeRenderer = new ShapeRenderer();
+        //Simpler way of rendering objects in the world
         debugRenderer = new Box2DDebugRenderer();
 
         music = Gdx.audio.newMusic(Gdx.files.internal(MUSIC_PATH));
@@ -113,6 +131,7 @@ public final class God {
         camHeight = Gdx.graphics.getHeight();
         camWidth = Gdx.graphics.getWidth();
 
+        //Creates the World where all objects are going to be in, sets the "gravity" to -10f in y-dir
         world = new World(new Vector2(0, -10f), false);
         loadAllTextures();
     }
@@ -121,10 +140,13 @@ public final class God {
         return GOD;
     }
 
+    //Used by external classes to retrieve a Texture
+    //Texture paths are static and so can be accessed outside the class, reducing error-prone string handling
     public Texture getTexture(String path) {
         return assetManager.get(path, Texture.class);
     }
 
+    //Ensures all textures are loaded before the start of the game
     private void loadAllTextures() {
         assetManager.load(PLAYER_COLOR_1_PATH, Texture.class);
         assetManager.load(PLAYER_COLOR_2_PATH, Texture.class);
@@ -171,24 +193,31 @@ public final class God {
         loaded = true;
     }
 
+    //Loads TileMap only when requested & returns the TileMap
     public TiledMap getTiledMap(int levelNumber) {
         assetManager.load("levels/" + levelNumber + ".tmx", TiledMap.class);
         assetManager.finishLoading();
         return assetManager.get("levels/" + levelNumber + ".tmx", TiledMap.class);
     }
 
+    //Gets the unlocked levels; if there is no current level property, returns 1
     public int getUnlockedLevels() {
         return preferences.getInteger(CURRENT_LEVEL, 1);
     }
 
+    //Gets the total stars collected in the game; if there is no current total stars property, returns 0
     public int getTotalStars() {
         return preferences.getInteger(TOTAL_STARS, 0);
     }
 
+    //Gets the number of stars gathered at a specific level;
+    //The preference is stored as an key offset from STARS_GATHERED_IN_LEVEL
+    //Returns 0 if no gathered stars for the given level
     public int getGatheredStars(int levelNumber) {
         return preferences.getInteger(STARS_GATHERED_IN_LEVEL + levelNumber, 0);
     }
 
+    //updates star counts and levels completed
     public void saveProgress(int levelNumber, int starsGathered) {
         int prevGathered = preferences.getInteger(STARS_GATHERED_IN_LEVEL + levelNumber, 0);
 
@@ -201,6 +230,7 @@ public final class God {
         }
     }
 
+    //Disposing of all allocated resources
     public void dispose() {
         assetManager.dispose();
         spriteBatch.dispose();

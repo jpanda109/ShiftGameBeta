@@ -42,8 +42,7 @@ public class GameRenderer {
         this.gameScreen = gameScreen;
         guiCam = new OrthographicCamera(64, 36);
         guiCam.position.set(32f, 18f, 0f);
-        //guiCam.setToOrtho(false, 60, 40);
-        //spriteBatch = Settings.getInstance().spriteBatch;
+
         spriteBatch = God.getInstance().spriteBatch;
         shapeRenderer = God.getInstance().shapeRenderer;
         debugRenderer =  God.getInstance().debugRenderer;

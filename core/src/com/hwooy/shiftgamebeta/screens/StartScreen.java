@@ -76,7 +76,6 @@ public class StartScreen extends ScreenAdapter {
                 screenManager.setScreen(ScreenManager.Screens.HELP);
             }
             else if (settingsBounds.contains(touchPoint.x, touchPoint.y)) {
-                // TODO THIS IS DEBUG PLS CHANGE LATER
                 screenManager.setScreen(ScreenManager.Screens.START);
             } else if (soundBounds.contains(touchPoint.x, touchPoint.y)) {
                 god.toggleMusic();
@@ -102,7 +101,6 @@ public class StartScreen extends ScreenAdapter {
         spriteBatch.draw(god.getTexture(God.PLAY_PATH), playBounds.x, playBounds.y);
         spriteBatch.draw(god.getTexture(God.HELP_PATH), helpBounds.x, helpBounds.y);
         spriteBatch.draw(soundTexture, soundBounds.x, soundBounds.y, soundBounds.width, soundBounds.height);
-//        spriteBatch.draw(god.getTexture(God.SELECT_PATH), 215, 170);
 
         spriteBatch.end();
     }

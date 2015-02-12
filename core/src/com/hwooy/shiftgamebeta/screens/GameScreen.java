@@ -27,7 +27,7 @@ import java.util.Iterator;
 
 /**
  * Created by jason on 12/3/14.
- * Game Screen(playing the actual game, rendering is in GameRenderer
+ * Game Screen(playing the actual game, rendering is in GameRenderer)
  */
 public class GameScreen extends ScreenAdapter {
 
@@ -105,6 +105,7 @@ public class GameScreen extends ScreenAdapter {
     }
 
     // shift player collision type
+    //Use when the Player changes their color
     public void shiftPlayer() {
         Fixture playerFixture = player.body.getFixtureList().get(0);
         Filter filter = playerFixture.getFilterData();
@@ -114,8 +115,8 @@ public class GameScreen extends ScreenAdapter {
     }
 
     private void handleInput(float delta) {
-
         if (Gdx.input.justTouched()) {
+            //translates touchPoint which is set to the input coordinates in screen coordinates to world space
             gameRenderer.guiCam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
 
             switch (state) {
@@ -136,7 +137,6 @@ public class GameScreen extends ScreenAdapter {
                     }
             }
         }
-
     }
 
     private void updateRunning(float delta) {
@@ -172,16 +172,16 @@ public class GameScreen extends ScreenAdapter {
         shiftContactListener.crumblingBodies.clear();
     }
 
+    //If Player fell off screen, restart the level
     private void checkPlayerBounds() {
         if (player.body.getPosition().x < -1f
-                || player.body.getPosition().x > 64
-                || player.body.getPosition().y < -1f) {
+            || player.body.getPosition().x > 64
+            || player.body.getPosition().y < -1f) {
             setGameState(GameState.RESTART);
         }
     }
 
     private void updatePaused(float delta) {
-
     }
 
     public void update(float delta) {
